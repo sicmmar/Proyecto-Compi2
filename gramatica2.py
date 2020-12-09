@@ -1,16 +1,11 @@
-# -----------------------------------------------------------------------------
-# Rainman Sián
-# 26-02-2020
-#
-# Ejemplo interprete sencillo con Python utilizando ply en Ubuntu
-# -----------------------------------------------------------------------------
 
 reservadas = {
     'show': 'show',
     'databases': 'databases',
+    'like': 'like',
     'select': 'select',
     'distinct': 'distinct',
-    'from': 'from',
+    'from': 'r_from',
     'alter': 'alter',
     ' rename': 'rename',
     'to': 'to',
@@ -50,10 +45,11 @@ reservadas = {
     'precision': 'precision',
     'money': 'money',
     'character': 'character',
-    'varyng': 'varyng',
+    'varying': 'varying',
     'char': 'char',
     'timestamp': 'timestamp',
     'without': 'without',
+    'time': 'time',
     'zone': 'zone',
     'date': 'date',
     'time': 'time',
@@ -72,6 +68,7 @@ reservadas = {
     'ilike': 'ilike',
     'similar': 'similar',
     'and': 'and',
+    'or': 'or',
     'between': 'between',
     'symetric': 'symetric',
     'isnull': 'isnull',
@@ -82,7 +79,11 @@ reservadas = {
     'values': 'values',
     'group': 'group',
     'by': 'by',
-    'having': 'having'
+    'having': 'having',
+    'as':'as',
+    'create':'create',
+    'varchar':'varchar',
+    'text':'text'
 }
 
 tokens = [
@@ -108,9 +109,9 @@ tokens = [
              'coma',
              'punto',
              'int',
-             'decimal',
-             'varchar',
-             'char',
+             'decimales',
+             'char_er',
+             'cadena',
              'parc',
              'simboloor',
              'id'
@@ -141,7 +142,7 @@ t_coma = r','
 t_punto = r'\.'
 
 
-def t_decimal(t):
+def t_decimales(t):
     r'\d+\.\d+'
     try:
         t.value = float(t.value)
@@ -166,9 +167,13 @@ def t_ID(t):
     t.type = reservadas.get(t.value.lower(), 'id')
     return t
 
+def t_char_er(t):
+    r'\'.?\''
+    t.value = t.value[1:-1]  # remuevo las comillas
+    return t
 
-def t_varchar(t):
-    r'\'.*?\''
+def t_cadena(t):
+    r'\'.+\''
     t.value = t.value[1:-1]  # remuevo las comillas
     return t
 
@@ -207,66 +212,160 @@ lexer = lex.lex()
 # Asociación de operadores y precedencia
 precedence = (
     ('left', 'punto'),
+    ('right', 'umenos', 'umas'),
+    ('left', 'elevado'),
+    ('left', 'multiplicacion', 'division', 'modulo'),
     ('left', 'mas', 'menos'),
-    ('left', 'POR', 'DIVIDIDO'),
-    ('right', 'UMENOS'),
+    ('left', 'mayor', 'menor', 'mayor_igual', 'menor_igual', 'igual', 'diferente1', 'diferente2'),
+    ('right', 'not'),
+    ('left', 'and'),
+    ('left', 'or'),
 )
+
 
 # ----------------------------------------------DEFINIMOS LA GRAMATICA------------------------------------------
 # Definición de la gramática
 
 
+
 def p_init(t):
     'init            : instrucciones'
+    t[0] = t[1]
+    print("ok")
 
 
 def p_instrucciones_lista(t):
     'instrucciones    : instrucciones instruccion'
+    t[1].append(t[2])
+    t[0] = t[1]
 
 
 def p_instrucciones_instruccion(t):
     'instrucciones    : instruccion '
+    t[0] = [t[1]]
 
 
 def p_instruccion(t):
-    '''instruccion      : SELECT '''
+    '''instruccion      :  SELECT
+                    | CREATETABLE
+                    | id igual EXP ptcoma '''
+    t[0] = t[1]
 
+def p_CREATETABLE(t):
+    '''CREATETABLE : create table id para LDEF parc ptcoma
+                    | create table id para LDEF parc HERENCIA ptcoma'''
+
+def p_LDEF(t):
+    '''LDEF : LDEF coma COLDEF
+            | COLDEF'''
+
+def p_COLDEF(t):
+    '''COLDEF : OPCONST
+            | constraint id OPCONST
+            | id TIPO 
+            | id TIPO LOPCOLUMN'''
+
+def p_LOPCOLUMN(t):
+    '''LOPCOLUMN : LOPCOLUMN OPCOLUMN
+            | OPCOLUMN'''
+
+def p_OPCOLUMN(t):
+    '''OPCOLUMN : constraint id unique
+            | constraint id check para EXP parc 
+            | default EXP
+            | PNULL
+            | primary key
+            | references id'''
+
+def p_PNULL(t):
+    '''PNULL : not null
+        | null'''
+
+def p_OPCONST(t):
+    '''OPCONST : primary key para LEXP parc
+            | foreign key para LEXP parc references table para LEXP parc
+            | unique para LEXP parc
+            | check para EXP parc'''
+
+def p_HERENCIA(t):
+    'HERENCIA : inherits para LEXP parc'
 
 def p_SELECT(t):
-    ''' SELECT : select distinct  LEXP from LFROM WHERE
-	          | select  LEXP from LFROM WHERE
-	'''
+    ''' SELECT : select distinct  LSELECT r_from LFROM WHERE GROUP HAVING
+	| select  LSELECT r_from LFROM WHERE  GROUP HAVING
+    '''
 
-
+def p_LSELECT(t):
+    '''
+    LSELECT : LEXP
+		| multiplicacion
+    '''
 def p_LFROM(t):
-    '''LFROM : LEXP
-	        |  para SELECT parc
-'''
+    ''' LFROM : LFROM coma FROM
+        | FROM
+    '''
 
+def p_FROM(t):
+    '''
+    FROM : EXP
+	| EXP as id
+    | para SELECT parc
+    | para SELECT parc as id
+    '''
 
 def p_WHERE(t):
-    ''' WHERE : where EXP ptcoma
-                | where EXP GROUP
-	            | GROUP'''
+    ''' WHERE : where EXP
+	            | '''
 
 
 def p_GROUP(t):
-    ''' GROUP :  group by EXP HAVING ptcoma
-	            | HAVING'''
+    ''' GROUP :  group by EXP
+	            | '''
 
 
 def p_HAVING(t):
     ''' HAVING : having EXP
 	| ptcoma '''
 
-
 def p_LEXP(t):
     '''LEXP : LEXP coma EXP
-	| EXP
-	| multiplicacion'''
+	| EXP'''
 
+def p_TIPO(t):
+    '''TIPO : smallint
+            | integer
+            | bigint
+            | decimal para LEXP parc
+            | numeric para LEXP parc
+            | real
+            | double precision 
+            | money
+            | character varying para int parc
+            | varchar para int parc
+            | character para int parc
+            | char para int parc
+            | text
+            | timestamp
+            | timestamp para int parc
+            | date
+            | time
+            | time para int parc
+            | interval 
+            | interval para int parc
+            | interval FIELDS
+            | interval para int parc FIELDS
+            | boolean'''
+
+def p_FIELDS(t):
+    '''FIELDS : year
+        | month
+        | day
+        | hour
+        | minute
+        | second'''
 
 def p_EXP(t):
+    
     '''EXP : EXP mas EXP
             | EXP menos EXP
             | EXP multiplicacion  EXP
@@ -283,21 +382,23 @@ def p_EXP(t):
             | EXP diferente1 EXP
             | EXP diferente2 EXP
             | EXP punto EXP
-            | mas EXP
-            | menos EXP
+            | mas EXP %prec umas
+            | menos EXP %prec umenos
             | not EXP 
             | para EXP parc 
             | int
-            | decimal
-            | varchar
-            | char
+            | decimales
+            | cadena
+            | char_er
             | true
             | false
             | id'''
 
+
 def p_error(t):
     print(t)
     print("Error sintáctico en '%s'" % t.value)
+
 
 import ply.yacc as yacc
 
@@ -307,4 +408,3 @@ parser = yacc.yacc()
 def parse(input):
     return parser.parse(input)
 
-#commit :)
