@@ -1,16 +1,11 @@
-# -----------------------------------------------------------------------------
-# Rainman Sián
-# 26-02-2020
-#
-# Ejemplo interprete sencillo con Python utilizando ply en Ubuntu
-# -----------------------------------------------------------------------------
 
 reservadas = {
     'show':'show',
     'databases':'databases',
+    'like':'like',
     'select':'select',
     'distinct':'distinct',
-    'from':'from',
+    'from':'r_from',
     'alter':'alter',
     'rename':'rename',
     'to':'to',
@@ -26,6 +21,7 @@ reservadas = {
     'unique':'unique',
     'foreign':'foreign',
     'key':'key',
+    'or':'or',
     'replace':'replace',
     'if':'if',
     'exist':'exist',
@@ -53,9 +49,9 @@ reservadas = {
     'char': 'char',
     'timestamp': 'timestamp',
     'without': 'without',
-    'time': 'time',
     'zone': 'zone',
     'date': 'date',
+    'time': 'time',
     'interval':'interval',
     'boolean':'boolean',
     'true':'true',
@@ -67,18 +63,17 @@ reservadas = {
     'minute':'minute',
     'second':'second',
     'in':'in',
-    'like':'like',
     'ilike':'ilike',
     'similar':'similar',
     'and':'and',
-    'or':'or',
     'between':'between',
     'symetric':'symetric',
     'isnull':'isnull',
     'notnull':'notnull',
     'unknown':'unknown',
     'insert':'insert',
-    'into':'into'
+    'into':'into',
+    'create':'create'
 }
 
 tokens = [
@@ -113,7 +108,8 @@ tokens = [
             'id'
          ] + list(reservadas.values())
 
-# Tokenst_mas = r'\+'
+# Tokens
+t_mas = r'\+'
 t_menos = r'-'
 t_elevado= r'^'
 t_multiplicacion = r'\*'
@@ -209,99 +205,84 @@ precedence = (
     ('right', 'UMENOS'),
 )
 
+
+
+
+
+
+
+#----------------------------------------------DEFINIMOS LA GRAMATICA------------------------------------------
 # Definición de la gramática
 
+from expresiones import *
+from instrucciones import *
 
 
 def p_init(t):
     'init            : instrucciones'
+    t[0] = t[1]
 
 
 def p_instrucciones_lista(t):
     'instrucciones    : instrucciones instruccion'
+    t[1].append(t[2])
+    t[0] = t[1]
 
 
 def p_instrucciones_instruccion(t):
     'instrucciones    : instruccion '
+    t[0] = [t[1]]
 
 
 def p_instruccion(t):
-    '''instruccion      : imprimir_instr
-                        | definicion_instr
-                        | asignacion_instr
-                        | mientras_instr
-                        | if_instr
-                        | if_else_instr'''
+    '''instruccion      : EXP
+                    | CREATETABLE'''
+    t[0] = t[1]
+
+def p_CREATETABLE(t):
+    '''CREATETABLE : create table id para LDEF parc'''
+
+def p_LDEF(t):
+    '''LDEF : LDEF coma DEFINICIONES
+            | DEFINICIONES'''
+
+def p_DEFINICIONES(t):
+    '''DEFINICIONES : COLUMNA'''
+
+def p_COLUMNA(t):
+    '''COLUMNA : id int'''
 
 
-def p_instruccion_imprimir(t):
-    'imprimir_instr     : IMPRIMIR PARIZQ expresion_cadena PARDER PTCOMA'
+def p_EXP(t):
+    '''EXP : EXP mas EXP1
+            |EXP menos EXP1
+            |EXP multiplicacion  EXP1
+            |EXP division EXP1
+            |EXP1'''
+    
 
+def p_EXP1(t):
+    '''EXP1 : EXP1 modulo EXP2
+             |EXP1 elevado EXP2
+             |EXP2'''
 
-def p_instruccion_definicion(t):
-    'definicion_instr   : NUMERO ID PTCOMA'
-
-
-def p_asignacion_instr(t):
-    'asignacion_instr   : ID IGUAL expresion_numerica PTCOMA'
-
-
-def p_mientras_instr(t):
-    'mientras_instr     : MIENTRAS PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER'
-
-
-def p_if_instr(t):
-    'if_instr           : IF PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER'
-
-
-def p_if_else_instr(t):
-    'if_else_instr      : IF PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER ELSE LLAVIZQ instrucciones LLAVDER'
-
-
-def p_expresion_binaria(t):
-    '''expresion_numerica : expresion_numerica MAS expresion_numerica
-                        | expresion_numerica MENOS expresion_numerica
-                        | expresion_numerica POR expresion_numerica
-                        | expresion_numerica DIVIDIDO expresion_numerica'''
-
-
-def p_expresion_unaria(t):
-    'expresion_numerica : MENOS expresion_numerica %prec UMENOS'
-
-
-def p_expresion_agrupacion(t):
-    'expresion_numerica : PARIZQ expresion_numerica PARDER'
-
-
-
-def p_expresion_number(t):
-    '''expresion_numerica : ENTERO
-                        | DECIMAL'''
-
-
-def p_expresion_id(t):
-    'expresion_numerica   : ID'
-
-
-def p_expresion_concatenacion(t):
-    'expresion_cadena     : expresion_cadena CONCAT expresion_cadena'
-
-
-def p_expresion_cadena(t):
-    'expresion_cadena     : CADENA'
-
-
-def p_expresion_cadena_numerico(t):
-    'expresion_cadena     : expresion_numerica'
-
-
-def p_expresion_logica(t):
-    '''expresion_logica : expresion_numerica MAYQUE expresion_numerica
-                        | expresion_numerica MENQUE expresion_numerica
-                        | expresion_numerica IGUALQUE expresion_numerica
-                        | expresion_numerica NIGUALQUE expresion_numerica'''
-
-
+def p_EXP2(t):
+    '''EXP2 : para EXP parac
+              |UNARIO EXP
+              |int
+              |decimal
+              |varchar
+              |char
+              |true
+              |false
+              |id
+              |id punto EXP'''
+              
+def p_EXP2(t):
+    '''UNARIOS:= not
+                |mas
+                |menos'''
+                
 def p_error(t):
     print(t)
     print("Error sintáctico en '%s'" % t.value)

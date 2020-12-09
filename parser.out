@@ -1,0 +1,240 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    add
+    alter
+    and
+    between
+    bigint
+    boolean
+    character
+    check
+    column
+    constraint
+    databases
+    date
+    day
+    default
+    diferente1
+    diferente2
+    division
+    dospuntos
+    double
+    drop
+    elevado
+    enum
+    exist
+    foreign
+    hour
+    if
+    igual
+    ilike
+    in
+    inherits
+    insert
+    integer
+    interval
+    into
+    isnull
+    key
+    like
+    llavea
+    llavec
+    mas
+    mayor
+    mayor_igual
+    menor
+    menor_igual
+    menos
+    minute
+    mode
+    modulo
+    money
+    month
+    not
+    notnull
+    null
+    numeric
+    or
+    owner
+    parac
+    precision
+    primary
+    punto
+    real
+    references
+    rename
+    replace
+    second
+    set
+    show
+    simboloor
+    similar
+    smallint
+    symetric
+    table
+    time
+    timestamp
+    to
+    type
+    unique
+    unknown
+    update
+    values
+    varyng
+    without
+    year
+    zone
+
+Grammar
+
+Rule 0     S' -> init
+Rule 1     init -> instrucciones
+Rule 2     instrucciones -> instrucciones instruccion
+Rule 3     instrucciones -> instruccion
+Rule 4     instruccion -> OPLOGICA
+Rule 5     instruccion -> SELECT
+Rule 6     SELECT -> select distinct LEXP from LFROM WHERE
+Rule 7     SELECT -> select LEXP from LFROM WHERE
+Rule 8     LFROM -> LEXP
+Rule 9     LFROM -> para SELECT parc
+Rule 10    WHERE -> where EXP ptcoma
+Rule 11    WHERE -> where EXP GROUP
+Rule 12    WHERE -> GROUP
+Rule 13    GROUP -> group by EXP HAVING ptcoma
+Rule 14    GROUP -> HAVING
+Rule 15    HAVING -> having EXP
+Rule 16    HAVING -> ptcoma
+Rule 17    LEXP -> LEXP coma EXP
+Rule 18    LEXP -> EXP
+Rule 19    LEXP -> multiplicacion
+Rule 20    EXP -> int
+Rule 21    EXP -> decimal
+Rule 22    EXP -> varchar
+Rule 23    EXP -> char
+Rule 24    EXP -> true
+Rule 25    EXP -> false
+Rule 26    EXP -> id
+
+Terminals, with rules where they appear
+
+add                  : 
+alter                : 
+and                  : 
+between              : 
+bigint               : 
+boolean              : 
+by                   : 13
+char                 : 23
+character            : 
+check                : 
+column               : 
+coma                 : 17
+constraint           : 
+databases            : 
+date                 : 
+day                  : 
+decimal              : 21
+default              : 
+diferente1           : 
+diferente2           : 
+distinct             : 6
+division             : 
+dospuntos            : 
+double               : 
+drop                 : 
+elevado              : 
+enum                 : 
+error                : 
+exist                : 
+false                : 25
+foreign              : 
+from                 : 6 7
+group                : 13
+having               : 15
+hour                 : 
+id                   : 26
+if                   : 
+igual                : 
+ilike                : 
+in                   : 
+inherits             : 
+insert               : 
+int                  : 20
+integer              : 
+interval             : 
+into                 : 
+isnull               : 
+key                  : 
+like                 : 
+llavea               : 
+llavec               : 
+mas                  : 
+mayor                : 
+mayor_igual          : 
+menor                : 
+menor_igual          : 
+menos                : 
+minute               : 
+mode                 : 
+modulo               : 
+money                : 
+month                : 
+multiplicacion       : 19
+not                  : 
+notnull              : 
+null                 : 
+numeric              : 
+or                   : 
+owner                : 
+para                 : 9
+parac                : 
+parc                 : 9
+precision            : 
+primary              : 
+ptcoma               : 10 13 16
+punto                : 
+real                 : 
+references           : 
+rename               : 
+replace              : 
+second               : 
+select               : 6 7
+set                  : 
+show                 : 
+simboloor            : 
+similar              : 
+smallint             : 
+symetric             : 
+table                : 
+time                 : 
+timestamp            : 
+to                   : 
+true                 : 24
+type                 : 
+unique               : 
+unknown              : 
+update               : 
+values               : 
+varchar              : 22
+varyng               : 
+where                : 10 11
+without              : 
+year                 : 
+zone                 : 
+
+Nonterminals, with rules where they appear
+
+EXP                  : 10 11 13 15 17 18
+GROUP                : 11 12
+HAVING               : 13 14
+LEXP                 : 6 7 8 17
+LFROM                : 6 7
+OPLOGICA             : 4
+SELECT               : 5 9
+WHERE                : 6 7
+init                 : 0
+instruccion          : 2 3
+instrucciones        : 1 2
+

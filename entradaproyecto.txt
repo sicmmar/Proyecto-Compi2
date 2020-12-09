@@ -1,0 +1,7 @@
+
+
+
+SELECT inventory_id
+FROM inventory
+WHERE true
+AND false;
