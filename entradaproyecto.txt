@@ -1,13 +1,23 @@
+CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
 
+UPDATE products SET price = 10 WHERE price = 5;
+DELETE FROM products WHERE price = 10;
+select *
+from (select nombre,fechanacimiento
+ from tbcolaborador
+ where nombre = 'suje') A;
 
+select A.nombre,A.fechanacimiento,(select identificacion from
+tbidentificacioncolaborador B where B.idcolaborador = A.id )
+ from tbcolaborador A
+ where nombre = 'suje' order by A.nombre;
 
-SELECT inventory_id
-FROM inventory
-WHERE true
-AND false;
+select A.nombre,A.fechanacimiento
+ from tbcolaborador A
+ where substring(nombre,1,4) = 'suje'
+ and A.id not in (select idcolaborador from
+tbidentificacioncolaborador B) ;
 
-identi1 = -5 + 2 * 8 AND 67;
-/*
 create table tabla_1 (
     id_codigo varchar(50) CONSTRAINT uni_id_codigo unique CONSTRAINT check_2 CHECK ( age >= 25 AND age < 89),
     primary key (id_codigo, id_fre),
@@ -18,6 +28,43 @@ create table tabla_1 (
 
 create table hija (
     columna653 varchar(897) default 'hola' primary key,
-    fechahora varchar(56) REFERENCES table1
-);
-************/
+    fechahora timestamp (5) REFERENCES table1
+)inherits(tabla_1);
+
+
+
+ALTER DATABASE name OWNER TO  new_owner ;
+ALTER DATABASE name rename TO new_nombre;
+
+--agregar columna
+ALTER TABLE usuario ADD COLUMN mombre smallint;
+
+--eliminar columnas
+ALTER TABLE products DROP COLUMN description;
+
+--check
+ALTER TABLE tabla ADD CHECK (name <> '');
+
+--UNIQUE
+ALTER TABLE usuarios ADD CONSTRAINT nombre unique (alumno);
+--constraint
+ALTER TABLE tabla ADD FOREIGN KEY (usuario) REFERENCES alumno (usuario);
+
+--set
+ALTER TABLE tabla ALTER COLUMN usuario SET NOT NULL;
+
+--drop alter
+ALTER TABLE tabla DROP CONSTRAINT some_name;
+
+ALTER TABLE distributors ALTER COLUMN address TYPE smallint,ALTER COLUMN name TYPE smallint;
+
+
+----DROP
+
+DROP database cliente;
+
+drop table asignacion;
+
+--INSERT
+
+INSERT INTO products VALUES (1, 'Cheese', 9.99);
