@@ -81,7 +81,18 @@ reservadas = {
     'varchar': 'varchar',
     'text': 'text',
     'is': 'is',
-    'delete': 'delete'
+    'delete': 'delete',
+    'order': 'order',
+    'asc' : 'asc',
+    'desc' : 'desc',
+    'when': 'when',
+    'case': 'case',
+    'else': 'else',
+    'then': 'then',
+    'end': 'end',
+    'extract':'extract',
+    'current_time':'current_time',
+    'current_date':'current_date'
 }
 
 tokens = [
@@ -107,7 +118,6 @@ tokens = [
              'punto',
              'int',
              'decimales',
-             'char_er',
              'cadena',
              'parc',
              'simboloor',
@@ -164,15 +174,8 @@ def t_ID(t):
     t.type = reservadas.get(t.value.lower(), 'id')
     return t
 
-
-def t_char_er(t):
-    r'\'.?\''
-    t.value = t.value[1:-1]  # remuevo las comillas
-    return t
-
-
 def t_cadena(t):
-    r'\'.+\''
+    r'\'.*?\''
     t.value = t.value[1:-1]  # remuevo las comillas
     return t
 
@@ -215,9 +218,8 @@ precedence = (
     ('left', 'elevado'),
     ('left', 'multiplicacion', 'division', 'modulo'),
     ('left', 'mas', 'menos'),
-    ('nonassoc', 'between', 'in', 'like', 'ilike'),
     ('left', 'mayor', 'menor', 'mayor_igual', 'menor_igual', 'igual', 'diferente1', 'diferente2'),
-    ('nonassoc', 'is', 'isnull', 'notnull'),
+    ('left', 'predicates'),
     ('right', 'not'),
     ('left', 'and'),
     ('left', 'or'),
@@ -253,12 +255,30 @@ def p_instruccion(t):
                     | ALTER  ptcoma
                     | DROP ptcoma
                     | INSERT ptcoma
+                    | CREATETYPE ptcoma
+		            | CASE ptcoma
     '''
     t[0] = t[1]
+	
+
+def p_CASE(t):
+    ''' CASE : case  LISTAWHEN ELSE end
+               | case LISTAWHEN end
+    '''
+def p_LISTAWHEN(t):
+    ''' LISTAWHEN : LISTAWHEN WHEN
+                    | WHEN
+    '''
+def p_WHEN(t): 
+    ''' WHEN : when LEXP then LEXP
+    '''
+def p_ELSE(t):
+    '''ELSE : else LEXP
+    '''
 
 def p_INSERT(t):
     '''INSERT : insert into id values para LEXP parc
-    ''' 
+    '''
 
 def p_DROP(t):
     '''DROP : drop table id
@@ -270,7 +290,7 @@ def p_ALTER(t):
               | altertable'''
 
 def p_r_o(t):
-    '''RO : rename to id 
+    '''RO : rename to id
            | owner to id
     '''
 
@@ -296,9 +316,9 @@ def p_alc(t):
     '''
 
 def p_ALTERDROP(t):
-    '''ALTERDROP : constraint id 
+    '''ALTERDROP : constraint id
                    | column LISTACOLUMN
-                   | check id 
+                   | check id
     '''
 def p_ADD(t):
     '''ADD : column id TIPO
@@ -307,7 +327,7 @@ def p_ADD(t):
             | foreign key para id parc references id para id parc
     '''
 def p_LISTACOLUMN(t):
-        '''LISTACOLUMN : LISTACOLUMN coma id 
+        '''LISTACOLUMN : LISTACOLUMN coma id
                         | id
         '''
 
@@ -358,10 +378,13 @@ def p_OPCONST(t):
 def p_HERENCIA(t):
     'HERENCIA : inherits para LEXP parc'
 
+def p_CREATETYPE(t):
+    'CREATETYPE : create type id as enum para LEXP parc'
 
 def p_SELECT(t):
-    ''' SELECT : select distinct  LSELECT r_from LFROM WHERE GROUP HAVING
-	| select  LSELECT r_from LFROM WHERE  GROUP HAVING
+    ''' SELECT : select distinct  LSELECT r_from LFROM WHERE GROUP HAVING ORDER
+	| select  LSELECT r_from LFROM WHERE  GROUP HAVING ORDER
+	| select  LSELECT
     '''
 
 
@@ -369,6 +392,7 @@ def p_LSELECT(t):
     ''' LSELECT : LEXP
 		| multiplicacion
     '''
+
 
 
 def p_LFROM(t):
@@ -397,6 +421,14 @@ def p_HAVING(t):
     ''' HAVING : having EXP
 	| '''
 
+def p_ORDER(t):
+    ''' ORDER : order by EXP ORD
+    | order by EXP
+	|  '''
+
+def p_ORD(t):
+    ''' ORD : asc
+	| desc '''
 
 def p_UPDATE(t):
     ' UPDATE : update id set LCAMPOS where EXP'
@@ -441,8 +473,8 @@ def p_TIPO(t):
             | time para int parc
             | interval
             | interval para int parc
-            | interval FIELDS
-            | interval para int parc FIELDS
+            | interval cadena
+            | interval para int parc cadena
             | boolean'''
 
 
@@ -479,36 +511,39 @@ def p_EXP(t):
             | int
             | decimales
             | cadena
-            | char_er
             | true
             | false
             | id
+            | SELECT
+            | PREDICADOS
             | id para parc
             | id para LEXP parc
-            | SELECT
-            | PREDICADOS'''
-            
+            | extract para FIELDS r_from timestamp cadena parc
+            | current_time
+            | current_date
+            | timestamp cadena 
+            | interval cadena
+            | CASE'''
+
 def p_PREDICADOS(t):
     '''
-    PREDICADOS : EXP between EXP
-            | EXP in EXP
-            | EXP not in EXP
-			| EXP not between EXP
-			| EXP  between symetric EXP
-			| EXP not between symetric EXP
-			| EXP is distinct r_from EXP
-			| EXP is not distinct r_from EXP
-			| EXP is PNULL
-			| EXP isnull
-			| EXP notnull
-			| EXP  is true
-			| EXP is not true
-			| EXP is false
-			| EXP is not false
-			| EXP is unknown
-			| EXP is not unknown
-
-    '''
+    PREDICADOS : EXP between EXP %prec predicates
+            | EXP in EXP %prec predicates
+            | EXP not in EXP %prec predicates
+			| EXP not between EXP %prec predicates
+			| EXP  between symetric EXP %prec predicates
+			| EXP not between symetric EXP %prec predicates
+			| EXP is distinct r_from EXP %prec predicates
+			| EXP is not distinct r_from EXP %prec predicates
+			| EXP is PNULL %prec predicates
+			| EXP isnull %prec predicates
+			| EXP notnull %prec predicates
+			| EXP  is true %prec predicates
+			| EXP is not true %prec predicates
+			| EXP is false %prec predicates
+			| EXP is not false %prec predicates
+			| EXP is unknown %prec predicates
+			| EXP is not unknown %prec predicates'''
 
 def p_error(t):
     print(t)
