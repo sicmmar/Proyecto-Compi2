@@ -1,4 +1,4 @@
 > # Gramática Ascendente
 ```
-TERMINAL ::= noterminal | &epsilon;
+TERMINAL ::= noterminal | Ɛ
 ```
