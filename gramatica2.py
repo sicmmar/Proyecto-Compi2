@@ -563,6 +563,13 @@ def p_EXP(t):
             | EXP is not false %prec predicates
             | EXP is unknown %prec predicates
             | EXP is not unknown %prec predicates
+            | EXP as cadenaString %prec lsel
+            | EXP cadenaString %prec lsel
+            | EXP as id %prec lsel
+            | EXP id  %prec lsel
+            | EXP as cadena %prec lsel
+            | EXP cadena %prec lsel
+            | multiplicacion %prec lsel
             | not EXP
             | para EXP parc
             | int
@@ -587,15 +594,8 @@ def p_EXP(t):
             | any para LEXP parc
             | all para LEXP parc
             | some para LEXP parc
-            | EXP as cadenaString %prec lsel
-            | EXP cadenaString %prec lsel
-            | EXP as id %prec lsel
-            | EXP id  %prec lsel
-            | EXP as cadena %prec lsel
-            | EXP cadena %prec lsel
-            | multiplicacion %prec lsel
             | default'''
-            
+
 def p_error(t):
     print(t)
     print("Error sintáctico en '%s'" % t.value)

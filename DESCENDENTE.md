@@ -1,4 +1,7 @@
 > # Gramática Descendente
+
+- [Precedencia de Operadores](#para-definir-la-producción-de-expresiones-aritméticas-lógicas-relacionales-se-utilizó-la-siguiente-precedencia-de-operadores)
+
 ```
 INIT ::= INSTRUCCIONES
 
@@ -222,8 +225,16 @@ FIELDS ::=  year
 
 ### Para definir la producción de Expresiones (aritméticas, lógicas, relacionales) se utilizó la siguiente precedencia de operadores
 
-| Tables   |      Are      |  Cool |
-|----------|:-------------:|------:|
-| col 1 is |  left-aligned | $1600 |
-| col 2 is |    centered   |   $12 |
-| col 3 is | right-aligned |    $1 |
+|Asociatividad|Símbolo|Descripción|
+|:----------:|:-------------:|:---------:|
+|Izquierda|lsel|Precedencia utilizada para los alias en la instrucción SELECT|
+|Izquierda|.|Operador para separar atributos de una tabla|
+|Derecha|-,+|Operador unario para números negativos y positivos|
+|Izquierda|^|Potencia|
+|Izquierda|*,/,%|Multiplicación, división y modular|
+|Izquierda|-,+|Suma y Resta|
+|Izquierda|>,<,>=,<=,=,!=,<>|Operaciones relacionales|
+|Izquierda|predicates|Precedencia para predicados en consultas|
+|Derecha|NOT|Negación lógica|
+|Izquierda|AND|Operador AND lógico|
+|Izquierda|OR| Operador OR lógico|
