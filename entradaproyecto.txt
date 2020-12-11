@@ -343,7 +343,7 @@ SELECT * FROM t1 WHERE ROW(1) = ANY (SELECT column1 FROM t2);
  select * from public.Album limit all;
 
 
- select name, rollnumber 
+ select name as aliasistos, rollnumber 
 from student 
 UNION 
 select name, rollnumber 
@@ -367,3 +367,5 @@ INTERSECT ALL SELECT DISTINCT city FROM travel-sample WHERE tipo = 'hotel';
 SELECT DISTINCT city FROM travel-sample WHERE tipo = 'airport' 
 EXCEPT ALL SELECT DISTINCT city FROM travel-sample WHERE tipo = 'hotel';
 
+SELECT ROUND(67.456e-89) AS
+"Round";
