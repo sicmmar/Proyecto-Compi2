@@ -84,7 +84,7 @@ SELECT CURRENT_DATE;
 SELECT CURRENT_TIME;
 SELECT TIMESTAMP 'now';
 
-select *
+select columna1 as sualias
 from tbsujeto
 where fechanacimiento between '2004-01-01' and '2005-01-01';
 select *
@@ -101,7 +101,7 @@ select least('a','b','c','aa');
 
 select CASE when nombre = 'sujeto3' then 'Juan Carlos'
 when nombre = 'sujeto4' then 'Luis Espino'
-end
+end alias11
 from tbcolaborador A
 where substring(nombre,1,4) = 'suje'
 and A.id not in (select idcolaborador from
@@ -111,17 +111,17 @@ select greatest(1,2,3,4,5);
 select greatest('1970-12-10','2000-11-11','2019-01-01');
 
 select least(1,2,3,3,5);
-select least('a','b','c','aa');
+select least('a','b\b\n\f\r\t','c','aa');
 
 CASE when nombre = 's' then 'Juan Carlos'
      when nombre = 's' then 'Luis Espino'
-end ;
+end
 
-CREATE DATABASE IF NOT EXIST name
+CREATE DATABASE IF NOT EXISTS name
  OWNER = user_name
  MODE = 6;
 
-CREATE OR REPLACE DATABASE IF NOT EXIST name
+CREATE OR REPLACE DATABASE IF NOT EXISTS name
  OWNER = user_name
  MODE = 6;
 
@@ -132,19 +132,238 @@ CREATE OR REPLACE DATABASE name
  CREATE OR REPLACE DATABASE name
  MODE = 6;
 
- CREATE DATABASE  IF NOT EXIST   name
+ CREATE DATABASE  IF NOT EXISTS   name
  OWNER = user_name
  MODE = 6;
 
-  CREATE DATABASE  IF NOT EXIST   name
+  CREATE DATABASE  IF NOT EXISTS   name
  MODE = 6;
 
-  CREATE DATABASE  IF NOT EXIST   name OWNER = user_name ;
-  CREATE OR REPLACE DATABASE  IF NOT EXIST   name OWNER = user_name ;
+  CREATE DATABASE  IF NOT EXISTS   name OWNER = user_name ;
+  CREATE OR REPLACE DATABASE  IF NOT EXISTS   name OWNER = user_name ;
   CREATE OR REPLACE DATABASE name OWNER = user_name;
 
 
-  CREATE OR REPLACE DATABASE  IF NOT EXIST   name
+  CREATE OR REPLACE DATABASE  IF NOT EXISTS   name
  MODE = 6;
 
 CREATE OR REPLACE DATABASE db2 OWNER = Carlos;
+
+SELECT nombre,indentificacion,sum(salario)
+FROM tbsujeto
+where X
+GROUP BY nombre,indentificacion
+HAVING sum(salario)>100000;
+
+select distinct puesto
+from tbempleado;
+select distinct puesto,salario
+from tbempleado;
+select *
+from tbcolaborador
+where nombre is distinct from 'sujeto1';
+
+select sum(col1), avg(col2)
+from tbcolaborador
+where nombre is not distinct from 'sujeto1';
+
+SELECT CBRT(343) AS CubeRoot;
+
+select 'cadena' NOT LIKE 'M%'
+from tbcolaborador;
+
+select *
+from (select nombre,fechanacimiento
+from tbcolaborador
+where substring(nombre,1,4) = 'suje') A;
+
+
+select * from usuario;
+
+SELECT first_name, last_name
+FROM customer c
+WHERE EXISTS
+    (
+     SELECT 1
+     FROM payment p
+     WHERE p.customer_id = c.customer_id
+       AND amount > 11 
+    )
+ORDER BY first_name,last_name;
+
+
+SELECT 
+    column1
+FROM 
+    table_1
+WHERE 
+    EXISTS( SELECT 
+                1 
+            FROM 
+                table_2 
+            WHERE 
+                column_2 = table_1.column_1);
+
+SELECT col1 FROM tab1
+    WHERE EXISTS(SELECT 1 FROM tab2 WHERE col2 = tab1.col2);
+
+SELECT col1 FROM tab1
+    WHERE (
+        SELECT 1 FROM tab2 
+              WHERE EXISTS
+              (
+                  SELECT 1 FROM tab2 WHERE col2 = tab1.col2
+              )
+         );
+
+SELECT
+	customer_id,
+	payment_id,
+	amount
+FROM
+	payment
+WHERE
+	amount BETWEEN 8 AND 9;
+
+SELECT
+	customer_id,
+	payment_id,
+	amount,
+ payment_date
+FROM
+	payment
+WHERE
+	payment_date BETWEEN '2007-02-07' AND '2007-02-15';
+
+
+SELECT
+	customer_id,
+	payment_id,
+	amount
+FROM
+	payment
+WHERE
+	amount NOT BETWEEN 8 AND 9;
+
+
+SELECT customer_id,
+	rental_id,
+	return_date
+FROM
+	rental
+WHERE
+	customer_id IN (1, 2)
+ORDER BY
+	return_date DESC;
+
+SELECT
+	customer_id,
+	first_name,
+	last_name
+FROM
+	customer
+WHERE
+	customer_id IN (
+		SELECT customer_id
+		FROM rental
+		WHERE CAST = '2005-05-27'
+	)
+ORDER BY customer_id;
+
+SELECT
+	customer_id,
+	rental_id,
+	return_date
+FROM
+	rental
+WHERE
+	customer_id NOT IN (1, 2);
+
+
+
+    SELECT
+	customer_id,
+	first_name,
+	last_name
+FROM
+	customer
+WHERE
+	customer_id NOT IN (
+		SELECT customer_id
+		FROM rental
+		WHERE CAST = '2005-05-27'
+	)
+ORDER BY customer_id;
+
+SELECT title
+FROM film
+WHERE length >= ANY(
+    SELECT MAX( length )
+    FROM film
+);
+
+SELECT e.first_name, e.last_name,e.department_id 
+FROM employees e
+WHERE department_id= ANY
+(SELECT DEPARTMENT_ID 
+FROM departments WHERE location_id=1700);
+
+
+SELECT
+    title,
+    category_id
+FROM
+    film
+WHERE
+    category_id = ANY(
+        SELECT
+            category_id
+        FROM
+            category
+        WHERE
+            NAME = 'Action'
+            OR NAME = 'Drama'
+    );
+
+select name, population from countries
+where population > any (select * from unnest(8000000, 22000000, null))
+order by population, name;
+
+select 100 <> ALL (select height from sys.summits) AS x;
+
+SELECT * FROM t1 WHERE ROW(1) = (SELECT column1 FROM t2);
+
+SELECT * FROM t1 WHERE ROW(1) = ANY (SELECT column1 FROM t2);
+
+ select * from public.Album limit 4;
+ select * from public.MediaType offset 3;
+ select *  from public.Album order by AlbumId offset 300 limit 1;
+ select *  from public.Album  limit 1 offset 1;
+
+ select * from public.Album limit all;
+
+
+ select name, rollnumber 
+from student 
+UNION 
+select name, rollnumber 
+from marks;
+
+SELECT DISTINCT city FROM travel-sample WHERE tipo = 'airport' 
+UNION SELECT DISTINCT city FROM travel-sample WHERE tipo = 'hotel';
+
+SELECT DISTINCT city FROM travel-sample WHERE tipo = 'airport'
+INTERSECT SELECT DISTINCT city FROM travel-sample WHERE  tipo = 'hotel';
+
+SELECT DISTINCT city FROM travel-sample WHERE tipo = 'airport'
+EXCEPT SELECT DISTINCT city FROM travel-sample WHERE tipo = 'hotel';
+
+SELECT DISTINCT city FROM travel-sample WHERE tipo = 'airport' 
+UNION ALL SELECT DISTINCT city FROM travel-sample WHERE tipo = 'hotel';
+
+SELECT DISTINCT city FROM travel-sample WHERE tipo = 'airport' 
+INTERSECT ALL SELECT DISTINCT city FROM travel-sample WHERE tipo = 'hotel';
+
+SELECT DISTINCT city FROM travel-sample WHERE tipo = 'airport' 
+EXCEPT ALL SELECT DISTINCT city FROM travel-sample WHERE tipo = 'hotel';
+
