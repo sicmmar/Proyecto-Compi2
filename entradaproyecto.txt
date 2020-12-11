@@ -21,7 +21,7 @@ tbidentificacioncolaborador B) ;
 create table tabla_1 (
     id_codigo varchar(50) CONSTRAINT uni_id_codigo unique CONSTRAINT check_2 CHECK ( age >= 25 AND age < 89),
     primary key (id_codigo, id_fre),
-    foreign key (id_fre) REFERENCES TABLE (tabla_3),
+    foreign key (id_fre) REFERENCES tabla1 (tabla_3),
     unique (columna_54),
     CONSTRAINT check_1 CHECK ( tabla.atr >= 25 )
 );

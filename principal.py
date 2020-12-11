@@ -17,9 +17,9 @@ def send_data():
     Tsalida.configure(state='normal')
     Tsalida.insert(INSERT, "Salida de consultas")
     Tsalida.configure(state='disabled')
-    print(contenido)
+    #print(contenido)
 
-    instrucciones = g.parse(contenido)
+    g.parse(contenido)
 
 
 entrada = StringVar()

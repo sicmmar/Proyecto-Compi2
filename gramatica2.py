@@ -330,7 +330,7 @@ def p_ADD(t):
     '''ADD : column id TIPO
             | check para LEXP parc
             | constraint id unique para id parc
-            | foreign key para id parc references id para id parc
+            | foreign key para LEXP parc references id para LEXP parc
     '''
 
 def p_SHOWDB(t) : 
@@ -389,19 +389,15 @@ def p_OPCOLUMN(t):
     '''OPCOLUMN : constraint id unique
             | constraint id check para EXP parc
             | default EXP
-            | PNULL
+            | not null
+            | null
             | primary key
             | references id'''
 
 
-def p_PNULL(t):
-    '''PNULL : not null
-        | null'''
-
-
 def p_OPCONST(t):
     '''OPCONST : primary key para LEXP parc
-            | foreign key para LEXP parc references table para LEXP parc
+            | foreign key para LEXP parc references id para LEXP parc
             | unique para LEXP parc
             | check para LEXP parc'''
 
@@ -469,8 +465,7 @@ def p_UPDATE(t):
 
 def p_LCAMPOS(t):
     '''LCAMPOS :  LCAMPOS id igual EXP
-		| id igual EXP
-		| id igual default'''
+		| id igual EXP'''
 
 
 def p_DELETE(t):
@@ -550,6 +545,24 @@ def p_EXP(t):
             | EXP punto EXP
             | mas EXP %prec umas
             | menos EXP %prec umenos
+            | EXP between EXP %prec predicates
+            | EXP in para LEXP parc %prec predicates
+            | EXP not in para LEXP parc %prec predicates
+            | EXP not between EXP %prec predicates
+            | EXP  between symetric EXP %prec predicates
+            | EXP not between symetric EXP %prec predicates
+            | EXP is distinct r_from EXP %prec predicates
+            | EXP is not distinct r_from EXP %prec predicates
+            | EXP is not null %prec predicates
+            | EXP is null %prec predicates
+            | EXP isnull %prec predicates
+            | EXP notnull %prec predicates
+            | EXP  is true %prec predicates
+            | EXP is not true %prec predicates
+            | EXP is false %prec predicates
+            | EXP is not false %prec predicates
+            | EXP is unknown %prec predicates
+            | EXP is not unknown %prec predicates
             | not EXP
             | para EXP parc
             | int
@@ -559,9 +572,8 @@ def p_EXP(t):
             | true
             | false
             | id
-            | PNULL
+            | null
             | SELECT
-            | PREDICADOS
             | id para parc
             | id para LEXP parc
             | extract para FIELDS r_from timestamp cadena parc
@@ -581,30 +593,9 @@ def p_EXP(t):
             | EXP id  %prec lsel
             | EXP as cadena %prec lsel
             | EXP cadena %prec lsel
-            | multiplicacion %prec lsel'''
-
-def p_PREDICADOS(t):
-    '''
-    PREDICADOS : EXP between EXP %prec predicates
-            | EXP in para LEXP parc %prec predicates
-            | EXP not in para LEXP parc %prec predicates
-            | EXP not between EXP %prec predicates
-	    | EXP  between symetric EXP %prec predicates
-	    | EXP not between symetric EXP %prec predicates
-	    | EXP is distinct r_from EXP %prec predicates
-	    | EXP is not distinct r_from EXP %prec predicates
-	    | EXP is PNULL %prec predicates
-	    | EXP isnull %prec predicates
-	    | EXP notnull %prec predicates
-	    | EXP  is true %prec predicates
-	    | EXP is not true %prec predicates
-	    | EXP is false %prec predicates
-	    | EXP is not false %prec predicates
-	    | EXP is unknown %prec predicates
-	    | EXP is not unknown %prec predicates
-
-    '''
-
+            | multiplicacion %prec lsel
+            | default'''
+            
 def p_error(t):
     print(t)
     print("Error sintáctico en '%s'" % t.value)
