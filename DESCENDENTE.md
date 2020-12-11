@@ -238,3 +238,74 @@ FIELDS ::=  year
 |Derecha|NOT|Negación lógica|
 |Izquierda|AND|Operador AND lógico|
 |Izquierda|OR| Operador OR lógico|
+
+```
+EXP ::= EXP mas EXP
+    | EXP menos EXP
+    | EXP multiplicacion  EXP
+    | EXP division EXP
+    | EXP modulo EXP
+    | EXP elevado EXP
+    | EXP and EXP
+    | EXP or EXP
+    | EXP mayor EXP
+    | EXP menor EXP
+    | EXP mayor_igual EXP
+    | EXP menor_igual EXP
+    | EXP igual EXP
+    | EXP diferente1 EXP
+    | EXP diferente2 EXP
+    | EXP punto EXP
+    | mas EXP %prec umas
+    | menos EXP %prec umenos
+    | EXP between EXP %prec predicates
+    | EXP in para LEXP parc %prec predicates
+    | EXP not in para LEXP parc %prec predicates
+    | EXP not between EXP %prec predicates
+    | EXP  between symetric EXP %prec predicates
+    | EXP not between symetric EXP %prec predicates
+    | EXP is distinct r_from EXP %prec predicates
+    | EXP is not distinct r_from EXP %prec predicates
+    | EXP is not null %prec predicates
+    | EXP is null %prec predicates
+    | EXP isnull %prec predicates
+    | EXP notnull %prec predicates
+    | EXP  is true %prec predicates
+    | EXP is not true %prec predicates
+    | EXP is false %prec predicates
+    | EXP is not false %prec predicates
+    | EXP is unknown %prec predicates
+    | EXP is not unknown %prec predicates
+    | EXP as cadenaString %prec lsel
+    | EXP cadenaString %prec lsel
+    | EXP as id %prec lsel
+    | EXP id  %prec lsel
+    | EXP as cadena %prec lsel
+    | EXP cadena %prec lsel
+    | multiplicacion %prec lsel
+    | not EXP
+    | para EXP parc
+    | int
+    | decimales
+    | cadena
+    | cadenaString
+    | true
+    | false
+    | id
+    | null
+    | SELECT
+    | id para parc
+    | id para LEXP parc
+    | extract para FIELDS r_from timestamp cadena parc
+    | current_time
+    | current_date
+    | timestamp cadena 
+    | interval cadena
+    | CASE
+    | cadena like cadena
+    | cadena not like cadena
+    | any para LEXP parc
+    | all para LEXP parc
+    | some para LEXP parc
+    | default
+```
