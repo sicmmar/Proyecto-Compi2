@@ -1,4 +1,4 @@
 > # Gramática Ascendente
 ```bnf
-TERMINAL ::= noterminal
+TERMINAL ::= noterminal | ::epsilon::
 ```
