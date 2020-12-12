@@ -1,8 +1,1572 @@
 // Árbol Sintáctico Abstracto (AST)
 digraph {
-	1 [label=extract]
-	2 [label=timestamp]
-	1 -> 2
-	3 [label="2020-05-23"]
-	1 -> 3
+	1 [label=sad]
+	2 [label=LEXP]
+	2 -> 1
+	3 [label=ok]
+	2 -> 3
+	4 [label=happy]
+	2 -> 4
+	5 [label=10]
+	6 [label=price]
+	7 [label=5]
+	8 [label="="]
+	8 -> 6
+	8 -> 7
+	9 [label=LEXP]
+	9 -> 8
+	10 [label=price]
+	11 [label=10]
+	12 [label="="]
+	12 -> 10
+	12 -> 11
+	13 [label=LEXP]
+	13 -> 12
+	14 [label="*"]
+	15 [label=LEXP]
+	15 -> 14
+	16 [label=nombre]
+	17 [label=LEXP]
+	17 -> 16
+	18 [label=fechanacimiento]
+	17 -> 18
+	19 [label=tbcolaborador]
+	20 [label=LEXP]
+	20 -> 19
+	21 [label=nombre]
+	22 [label=suje]
+	23 [label="="]
+	23 -> 21
+	23 -> 22
+	24 [label=LEXP]
+	24 -> 23
+	25 [label=A]
+	25 -> None
+	26 [label=LEXP]
+	26 -> 25
+	27 [label=A]
+	28 [label=nombre]
+	29 [label="."]
+	29 -> 27
+	29 -> 28
+	30 [label=LEXP]
+	30 -> 29
+	31 [label=A]
+	32 [label=fechanacimiento]
+	33 [label="."]
+	33 -> 31
+	33 -> 32
+	30 -> 33
+	34 [label=identificacion]
+	35 [label=LEXP]
+	35 -> 34
+	36 [label=tbidentificacioncolaborador]
+	37 [label=B]
+	37 -> 36
+	38 [label=LEXP]
+	38 -> 37
+	39 [label=B]
+	40 [label=idcolaborador]
+	41 [label="."]
+	41 -> 39
+	41 -> 40
+	42 [label=A]
+	43 [label=id]
+	44 [label="."]
+	44 -> 42
+	44 -> 43
+	45 [label="="]
+	45 -> 41
+	45 -> 44
+	46 [label=LEXP]
+	46 -> 45
+	30 -> None
+	47 [label=tbcolaborador]
+	48 [label=A]
+	48 -> 47
+	49 [label=LEXP]
+	49 -> 48
+	50 [label=nombre]
+	51 [label=suje]
+	52 [label="="]
+	52 -> 50
+	52 -> 51
+	53 [label=LEXP]
+	53 -> 52
+	54 [label=A]
+	55 [label=nombre]
+	56 [label="."]
+	56 -> 54
+	56 -> 55
+	57 [label=LEXP]
+	57 -> 56
+	58 [label=A]
+	59 [label=nombre]
+	60 [label="."]
+	60 -> 58
+	60 -> 59
+	61 [label=LEXP]
+	61 -> 60
+	62 [label=A]
+	63 [label=fechanacimiento]
+	64 [label="."]
+	64 -> 62
+	64 -> 63
+	61 -> 64
+	65 [label=tbcolaborador]
+	66 [label=A]
+	66 -> 65
+	67 [label=LEXP]
+	67 -> 66
+	68 [label=nombre]
+	69 [label=LEXP]
+	69 -> 68
+	70 [label=1]
+	69 -> 70
+	71 [label=4]
+	69 -> 71
+	72 [label=substring]
+	72 -> 69
+	73 [label=suje]
+	74 [label="="]
+	74 -> 72
+	74 -> 73
+	75 [label=A]
+	76 [label=id]
+	77 [label="."]
+	77 -> 75
+	77 -> 76
+	78 [label=idcolaborador]
+	79 [label=LEXP]
+	79 -> 78
+	80 [label=tbidentificacioncolaborador]
+	81 [label=B]
+	81 -> 80
+	82 [label=LEXP]
+	82 -> 81
+	83 [label=LEXP]
+	83 -> None
+	84 [label="not in"]
+	84 -> 77
+	84 -> 83
+	85 [label=and]
+	85 -> 74
+	85 -> 84
+	86 [label=LEXP]
+	86 -> 85
+	87 [label=age]
+	88 [label=25]
+	89 [label=">="]
+	89 -> 87
+	89 -> 88
+	90 [label=age]
+	91 [label=89]
+	92 [label="<"]
+	92 -> 90
+	92 -> 91
+	93 [label=AND]
+	93 -> 89
+	93 -> 92
+	94 [label=id_codigo]
+	95 [label=LEXP]
+	95 -> 94
+	96 [label=id_fre]
+	95 -> 96
+	97 [label=id_fre]
+	98 [label=LEXP]
+	98 -> 97
+	99 [label=tabla_3]
+	100 [label=LEXP]
+	100 -> 99
+	101 [label=columna_54]
+	102 [label=LEXP]
+	102 -> 101
+	103 [label=tabla]
+	104 [label=atr]
+	105 [label="."]
+	105 -> 103
+	105 -> 104
+	106 [label=25]
+	107 [label=">="]
+	107 -> 105
+	107 -> 106
+	108 [label=LEXP]
+	108 -> 107
+	109 [label=hola]
+	110 [label=tabla_1]
+	111 [label=LEXP]
+	111 -> 110
+	112 [label=smallint]
+	113 [label=description]
+	114 [label=LEXP]
+	114 -> 113
+	115 [label=name]
+	116 [label=""]
+	117 [label=<>]
+	117 -> 115
+	117 -> 116
+	118 [label=LEXP]
+	118 -> 117
+	119 [label=usuario]
+	120 [label=LEXP]
+	120 -> 119
+	121 [label=usuario]
+	122 [label=LEXP]
+	122 -> 121
+	123 [label=smallint]
+	124 [label=smallint]
+	125 [label=1]
+	126 [label=LEXP]
+	126 -> 125
+	127 [label=Cheese]
+	126 -> 127
+	128 [label=9.99]
+	126 -> 128
+	129 [label=YEAR]
+	130 [label=EXTRACT]
+	130 -> 129
+	131 [label=TIMESTAMP]
+	130 -> 131
+	132 [label="2001-02-16 20:38:40"]
+	130 -> 132
+	133 [label=LEXP]
+	133 -> 130
+	134 [label=hour]
+	135 [label=LEXP]
+	135 -> 134
+	136 [label="INTERVAL 4 hours 3 minutes"]
+	135 -> 136
+	137 [label=date_part]
+	137 -> 135
+	138 [label=LEXP]
+	138 -> 137
+	139 [label="now()"]
+	140 [label=LEXP]
+	140 -> 139
+	141 [label=HOUR]
+	142 [label=EXTRACT]
+	142 -> 141
+	143 [label=TIMESTAMP]
+	142 -> 143
+	144 [label="2001-02-16 20:38:40"]
+	142 -> 144
+	145 [label=LEXP]
+	145 -> 142
+	146 [label=MINUTE]
+	147 [label=EXTRACT]
+	147 -> 146
+	148 [label=TIMESTAMP]
+	147 -> 148
+	149 [label="2001-02-16 20:38:40"]
+	147 -> 149
+	150 [label=LEXP]
+	150 -> 147
+	151 [label=SECOND]
+	152 [label=EXTRACT]
+	152 -> 151
+	153 [label=TIMESTAMP]
+	152 -> 153
+	154 [label="2001-02-16 20:38:40"]
+	152 -> 154
+	155 [label=LEXP]
+	155 -> 152
+	156 [label=YEAR]
+	157 [label=EXTRACT]
+	157 -> 156
+	158 [label=TIMESTAMP]
+	157 -> 158
+	159 [label="2001-02-16 20:38:40"]
+	157 -> 159
+	160 [label=LEXP]
+	160 -> 157
+	161 [label=MONTH]
+	162 [label=EXTRACT]
+	162 -> 161
+	163 [label=TIMESTAMP]
+	162 -> 163
+	164 [label="2001-02-16 20:38:40"]
+	162 -> 164
+	165 [label=LEXP]
+	165 -> 162
+	166 [label=DAY]
+	167 [label=EXTRACT]
+	167 -> 166
+	168 [label=TIMESTAMP]
+	167 -> 168
+	169 [label="2001-02-16 20:38:40"]
+	167 -> 169
+	170 [label=LEXP]
+	170 -> 167
+	171 [label=minutes]
+	172 [label=LEXP]
+	172 -> 171
+	173 [label="INTERVAL 4 hours 3 minutes"]
+	172 -> 173
+	174 [label=date_part]
+	174 -> 172
+	175 [label=LEXP]
+	175 -> 174
+	176 [label=seconds]
+	177 [label=LEXP]
+	177 -> 176
+	178 [label="INTERVAL 4 hours 3 minutes 15 seconds"]
+	177 -> 178
+	179 [label=date_part]
+	179 -> 177
+	180 [label=LEXP]
+	180 -> 179
+	181 [label=CURRENT_DATE]
+	182 [label=LEXP]
+	182 -> 181
+	183 [label=CURRENT_TIME]
+	184 [label=LEXP]
+	184 -> 183
+	185 [label="TIMESTAMP now"]
+	186 [label=LEXP]
+	186 -> 185
+	187 [label=columna1]
+	188 [label="as sualias"]
+	188 -> 187
+	189 [label=LEXP]
+	189 -> 188
+	190 [label=tbsujeto]
+	191 [label=LEXP]
+	191 -> 190
+	192 [label=fechanacimiento]
+	193 [label="2004-01-01"]
+	194 [label=between]
+	194 -> 192
+	194 -> 193
+	195 [label="2005-01-01"]
+	196 [label=and]
+	196 -> 194
+	196 -> 195
+	197 [label=LEXP]
+	197 -> 196
+	198 [label="*"]
+	199 [label=LEXP]
+	199 -> 198
+	200 [label=tbsujeto]
+	201 [label=LEXP]
+	201 -> 200
+	202 [label=edad]
+	203 [label=5]
+	204 [label=between]
+	204 -> 202
+	204 -> 203
+	205 [label=25]
+	206 [label=and]
+	206 -> 204
+	206 -> 205
+	207 [label=LEXP]
+	207 -> 206
+	208 [label=1]
+	209 [label=LEXP]
+	209 -> 208
+	210 [label=2]
+	209 -> 210
+	211 [label=3]
+	209 -> 211
+	212 [label=4]
+	209 -> 212
+	213 [label=5]
+	209 -> 213
+	214 [label=greatest]
+	214 -> 209
+	215 [label=LEXP]
+	215 -> 214
+	216 [label="1970-12-10"]
+	217 [label=LEXP]
+	217 -> 216
+	218 [label="2000-11-11"]
+	217 -> 218
+	219 [label="2019-01-01"]
+	217 -> 219
+	220 [label=greatest]
+	220 -> 217
+	221 [label=LEXP]
+	221 -> 220
+	222 [label="2030-02-20"]
+	223 [label=LEXP]
+	223 -> 222
+	224 [label="now()"]
+	223 -> 224
+	225 [label=GREATEST]
+	225 -> 223
+	226 [label=LEXP]
+	226 -> 225
+	227 [label=1]
+	228 [label=LEXP]
+	228 -> 227
+	229 [label=2]
+	228 -> 229
+	230 [label=3]
+	228 -> 230
+	231 [label=3]
+	228 -> 231
+	232 [label=5]
+	228 -> 232
+	233 [label=least]
+	233 -> 228
+	234 [label=LEXP]
+	234 -> 233
+	235 [label=a]
+	236 [label=LEXP]
+	236 -> 235
+	237 [label=b]
+	236 -> 237
+	238 [label=c]
+	236 -> 238
+	239 [label=aa]
+	236 -> 239
+	240 [label=least]
+	240 -> 236
+	241 [label=LEXP]
+	241 -> 240
+	242 [label=nombre]
+	243 [label=sujeto3]
+	244 [label="="]
+	244 -> 242
+	244 -> 243
+	245 [label=LEXP]
+	245 -> 244
+	246 [label="Juan Carlos"]
+	247 [label=LEXP]
+	247 -> 246
+	248 [label=nombre]
+	249 [label=sujeto4]
+	250 [label="="]
+	250 -> 248
+	250 -> 249
+	251 [label=LEXP]
+	251 -> 250
+	252 [label="Luis Espino"]
+	253 [label=LEXP]
+	253 -> 252
+	254 [label=alias11]
+	254 -> None
+	255 [label=LEXP]
+	255 -> 254
+	256 [label=tbcolaborador]
+	257 [label=A]
+	257 -> 256
+	258 [label=LEXP]
+	258 -> 257
+	259 [label=nombre]
+	260 [label=LEXP]
+	260 -> 259
+	261 [label=1]
+	260 -> 261
+	262 [label=4]
+	260 -> 262
+	263 [label=substring]
+	263 -> 260
+	264 [label=suje]
+	265 [label="="]
+	265 -> 263
+	265 -> 264
+	266 [label=A]
+	267 [label=id]
+	268 [label="."]
+	268 -> 266
+	268 -> 267
+	269 [label=idcolaborador]
+	270 [label=LEXP]
+	270 -> 269
+	271 [label=tbidentificacioncolaborador]
+	272 [label=B]
+	272 -> 271
+	273 [label=LEXP]
+	273 -> 272
+	274 [label=LEXP]
+	274 -> None
+	275 [label="not in"]
+	275 -> 268
+	275 -> 274
+	276 [label=and]
+	276 -> 265
+	276 -> 275
+	277 [label=LEXP]
+	277 -> 276
+	278 [label=1]
+	279 [label=LEXP]
+	279 -> 278
+	280 [label=2]
+	279 -> 280
+	281 [label=3]
+	279 -> 281
+	282 [label=4]
+	279 -> 282
+	283 [label=5]
+	279 -> 283
+	284 [label=greatest]
+	284 -> 279
+	285 [label=LEXP]
+	285 -> 284
+	286 [label="1970-12-10"]
+	287 [label=LEXP]
+	287 -> 286
+	288 [label="2000-11-11"]
+	287 -> 288
+	289 [label="2019-01-01"]
+	287 -> 289
+	290 [label=greatest]
+	290 -> 287
+	291 [label=LEXP]
+	291 -> 290
+	292 [label=1]
+	293 [label=LEXP]
+	293 -> 292
+	294 [label=2]
+	293 -> 294
+	295 [label=3]
+	293 -> 295
+	296 [label=3]
+	293 -> 296
+	297 [label=5]
+	293 -> 297
+	298 [label=least]
+	298 -> 293
+	299 [label=LEXP]
+	299 -> 298
+	300 [label=a]
+	301 [label=LEXP]
+	301 -> 300
+	302 [label="b\b\n\f\r\t"]
+	301 -> 302
+	303 [label=c]
+	301 -> 303
+	304 [label=aa]
+	301 -> 304
+	305 [label=least]
+	305 -> 301
+	306 [label=LEXP]
+	306 -> 305
+	307 [label=nombre]
+	308 [label=s]
+	309 [label="="]
+	309 -> 307
+	309 -> 308
+	310 [label=LEXP]
+	310 -> 309
+	311 [label="Juan Carlos"]
+	312 [label=LEXP]
+	312 -> 311
+	313 [label=nombre]
+	314 [label=s]
+	315 [label="="]
+	315 -> 313
+	315 -> 314
+	316 [label=LEXP]
+	316 -> 315
+	317 [label="Luis Espino"]
+	318 [label=LEXP]
+	318 -> 317
+	319 [label=nombre]
+	320 [label=LEXP]
+	320 -> 319
+	321 [label=indentificacion]
+	320 -> 321
+	322 [label=salario]
+	323 [label=LEXP]
+	323 -> 322
+	324 [label=sum]
+	324 -> 323
+	320 -> 324
+	325 [label=tbsujeto]
+	326 [label=LEXP]
+	326 -> 325
+	327 [label=X]
+	328 [label=LEXP]
+	328 -> 327
+	329 [label=nombre]
+	330 [label=LEXP]
+	330 -> 329
+	331 [label=indentificacion]
+	330 -> 331
+	332 [label=salario]
+	333 [label=LEXP]
+	333 -> 332
+	334 [label=sum]
+	334 -> 333
+	335 [label=100000]
+	336 [label=">"]
+	336 -> 334
+	336 -> 335
+	337 [label=LEXP]
+	337 -> 336
+	338 [label=puesto]
+	339 [label=LEXP]
+	339 -> 338
+	340 [label=tbempleado]
+	341 [label=LEXP]
+	341 -> 340
+	342 [label=puesto]
+	343 [label=LEXP]
+	343 -> 342
+	344 [label=salario]
+	343 -> 344
+	345 [label=tbempleado]
+	346 [label=LEXP]
+	346 -> 345
+	347 [label="*"]
+	348 [label=LEXP]
+	348 -> 347
+	349 [label=tbcolaborador]
+	350 [label=LEXP]
+	350 -> 349
+	351 [label=nombre]
+	352 [label=sujeto1]
+	353 [label="is distinct from"]
+	353 -> 351
+	353 -> 352
+	354 [label=LEXP]
+	354 -> 353
+	355 [label=col1]
+	356 [label=LEXP]
+	356 -> 355
+	357 [label=sum]
+	357 -> 356
+	358 [label=LEXP]
+	358 -> 357
+	359 [label=col2]
+	360 [label=LEXP]
+	360 -> 359
+	361 [label=avg]
+	361 -> 360
+	358 -> 361
+	362 [label=tbcolaborador]
+	363 [label=LEXP]
+	363 -> 362
+	364 [label=nombre]
+	365 [label=sujeto1]
+	366 [label="is not distinct from"]
+	366 -> 364
+	366 -> 365
+	367 [label=LEXP]
+	367 -> 366
+	368 [label=343]
+	369 [label=LEXP]
+	369 -> 368
+	370 [label=CBRT]
+	370 -> 369
+	371 [label="AS CubeRoot"]
+	371 -> 370
+	372 [label=LEXP]
+	372 -> 371
+	373 [label="cadena NOT LIKE M%"]
+	374 [label=LEXP]
+	374 -> 373
+	375 [label=tbcolaborador]
+	376 [label=LEXP]
+	376 -> 375
+	377 [label="*"]
+	378 [label=LEXP]
+	378 -> 377
+	379 [label=nombre]
+	380 [label=LEXP]
+	380 -> 379
+	381 [label=fechanacimiento]
+	380 -> 381
+	382 [label=tbcolaborador]
+	383 [label=LEXP]
+	383 -> 382
+	384 [label=nombre]
+	385 [label=LEXP]
+	385 -> 384
+	386 [label=1]
+	385 -> 386
+	387 [label=4]
+	385 -> 387
+	388 [label=substring]
+	388 -> 385
+	389 [label=suje]
+	390 [label="="]
+	390 -> 388
+	390 -> 389
+	391 [label=LEXP]
+	391 -> 390
+	392 [label=A]
+	392 -> None
+	393 [label=LEXP]
+	393 -> 392
+	394 [label="*"]
+	395 [label=LEXP]
+	395 -> 394
+	396 [label=usuario]
+	397 [label=LEXP]
+	397 -> 396
+	398 [label=first_name]
+	399 [label=LEXP]
+	399 -> 398
+	400 [label=last_name]
+	399 -> 400
+	401 [label=customer]
+	402 [label=c]
+	402 -> 401
+	403 [label=LEXP]
+	403 -> 402
+	404 [label=1]
+	405 [label=LEXP]
+	405 -> 404
+	406 [label=payment]
+	407 [label=p]
+	407 -> 406
+	408 [label=LEXP]
+	408 -> 407
+	409 [label=p]
+	410 [label=customer_id]
+	411 [label="."]
+	411 -> 409
+	411 -> 410
+	412 [label=c]
+	413 [label=customer_id]
+	414 [label="."]
+	414 -> 412
+	414 -> 413
+	415 [label="="]
+	415 -> 411
+	415 -> 414
+	416 [label=amount]
+	417 [label=11]
+	418 [label=">"]
+	418 -> 416
+	418 -> 417
+	419 [label=AND]
+	419 -> 415
+	419 -> 418
+	420 [label=LEXP]
+	420 -> 419
+	421 [label=first_name]
+	422 [label=LEXP]
+	422 -> 421
+	423 [label=last_name]
+	422 -> 423
+	424 [label=column1]
+	425 [label=LEXP]
+	425 -> 424
+	426 [label=table_1]
+	427 [label=LEXP]
+	427 -> 426
+	428 [label=1]
+	429 [label=LEXP]
+	429 -> 428
+	430 [label=table_2]
+	431 [label=LEXP]
+	431 -> 430
+	432 [label=column_2]
+	433 [label=table_1]
+	434 [label=column_1]
+	435 [label="."]
+	435 -> 433
+	435 -> 434
+	436 [label="="]
+	436 -> 432
+	436 -> 435
+	437 [label=LEXP]
+	437 -> 436
+	438 [label=col1]
+	439 [label=LEXP]
+	439 -> 438
+	440 [label=tab1]
+	441 [label=LEXP]
+	441 -> 440
+	442 [label=1]
+	443 [label=LEXP]
+	443 -> 442
+	444 [label=tab2]
+	445 [label=LEXP]
+	445 -> 444
+	446 [label=col2]
+	447 [label=tab1]
+	448 [label=col2]
+	449 [label="."]
+	449 -> 447
+	449 -> 448
+	450 [label="="]
+	450 -> 446
+	450 -> 449
+	451 [label=LEXP]
+	451 -> 450
+	452 [label=col1]
+	453 [label=LEXP]
+	453 -> 452
+	454 [label=tab1]
+	455 [label=LEXP]
+	455 -> 454
+	456 [label=1]
+	457 [label=LEXP]
+	457 -> 456
+	458 [label=tab2]
+	459 [label=LEXP]
+	459 -> 458
+	460 [label=1]
+	461 [label=LEXP]
+	461 -> 460
+	462 [label=tab2]
+	463 [label=LEXP]
+	463 -> 462
+	464 [label=col2]
+	465 [label=tab1]
+	466 [label=col2]
+	467 [label="."]
+	467 -> 465
+	467 -> 466
+	468 [label="="]
+	468 -> 464
+	468 -> 467
+	469 [label=LEXP]
+	469 -> 468
+	470 [label=LEXP]
+	470 -> None
+	471 [label=customer_id]
+	472 [label=LEXP]
+	472 -> 471
+	473 [label=payment_id]
+	472 -> 473
+	474 [label=amount]
+	472 -> 474
+	475 [label=payment]
+	476 [label=LEXP]
+	476 -> 475
+	477 [label=amount]
+	478 [label=8]
+	479 [label=BETWEEN]
+	479 -> 477
+	479 -> 478
+	480 [label=9]
+	481 [label=AND]
+	481 -> 479
+	481 -> 480
+	482 [label=LEXP]
+	482 -> 481
+	483 [label=customer_id]
+	484 [label=LEXP]
+	484 -> 483
+	485 [label=payment_id]
+	484 -> 485
+	486 [label=amount]
+	484 -> 486
+	487 [label=payment_date]
+	484 -> 487
+	488 [label=payment]
+	489 [label=LEXP]
+	489 -> 488
+	490 [label=payment_date]
+	491 [label="2007-02-07"]
+	492 [label=BETWEEN]
+	492 -> 490
+	492 -> 491
+	493 [label="2007-02-15"]
+	494 [label=AND]
+	494 -> 492
+	494 -> 493
+	495 [label=LEXP]
+	495 -> 494
+	496 [label=customer_id]
+	497 [label=LEXP]
+	497 -> 496
+	498 [label=payment_id]
+	497 -> 498
+	499 [label=amount]
+	497 -> 499
+	500 [label=payment]
+	501 [label=LEXP]
+	501 -> 500
+	502 [label=amount]
+	503 [label=8]
+	504 [label="NOT BETWEEN"]
+	504 -> 502
+	504 -> 503
+	505 [label=9]
+	506 [label=AND]
+	506 -> 504
+	506 -> 505
+	507 [label=LEXP]
+	507 -> 506
+	508 [label=customer_id]
+	509 [label=LEXP]
+	509 -> 508
+	510 [label=rental_id]
+	509 -> 510
+	511 [label=return_date]
+	509 -> 511
+	512 [label=rental]
+	513 [label=LEXP]
+	513 -> 512
+	514 [label=customer_id]
+	515 [label=1]
+	516 [label=LEXP]
+	516 -> 515
+	517 [label=2]
+	516 -> 517
+	518 [label=in]
+	518 -> 514
+	518 -> 516
+	519 [label=LEXP]
+	519 -> 518
+	520 [label=return_date]
+	521 [label=LEXP]
+	521 -> 520
+	522 [label=customer_id]
+	523 [label=LEXP]
+	523 -> 522
+	524 [label=first_name]
+	523 -> 524
+	525 [label=last_name]
+	523 -> 525
+	526 [label=customer]
+	527 [label=LEXP]
+	527 -> 526
+	528 [label=customer_id]
+	529 [label=customer_id]
+	530 [label=LEXP]
+	530 -> 529
+	531 [label=rental]
+	532 [label=LEXP]
+	532 -> 531
+	533 [label=CAST]
+	534 [label="2005-05-27"]
+	535 [label="="]
+	535 -> 533
+	535 -> 534
+	536 [label=LEXP]
+	536 -> 535
+	537 [label=LEXP]
+	537 -> None
+	538 [label=in]
+	538 -> 528
+	538 -> 537
+	539 [label=LEXP]
+	539 -> 538
+	540 [label=customer_id]
+	541 [label=LEXP]
+	541 -> 540
+	542 [label=customer_id]
+	543 [label=LEXP]
+	543 -> 542
+	544 [label=rental_id]
+	543 -> 544
+	545 [label=return_date]
+	543 -> 545
+	546 [label=rental]
+	547 [label=LEXP]
+	547 -> 546
+	548 [label=customer_id]
+	549 [label=1]
+	550 [label=LEXP]
+	550 -> 549
+	551 [label=2]
+	550 -> 551
+	552 [label="not in"]
+	552 -> 548
+	552 -> 550
+	553 [label=LEXP]
+	553 -> 552
+	554 [label=customer_id]
+	555 [label=LEXP]
+	555 -> 554
+	556 [label=first_name]
+	555 -> 556
+	557 [label=last_name]
+	555 -> 557
+	558 [label=customer]
+	559 [label=LEXP]
+	559 -> 558
+	560 [label=customer_id]
+	561 [label=customer_id]
+	562 [label=LEXP]
+	562 -> 561
+	563 [label=rental]
+	564 [label=LEXP]
+	564 -> 563
+	565 [label=CAST]
+	566 [label="2005-05-27"]
+	567 [label="="]
+	567 -> 565
+	567 -> 566
+	568 [label=LEXP]
+	568 -> 567
+	569 [label=LEXP]
+	569 -> None
+	570 [label="not in"]
+	570 -> 560
+	570 -> 569
+	571 [label=LEXP]
+	571 -> 570
+	572 [label=customer_id]
+	573 [label=LEXP]
+	573 -> 572
+	574 [label=title]
+	575 [label=LEXP]
+	575 -> 574
+	576 [label=film]
+	577 [label=LEXP]
+	577 -> 576
+	578 [label=length]
+	579 [label=length]
+	580 [label=LEXP]
+	580 -> 579
+	581 [label=MAX]
+	581 -> 580
+	582 [label=LEXP]
+	582 -> 581
+	583 [label=film]
+	584 [label=LEXP]
+	584 -> 583
+	585 [label=LEXP]
+	585 -> None
+	586 [label=ANY]
+	586 -> 585
+	587 [label=">="]
+	587 -> 578
+	587 -> 586
+	588 [label=LEXP]
+	588 -> 587
+	589 [label=e]
+	590 [label=first_name]
+	591 [label="."]
+	591 -> 589
+	591 -> 590
+	592 [label=LEXP]
+	592 -> 591
+	593 [label=e]
+	594 [label=last_name]
+	595 [label="."]
+	595 -> 593
+	595 -> 594
+	592 -> 595
+	596 [label=e]
+	597 [label=department_id]
+	598 [label="."]
+	598 -> 596
+	598 -> 597
+	592 -> 598
+	599 [label=employees]
+	600 [label=e]
+	600 -> 599
+	601 [label=LEXP]
+	601 -> 600
+	602 [label=department_id]
+	603 [label=DEPARTMENT_ID]
+	604 [label=LEXP]
+	604 -> 603
+	605 [label=departments]
+	606 [label=LEXP]
+	606 -> 605
+	607 [label=location_id]
+	608 [label=1700]
+	609 [label="="]
+	609 -> 607
+	609 -> 608
+	610 [label=LEXP]
+	610 -> 609
+	611 [label=LEXP]
+	611 -> None
+	612 [label=ANY]
+	612 -> 611
+	613 [label="="]
+	613 -> 602
+	613 -> 612
+	614 [label=LEXP]
+	614 -> 613
+	615 [label=title]
+	616 [label=LEXP]
+	616 -> 615
+	617 [label=category_id]
+	616 -> 617
+	618 [label=film]
+	619 [label=LEXP]
+	619 -> 618
+	620 [label=category_id]
+	621 [label=category_id]
+	622 [label=LEXP]
+	622 -> 621
+	623 [label=category]
+	624 [label=LEXP]
+	624 -> 623
+	625 [label=NAME]
+	626 [label=Action]
+	627 [label="="]
+	627 -> 625
+	627 -> 626
+	628 [label=NAME]
+	629 [label=Drama]
+	630 [label="="]
+	630 -> 628
+	630 -> 629
+	631 [label=OR]
+	631 -> 627
+	631 -> 630
+	632 [label=LEXP]
+	632 -> 631
+	633 [label=LEXP]
+	633 -> None
+	634 [label=ANY]
+	634 -> 633
+	635 [label="="]
+	635 -> 620
+	635 -> 634
+	636 [label=LEXP]
+	636 -> 635
+	637 [label=name]
+	638 [label=LEXP]
+	638 -> 637
+	639 [label=population]
+	638 -> 639
+	640 [label=countries]
+	641 [label=LEXP]
+	641 -> 640
+	642 [label=population]
+	643 [label="*"]
+	644 [label=LEXP]
+	644 -> 643
+	645 [label=8000000]
+	646 [label=LEXP]
+	646 -> 645
+	647 [label=22000000]
+	646 -> 647
+	648 [label=null]
+	646 -> 648
+	649 [label=unnest]
+	649 -> 646
+	650 [label=LEXP]
+	650 -> 649
+	651 [label=LEXP]
+	651 -> None
+	652 [label=any]
+	652 -> 651
+	653 [label=">"]
+	653 -> 642
+	653 -> 652
+	654 [label=LEXP]
+	654 -> 653
+	655 [label=population]
+	656 [label=LEXP]
+	656 -> 655
+	657 [label=name]
+	656 -> 657
+	658 [label=100]
+	659 [label=height]
+	660 [label=LEXP]
+	660 -> 659
+	661 [label=sys]
+	662 [label=summits]
+	663 [label="."]
+	663 -> 661
+	663 -> 662
+	664 [label=LEXP]
+	664 -> 663
+	665 [label=LEXP]
+	665 -> None
+	666 [label=ALL]
+	666 -> 665
+	667 [label=<>]
+	667 -> 658
+	667 -> 666
+	668 [label="AS x"]
+	668 -> 667
+	669 [label=LEXP]
+	669 -> 668
+	670 [label="*"]
+	671 [label=LEXP]
+	671 -> 670
+	672 [label=t1]
+	673 [label=LEXP]
+	673 -> 672
+	674 [label=1]
+	675 [label=LEXP]
+	675 -> 674
+	676 [label=ROW]
+	676 -> 675
+	677 [label=column1]
+	678 [label=LEXP]
+	678 -> 677
+	679 [label=t2]
+	680 [label=LEXP]
+	680 -> 679
+	681 [label="="]
+	681 -> 676
+	681 -> None
+	682 [label=LEXP]
+	682 -> 681
+	683 [label="*"]
+	684 [label=LEXP]
+	684 -> 683
+	685 [label=t1]
+	686 [label=LEXP]
+	686 -> 685
+	687 [label=1]
+	688 [label=LEXP]
+	688 -> 687
+	689 [label=ROW]
+	689 -> 688
+	690 [label=column1]
+	691 [label=LEXP]
+	691 -> 690
+	692 [label=t2]
+	693 [label=LEXP]
+	693 -> 692
+	694 [label=LEXP]
+	694 -> None
+	695 [label=ANY]
+	695 -> 694
+	696 [label="="]
+	696 -> 689
+	696 -> 695
+	697 [label=LEXP]
+	697 -> 696
+	698 [label="*"]
+	699 [label=LEXP]
+	699 -> 698
+	700 [label=public]
+	701 [label=Album]
+	702 [label="."]
+	702 -> 700
+	702 -> 701
+	703 [label=LEXP]
+	703 -> 702
+	704 [label="*"]
+	705 [label=LEXP]
+	705 -> 704
+	706 [label=public]
+	707 [label=MediaType]
+	708 [label="."]
+	708 -> 706
+	708 -> 707
+	709 [label=LEXP]
+	709 -> 708
+	710 [label="*"]
+	711 [label=LEXP]
+	711 -> 710
+	712 [label=public]
+	713 [label=Album]
+	714 [label="."]
+	714 -> 712
+	714 -> 713
+	715 [label=LEXP]
+	715 -> 714
+	716 [label=AlbumId]
+	717 [label=LEXP]
+	717 -> 716
+	718 [label="*"]
+	719 [label=LEXP]
+	719 -> 718
+	720 [label=public]
+	721 [label=Album]
+	722 [label="."]
+	722 -> 720
+	722 -> 721
+	723 [label=LEXP]
+	723 -> 722
+	724 [label="*"]
+	725 [label=LEXP]
+	725 -> 724
+	726 [label=public]
+	727 [label=Album]
+	728 [label="."]
+	728 -> 726
+	728 -> 727
+	729 [label=LEXP]
+	729 -> 728
+	730 [label=name]
+	731 [label=LEXP]
+	731 -> 730
+	732 [label=rollnumber]
+	731 -> 732
+	733 [label=student]
+	734 [label=LEXP]
+	734 -> 733
+	735 [label=name]
+	736 [label=LEXP]
+	736 -> 735
+	737 [label=rollnumber]
+	736 -> 737
+	738 [label=marks]
+	739 [label=LEXP]
+	739 -> 738
+	740 [label=LEXP]
+	740 -> None
+	741 [label=city]
+	742 [label=LEXP]
+	742 -> 741
+	743 [label=travel]
+	744 [label=sample]
+	745 [label="-"]
+	745 -> 743
+	745 -> 744
+	746 [label=LEXP]
+	746 -> 745
+	747 [label=tipo]
+	748 [label=airport]
+	749 [label="="]
+	749 -> 747
+	749 -> 748
+	750 [label=LEXP]
+	750 -> 749
+	751 [label=city]
+	752 [label=LEXP]
+	752 -> 751
+	753 [label=travel]
+	754 [label=sample]
+	755 [label="-"]
+	755 -> 753
+	755 -> 754
+	756 [label=LEXP]
+	756 -> 755
+	757 [label=tipo]
+	758 [label=hotel]
+	759 [label="="]
+	759 -> 757
+	759 -> 758
+	760 [label=LEXP]
+	760 -> 759
+	761 [label=LEXP]
+	761 -> None
+	762 [label=city]
+	763 [label=LEXP]
+	763 -> 762
+	764 [label=travel]
+	765 [label=sample]
+	766 [label="-"]
+	766 -> 764
+	766 -> 765
+	767 [label=LEXP]
+	767 -> 766
+	768 [label=tipo]
+	769 [label=airport]
+	770 [label="="]
+	770 -> 768
+	770 -> 769
+	771 [label=LEXP]
+	771 -> 770
+	772 [label=city]
+	773 [label=LEXP]
+	773 -> 772
+	774 [label=travel]
+	775 [label=sample]
+	776 [label="-"]
+	776 -> 774
+	776 -> 775
+	777 [label=LEXP]
+	777 -> 776
+	778 [label=tipo]
+	779 [label=hotel]
+	780 [label="="]
+	780 -> 778
+	780 -> 779
+	781 [label=LEXP]
+	781 -> 780
+	782 [label=LEXP]
+	782 -> None
+	783 [label=city]
+	784 [label=LEXP]
+	784 -> 783
+	785 [label=travel]
+	786 [label=sample]
+	787 [label="-"]
+	787 -> 785
+	787 -> 786
+	788 [label=LEXP]
+	788 -> 787
+	789 [label=tipo]
+	790 [label=airport]
+	791 [label="="]
+	791 -> 789
+	791 -> 790
+	792 [label=LEXP]
+	792 -> 791
+	793 [label=city]
+	794 [label=LEXP]
+	794 -> 793
+	795 [label=travel]
+	796 [label=sample]
+	797 [label="-"]
+	797 -> 795
+	797 -> 796
+	798 [label=LEXP]
+	798 -> 797
+	799 [label=tipo]
+	800 [label=hotel]
+	801 [label="="]
+	801 -> 799
+	801 -> 800
+	802 [label=LEXP]
+	802 -> 801
+	803 [label=LEXP]
+	803 -> None
+	804 [label=city]
+	805 [label=LEXP]
+	805 -> 804
+	806 [label=travel]
+	807 [label=sample]
+	808 [label="-"]
+	808 -> 806
+	808 -> 807
+	809 [label=LEXP]
+	809 -> 808
+	810 [label=tipo]
+	811 [label=airport]
+	812 [label="="]
+	812 -> 810
+	812 -> 811
+	813 [label=LEXP]
+	813 -> 812
+	814 [label=city]
+	815 [label=LEXP]
+	815 -> 814
+	816 [label=travel]
+	817 [label=sample]
+	818 [label="-"]
+	818 -> 816
+	818 -> 817
+	819 [label=LEXP]
+	819 -> 818
+	820 [label=tipo]
+	821 [label=hotel]
+	822 [label="="]
+	822 -> 820
+	822 -> 821
+	823 [label=LEXP]
+	823 -> 822
+	824 [label=LEXP]
+	824 -> None
+	825 [label=city]
+	826 [label=LEXP]
+	826 -> 825
+	827 [label=travel]
+	828 [label=sample]
+	829 [label="-"]
+	829 -> 827
+	829 -> 828
+	830 [label=LEXP]
+	830 -> 829
+	831 [label=tipo]
+	832 [label=airport]
+	833 [label="="]
+	833 -> 831
+	833 -> 832
+	834 [label=LEXP]
+	834 -> 833
+	835 [label=city]
+	836 [label=LEXP]
+	836 -> 835
+	837 [label=travel]
+	838 [label=sample]
+	839 [label="-"]
+	839 -> 837
+	839 -> 838
+	840 [label=LEXP]
+	840 -> 839
+	841 [label=tipo]
+	842 [label=hotel]
+	843 [label="="]
+	843 -> 841
+	843 -> 842
+	844 [label=LEXP]
+	844 -> 843
+	845 [label=LEXP]
+	845 -> None
+	846 [label=city]
+	847 [label=LEXP]
+	847 -> 846
+	848 [label=travel]
+	849 [label=sample]
+	850 [label="-"]
+	850 -> 848
+	850 -> 849
+	851 [label=LEXP]
+	851 -> 850
+	852 [label=tipo]
+	853 [label=airport]
+	854 [label="="]
+	854 -> 852
+	854 -> 853
+	855 [label=LEXP]
+	855 -> 854
+	856 [label=city]
+	857 [label=LEXP]
+	857 -> 856
+	858 [label=travel]
+	859 [label=sample]
+	860 [label="-"]
+	860 -> 858
+	860 -> 859
+	861 [label=LEXP]
+	861 -> 860
+	862 [label=tipo]
+	863 [label=hotel]
+	864 [label="="]
+	864 -> 862
+	864 -> 863
+	865 [label=LEXP]
+	865 -> 864
+	866 [label=LEXP]
+	866 -> None
+	867 [label=343]
+	868 [label=LEXP]
+	868 -> 867
+	869 [label=CBRT]
+	869 -> 868
+	870 [label="AS cube"]
+	870 -> 869
+	871 [label=LEXP]
+	871 -> 870
+	872 [label=columna]
+	873 [label=int]
+	874 [label="-"]
+	874 -> 872
+	874 -> 873
+	875 [label=LEXP]
+	875 -> 874
+	876 [label=abs]
+	876 -> 875
+	877 [label=LEXP]
+	877 -> 876
+	878 [label=5]
+	879 [label="-"]
+	879 -> 878
+	880 [label=LEXP]
+	880 -> 879
+	881 [label=abc]
+	881 -> 880
+	882 [label=LEXP]
+	882 -> 881
+	883 [label="*"]
+	884 [label=LEXP]
+	884 -> 883
+	885 [label=tbempleado]
+	886 [label=LEXP]
+	886 -> 885
+	887 [label=antiguedad]
+	888 [label=LEXP]
+	888 -> 887
+	889 [label=abs]
+	889 -> 888
+	890 [label=0]
+	891 [label=">"]
+	891 -> 889
+	891 -> 890
+	892 [label=LEXP]
+	892 -> 891
+	893 [label=53.7]
+	894 [label=LEXP]
+	894 -> 893
+	895 [label=CEIL]
+	895 -> 894
+	896 [label="AS ceil"]
+	896 -> 895
+	897 [label=LEXP]
+	897 -> 896
+	898 [label=19]
+	899 [label=LEXP]
+	899 -> 898
+	900 [label=3]
+	899 -> 900
+	901 [label=DIV]
+	901 -> 899
+	902 [label="AS Quotient"]
+	902 -> 901
+	903 [label=LEXP]
+	903 -> 902
 }

@@ -418,10 +418,10 @@ def p_CREATETYPE(t):
     'CREATETYPE : create type id as enum para LEXP parc'
 
 def p_SELECT(t):
-    ''' SELECT : select distinct  LEXP r_from LEXP  WHERE GROUP HAVING ORDER LIMIT  COMBINING
-	| select  LEXP r_from LEXP WHERE  GROUP HAVING ORDER LIMIT COMBINING
-	| select  LEXP LIMIT COMBINING 
-    '''
+    ''' SELECT : select distinct  LEXP r_from LEXP  WHERE GROUP HAVING COMBINING ORDER LIMIT
+	| select  LEXP r_from LEXP WHERE  GROUP HAVING  COMBINING ORDER LIMIT
+	| select  LEXP WHERE  GROUP HAVING  COMBINING ORDER LIMIT
+    ''' 
 
 def p_LIMIT(t):
     '''LIMIT : limit int
@@ -487,9 +487,17 @@ def p_EXIST(t):
     '''EXIST : exist para SELECT parc
     '''
 
-def p_LEXP(t):
-    '''LEXP : LEXP coma EXP
-	| EXP'''
+def p_LEXP1(t):
+    '''LEXP : LEXP coma EXP'''
+    t[0] = t[1]
+    arbol.edge(str(t[0]),str(t[3]))
+
+def p_LEXP2(t):
+    '''LEXP : EXP'''
+    id = inc()
+    t[0] = id
+    arbol.node(str(id),"LEXP")
+    arbol.edge(str(id),str(t[1]))
 
 def p_TIPOE(t):
     '''TIPO : interval cadena
@@ -503,12 +511,14 @@ def p_TIPOE(t):
             | time para int parc
             | character varying para int parc'''
 
-def p_TIPOL(t):
+def p_TIPOL1(t):
     ''' TIPO : timestamp para int parc without time zone
             | timestamp para int parc with time zone
             | time para int parc without time zone
-            | time para int parc with time zone
-            | interval para int parc cadena '''
+            | time para int parc with time zone '''
+
+def p_TIPOL2(t):
+    ''' TIPO : interval para int parc cadena '''
 
 def p_TIPO(t):
     '''TIPO : smallint
@@ -578,60 +588,98 @@ def p_EXP3(t):
     arbol.edge(str(id),str(t[1]))
     arbol.edge(str(id),str(t[3]))
 
-def p_EXP2(t):
+def p_EXP21(t):
     '''EXP : EXP is not null %prec predicates
-            | EXP is null %prec predicates
-            | EXP isnull %prec predicates
-            | EXP notnull %prec predicates
-            | EXP  is true %prec predicates
             | EXP is not true %prec predicates
-            | EXP is false %prec predicates
             | EXP is not false %prec predicates
+            | EXP is not unknown %prec predicates'''
+    id = inc()
+    t[0] = id
+    arbol.node(str(id),str(t[2] + " " + t[3] + " " + t[4]))
+    arbol.edge(str(id),str(t[1]))
+
+def p_EXP22(t):
+    '''EXP : EXP is null %prec predicates
+            | EXP  is true %prec predicates
             | EXP is unknown %prec predicates
-            | EXP is not unknown %prec predicates
-            | EXP as cadenaString %prec lsel
-            | EXP cadenaString %prec lsel
-            | EXP as id %prec lsel
-            | EXP id  %prec lsel
             | EXP as cadena %prec lsel
+            | EXP as id %prec lsel
+            | EXP as cadenaString %prec lsel
+            | EXP is false %prec predicates'''
+    id = inc()
+    t[0] = id
+    arbol.node(str(id),str(t[2] + " " + t[3]))
+    arbol.edge(str(id),str(t[1]))
+
+def p_EXP23(t):
+    '''EXP : EXP isnull %prec predicates
+            | EXP notnull %prec predicates
+            | EXP cadenaString %prec lsel
+            | EXP id  %prec lsel
             | EXP cadena %prec lsel'''
+    id = inc()
+    t[0] = id
+    arbol.node(str(id),str(t[2]))
+    arbol.edge(str(id),str(t[1]))
     
 def p_EXP1(t):
     '''EXP : mas EXP %prec umas
             | menos EXP %prec umenos
             | not EXP'''
     id = inc()
+    t[0] = id
     arbol.node(str(id),str(t[1]))
     arbol.edge(str(id),str(t[2]))
 
 def p_EXPV1(t):
-    '''EXP : EXP in para LEXP parc %prec predicates
-            | EXP not between EXP %prec predicates
-            | EXP between symetric EXP %prec predicates
-            | EXP is not distinct r_from EXP %prec predicates'''
+    '''EXP : EXP not between EXP %prec predicates
+            | EXP between symetric EXP %prec predicates'''
     id = inc()
+    t[0] = id
     arbol.node(str(id),str(t[2] + " " + t[3]))
+    arbol.edge(str(id),str(t[1]))
+    arbol.edge(str(id),str(t[4]))
+
+def p_EXPV12(t):
+    '''EXP : EXP in para LEXP parc %prec predicates'''
+    id = inc()
+    t[0] = id
+    arbol.node(str(id),"in")
     arbol.edge(str(id),str(t[1]))
     arbol.edge(str(id),str(t[4]))
 
 def p_EXPV2(t):
     '''EXP : EXP not in para LEXP parc %prec predicates'''
     id = inc() 
-    arbol.node(str(id),str(t[2] + " " + t[3]))
+    t[0] = id
+    arbol.node(str(id),"not in")
     arbol.edge(str(id),str(t[1]))
     arbol.edge(str(id),str(t[5]))
 
 def p_EXPV3(t):
     '''EXP : EXP is not distinct r_from EXP %prec predicates'''
     id = inc()
-    arbol.node(str(id),str(t[2] + " " + t[3] + " " + t[4] + " " + t[5]))
+    t[0] = id
+    arbol.node(str(id),"is not distinct from")
     arbol.edge(str(id),str(t[1]))
     arbol.edge(str(id),str(t[6]))
+
+
+def p_EXPV32(t):
+    '''EXP : EXP is distinct r_from EXP %prec predicates'''
+    id = inc()
+    t[0] = id
+    arbol.node(str(id),"is distinct from")
+    arbol.edge(str(id),str(t[1]))
+    arbol.edge(str(id),str(t[5]))
 
 def p_EXPV4(t):
     '''EXP : EXP not between symetric EXP %prec predicates'''
     id = inc() 
-    arbol.node(str(id),str())
+    t[0] = id
+    arbol.node(str(id),"not between symetric")
+    arbol.edge(str(id),str(t[1]))
+    arbol.edge(str(id),str(t[5]))
 
 def p_EXPJ(t):
     '''EXP : SELECT
