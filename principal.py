@@ -1,4 +1,4 @@
-import gramatica2 as g
+import AST as g
 from tkinter import *
 
 

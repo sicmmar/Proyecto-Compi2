@@ -149,21 +149,21 @@ t_ptcoma = r';'
 t_coma = r','
 t_punto = r'\.'
 
-def t_int(t):
-    r'\d+'
-    try:
-        t.value = int(t.value)
-    except ValueError:
-        print("Valor numerico incorrecto %d", t.value)
-        t.value = 0
-    return t
-
 def t_decimales(t):
     r'\d+\.\d+([e][+-]\d+)?'
     try:
         t.value = float(t.value)
     except ValueError:
         print("Error no se puede convertir %d", t.value)
+        t.value = 0
+    return t
+
+def t_int(t):
+    r'\d+'
+    try:
+        t.value = int(t.value)
+    except ValueError:
+        print("Valor numerico incorrecto %d", t.value)
         t.value = 0
     return t
 
@@ -214,19 +214,28 @@ import ply.lex as lex
 
 lexer = lex.lex()
 
+from graphviz import Digraph
+arbol = Digraph(comment='Árbol Sintáctico Abstracto (AST)')
+
+i = 0
+def inc():
+    global i
+    i += 1
+    return i
+
 # Asociación de operadores y precedencia
 precedence = (
-    ('left', 'lsel'),
-    ('left', 'punto'),
-    ('right', 'umenos', 'umas'),
-    ('left', 'elevado'),
-    ('left', 'multiplicacion', 'division', 'modulo'),
-    ('left', 'mas', 'menos'),
-    ('left', 'mayor', 'menor', 'mayor_igual', 'menor_igual', 'igual', 'diferente1', 'diferente2'),
-    ('left', 'predicates'),
-    ('right', 'not'),
-    ('left', 'and'),
     ('left', 'or'),
+    ('left', 'and'),
+    ('right', 'not'),
+    ('left', 'predicates'),
+    ('left', 'mayor', 'menor', 'mayor_igual', 'menor_igual', 'igual', 'diferente1', 'diferente2'),
+    ('left', 'mas', 'menos'),
+    ('left', 'multiplicacion', 'division', 'modulo'),
+    ('left', 'elevado'),
+    ('right', 'umenos', 'umas'),
+    ('left', 'punto'),
+    ('left', 'lsel'),
 )
 
 
@@ -482,39 +491,55 @@ def p_LEXP(t):
     '''LEXP : LEXP coma EXP
 	| EXP'''
 
+def p_TIPOE(t):
+    '''TIPO : interval cadena
+            | decimal para LEXP parc
+            | numeric para LEXP parc
+            | varchar para int parc
+            | timestamp para int parc
+            | character para int parc
+            | interval para int parc
+            | char para int parc
+            | time para int parc
+            | character varying para int parc'''
+
+def p_TIPOL(t):
+    ''' TIPO : timestamp para int parc without time zone
+            | timestamp para int parc with time zone
+            | time para int parc without time zone
+            | time para int parc with time zone
+            | interval para int parc cadena '''
 
 def p_TIPO(t):
     '''TIPO : smallint
             | integer
             | bigint
-            | decimal para LEXP parc
-            | numeric para LEXP parc
             | real
             | double precision
             | money
-            | character varying para int parc
-            | varchar para int parc
-            | character para int parc
-            | char para int parc
             | text
             | timestamp 
-            | timestamp without time zone
-            | timestamp para int parc without time zone
-            | timestamp with time zone
-            | timestamp para int parc with time zone
-            | timestamp para int parc
             | date
             | time 
-            | time without time zone
-            | time para int parc without time zone
-            | time with time zone
-            | time para int parc with time zone
-            | time para int parc
             | interval
-            | interval para int parc
-            | interval cadena
-            | interval para int parc cadena
-            | boolean'''
+            | boolean
+            | timestamp without time zone
+            | timestamp with time zone
+            | time without time zone
+            | time with time zone'''
+    l = len(t)
+    if l == 2:
+        id = inc()
+        t[0] = id
+        arbol.node(str(id),str(t[1]))
+    elif l == 3:
+        id = inc()
+        t[0] = id
+        arbol.node(str(id),str(t[1] + " " + t[2]))
+    elif l == 5:
+        id = inc()
+        t[0] = id
+        arbol.node(str(id),str(t[1] + " " + t[2] + " " + t[3] + " " + t[4]))
 
 
 def p_FIELDS(t):
@@ -524,9 +549,12 @@ def p_FIELDS(t):
         | hour
         | minute
         | second'''
+    id = inc()
+    t[0] = id
+    arbol.node(str(id),str(t[1]))
 
 
-def p_EXP(t):
+def p_EXP3(t):
     '''EXP : EXP mas EXP
             | EXP menos EXP
             | EXP multiplicacion  EXP
@@ -542,18 +570,16 @@ def p_EXP(t):
             | EXP igual EXP
             | EXP diferente1 EXP
             | EXP diferente2 EXP
-            | EXP punto EXP
-            | mas EXP %prec umas
-            | menos EXP %prec umenos
             | EXP between EXP %prec predicates
-            | EXP in para LEXP parc %prec predicates
-            | EXP not in para LEXP parc %prec predicates
-            | EXP not between EXP %prec predicates
-            | EXP  between symetric EXP %prec predicates
-            | EXP not between symetric EXP %prec predicates
-            | EXP is distinct r_from EXP %prec predicates
-            | EXP is not distinct r_from EXP %prec predicates
-            | EXP is not null %prec predicates
+            | EXP punto EXP'''
+    id = inc()
+    t[0] = id
+    arbol.node(str(id),str(t[2]))
+    arbol.edge(str(id),str(t[1]))
+    arbol.edge(str(id),str(t[3]))
+
+def p_EXP2(t):
+    '''EXP : EXP is not null %prec predicates
             | EXP is null %prec predicates
             | EXP isnull %prec predicates
             | EXP notnull %prec predicates
@@ -568,33 +594,120 @@ def p_EXP(t):
             | EXP as id %prec lsel
             | EXP id  %prec lsel
             | EXP as cadena %prec lsel
-            | EXP cadena %prec lsel
-            | multiplicacion %prec lsel
-            | not EXP
-            | para EXP parc
-            | int
+            | EXP cadena %prec lsel'''
+    
+def p_EXP1(t):
+    '''EXP : mas EXP %prec umas
+            | menos EXP %prec umenos
+            | not EXP'''
+    id = inc()
+    arbol.node(str(id),str(t[1]))
+    arbol.edge(str(id),str(t[2]))
+
+def p_EXPV1(t):
+    '''EXP : EXP in para LEXP parc %prec predicates
+            | EXP not between EXP %prec predicates
+            | EXP between symetric EXP %prec predicates
+            | EXP is not distinct r_from EXP %prec predicates'''
+    id = inc()
+    arbol.node(str(id),str(t[2] + " " + t[3]))
+    arbol.edge(str(id),str(t[1]))
+    arbol.edge(str(id),str(t[4]))
+
+def p_EXPV2(t):
+    '''EXP : EXP not in para LEXP parc %prec predicates'''
+    id = inc() 
+    arbol.node(str(id),str(t[2] + " " + t[3]))
+    arbol.edge(str(id),str(t[1]))
+    arbol.edge(str(id),str(t[5]))
+
+def p_EXPV3(t):
+    '''EXP : EXP is not distinct r_from EXP %prec predicates'''
+    id = inc()
+    arbol.node(str(id),str(t[2] + " " + t[3] + " " + t[4] + " " + t[5]))
+    arbol.edge(str(id),str(t[1]))
+    arbol.edge(str(id),str(t[6]))
+
+def p_EXPV4(t):
+    '''EXP : EXP not between symetric EXP %prec predicates'''
+    id = inc() 
+    arbol.node(str(id),str())
+
+def p_EXPJ(t):
+    '''EXP : SELECT
+            | CASE
+            | para EXP parc'''
+    l = len(t)
+    if l == 4:
+        t[0] = t[2]
+    else:
+        t[0] = t[1]
+
+def p_EXP(t):
+    '''EXP : id para parc
+            | id para LEXP parc
+            | any para LEXP parc
+            | all para LEXP parc
+            | some para LEXP parc
+            | extract para FIELDS r_from timestamp cadena parc'''
+    l = len(t)
+    if l == 4:
+        id = inc()
+        t[0] = id
+        arbol.node(str(id),str(t[1]+"()"))
+    elif l == 5:
+        id = inc()
+        t[0] = id
+        arbol.node(str(id),str(t[1]))
+        arbol.edge(str(id),str(t[3]))
+    else:
+        id = inc()
+        t[0] = id
+        arbol.node(str(id),str(t[1]))
+        arbol.edge(str(id),str(t[3]))
+        uno = inc()
+        arbol.node(str(uno),str(t[5]))
+        arbol.edge(str(id),str(uno))
+        dos = inc()
+        arbol.node(str(dos),str(t[6]))
+        arbol.edge(str(id),str(dos))
+
+
+def p_EXPT(t):
+    '''EXP : int
             | decimales
             | cadena
             | cadenaString
             | true
-            | false
+            | false 
             | id
+            | multiplicacion %prec lsel
             | null
-            | SELECT
-            | id para parc
-            | id para LEXP parc
-            | extract para FIELDS r_from timestamp cadena parc
+            | default
             | current_time
             | current_date
             | timestamp cadena 
             | interval cadena
-            | CASE
             | cadena like cadena
-            | cadena not like cadena
-            | any para LEXP parc
-            | all para LEXP parc
-            | some para LEXP parc
-            | default'''
+            | cadena not like cadena'''
+    l = len(t)
+    if l == 2:
+        id = inc()
+        t[0] = id
+        arbol.node(str(id),str(t[1]))
+    elif l == 3:
+        id = inc()
+        t[0] = id
+        arbol.node(str(id),str(t[1] + " " + t[2]))
+    elif l == 4:
+        id = inc()
+        t[0] = id
+        arbol.node(str(id),str(t[1] + " " + t[2], " " + t[3]))
+    elif l == 5:
+        id = inc()
+        t[0] = id
+        arbol.node(str(id),str(t[1] + " " + t[2] + " " + t[3] + " " + t[4]))
+
 
 def p_error(t):
     print(t)
@@ -605,6 +718,8 @@ import ply.yacc as yacc
 
 parser = yacc.yacc()
 
-
 def parse(input):
-    return parser.parse(input)
+    r = parser.parse(input)
+    arbol.render('ast', view=False)  # doctest: +SKIP
+    'ast.pdf'
+    return r

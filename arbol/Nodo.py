@@ -1,6 +1,5 @@
-class Nodo:
-    def __init__(self, valor = None, tipo = "", fila = 0, columna = 0):
-        self.valor = valor
+class Nodo():
+    def __init__(self, iden: int, retorno: any, tipo):
+        self.iden = iden
+        self.retorno = retorno
         self.tipo = tipo
-        self.fila = fila
-        self.columna = columna
