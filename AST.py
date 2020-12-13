@@ -221,7 +221,8 @@ i = 0
 def inc():
     global i
     i += 1
-    return i
+    s = str(i)
+    return s
 
 # Asociación de operadores y precedencia
 precedence = (
@@ -245,19 +246,25 @@ precedence = (
 
 def p_init(t):
     'init            : instrucciones'
-    t[0] = t[1]
+    id = inc()
+    t[0] = id
+    arbol.node(id,"INIT")
+    arbol.edge(id,t[1])
     print("ok")
 
 
 def p_instrucciones_lista(t):
     'instrucciones    : instrucciones instruccion'
-    t[1].append(t[2])
     t[0] = t[1]
+    arbol.edge(t[1],t[2])
 
 
 def p_instrucciones_instruccion(t):
     'instrucciones    : instruccion '
-    t[0] = [t[1]]
+    id = inc()
+    t[0] = id
+    arbol.node(id,"INSTRUCCION")
+    arbol.edge(id,t[1])
 
 
 def p_instruccion(t):
@@ -271,157 +278,558 @@ def p_instruccion(t):
                     | CREATETYPE ptcoma
                     | CASE 
                     | CREATEDB ptcoma
-                    | SHOWDB ptcoma
-    '''
+                    | SHOWDB ptcoma'''
     t[0] = t[1]
 
 
 def p_CASE(t):
     ''' CASE : case  LISTAWHEN ELSE end
-               | case LISTAWHEN end
-    '''
+               | case LISTAWHEN end'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"CASE")
+    arbol.edge(id,t[2])
+    if len(t) > 4: arbol.edge(id,t[3])
+
 def p_LISTAWHEN(t):
-    ''' LISTAWHEN : LISTAWHEN WHEN
-                    | WHEN
-    '''
+    ''' LISTAWHEN : LISTAWHEN WHEN'''
+    t[0] = t[1]
+    arbol.edge(t[1],t[2])
+
+def p_LISTAWHEN1(t):
+    ''' LISTAWHEN : WHEN'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"WHEN")
+    arbol.edge(id,t[1])
+
 def p_WHEN(t): 
-    ''' WHEN : when LEXP then LEXP
-    '''
+    ''' WHEN : when LEXP then LEXP'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"when")
+    arbol.edge(id,t[2])
+    th = inc()
+    arbol.node(th,"then")
+    arbol.edge(id,th)
+    arbol.edge(th,t[4])
+
 def p_ELSE(t):
-    '''ELSE : else LEXP
-    '''
+    '''ELSE : else LEXP'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"else")
+    arbol.edge(id,t[2])
 
 def p_INSERT(t):
-    '''INSERT : insert into id values para LEXP parc
-    '''
+    '''INSERT : insert into id values para LEXP parc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"insert")
+    into = inc()
+    arbol.node(into,"into")
+    arbol.edge(id,into)
+    iden = inc()
+    arbol.node(iden,str(t[3]))
+    arbol.edge(into,iden)
+    val = inc()
+    arbol.node(val,"values")
+    arbol.edge(id,val)
+    arbol.edge(val,t[6])
 
 def p_DROP(t):
     '''DROP : drop table id
-             | drop databases if exist id
              | drop databases id '''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"drop")
+    at = inc()
+    arbol.node(at,str(t[2]))
+    arbol.edge(id,at)
+    ide = inc()
+    arbol.node(ide,str(t[3]))
+    arbol.edge(at,ide)
+
+def p_DROP1(t):
+    '''DROP : drop databases if exist id'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"drop")
+    at = inc()
+    arbol.node(at,"databases if exist")
+    arbol.edge(id,at)
+    ide = inc()
+    arbol.node(ide,str(t[5]))
+    arbol.edge(at,ide)
 
 def p_ALTER(t):
     '''ALTER : alter databases id RO
-              | altertable'''
+            | alter table id OP'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"alter")
+    at = inc()
+    arbol.node(at,str(t[2]))
+    arbol.edge(id,at)
+    ide = inc()
+    arbol.node(ide,str(t[3]))
+    arbol.edge(at,ide)
+    arbol.edge(id,t[4])
 
 def p_r_o(t):
     '''RO : rename to id
-           | owner to id
-    '''
+           | owner to id'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,str(t[1]))
+    iden = inc()
+    arbol.node(iden,str(t[3]))
+    arbol.edge(id,iden)
 
-def p_altertable(t):
-    '''altertable : alter table id OP
-    '''
 def p_op(t):
-    '''OP : add ADD
-            | drop column ALTERDROP
-            | alter column id set not null
-            | alter column id set null
-            | listaalc
-            | drop ALTERDROP
-            | rename column id to id '''
+    '''OP : add ADD '''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"add")
+    arbol.edge(id,t[2])
 
-def p_listaalc(t):
-    '''listaalc : listaalc coma alc
-            | alc
-    '''
+def p_op1(t):
+    '''OP :  drop column ALTERDROP
+            | drop ALTERDROP'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"drop")
+    if len(t) > 3: arbol.edge(id,t[3])
+    else : arbol.edge(id,t[2])
+
+def p_op2(t):
+    '''OP : alter column id set not null
+            | alter column id set null'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"alter")
+    cc = inc()
+    arbol.node(cc,"column")
+    arbol.edge(id,cc)
+    ic = inc()
+    arbol.node(ic,str(t[3]))
+    arbol.edge(cc,ic)
+    ss = inc()
+    arbol.node(ss,"set")
+    arbol.edge(id,ss)
+    ccc = str(t[5])
+    if len(t) > 5: ccc += " " + str(t[6])
+    nn = inc()
+    arbol.node(nn,ccc)
+    arbol.edge(ss,nn)
+
+def p_op3(t):
+    '''OP : rename column id to id'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"rename")
+    cc = inc()
+    arbol.node(cc,"column")
+    arbol.edge(id,cc)
+    ic = inc()
+    arbol.node(ic,str(t[3]))
+    arbol.edge(cc,ic)
+    tc = inc()
+    arbol.node(tc,"to")
+    arbol.edge(id,tc)
+    itc = inc()
+    arbol.node(tc,str(t[5]))
+    arbol.edge(itc,tc)
+
+def p_op4(t):
+    '''OP : listaalc'''
+    t[0] = t[1]
+
+def p_listaalc1(t):
+    '''listaalc : listaalc coma alc'''
+    t[0] = t[1]
+    arbol.edge(t[1],t[3])
+
+def p_listaalc2(t):
+    '''listaalc : alc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"alter")
+    arbol.edge(id,t[1])
 
 def p_alc(t):
-    '''alc : alter column id type TIPO
-    '''
+    '''alc : alter column id type TIPO'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"column")
+    iden = inc()
+    arbol.node(iden,t[3])
+    arbol.edge(id,iden)
+    arbol.edge(iden,t[5])
 
 def p_ALTERDROP(t):
     '''ALTERDROP : constraint id
-                   | column LEXP
-                   | check id
-    '''
-def p_ADD(t):
-    '''ADD : column id TIPO
-            | check para LEXP parc
-            | constraint id unique para id parc
-            | foreign key para LEXP parc references id para LEXP parc
-    '''
+                | check id'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,str(t[1]))
+    iden = inc()
+    arbol.node(id,str(t[2]))
+    arbol.edge(id,iden)
+
+def p_ALTERDROP1(t):
+    '''ALTERDROP : column LEXP'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"column")
+    arbol.edge(id,t[2])
+    
+def p_ADD1(t):
+    '''ADD : column id TIPO'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"column")
+    iden = inc()
+    arbol.node(iden,str(t[2]))
+    arbol.edge(id,iden)
+    arbol.edge(id,t[3])
+
+def p_ADD2(t):
+    '''ADD : check para LEXP parc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"check")
+    arbol.edge(id,t[3])
+
+def p_ADD3(t):
+    '''ADD : constraint id unique para id parc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"constraint")
+    iden = inc()
+    arbol.node(iden,str(t[2]))
+    arbol.edge(id,iden)
+    uu = inc()
+    arbol.node(uu,"unique")
+    arbol.edge(id,uu)
+    iu = inc()
+    arbol.node(iu,str(t[5]))
+    arbol.edge(uu,iu)
+
+def p_ADD4(t):
+    '''ADD : foreign key para LEXP parc references id para LEXP parc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"foreign key")
+    arbol.edge(id,t[4])
+    rr = inc()
+    arbol.node(rr,"references")
+    arbol.edge(id,rr)
+    ir = inc()
+    arbol.node(ir,str(t[7]))
+    arbol.edge(rr,ir)
+    arbol.edge(rr,t[9])
 
 def p_SHOWDB(t) : 
-   ''' SHOWDB : show databases
-    '''
+   ''' SHOWDB : show databases'''
+   id = inc()
+   t[0] = id
+   arbol.node(id, "show databases")
 
-def p_CREATEDB(t) : 
+def p_CREATEDB1(t) : 
     '''CREATEDB : create RD if not exist id
-        | create RD if not exist id OPCCDB
-        | create RD id
-        | create RD id OPCCDB
-    '''
+                | create RD if not exist id OPCCDB'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,("create " + t[2] + " if not exist"))
+    iden = inc()
+    arbol.node(iden,str(t[6]))
+    arbol.edge(id,iden)
+    if len(t) > 7:
+        arr = t[7]
+        arbol.edge(id,arr[0])
+        if len(arr) > 1:
+            arbol.edge(id,arr[1])
+
+def p_CREATEDB2(t) : 
+    '''CREATEDB : create RD id
+                | create RD id OPCCDB'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,("create " + t[2]))
+    iden = inc()
+    arbol.node(iden,str(t[3]))
+    arbol.edge(id,iden)
+    if len(t) > 4:
+        arr = t[4]
+        arbol.edge(id,arr[0])
+        if len(arr) > 1:
+            arbol.edge(id,arr[1])
+
 def p_OPCCDB(t):
     '''OPCCDB : PROPIETARIO
         | MODO
         | PROPIETARIO MODO'''
+    if len(t) > 2: t[0] = [t[1],t[2]]
+    else: t[0] = [t[1]]
 
 def p_RD(t) : 
     '''RD : or replace databases
-        | databases
-    '''
+        | databases'''
+    c = str(t[1])
+    if len(t) > 2: c += str(" " + t[2] + " " + t[3])
+
+    t[0] = c
  
 def p_PROPIETARIO(t):
     '''PROPIETARIO : owner igual id
-		| owner id
-    '''
+		| owner id'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"owner")
+    tt = inc()
+    if len(t) == 3: arbol.node(tt,str(t[2]))
+    else: arbol.node(tt,str(t[3]))
+    arbol.edge(id,tt)
 
 def p_MODO(t): 
     '''MODO : mode  igual int
 	    | mode int
     '''	
+    id = inc()
+    t[0] = id
+    arbol.node(id,"mode")
+    tt = inc()
+    if len(t) == 3: arbol.node(tt,str(t[2]))
+    else: arbol.node(tt,str(t[3]))
+    arbol.edge(id,tt)
+
 
 def p_CREATETABLE(t):
     '''CREATETABLE : create table id para LDEF parc ptcoma
                     | create table id para LDEF parc HERENCIA ptcoma'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"create table")
+    iden = inc()
+    arbol.node(iden,str(t[3]))
+    arbol.edge(id,iden)
+    arbol.edge(id,t[5])
+    if len(t) > 8:
+        arbol.edge(id,t[7])
 
+def p_LDEF1(t):
+    '''LDEF : LDEF coma COLDEF'''
+    t[0] = t[1]
+    arbol.edge(t[1],t[3])
 
-def p_LDEF(t):
-    '''LDEF : LDEF coma COLDEF
-            | COLDEF'''
-
+def p_LDEF2(t):
+    '''LDEF : COLDEF'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"CONTENIDO")
+    arbol.edge(id,t[1])
 
 def p_COLDEF(t):
-    '''COLDEF : OPCONST
-            | constraint id OPCONST
-            | id TIPO
-            | id TIPO LOPCOLUMN'''
+    '''COLDEF : OPCONST'''
+    t[0] = t[1]
 
+def p_COLDEF1(t):
+    '''COLDEF : constraint id OPCONST'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"constraint")
+    iden = inc()
+    arbol.node(iden,str(t[2]))
+    arbol.edge(id,iden)
+    arbol.edge(id,t[3])
 
-def p_LOPCOLUMN(t):
-    '''LOPCOLUMN : LOPCOLUMN OPCOLUMN
-            | OPCOLUMN'''
+def p_COLDEF2(t):
+    '''COLDEF : id TIPO
+                | id TIPO LOPCOLUMN'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"columna")
+    iden = inc()
+    arbol.node(iden,str(t[1]))
+    arbol.edge(id,iden)
+    arbol.edge(id,t[2])
+    if len(t) > 3:
+        arbol.edge(id,t[3])
 
+def p_LOPCOLUMN1(t):
+    '''LOPCOLUMN : LOPCOLUMN OPCOLUMN'''
+    t[0] = t[1]
+    arbol.edge(t[1],t[2])
 
-def p_OPCOLUMN(t):
-    '''OPCOLUMN : constraint id unique
-            | constraint id check para EXP parc
-            | default EXP
-            | not null
-            | null
-            | primary key
-            | references id'''
+def p_LOPCOLUMN2(t):
+    '''LOPCOLUMN : OPCOLUMN'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"ATRCOLUMNA")
+    arbol.edge(id,t[1])
 
+def p_OPCOLUMN11(t):
+    '''OPCOLUMN : constraint id unique'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"constraint")
+    uu = inc()
+    arbol.node(uu,"unique")
+    arbol.edge(id,uu)
+    iden = inc()
+    arbol.node(iden,str(t[2]))
+    arbol.edge(uu,iden)
 
-def p_OPCONST(t):
+def p_OPCOLUMN12(t):
+    '''OPCOLUMN : not null
+                | primary key
+                | null'''
+    id = inc()
+    t[0] = id
+    if len(t) == 2:
+        arbol.node(id,str(t[1]))
+    else: 
+        arbol.node(id,str(t[1] + " " + t[2]))
+
+def p_OPCOLUMN13(t):
+    '''OPCOLUMN : references id'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"references")
+    iden = inc()
+    arbol.node(iden,str(t[2]))
+    arbol.edge(id,iden)
+
+def p_OPCOLUMN2(t):
+    '''OPCOLUMN : constraint id check para EXP parc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"constraint")
+    iden = inc()
+    arbol.node(iden,str(t[2]))
+    arbol.edge(id,iden)
+    cc = inc()
+    arbol.node(cc,"check")
+    arbol.edge(id,cc)
+    arbol.edge(cc,t[5])
+
+def p_OPCOLUMN3(t):
+    '''OPCOLUMN : default EXP'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"default")
+    arbol.edge(id,t[2])
+
+def p_OPCONST1(t):
     '''OPCONST : primary key para LEXP parc
-            | foreign key para LEXP parc references id para LEXP parc
-            | unique para LEXP parc
-            | check para LEXP parc'''
+            | foreign key para LEXP parc references id para LEXP parc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,str(t[1] + " " + t[2]))
+    arbol.edge(id,t[4])
+    if len(t) > 6:
+        rr = inc()
+        arbol.node(rr,"references")
+        arbol.edge(id,rr)
+        iden = inc()
+        arbol.node(iden,str(t[7]))
+        arbol.edge(rr,iden)
+        arbol.edge(rr,t[9])
+    
 
+def p_OPCONST2(t):
+    '''OPCONST : unique para LEXP parc
+                | check para LEXP parc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,str(t[1]))
+    arbol.edge(id,t[3])
 
 def p_HERENCIA(t):
     'HERENCIA : inherits para LEXP parc'
+    id = inc()
+    t[0] = id
+    arbol.node(id,"inherits")
+    arbol.edge(id,t[3])
 
 def p_CREATETYPE(t):
     'CREATETYPE : create type id as enum para LEXP parc'
+    id = inc()
+    t[0] = id
+    arbol.node(id,"create type")
+    iden = inc()
+    arbol.node(iden,str(t[3]))
+    arbol.edge(id,iden)
+    ee = inc()
+    arbol.node(ee,"enum")
+    arbol.edge(id,ee)
+    arbol.edge(ee,t[7])
 
-def p_SELECT(t):
-    ''' SELECT : select distinct  LEXP r_from LEXP  WHERE GROUP HAVING COMBINING ORDER LIMIT
-	| select  LEXP r_from LEXP WHERE  GROUP HAVING  COMBINING ORDER LIMIT
-	| select  LEXP WHERE  GROUP HAVING  COMBINING ORDER LIMIT
-    ''' 
+def p_SELECT1(t):
+    ''' SELECT : select distinct  LEXP r_from LEXP  WHERE GROUP HAVING COMBINING ORDER LIMIT''' 
+    id = inc()
+    t[0] = id
+    arbol.node(id,"select")
+    arbol.edge(id,t[3])
+    f = inc()
+    arbol.node(f,"from")
+    arbol.edge(id,f)
+    arbol.edge(f,t[5])
+    if t[6] != None:
+        arbol.edge(id,t[6])
+    if t[7] != None:
+        arbol.edge(id,t[7])
+    if t[8] != None:
+        arbol.edge(id,t[8])
+    if t[9] != None:
+        arbol.edge(id,t[9])
+    if t[10] != None:
+        arbol.edge(id,t[10])
+    if t[11] != None:
+        arbol.edge(id,t[11]) 
+
+def p_SELECT2(t):
+    ''' SELECT : select  LEXP r_from LEXP WHERE  GROUP HAVING  COMBINING ORDER LIMIT''' 
+    id = inc()
+    t[0] = id
+    arbol.node(id,"select")
+    arbol.edge(id,t[2])
+    f = inc()
+    arbol.node(f,"from")
+    arbol.edge(id,f)
+    arbol.edge(f,t[4])
+    if t[5] != None:
+        arbol.edge(id,t[5])
+    if t[6] != None:
+        arbol.edge(id,t[6])
+    if t[7] != None:
+        arbol.edge(id,t[7])
+    if t[8] != None:
+        arbol.edge(id,t[8])
+    if t[9] != None:
+        arbol.edge(id,t[9])
+    if t[10] != None:
+        arbol.edge(id,t[10])
+
+def p_SELECT3(t):
+    ''' SELECT : select  LEXP WHERE  GROUP HAVING  COMBINING ORDER LIMIT''' 
+    id = inc()
+    t[0] = id
+    arbol.node(id,"select")
+    arbol.edge(id,t[2])
+    if t[3] != None:
+        arbol.edge(id,t[3])
+    if t[4] != None:
+        arbol.edge(id,t[4])
+    if t[5] != None:
+        arbol.edge(id,t[5])
+    if t[6] != None:
+        arbol.edge(id,t[6])
+    if t[7] != None:
+        arbol.edge(id,t[7])
+    if t[8] != None:
+        arbol.edge(id,t[8])
 
 def p_LIMIT(t):
     '''LIMIT : limit int
@@ -432,6 +840,15 @@ def p_LIMIT(t):
                | limit all offset int
                | offset int limit all
                | '''
+    tam = len(t)
+    if tam > 1:
+        id = inc()
+        t[0] = id
+        if tam == 3:
+            arbol.node(id,(str(t[1]) + " " + str(t[2])))
+        elif tam == 5:
+            arbol.node(id,(str(t[1]) + " " + str(t[2]) + " " + str(t[3]) + " " + str(t[4])))
+    else: t[0] = None
 
 def p_WHERE(t):
     ''' WHERE : where LEXP
@@ -439,6 +856,17 @@ def p_WHERE(t):
                 | union LEXP
                 | union all LEXP
 	            | '''
+    tam = len(t)
+    if tam > 1:
+        id = inc()
+        t[0] = id
+        if tam == 3:
+            arbol.node(id,str(t[1]))
+            arbol.edge(id,t[2])
+        elif tam == 4:
+            arbol.node(id,str(t[1] + " " + t[2]))
+            arbol.edge(id,t[3])
+    else: t[0] = None
 
 def p_COMBINING(t):
     '''COMBINING :  union LEXP
@@ -448,77 +876,198 @@ def p_COMBINING(t):
                 | except LEXP
                 | except all LEXP
 	            | '''
+    if len(t) > 1:
+        id = inc()
+        t[0] = id
+        if len(t) == 3:
+            arbol.node(id,str(t[1]))
+            arbol.edge(id,t[2])
+        elif len(t) == 4:
+            arbol.node(id,str(t[1] + " " + t[2]))
+            arbol.edge(id,t[3])
+    else: t[0] = None
 
 
 def p_GROUP(t):
     ''' GROUP :  group by LEXP
 	            | '''
+    if len(t) > 1:
+        id = inc()
+        t[0] = id
+        arbol.node(id,"group by")
+        arbol.edge(id,t[3])
+    else: t[0] = None
 
 
 def p_HAVING(t):
     ''' HAVING : having LEXP
 	| '''
+    if len(t) > 1:
+        id = inc()
+        t[0] = id
+        arbol.node(id,"having")
+        arbol.edge(id,t[2])
+    else: t[0] = None
 
 def p_ORDER(t):
     ''' ORDER : order by LEXP ORD
-    | order by LEXP
-	|  '''
+            | order by LEXP
+            |  '''
+    if len(t) > 1:
+        id = inc()
+        t[0] = id
+        arbol.node(id,"order by")
+        arbol.edge(id,t[3])
+        if len(t) == 5:
+            arbol.edge(id,t[4])
+    else: t[0] = None
 
 def p_ORD(t):
     ''' ORD : asc
 	| desc '''
+    id = inc()
+    t[0] = id
+    arbol.node(id,str(t[1]))
 
 def p_UPDATE(t):
     ' UPDATE : update id set LCAMPOS where LEXP'
+    id = inc()
+    t[0] = id
+    arbol.node(id,"update")
+    idd = inc()
+    arbol.node(idd,str(t[2]))
+    arbol.edge(id,idd)
+    arbol.edge(id,t[4])
+    ww = inc()
+    arbol.node(ww,"where")
+    arbol.edge(id,ww)
+    arbol.edge(ww,t[6])
 
 
-def p_LCAMPOS(t):
-    '''LCAMPOS :  LCAMPOS id igual EXP
-		| id igual EXP'''
+def p_LCAMPOS1(t):
+    '''LCAMPOS :  LCAMPOS id igual EXP'''
+    t[0] = t[1]
+    ii = inc()
+    arbol.node(ii,"=")
+    arbol.edge(t[1],ii)
+    idd = inc()
+    arbol.node(idd,str(t[2]))
+    arbol.edge(ii,idd)
+    arbol.edge(ii,t[4])
 
+def p_LCAMPOS2(t):
+    '''LCAMPOS : id igual EXP'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"CAMPO")
+    ii = inc()
+    arbol.node(ii,"=")
+    arbol.edge(id,ii)
+    idd = inc()
+    arbol.node(idd,str(t[1]))
+    arbol.edge(ii,idd)
+    arbol.edge(ii,t[3])
 
 def p_DELETE(t):
-    '''
-    DELETE : delete   r_from id where LEXP
-            | delete  r_from id
-    '''
+    '''DELETE : delete   r_from id where LEXP
+            | delete  r_from id'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"delete")
+    uno = inc()
+    arbol.node(uno,"from ")
+    arbol.edge(id,uno)
+    iii = inc()
+    arbol.node(iii,str(t[3]))
+    arbol.edge(uno,iii)
+    if len(t) == 6:
+        dos = inc()
+        arbol.node(dos,"where")
+        arbol.edge(id,dos)
+        arbol.edge(dos,str(t[5]))
 
 def p_EXIST(t):
-    '''EXIST : exist para SELECT parc
-    '''
+    '''EXIST : exist para SELECT parc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"exist")
+    arbol.edge(id,str(t[3]))
 
 def p_LEXP1(t):
     '''LEXP : LEXP coma EXP'''
     t[0] = t[1]
-    arbol.edge(str(t[0]),str(t[3]))
+    arbol.edge(t[0],str(t[3]))
 
 def p_LEXP2(t):
     '''LEXP : EXP'''
     id = inc()
     t[0] = id
-    arbol.node(str(id),"LEXP")
-    arbol.edge(str(id),str(t[1]))
+    arbol.node(id,"EXP")
+    arbol.edge(id,str(t[1]))
+
+def p_TIPOD(t):
+    '''TIPO : decimal para LEXP parc
+            | numeric para LEXP parc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,str(t[1]))
+    arbol.edge(id,str(t[3]))
 
 def p_TIPOE(t):
-    '''TIPO : interval cadena
-            | decimal para LEXP parc
-            | numeric para LEXP parc
-            | varchar para int parc
+    '''TIPO : varchar para int parc
             | timestamp para int parc
             | character para int parc
             | interval para int parc
             | char para int parc
-            | time para int parc
-            | character varying para int parc'''
+            | time para int parc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,str(t[1]))
+    uno = inc()
+    arbol.node(uno,str(t[3]))
+    arbol.edge(id,uno)
+
+def p_TIPOF(t):
+    '''TIPO : character varying para int parc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"character varying")
+    unp = inc()
+    arbol.node(unp,str(t[4]))
+    arbol.edge(id,unp)
+
+def p_TIPOG(t):
+    '''TIPO : interval cadena'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,str("interval " + t[2]))
 
 def p_TIPOL1(t):
     ''' TIPO : timestamp para int parc without time zone
             | timestamp para int parc with time zone
             | time para int parc without time zone
             | time para int parc with time zone '''
+    id = inc()
+    t[0] = id
+    arbol.node(id,str(t[1]))
+    uno = inc()
+    arbol.node(uno,str(t[3]))
+    arbol.edge(id,uno)
+    dos = inc()
+    arbol.node(dos,str(t[5] + " time zone"))
+    arbol.edge(id,dos)
 
 def p_TIPOL2(t):
     ''' TIPO : interval para int parc cadena '''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"interval")
+    uno = inc()
+    arbol.node(uno,str(t[3]))
+    arbol.edge(id,uno)
+    dos = inc()
+    arbol.node(dos,str(t[5]))
+    arbol.edge(id,dos)
 
 def p_TIPO(t):
     '''TIPO : smallint
@@ -541,15 +1090,15 @@ def p_TIPO(t):
     if l == 2:
         id = inc()
         t[0] = id
-        arbol.node(str(id),str(t[1]))
+        arbol.node(id,str(t[1]))
     elif l == 3:
         id = inc()
         t[0] = id
-        arbol.node(str(id),str(t[1] + " " + t[2]))
+        arbol.node(id,str(t[1] + " " + t[2]))
     elif l == 5:
         id = inc()
         t[0] = id
-        arbol.node(str(id),str(t[1] + " " + t[2] + " " + t[3] + " " + t[4]))
+        arbol.node(id,str(t[1] + " " + t[2] + " " + t[3] + " " + t[4]))
 
 
 def p_FIELDS(t):
@@ -561,7 +1110,7 @@ def p_FIELDS(t):
         | second'''
     id = inc()
     t[0] = id
-    arbol.node(str(id),str(t[1]))
+    arbol.node(id,str(t[1]))
 
 
 def p_EXP3(t):
@@ -584,9 +1133,9 @@ def p_EXP3(t):
             | EXP punto EXP'''
     id = inc()
     t[0] = id
-    arbol.node(str(id),str(t[2]))
-    arbol.edge(str(id),str(t[1]))
-    arbol.edge(str(id),str(t[3]))
+    arbol.node(id,str(t[2]))
+    arbol.edge(id,str(t[1]))
+    arbol.edge(id,str(t[3]))
 
 def p_EXP21(t):
     '''EXP : EXP is not null %prec predicates
@@ -595,8 +1144,8 @@ def p_EXP21(t):
             | EXP is not unknown %prec predicates'''
     id = inc()
     t[0] = id
-    arbol.node(str(id),str(t[2] + " " + t[3] + " " + t[4]))
-    arbol.edge(str(id),str(t[1]))
+    arbol.node(id,str(t[2] + " " + t[3] + " " + t[4]))
+    arbol.edge(id,str(t[1]))
 
 def p_EXP22(t):
     '''EXP : EXP is null %prec predicates
@@ -608,8 +1157,8 @@ def p_EXP22(t):
             | EXP is false %prec predicates'''
     id = inc()
     t[0] = id
-    arbol.node(str(id),str(t[2] + " " + t[3]))
-    arbol.edge(str(id),str(t[1]))
+    arbol.node(id,str(t[2] + " " + t[3]))
+    arbol.edge(id,str(t[1]))
 
 def p_EXP23(t):
     '''EXP : EXP isnull %prec predicates
@@ -619,8 +1168,8 @@ def p_EXP23(t):
             | EXP cadena %prec lsel'''
     id = inc()
     t[0] = id
-    arbol.node(str(id),str(t[2]))
-    arbol.edge(str(id),str(t[1]))
+    arbol.node(id,str(t[2]))
+    arbol.edge(id,str(t[1]))
     
 def p_EXP1(t):
     '''EXP : mas EXP %prec umas
@@ -628,58 +1177,51 @@ def p_EXP1(t):
             | not EXP'''
     id = inc()
     t[0] = id
-    arbol.node(str(id),str(t[1]))
-    arbol.edge(str(id),str(t[2]))
+    arbol.node(id,str(t[1]))
+    arbol.edge(id,str(t[2]))
 
 def p_EXPV1(t):
     '''EXP : EXP not between EXP %prec predicates
             | EXP between symetric EXP %prec predicates'''
     id = inc()
     t[0] = id
-    arbol.node(str(id),str(t[2] + " " + t[3]))
-    arbol.edge(str(id),str(t[1]))
-    arbol.edge(str(id),str(t[4]))
+    arbol.node(id,str(t[2] + " " + t[3]))
+    arbol.edge(id,str(t[1]))
+    arbol.edge(id,str(t[4]))
 
 def p_EXPV12(t):
     '''EXP : EXP in para LEXP parc %prec predicates'''
     id = inc()
     t[0] = id
-    arbol.node(str(id),"in")
-    arbol.edge(str(id),str(t[1]))
-    arbol.edge(str(id),str(t[4]))
+    arbol.node(id,"in")
+    arbol.edge(id,str(t[1]))
+    arbol.edge(id,str(t[4]))
 
 def p_EXPV2(t):
     '''EXP : EXP not in para LEXP parc %prec predicates'''
     id = inc() 
     t[0] = id
-    arbol.node(str(id),"not in")
-    arbol.edge(str(id),str(t[1]))
-    arbol.edge(str(id),str(t[5]))
+    arbol.node(id,"not in")
+    arbol.edge(id,str(t[1]))
+    arbol.edge(id,str(t[5]))
 
 def p_EXPV3(t):
     '''EXP : EXP is not distinct r_from EXP %prec predicates'''
     id = inc()
     t[0] = id
-    arbol.node(str(id),"is not distinct from")
-    arbol.edge(str(id),str(t[1]))
-    arbol.edge(str(id),str(t[6]))
+    arbol.node(id,"is not distinct from")
+    arbol.edge(id,str(t[1]))
+    arbol.edge(id,str(t[6]))
 
 
 def p_EXPV32(t):
-    '''EXP : EXP is distinct r_from EXP %prec predicates'''
+    '''EXP : EXP is distinct r_from EXP %prec predicates
+            | EXP not between symetric EXP %prec predicates'''
     id = inc()
     t[0] = id
-    arbol.node(str(id),"is distinct from")
-    arbol.edge(str(id),str(t[1]))
-    arbol.edge(str(id),str(t[5]))
-
-def p_EXPV4(t):
-    '''EXP : EXP not between symetric EXP %prec predicates'''
-    id = inc() 
-    t[0] = id
-    arbol.node(str(id),"not between symetric")
-    arbol.edge(str(id),str(t[1]))
-    arbol.edge(str(id),str(t[5]))
+    arbol.node(id,(t[2] + " " + t[3] + " " + t[4]))
+    arbol.edge(id,str(t[1]))
+    arbol.edge(id,str(t[5]))
 
 def p_EXPJ(t):
     '''EXP : SELECT
@@ -702,23 +1244,23 @@ def p_EXP(t):
     if l == 4:
         id = inc()
         t[0] = id
-        arbol.node(str(id),str(t[1]+"()"))
+        arbol.node(id,str(t[1]+"()"))
     elif l == 5:
         id = inc()
         t[0] = id
-        arbol.node(str(id),str(t[1]))
-        arbol.edge(str(id),str(t[3]))
+        arbol.node(id,str(t[1]))
+        arbol.edge(id,str(t[3]))
     else:
         id = inc()
         t[0] = id
-        arbol.node(str(id),str(t[1]))
-        arbol.edge(str(id),str(t[3]))
+        arbol.node(id,str(t[1]))
+        arbol.edge(id,str(t[3]))
         uno = inc()
-        arbol.node(str(uno),str(t[5]))
-        arbol.edge(str(id),str(uno))
+        arbol.node(uno,str(t[5]))
+        arbol.edge(id,uno)
         dos = inc()
-        arbol.node(str(dos),str(t[6]))
-        arbol.edge(str(id),str(dos))
+        arbol.node(dos,str(t[6]))
+        arbol.edge(id,dos)
 
 
 def p_EXPT(t):
@@ -742,19 +1284,19 @@ def p_EXPT(t):
     if l == 2:
         id = inc()
         t[0] = id
-        arbol.node(str(id),str(t[1]))
+        arbol.node(id,str(t[1]))
     elif l == 3:
         id = inc()
         t[0] = id
-        arbol.node(str(id),str(t[1] + " " + t[2]))
+        arbol.node(id,str(t[1] + " " + t[2]))
     elif l == 4:
         id = inc()
         t[0] = id
-        arbol.node(str(id),str(t[1] + " " + t[2], " " + t[3]))
+        arbol.node(id,str(t[1] + " " + t[2], " " + t[3]))
     elif l == 5:
         id = inc()
         t[0] = id
-        arbol.node(str(id),str(t[1] + " " + t[2] + " " + t[3] + " " + t[4]))
+        arbol.node(id,str(t[1] + " " + t[2] + " " + t[3] + " " + t[4]))
 
 
 def p_error(t):
