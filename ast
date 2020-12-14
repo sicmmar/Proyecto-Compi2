@@ -1,2684 +1,2103 @@
 // Árbol Sintáctico Abstracto (AST)
 digraph {
+	graph [label="Árbol Sintáctico Abstracto (AST)"]
+	node [color=navyblue fillcolor=darkolivegreen fontcolor=white style=filled]
+	edge [arrowsize=0.7]
 	1 [label=sad]
-	2 [label=EXP]
-	2 -> 1
-	3 [label=ok]
-	2 -> 3
-	4 [label=happy]
-	2 -> 4
-	5 [label="create type"]
-	6 [label=mood]
-	5 -> 6
-	7 [label=enum]
-	5 -> 7
-	7 -> 2
-	8 [label=INSTRUCCION]
-	8 -> 5
-	9 [label=10]
-	10 [label=CAMPO]
-	11 [label="="]
+	2 [label=ok]
+	3 [label=happy]
+	4 [label="create type"]
+	5 [label=mood]
+	4 -> 5
+	6 [label=enum]
+	4 -> 6
+	6 -> 1
+	6 -> 2
+	6 -> 3
+	7 [label=INSTRUCCION]
+	7 -> 4
+	8 [label=10]
+	9 [label=CAMPO]
+	10 [label="="]
+	9 -> 10
+	11 [label=price]
 	10 -> 11
+	10 -> 8
 	12 [label=price]
-	11 -> 12
-	11 -> 9
-	13 [label=price]
-	14 [label=5]
-	15 [label="="]
-	15 -> 13
-	15 -> 14
-	16 [label=EXP]
-	16 -> 15
-	17 [label=update]
-	18 [label=products]
-	17 -> 18
-	17 -> 10
-	19 [label=where]
-	17 -> 19
-	19 -> 16
-	8 -> 17
-	20 [label=price]
-	21 [label=10]
-	22 [label="="]
-	22 -> 20
-	22 -> 21
-	23 [label=EXP]
-	23 -> 22
-	24 [label=delete]
-	25 [label="from "]
-	24 -> 25
-	26 [label=products]
-	25 -> 26
-	27 [label=where]
-	24 -> 27
-	27 -> 23
-	8 -> 24
-	28 [label="*"]
-	29 [label=EXP]
-	29 -> 28
-	30 [label=nombre]
-	31 [label=EXP]
+	13 [label=5]
+	14 [label="="]
+	14 -> 12
+	14 -> 13
+	15 [label=update]
+	16 [label=products]
+	15 -> 16
+	15 -> 9
+	17 [label=where]
+	15 -> 17
+	17 -> 14
+	7 -> 15
+	18 [label=price]
+	19 [label=10]
+	20 [label="="]
+	20 -> 18
+	20 -> 19
+	21 [label=delete]
+	22 [label="from "]
+	21 -> 22
+	23 [label=products]
+	22 -> 23
+	24 [label=where]
+	21 -> 24
+	24 -> 20
+	7 -> 21
+	25 [label="*"]
+	26 [label=nombre]
+	27 [label=fechanacimiento]
+	28 [label=tbcolaborador]
+	29 [label=nombre]
+	30 [label=suje]
+	31 [label="="]
+	31 -> 29
 	31 -> 30
-	32 [label=fechanacimiento]
-	31 -> 32
-	33 [label=tbcolaborador]
-	34 [label=EXP]
-	34 -> 33
-	35 [label=nombre]
-	36 [label=suje]
-	37 [label="="]
+	32 [label=where]
+	32 -> 31
+	33 [label=select]
+	33 -> 26
+	33 -> 27
+	34 [label=from]
+	33 -> 34
+	34 -> 28
+	33 -> 32
+	35 [label=A]
+	35 -> 33
+	36 [label=select]
+	36 -> 25
+	37 [label=from]
+	36 -> 37
 	37 -> 35
-	37 -> 36
-	38 [label=EXP]
-	38 -> 37
-	39 [label=where]
-	39 -> 38
-	40 [label=select]
-	40 -> 31
-	41 [label=from]
-	40 -> 41
-	41 -> 34
+	7 -> 36
+	38 [label=A]
+	39 [label=nombre]
+	40 [label="."]
+	40 -> 38
 	40 -> 39
-	42 [label=A]
-	42 -> 40
-	43 [label=EXP]
+	41 [label=A]
+	42 [label=fechanacimiento]
+	43 [label="."]
+	43 -> 41
 	43 -> 42
-	44 [label=select]
-	44 -> 29
-	45 [label=from]
-	44 -> 45
-	45 -> 43
-	8 -> 44
-	46 [label=A]
-	47 [label=nombre]
-	48 [label="."]
-	48 -> 46
-	48 -> 47
-	49 [label=EXP]
+	44 [label=identificacion]
+	45 [label=tbidentificacioncolaborador]
+	46 [label=B]
+	46 -> 45
+	47 [label=B]
+	48 [label=idcolaborador]
+	49 [label="."]
+	49 -> 47
 	49 -> 48
 	50 [label=A]
-	51 [label=fechanacimiento]
+	51 [label=id]
 	52 [label="."]
 	52 -> 50
 	52 -> 51
-	49 -> 52
-	53 [label=identificacion]
-	54 [label=EXP]
+	53 [label="="]
+	53 -> 49
+	53 -> 52
+	54 [label=where]
 	54 -> 53
-	55 [label=tbidentificacioncolaborador]
-	56 [label=B]
-	56 -> 55
-	57 [label=EXP]
-	57 -> 56
-	58 [label=B]
-	59 [label=idcolaborador]
-	60 [label="."]
-	60 -> 58
-	60 -> 59
-	61 [label=A]
-	62 [label=id]
-	63 [label="."]
-	63 -> 61
-	63 -> 62
-	64 [label="="]
-	64 -> 60
-	64 -> 63
-	65 [label=EXP]
+	55 [label=select]
+	55 -> 44
+	56 [label=from]
+	55 -> 56
+	56 -> 46
+	55 -> 54
+	57 [label=tbcolaborador]
+	58 [label=A]
+	58 -> 57
+	59 [label=nombre]
+	60 [label=suje]
+	61 [label="="]
+	61 -> 59
+	61 -> 60
+	62 [label=where]
+	62 -> 61
+	63 [label=A]
+	64 [label=nombre]
+	65 [label="."]
+	65 -> 63
 	65 -> 64
-	66 [label=where]
+	66 [label="order by"]
 	66 -> 65
 	67 [label=select]
-	67 -> 54
+	67 -> 40
+	67 -> 43
+	67 -> 55
 	68 [label=from]
 	67 -> 68
-	68 -> 57
+	68 -> 58
+	67 -> 62
 	67 -> 66
-	49 -> 67
-	69 [label=tbcolaborador]
-	70 [label=A]
-	70 -> 69
-	71 [label=EXP]
+	7 -> 67
+	69 [label=A]
+	70 [label=nombre]
+	71 [label="."]
+	71 -> 69
 	71 -> 70
-	72 [label=nombre]
-	73 [label=suje]
-	74 [label="="]
+	72 [label=A]
+	73 [label=fechanacimiento]
+	74 [label="."]
 	74 -> 72
 	74 -> 73
-	75 [label=EXP]
-	75 -> 74
-	76 [label=where]
+	75 [label=tbcolaborador]
+	76 [label=A]
 	76 -> 75
-	77 [label=A]
-	78 [label=nombre]
-	79 [label="."]
-	79 -> 77
-	79 -> 78
-	80 [label=EXP]
+	77 [label=nombre]
+	78 [label=1]
+	79 [label=4]
+	80 [label=substring]
+	80 -> 77
+	80 -> 78
 	80 -> 79
-	81 [label="order by"]
-	81 -> 80
-	82 [label=select]
-	82 -> 49
-	83 [label=from]
-	82 -> 83
-	83 -> 71
-	82 -> 76
+	81 [label=suje]
+	82 [label="="]
+	82 -> 80
 	82 -> 81
-	8 -> 82
-	84 [label=A]
-	85 [label=nombre]
-	86 [label="."]
-	86 -> 84
-	86 -> 85
-	87 [label=EXP]
-	87 -> 86
-	88 [label=A]
-	89 [label=fechanacimiento]
-	90 [label="."]
+	83 [label=A]
+	84 [label=id]
+	85 [label="."]
+	85 -> 83
+	85 -> 84
+	86 [label=idcolaborador]
+	87 [label=tbidentificacioncolaborador]
+	88 [label=B]
+	88 -> 87
+	89 [label=select]
+	89 -> 86
+	90 [label=from]
+	89 -> 90
 	90 -> 88
-	90 -> 89
-	87 -> 90
-	91 [label=tbcolaborador]
-	92 [label=A]
+	91 [label="not in"]
+	91 -> 85
+	91 -> 89
+	92 [label=and]
+	92 -> 82
 	92 -> 91
-	93 [label=EXP]
+	93 [label=where]
 	93 -> 92
-	94 [label=nombre]
-	95 [label=EXP]
-	95 -> 94
-	96 [label=1]
-	95 -> 96
-	97 [label=4]
-	95 -> 97
-	98 [label=substring]
-	98 -> 95
-	99 [label=suje]
-	100 [label="="]
-	100 -> 98
-	100 -> 99
-	101 [label=A]
-	102 [label=id]
-	103 [label="."]
-	103 -> 101
-	103 -> 102
-	104 [label=idcolaborador]
-	105 [label=EXP]
-	105 -> 104
-	106 [label=tbidentificacioncolaborador]
-	107 [label=B]
+	94 [label=select]
+	94 -> 71
+	94 -> 74
+	95 [label=from]
+	94 -> 95
+	95 -> 76
+	94 -> 93
+	7 -> 94
+	96 [label=varchar]
+	97 [label=50]
+	96 -> 97
+	98 [label=constraint]
+	99 [label=unique]
+	98 -> 99
+	100 [label=uni_id_codigo]
+	99 -> 100
+	101 [label=ATRCOLUMNA]
+	101 -> 98
+	102 [label=age]
+	103 [label=25]
+	104 [label=">="]
+	104 -> 102
+	104 -> 103
+	105 [label=age]
+	106 [label=89]
+	107 [label="<"]
+	107 -> 105
 	107 -> 106
-	108 [label=EXP]
+	108 [label=AND]
+	108 -> 104
 	108 -> 107
-	109 [label=select]
-	109 -> 105
-	110 [label=from]
+	109 [label=constraint]
+	110 [label=check_2]
 	109 -> 110
-	110 -> 108
-	111 [label=EXP]
-	111 -> 109
-	112 [label="not in"]
-	112 -> 103
-	112 -> 111
-	113 [label=and]
-	113 -> 100
-	113 -> 112
-	114 [label=EXP]
-	114 -> 113
-	115 [label=where]
-	115 -> 114
-	116 [label=select]
-	116 -> 87
-	117 [label=from]
-	116 -> 117
-	117 -> 93
-	116 -> 115
-	8 -> 116
-	118 [label=varchar]
-	119 [label=50]
-	118 -> 119
-	120 [label=constraint]
-	121 [label=unique]
+	111 [label=check]
+	109 -> 111
+	111 -> 108
+	101 -> 109
+	112 [label=columna]
+	113 [label=id_codigo]
+	112 -> 113
+	112 -> 96
+	112 -> 101
+	114 [label=CONTENIDO]
+	114 -> 112
+	115 [label=id_codigo]
+	116 [label=id_fre]
+	117 [label="primary key"]
+	117 -> 115
+	117 -> 116
+	114 -> 117
+	118 [label=id_fre]
+	119 [label=tabla_3]
+	120 [label="foreign key"]
+	120 -> 118
+	121 [label=references]
 	120 -> 121
-	122 [label=uni_id_codigo]
+	122 [label=TABla]
 	121 -> 122
-	123 [label=ATRCOLUMNA]
-	123 -> 120
-	124 [label=age]
-	125 [label=25]
-	126 [label=">="]
-	126 -> 124
-	126 -> 125
-	127 [label=age]
-	128 [label=89]
-	129 [label="<"]
+	121 -> 119
+	114 -> 120
+	123 [label=columna_54]
+	124 [label=unique]
+	124 -> 123
+	114 -> 124
+	125 [label=tabla]
+	126 [label=atr]
+	127 [label="."]
+	127 -> 125
+	127 -> 126
+	128 [label=25]
+	129 [label=">="]
 	129 -> 127
 	129 -> 128
-	130 [label=AND]
-	130 -> 126
+	130 [label=CHECK]
 	130 -> 129
 	131 [label=constraint]
-	132 [label=check_2]
+	132 [label=check_1]
 	131 -> 132
-	133 [label=check]
-	131 -> 133
-	133 -> 130
-	123 -> 131
-	134 [label=columna]
-	135 [label=id_codigo]
-	134 -> 135
-	134 -> 118
-	134 -> 123
-	136 [label=CONTENIDO]
-	136 -> 134
-	137 [label=id_codigo]
-	138 [label=EXP]
+	131 -> 130
+	114 -> 131
+	133 [label="create table"]
+	134 [label=tabla_1]
+	133 -> 134
+	133 -> 114
+	7 -> 133
+	135 [label=varchar]
+	136 [label=897]
+	135 -> 136
+	137 [label=hola]
+	138 [label=default]
 	138 -> 137
-	139 [label=id_fre]
-	138 -> 139
+	139 [label=ATRCOLUMNA]
+	139 -> 138
 	140 [label="primary key"]
-	140 -> 138
-	136 -> 140
-	141 [label=id_fre]
-	142 [label=EXP]
-	142 -> 141
-	143 [label=tabla_3]
-	144 [label=EXP]
-	144 -> 143
-	145 [label="foreign key"]
-	145 -> 142
+	139 -> 140
+	141 [label=columna]
+	142 [label=columna653]
+	141 -> 142
+	141 -> 135
+	141 -> 139
+	143 [label=CONTENIDO]
+	143 -> 141
+	144 [label=timestamp]
+	145 [label=5]
+	144 -> 145
 	146 [label=references]
-	145 -> 146
-	147 [label=TABla]
+	147 [label=table1]
 	146 -> 147
-	146 -> 144
-	136 -> 145
-	148 [label=columna_54]
-	149 [label=EXP]
+	148 [label=ATRCOLUMNA]
+	148 -> 146
+	149 [label=columna]
+	150 [label=fechahora]
+	149 -> 150
+	149 -> 144
 	149 -> 148
-	150 [label=unique]
-	150 -> 149
-	136 -> 150
-	151 [label=tabla]
-	152 [label=atr]
-	153 [label="."]
-	153 -> 151
+	143 -> 149
+	151 [label=tabla_1]
+	152 [label=inherits]
+	152 -> 151
+	153 [label="create table"]
+	154 [label=hija]
+	153 -> 154
+	153 -> 143
 	153 -> 152
-	154 [label=25]
-	155 [label=">="]
-	155 -> 153
-	155 -> 154
-	156 [label=EXP]
-	156 -> 155
-	157 [label=CHECK]
-	157 -> 156
-	158 [label=constraint]
-	159 [label=check_1]
+	7 -> 153
+	155 [label=OWNER]
+	156 [label=new_owner]
+	155 -> 156
+	157 [label=alter]
+	158 [label=DATABASE]
+	157 -> 158
+	159 [label=name]
 	158 -> 159
-	158 -> 157
-	136 -> 158
-	160 [label="create table"]
-	161 [label=tabla_1]
+	157 -> 155
+	7 -> 157
+	160 [label=rename]
+	161 [label=new_nombre]
 	160 -> 161
-	160 -> 136
-	8 -> 160
-	162 [label=varchar]
-	163 [label=897]
+	162 [label=alter]
+	163 [label=DATABASE]
 	162 -> 163
-	164 [label=hola]
-	165 [label=default]
-	165 -> 164
-	166 [label=ATRCOLUMNA]
-	166 -> 165
-	167 [label="primary key"]
+	164 [label=name]
+	163 -> 164
+	162 -> 160
+	7 -> 162
+	165 [label=smallint]
+	166 [label=column]
+	167 [label=mombre]
 	166 -> 167
-	168 [label=columna]
-	169 [label=columna653]
-	168 -> 169
-	168 -> 162
+	166 -> 165
+	168 [label=add]
 	168 -> 166
-	170 [label=CONTENIDO]
-	170 -> 168
-	171 [label=timestamp]
-	172 [label=5]
-	171 -> 172
-	173 [label=references]
-	174 [label=table1]
-	173 -> 174
-	175 [label=ATRCOLUMNA]
-	175 -> 173
-	176 [label=columna]
-	177 [label=fechahora]
+	169 [label=alter]
+	170 [label=TABLE]
+	169 -> 170
+	171 [label=usuario]
+	170 -> 171
+	169 -> 168
+	7 -> 169
+	172 [label=description]
+	173 [label=column]
+	173 -> 172
+	174 [label=drop]
+	174 -> 173
+	175 [label=alter]
+	176 [label=TABLE]
+	175 -> 176
+	177 [label=products]
 	176 -> 177
-	176 -> 171
-	176 -> 175
-	170 -> 176
-	178 [label=tabla_1]
-	179 [label=EXP]
-	179 -> 178
-	180 [label=inherits]
+	175 -> 174
+	7 -> 175
+	178 [label=name]
+	179 [label=""]
+	180 [label=<>]
+	180 -> 178
 	180 -> 179
-	181 [label="create table"]
-	182 [label=hija]
-	181 -> 182
-	181 -> 170
+	181 [label=check]
 	181 -> 180
-	8 -> 181
-	183 [label=OWNER]
-	184 [label=new_owner]
+	182 [label=add]
+	182 -> 181
+	183 [label=alter]
+	184 [label=TABLE]
 	183 -> 184
-	185 [label=alter]
-	186 [label=DATABASE]
-	185 -> 186
-	187 [label=name]
+	185 [label=tabla]
+	184 -> 185
+	183 -> 182
+	7 -> 183
+	186 [label=constraint]
+	187 [label=nombre]
 	186 -> 187
-	185 -> 183
-	8 -> 185
-	188 [label=rename]
-	189 [label=new_nombre]
+	188 [label=unique]
+	186 -> 188
+	189 [label=alumno]
 	188 -> 189
-	190 [label=alter]
-	191 [label=DATABASE]
-	190 -> 191
-	192 [label=name]
+	190 [label=add]
+	190 -> 186
+	191 [label=alter]
+	192 [label=TABLE]
 	191 -> 192
-	190 -> 188
-	8 -> 190
-	193 [label=smallint]
-	194 [label=column]
-	195 [label=mombre]
-	194 -> 195
-	194 -> 193
-	196 [label=add]
+	193 [label=usuarios]
+	192 -> 193
+	191 -> 190
+	7 -> 191
+	194 [label=usuario]
+	195 [label=usuario]
+	196 [label="foreign key"]
 	196 -> 194
-	197 [label=alter]
-	198 [label=TABLE]
+	197 [label=references]
+	196 -> 197
+	198 [label=alumno]
 	197 -> 198
-	199 [label=usuario]
-	198 -> 199
-	197 -> 196
-	8 -> 197
-	200 [label=description]
-	201 [label=EXP]
-	201 -> 200
-	202 [label=column]
-	202 -> 201
-	203 [label=drop]
-	203 -> 202
-	204 [label=alter]
-	205 [label=TABLE]
+	197 -> 195
+	199 [label=add]
+	199 -> 196
+	200 [label=alter]
+	201 [label=TABLE]
+	200 -> 201
+	202 [label=tabla]
+	201 -> 202
+	200 -> 199
+	7 -> 200
+	203 [label=alter]
+	204 [label=column]
+	203 -> 204
+	205 [label=usuario]
 	204 -> 205
-	206 [label=products]
-	205 -> 206
-	204 -> 203
-	8 -> 204
-	207 [label=name]
-	208 [label=""]
-	209 [label=<>]
-	209 -> 207
-	209 -> 208
-	210 [label=EXP]
-	210 -> 209
-	211 [label=check]
-	211 -> 210
-	212 [label=add]
-	212 -> 211
-	213 [label=alter]
-	214 [label=TABLE]
-	213 -> 214
-	215 [label=tabla]
+	206 [label=set]
+	203 -> 206
+	207 [label="NOT NULL"]
+	206 -> 207
+	208 [label=alter]
+	209 [label=TABLE]
+	208 -> 209
+	210 [label=tabla]
+	209 -> 210
+	208 -> 203
+	7 -> 208
+	211 [label=CONSTRAINT]
+	211 [label=some_name]
+	211 -> 212
+	213 [label=drop]
+	213 -> 211
+	214 [label=alter]
+	215 [label=TABLE]
 	214 -> 215
-	213 -> 212
-	8 -> 213
-	216 [label=constraint]
-	217 [label=nombre]
-	216 -> 217
-	218 [label=unique]
-	216 -> 218
-	219 [label=alumno]
+	216 [label=tabla]
+	215 -> 216
+	214 -> 213
+	7 -> 214
+	217 [label=smallint]
+	218 [label=column]
+	219 [label=address]
 	218 -> 219
-	220 [label=add]
-	220 -> 216
-	221 [label=alter]
-	222 [label=TABLE]
-	221 -> 222
-	223 [label=usuarios]
+	219 -> 217
+	220 [label=alter]
+	220 -> 218
+	221 [label=smallint]
+	222 [label=column]
+	223 [label=name]
 	222 -> 223
-	221 -> 220
-	8 -> 221
-	224 [label=usuario]
-	225 [label=EXP]
-	225 -> 224
-	226 [label=usuario]
-	227 [label=EXP]
-	227 -> 226
-	228 [label="foreign key"]
-	228 -> 225
-	229 [label=references]
+	223 -> 221
+	220 -> 222
+	224 [label=alter]
+	225 [label=TABLE]
+	224 -> 225
+	226 [label=distributors]
+	225 -> 226
+	224 -> 220
+	7 -> 224
+	227 [label=drop]
+	228 [label=database]
+	227 -> 228
+	229 [label=cliente]
 	228 -> 229
-	230 [label=alumno]
-	229 -> 230
-	229 -> 227
-	231 [label=add]
-	231 -> 228
-	232 [label=alter]
-	233 [label=TABLE]
-	232 -> 233
-	234 [label=tabla]
-	233 -> 234
-	232 -> 231
-	8 -> 232
-	235 [label=alter]
-	236 [label=column]
-	235 -> 236
-	237 [label=usuario]
-	236 -> 237
-	238 [label=set]
-	235 -> 238
-	239 [label="NOT NULL"]
+	7 -> 227
+	230 [label=drop]
+	231 [label=table]
+	230 -> 231
+	232 [label=asignacion]
+	231 -> 232
+	7 -> 230
+	233 [label=1]
+	234 [label=Cheese]
+	235 [label=9]
+	236 [label=99]
+	237 [label="."]
+	237 -> 235
+	237 -> 236
+	238 [label=insert]
+	239 [label=into]
 	238 -> 239
-	240 [label=alter]
-	241 [label=TABLE]
-	240 -> 241
-	242 [label=tabla]
-	241 -> 242
-	240 -> 235
-	8 -> 240
-	243 [label=CONSTRAINT]
-	243 [label=some_name]
+	240 [label=products]
+	239 -> 240
+	241 [label=values]
+	238 -> 241
+	241 -> 233
+	241 -> 234
+	241 -> 237
+	7 -> 238
+	242 [label=YEAR]
+	243 [label=EXTRACT]
+	243 -> 242
+	244 [label=TIMESTAMP]
 	243 -> 244
-	245 [label=drop]
-	245 -> 243
-	246 [label=alter]
-	247 [label=TABLE]
-	246 -> 247
-	248 [label=tabla]
-	247 -> 248
-	246 -> 245
-	8 -> 246
-	249 [label=smallint]
-	250 [label=column]
-	251 [label=address]
-	250 -> 251
-	251 -> 249
-	252 [label=alter]
-	252 -> 250
-	253 [label=smallint]
-	254 [label=column]
-	255 [label=name]
+	245 [label="2001-02-16 20:38:40"]
+	243 -> 245
+	246 [label=select]
+	246 -> 243
+	7 -> 246
+	247 [label=hour]
+	248 [label="INTERVAL 4 hours 3 minutes"]
+	249 [label=date_part]
+	249 -> 247
+	249 -> 248
+	250 [label=select]
+	250 -> 249
+	7 -> 250
+	251 [label="now()"]
+	252 [label=select]
+	252 -> 251
+	7 -> 252
+	253 [label=HOUR]
+	254 [label=EXTRACT]
+	254 -> 253
+	255 [label=TIMESTAMP]
 	254 -> 255
-	255 -> 253
-	252 -> 254
-	256 [label=alter]
-	257 [label=TABLE]
-	256 -> 257
-	258 [label=distributors]
-	257 -> 258
-	256 -> 252
-	8 -> 256
-	259 [label=drop]
-	260 [label=database]
+	256 [label="2001-02-16 20:38:40"]
+	254 -> 256
+	257 [label=select]
+	257 -> 254
+	7 -> 257
+	258 [label=MINUTE]
+	259 [label=EXTRACT]
+	259 -> 258
+	260 [label=TIMESTAMP]
 	259 -> 260
-	261 [label=cliente]
-	260 -> 261
-	8 -> 259
-	262 [label=drop]
-	263 [label=table]
-	262 -> 263
-	264 [label=asignacion]
-	263 -> 264
-	8 -> 262
-	265 [label=1]
-	266 [label=EXP]
-	266 -> 265
-	267 [label=Cheese]
-	266 -> 267
-	268 [label=9.99]
-	266 -> 268
-	269 [label=insert]
-	270 [label=into]
+	261 [label="2001-02-16 20:38:40"]
+	259 -> 261
+	262 [label=select]
+	262 -> 259
+	7 -> 262
+	263 [label=SECOND]
+	264 [label=EXTRACT]
+	264 -> 263
+	265 [label=TIMESTAMP]
+	264 -> 265
+	266 [label="2001-02-16 20:38:40"]
+	264 -> 266
+	267 [label=select]
+	267 -> 264
+	7 -> 267
+	268 [label=YEAR]
+	269 [label=EXTRACT]
+	269 -> 268
+	270 [label=TIMESTAMP]
 	269 -> 270
-	271 [label=products]
-	270 -> 271
-	272 [label=values]
-	269 -> 272
-	272 -> 266
-	8 -> 269
-	273 [label=YEAR]
+	271 [label="2001-02-16 20:38:40"]
+	269 -> 271
+	272 [label=select]
+	272 -> 269
+	7 -> 272
+	273 [label=MONTH]
 	274 [label=EXTRACT]
 	274 -> 273
 	275 [label=TIMESTAMP]
 	274 -> 275
 	276 [label="2001-02-16 20:38:40"]
 	274 -> 276
-	277 [label=EXP]
+	277 [label=select]
 	277 -> 274
-	278 [label=select]
-	278 -> 277
-	8 -> 278
-	279 [label=hour]
-	280 [label=EXP]
-	280 -> 279
-	281 [label="INTERVAL 4 hours 3 minutes"]
-	280 -> 281
-	282 [label=date_part]
-	282 -> 280
-	283 [label=EXP]
-	283 -> 282
-	284 [label=select]
-	284 -> 283
-	8 -> 284
-	285 [label="now()"]
-	286 [label=EXP]
+	7 -> 277
+	278 [label=DAY]
+	279 [label=EXTRACT]
+	279 -> 278
+	280 [label=TIMESTAMP]
+	279 -> 280
+	281 [label="2001-02-16 20:38:40"]
+	279 -> 281
+	282 [label=select]
+	282 -> 279
+	7 -> 282
+	283 [label=minutes]
+	284 [label="INTERVAL 4 hours 3 minutes"]
+	285 [label=date_part]
+	285 -> 283
+	285 -> 284
+	286 [label=select]
 	286 -> 285
-	287 [label=select]
-	287 -> 286
-	8 -> 287
-	288 [label=HOUR]
-	289 [label=EXTRACT]
+	7 -> 286
+	287 [label=seconds]
+	288 [label="INTERVAL 4 hours 3 minutes 15 seconds"]
+	289 [label=date_part]
+	289 -> 287
 	289 -> 288
-	290 [label=TIMESTAMP]
-	289 -> 290
-	291 [label="2001-02-16 20:38:40"]
-	289 -> 291
-	292 [label=EXP]
-	292 -> 289
-	293 [label=select]
-	293 -> 292
-	8 -> 293
-	294 [label=MINUTE]
-	295 [label=EXTRACT]
-	295 -> 294
-	296 [label=TIMESTAMP]
-	295 -> 296
-	297 [label="2001-02-16 20:38:40"]
-	295 -> 297
-	298 [label=EXP]
-	298 -> 295
-	299 [label=select]
-	299 -> 298
-	8 -> 299
-	300 [label=SECOND]
-	301 [label=EXTRACT]
-	301 -> 300
-	302 [label=TIMESTAMP]
-	301 -> 302
-	303 [label="2001-02-16 20:38:40"]
-	301 -> 303
-	304 [label=EXP]
-	304 -> 301
-	305 [label=select]
+	290 [label=select]
+	290 -> 289
+	7 -> 290
+	291 [label=CURRENT_DATE]
+	292 [label=select]
+	292 -> 291
+	7 -> 292
+	293 [label=CURRENT_TIME]
+	294 [label=select]
+	294 -> 293
+	7 -> 294
+	295 [label="TIMESTAMP now"]
+	296 [label=select]
+	296 -> 295
+	7 -> 296
+	297 [label=columna1]
+	298 [label="as sualias"]
+	298 -> 297
+	299 [label=tbsujeto]
+	300 [label=fechanacimiento]
+	301 [label="2004-01-01"]
+	302 [label=between]
+	302 -> 300
+	302 -> 301
+	303 [label="2005-01-01"]
+	304 [label=and]
+	304 -> 302
+	304 -> 303
+	305 [label=where]
 	305 -> 304
-	8 -> 305
-	306 [label=YEAR]
-	307 [label=EXTRACT]
-	307 -> 306
-	308 [label=TIMESTAMP]
-	307 -> 308
-	309 [label="2001-02-16 20:38:40"]
-	307 -> 309
-	310 [label=EXP]
-	310 -> 307
-	311 [label=select]
-	311 -> 310
-	8 -> 311
-	312 [label=MONTH]
-	313 [label=EXTRACT]
-	313 -> 312
-	314 [label=TIMESTAMP]
-	313 -> 314
-	315 [label="2001-02-16 20:38:40"]
-	313 -> 315
-	316 [label=EXP]
-	316 -> 313
-	317 [label=select]
-	317 -> 316
-	8 -> 317
-	318 [label=DAY]
-	319 [label=EXTRACT]
-	319 -> 318
-	320 [label=TIMESTAMP]
-	319 -> 320
-	321 [label="2001-02-16 20:38:40"]
-	319 -> 321
-	322 [label=EXP]
-	322 -> 319
-	323 [label=select]
+	306 [label=select]
+	306 -> 298
+	307 [label=from]
+	306 -> 307
+	307 -> 299
+	306 -> 305
+	7 -> 306
+	308 [label="*"]
+	309 [label=tbsujeto]
+	310 [label=edad]
+	311 [label=5]
+	312 [label=between]
+	312 -> 310
+	312 -> 311
+	313 [label=25]
+	314 [label=and]
+	314 -> 312
+	314 -> 313
+	315 [label=where]
+	315 -> 314
+	316 [label=select]
+	316 -> 308
+	317 [label=from]
+	316 -> 317
+	317 -> 309
+	316 -> 315
+	7 -> 316
+	318 [label=1]
+	319 [label=2]
+	320 [label=3]
+	321 [label=4]
+	322 [label=5]
+	323 [label=greatest]
+	323 -> 318
+	323 -> 319
+	323 -> 320
+	323 -> 321
 	323 -> 322
-	8 -> 323
-	324 [label=minutes]
-	325 [label=EXP]
-	325 -> 324
-	326 [label="INTERVAL 4 hours 3 minutes"]
-	325 -> 326
-	327 [label=date_part]
-	327 -> 325
-	328 [label=EXP]
+	324 [label=select]
+	324 -> 323
+	7 -> 324
+	325 [label="1970-12-10"]
+	326 [label="2000-11-11"]
+	327 [label="2019-01-01"]
+	328 [label=greatest]
+	328 -> 325
+	328 -> 326
 	328 -> 327
 	329 [label=select]
 	329 -> 328
-	8 -> 329
-	330 [label=seconds]
-	331 [label=EXP]
-	331 -> 330
-	332 [label="INTERVAL 4 hours 3 minutes 15 seconds"]
-	331 -> 332
-	333 [label=date_part]
-	333 -> 331
-	334 [label=EXP]
-	334 -> 333
-	335 [label=select]
-	335 -> 334
-	8 -> 335
-	336 [label=CURRENT_DATE]
-	337 [label=EXP]
-	337 -> 336
-	338 [label=select]
-	338 -> 337
-	8 -> 338
-	339 [label=CURRENT_TIME]
-	340 [label=EXP]
+	7 -> 329
+	330 [label="2030-02-20"]
+	331 [label="now()"]
+	332 [label=GREATEST]
+	332 -> 330
+	332 -> 331
+	333 [label=select]
+	333 -> 332
+	7 -> 333
+	334 [label=1]
+	335 [label=2]
+	336 [label=3]
+	337 [label=3]
+	338 [label=5]
+	339 [label=least]
+	339 -> 334
+	339 -> 335
+	339 -> 336
+	339 -> 337
+	339 -> 338
+	340 [label=select]
 	340 -> 339
-	341 [label=select]
-	341 -> 340
-	8 -> 341
-	342 [label="TIMESTAMP now"]
-	343 [label=EXP]
-	343 -> 342
-	344 [label=select]
-	344 -> 343
-	8 -> 344
-	345 [label=columna1]
-	346 [label="as sualias"]
+	7 -> 340
+	341 [label=a]
+	342 [label=b]
+	343 [label=c]
+	344 [label=aa]
+	345 [label=least]
+	345 -> 341
+	345 -> 342
+	345 -> 343
+	345 -> 344
+	346 [label=select]
 	346 -> 345
-	347 [label=EXP]
-	347 -> 346
-	348 [label=tbsujeto]
-	349 [label=EXP]
+	7 -> 346
+	347 [label=nombre]
+	348 [label=sujeto3]
+	349 [label="="]
+	349 -> 347
 	349 -> 348
-	350 [label=fechanacimiento]
-	351 [label="2004-01-01"]
-	352 [label=between]
+	350 [label="Juan Carlos"]
+	351 [label=when]
+	351 -> 349
+	352 [label=then]
+	351 -> 352
 	352 -> 350
-	352 -> 351
-	353 [label="2005-01-01"]
-	354 [label=and]
-	354 -> 352
-	354 -> 353
-	355 [label=EXP]
-	355 -> 354
-	356 [label=where]
+	353 [label=WHEN]
+	353 -> 351
+	354 [label=nombre]
+	355 [label=sujeto4]
+	356 [label="="]
+	356 -> 354
 	356 -> 355
-	357 [label=select]
-	357 -> 347
-	358 [label=from]
-	357 -> 358
-	358 -> 349
-	357 -> 356
-	8 -> 357
-	359 [label="*"]
-	360 [label=EXP]
-	360 -> 359
-	361 [label=tbsujeto]
-	362 [label=EXP]
-	362 -> 361
-	363 [label=edad]
-	364 [label=5]
-	365 [label=between]
-	365 -> 363
-	365 -> 364
-	366 [label=25]
-	367 [label=and]
+	357 [label="Luis Espino"]
+	358 [label=when]
+	358 -> 356
+	359 [label=then]
+	358 -> 359
+	359 -> 357
+	353 -> 358
+	360 [label=CASE]
+	360 -> 353
+	361 [label=alias11]
+	361 -> 360
+	362 [label=tbcolaborador]
+	363 [label=A]
+	363 -> 362
+	364 [label=nombre]
+	365 [label=1]
+	366 [label=4]
+	367 [label=substring]
+	367 -> 364
 	367 -> 365
 	367 -> 366
-	368 [label=EXP]
-	368 -> 367
-	369 [label=where]
+	368 [label=suje]
+	369 [label="="]
+	369 -> 367
 	369 -> 368
-	370 [label=select]
-	370 -> 360
-	371 [label=from]
-	370 -> 371
-	371 -> 362
-	370 -> 369
-	8 -> 370
-	372 [label=1]
-	373 [label=EXP]
-	373 -> 372
-	374 [label=2]
-	373 -> 374
-	375 [label=3]
-	373 -> 375
-	376 [label=4]
-	373 -> 376
-	377 [label=5]
-	373 -> 377
-	378 [label=greatest]
-	378 -> 373
-	379 [label=EXP]
+	370 [label=A]
+	371 [label=id]
+	372 [label="."]
+	372 -> 370
+	372 -> 371
+	373 [label=idcolaborador]
+	374 [label=tbidentificacioncolaborador]
+	375 [label=B]
+	375 -> 374
+	376 [label=select]
+	376 -> 373
+	377 [label=from]
+	376 -> 377
+	377 -> 375
+	378 [label="not in"]
+	378 -> 372
+	378 -> 376
+	379 [label=and]
+	379 -> 369
 	379 -> 378
-	380 [label=select]
+	380 [label=where]
 	380 -> 379
-	8 -> 380
-	381 [label="1970-12-10"]
-	382 [label=EXP]
-	382 -> 381
-	383 [label="2000-11-11"]
-	382 -> 383
-	384 [label="2019-01-01"]
-	382 -> 384
-	385 [label=greatest]
-	385 -> 382
-	386 [label=EXP]
-	386 -> 385
-	387 [label=select]
-	387 -> 386
-	8 -> 387
-	388 [label="2030-02-20"]
-	389 [label=EXP]
+	381 [label=select]
+	381 -> 361
+	382 [label=from]
+	381 -> 382
+	382 -> 363
+	381 -> 380
+	7 -> 381
+	383 [label=1]
+	384 [label=2]
+	385 [label=3]
+	386 [label=4]
+	387 [label=5]
+	388 [label=greatest]
+	388 -> 383
+	388 -> 384
+	388 -> 385
+	388 -> 386
+	388 -> 387
+	389 [label=select]
 	389 -> 388
-	390 [label="now()"]
-	389 -> 390
-	391 [label=GREATEST]
-	391 -> 389
-	392 [label=EXP]
-	392 -> 391
-	393 [label=select]
+	7 -> 389
+	390 [label="1970-12-10"]
+	391 [label="2000-11-11"]
+	392 [label="2019-01-01"]
+	393 [label=greatest]
+	393 -> 390
+	393 -> 391
 	393 -> 392
-	8 -> 393
-	394 [label=1]
-	395 [label=EXP]
-	395 -> 394
+	394 [label=select]
+	394 -> 393
+	7 -> 394
+	395 [label=1]
 	396 [label=2]
-	395 -> 396
 	397 [label=3]
-	395 -> 397
 	398 [label=3]
-	395 -> 398
 	399 [label=5]
-	395 -> 399
 	400 [label=least]
 	400 -> 395
-	401 [label=EXP]
+	400 -> 396
+	400 -> 397
+	400 -> 398
+	400 -> 399
+	401 [label=select]
 	401 -> 400
-	402 [label=select]
-	402 -> 401
-	8 -> 402
-	403 [label=a]
-	404 [label=EXP]
-	404 -> 403
-	405 [label=b]
-	404 -> 405
-	406 [label=c]
-	404 -> 406
-	407 [label=aa]
-	404 -> 407
-	408 [label=least]
-	408 -> 404
-	409 [label=EXP]
-	409 -> 408
-	410 [label=select]
+	7 -> 401
+	402 [label=a]
+	403 [label="b\b\n\f\r\t"]
+	404 [label=c]
+	405 [label=aa]
+	406 [label=least]
+	406 -> 402
+	406 -> 403
+	406 -> 404
+	406 -> 405
+	407 [label=select]
+	407 -> 406
+	7 -> 407
+	408 [label=nombre]
+	409 [label=s]
+	410 [label="="]
+	410 -> 408
 	410 -> 409
-	8 -> 410
-	411 [label=nombre]
-	412 [label=sujeto3]
-	413 [label="="]
+	411 [label="Juan Carlos"]
+	412 [label=when]
+	412 -> 410
+	413 [label=then]
+	412 -> 413
 	413 -> 411
-	413 -> 412
-	414 [label=EXP]
-	414 -> 413
-	415 [label="Juan Carlos"]
-	416 [label=EXP]
-	416 -> 415
-	417 [label=when]
-	417 -> 414
-	418 [label=then]
-	417 -> 418
-	418 -> 416
-	419 [label=WHEN]
+	414 [label=WHEN]
+	414 -> 412
+	415 [label=nombre]
+	416 [label=s]
+	417 [label="="]
+	417 -> 415
+	417 -> 416
+	418 [label="Luis Espino"]
+	419 [label=when]
 	419 -> 417
-	420 [label=nombre]
-	421 [label=sujeto4]
-	422 [label="="]
-	422 -> 420
-	422 -> 421
-	423 [label=EXP]
-	423 -> 422
-	424 [label="Luis Espino"]
-	425 [label=EXP]
-	425 -> 424
-	426 [label=when]
-	426 -> 423
-	427 [label=then]
+	420 [label=then]
+	419 -> 420
+	420 -> 418
+	414 -> 419
+	421 [label=CASE]
+	421 -> 414
+	7 -> 421
+	422 [label=owner]
+	423 [label=user_name]
+	422 -> 423
+	424 [label=mode]
+	425 [label=6]
+	424 -> 425
+	426 [label="create DATABASE if not exist"]
+	427 [label=name]
 	426 -> 427
-	427 -> 425
-	419 -> 426
-	428 [label=CASE]
-	428 -> 419
-	429 [label=alias11]
-	429 -> 428
-	430 [label=EXP]
-	430 -> 429
-	431 [label=tbcolaborador]
-	432 [label=A]
-	432 -> 431
-	433 [label=EXP]
-	433 -> 432
-	434 [label=nombre]
-	435 [label=EXP]
-	435 -> 434
-	436 [label=1]
-	435 -> 436
-	437 [label=4]
-	435 -> 437
-	438 [label=substring]
-	438 -> 435
-	439 [label=suje]
-	440 [label="="]
-	440 -> 438
-	440 -> 439
-	441 [label=A]
-	442 [label=id]
-	443 [label="."]
-	443 -> 441
-	443 -> 442
-	444 [label=idcolaborador]
-	445 [label=EXP]
-	445 -> 444
-	446 [label=tbidentificacioncolaborador]
-	447 [label=B]
-	447 -> 446
-	448 [label=EXP]
-	448 -> 447
-	449 [label=select]
-	449 -> 445
-	450 [label=from]
-	449 -> 450
-	450 -> 448
-	451 [label=EXP]
-	451 -> 449
-	452 [label="not in"]
-	452 -> 443
-	452 -> 451
-	453 [label=and]
-	453 -> 440
-	453 -> 452
-	454 [label=EXP]
-	454 -> 453
-	455 [label=where]
-	455 -> 454
-	456 [label=select]
-	456 -> 430
-	457 [label=from]
+	426 -> 422
+	426 -> 424
+	7 -> 426
+	428 [label=owner]
+	429 [label=user_name]
+	428 -> 429
+	430 [label=mode]
+	431 [label=6]
+	430 -> 431
+	432 [label="create OR REPLACE DATABASE if not exist"]
+	433 [label=name]
+	432 -> 433
+	432 -> 428
+	432 -> 430
+	7 -> 432
+	434 [label=owner]
+	435 [label=user_name]
+	434 -> 435
+	436 [label=mode]
+	437 [label=6]
+	436 -> 437
+	438 [label="create OR REPLACE DATABASE"]
+	439 [label=name]
+	438 -> 439
+	438 -> 434
+	438 -> 436
+	7 -> 438
+	440 [label=mode]
+	441 [label=6]
+	440 -> 441
+	442 [label="create OR REPLACE DATABASE"]
+	443 [label=name]
+	442 -> 443
+	442 -> 440
+	7 -> 442
+	444 [label=owner]
+	445 [label=user_name]
+	444 -> 445
+	446 [label=mode]
+	447 [label=6]
+	446 -> 447
+	448 [label="create DATABASE if not exist"]
+	449 [label=name]
+	448 -> 449
+	448 -> 444
+	448 -> 446
+	7 -> 448
+	450 [label=mode]
+	451 [label=6]
+	450 -> 451
+	452 [label="create DATABASE if not exist"]
+	453 [label=name]
+	452 -> 453
+	452 -> 450
+	7 -> 452
+	454 [label=owner]
+	455 [label=user_name]
+	454 -> 455
+	456 [label="create DATABASE if not exist"]
+	457 [label=name]
 	456 -> 457
-	457 -> 433
-	456 -> 455
-	8 -> 456
-	458 [label=1]
-	459 [label=EXP]
-	459 -> 458
-	460 [label=2]
-	459 -> 460
-	461 [label=3]
-	459 -> 461
-	462 [label=4]
-	459 -> 462
-	463 [label=5]
-	459 -> 463
-	464 [label=greatest]
-	464 -> 459
-	465 [label=EXP]
-	465 -> 464
-	466 [label=select]
-	466 -> 465
-	8 -> 466
-	467 [label="1970-12-10"]
-	468 [label=EXP]
-	468 -> 467
-	469 [label="2000-11-11"]
+	456 -> 454
+	7 -> 456
+	458 [label=owner]
+	459 [label=user_name]
+	458 -> 459
+	460 [label="create OR REPLACE DATABASE if not exist"]
+	461 [label=name]
+	460 -> 461
+	460 -> 458
+	7 -> 460
+	462 [label=owner]
+	463 [label=user_name]
+	462 -> 463
+	464 [label="create OR REPLACE DATABASE"]
+	465 [label=name]
+	464 -> 465
+	464 -> 462
+	7 -> 464
+	466 [label=mode]
+	467 [label=6]
+	466 -> 467
+	468 [label="create OR REPLACE DATABASE if not exist"]
+	469 [label=name]
 	468 -> 469
-	470 [label="2019-01-01"]
-	468 -> 470
-	471 [label=greatest]
-	471 -> 468
-	472 [label=EXP]
-	472 -> 471
-	473 [label=select]
-	473 -> 472
-	8 -> 473
-	474 [label=1]
-	475 [label=EXP]
-	475 -> 474
-	476 [label=2]
-	475 -> 476
-	477 [label=3]
-	475 -> 477
-	478 [label=3]
-	475 -> 478
-	479 [label=5]
-	475 -> 479
-	480 [label=least]
-	480 -> 475
-	481 [label=EXP]
-	481 -> 480
-	482 [label=select]
-	482 -> 481
-	8 -> 482
-	483 [label=a]
-	484 [label=EXP]
-	484 -> 483
-	485 [label="b\b\n\f\r\t"]
-	484 -> 485
-	486 [label=c]
-	484 -> 486
-	487 [label=aa]
-	484 -> 487
-	488 [label=least]
-	488 -> 484
-	489 [label=EXP]
+	468 -> 466
+	7 -> 468
+	470 [label=owner]
+	471 [label=Carlos]
+	470 -> 471
+	472 [label="create OR REPLACE DATABASE"]
+	473 [label=db2]
+	472 -> 473
+	472 -> 470
+	7 -> 472
+	474 [label=nombre]
+	475 [label=indentificacion]
+	476 [label=salario]
+	477 [label=sum]
+	477 -> 476
+	478 [label=tbsujeto]
+	479 [label=X]
+	480 [label=where]
+	480 -> 479
+	481 [label=nombre]
+	482 [label=indentificacion]
+	483 [label="group by"]
+	483 -> 481
+	483 -> 482
+	484 [label=salario]
+	485 [label=sum]
+	485 -> 484
+	486 [label=100000]
+	487 [label=">"]
+	487 -> 485
+	487 -> 486
+	488 [label=having]
+	488 -> 487
+	489 [label=select]
+	489 -> 474
+	489 -> 475
+	489 -> 477
+	490 [label=from]
+	489 -> 490
+	490 -> 478
+	489 -> 480
+	489 -> 483
 	489 -> 488
-	490 [label=select]
-	490 -> 489
-	8 -> 490
-	491 [label=nombre]
-	492 [label=s]
-	493 [label="="]
+	7 -> 489
+	491 [label=puesto]
+	492 [label=tbempleado]
+	493 [label=select]
 	493 -> 491
-	493 -> 492
-	494 [label=EXP]
-	494 -> 493
-	495 [label="Juan Carlos"]
-	496 [label=EXP]
-	496 -> 495
-	497 [label=when]
-	497 -> 494
-	498 [label=then]
-	497 -> 498
+	494 [label=from]
+	493 -> 494
+	494 -> 492
+	7 -> 493
+	495 [label=puesto]
+	496 [label=salario]
+	497 [label=tbempleado]
+	498 [label=select]
+	498 -> 495
 	498 -> 496
-	499 [label=WHEN]
+	499 [label=from]
+	498 -> 499
 	499 -> 497
-	500 [label=nombre]
-	501 [label=s]
-	502 [label="="]
-	502 -> 500
-	502 -> 501
-	503 [label=EXP]
-	503 -> 502
-	504 [label="Luis Espino"]
-	505 [label=EXP]
+	7 -> 498
+	500 [label="*"]
+	501 [label=tbcolaborador]
+	502 [label=nombre]
+	503 [label=sujeto1]
+	504 [label="is distinct from"]
+	504 -> 502
+	504 -> 503
+	505 [label=where]
 	505 -> 504
-	506 [label=when]
-	506 -> 503
-	507 [label=then]
+	506 [label=select]
+	506 -> 500
+	507 [label=from]
 	506 -> 507
-	507 -> 505
-	499 -> 506
-	508 [label=CASE]
-	508 -> 499
-	8 -> 508
-	509 [label=owner]
-	510 [label=user_name]
-	509 -> 510
-	511 [label=mode]
-	512 [label=6]
-	511 -> 512
-	513 [label="create DATABASE if not exist"]
-	514 [label=name]
-	513 -> 514
-	513 -> 509
-	513 -> 511
-	8 -> 513
-	515 [label=owner]
-	516 [label=user_name]
-	515 -> 516
-	517 [label=mode]
-	518 [label=6]
+	507 -> 501
+	506 -> 505
+	7 -> 506
+	508 [label=col1]
+	509 [label=sum]
+	509 -> 508
+	510 [label=col2]
+	511 [label=avg]
+	511 -> 510
+	512 [label=tbcolaborador]
+	513 [label=nombre]
+	514 [label=sujeto1]
+	515 [label="is not distinct from"]
+	515 -> 513
+	515 -> 514
+	516 [label=where]
+	516 -> 515
+	517 [label=select]
+	517 -> 509
+	517 -> 511
+	518 [label=from]
 	517 -> 518
-	519 [label="create OR REPLACE DATABASE if not exist"]
-	520 [label=name]
-	519 -> 520
-	519 -> 515
-	519 -> 517
-	8 -> 519
-	521 [label=owner]
-	522 [label=user_name]
-	521 -> 522
-	523 [label=mode]
-	524 [label=6]
-	523 -> 524
-	525 [label="create OR REPLACE DATABASE"]
-	526 [label=name]
-	525 -> 526
-	525 -> 521
+	518 -> 512
+	517 -> 516
+	7 -> 517
+	519 [label=343]
+	520 [label=CBRT]
+	520 -> 519
+	521 [label="AS CubeRoot"]
+	521 -> 520
+	522 [label=select]
+	522 -> 521
+	7 -> 522
+	523 [label="cadena NOT LIKE M%"]
+	524 [label=tbcolaborador]
+	525 [label=select]
 	525 -> 523
-	8 -> 525
-	527 [label=mode]
-	528 [label=6]
-	527 -> 528
-	529 [label="create OR REPLACE DATABASE"]
-	530 [label=name]
-	529 -> 530
-	529 -> 527
-	8 -> 529
-	531 [label=owner]
-	532 [label=user_name]
-	531 -> 532
-	533 [label=mode]
-	534 [label=6]
-	533 -> 534
-	535 [label="create DATABASE if not exist"]
-	536 [label=name]
-	535 -> 536
-	535 -> 531
-	535 -> 533
-	8 -> 535
-	537 [label=mode]
-	538 [label=6]
-	537 -> 538
-	539 [label="create DATABASE if not exist"]
-	540 [label=name]
-	539 -> 540
-	539 -> 537
-	8 -> 539
-	541 [label=owner]
-	542 [label=user_name]
+	526 [label=from]
+	525 -> 526
+	526 -> 524
+	7 -> 525
+	527 [label="*"]
+	528 [label=nombre]
+	529 [label=fechanacimiento]
+	530 [label=tbcolaborador]
+	531 [label=nombre]
+	532 [label=1]
+	533 [label=4]
+	534 [label=substring]
+	534 -> 531
+	534 -> 532
+	534 -> 533
+	535 [label=suje]
+	536 [label="="]
+	536 -> 534
+	536 -> 535
+	537 [label=where]
+	537 -> 536
+	538 [label=select]
+	538 -> 528
+	538 -> 529
+	539 [label=from]
+	538 -> 539
+	539 -> 530
+	538 -> 537
+	540 [label=A]
+	540 -> 538
+	541 [label=select]
+	541 -> 527
+	542 [label=from]
 	541 -> 542
-	543 [label="create DATABASE if not exist"]
-	544 [label=name]
-	543 -> 544
-	543 -> 541
-	8 -> 543
-	545 [label=owner]
-	546 [label=user_name]
+	542 -> 540
+	7 -> 541
+	543 [label="*"]
+	544 [label=usuario]
+	545 [label=select]
+	545 -> 543
+	546 [label=from]
 	545 -> 546
-	547 [label="create OR REPLACE DATABASE if not exist"]
-	548 [label=name]
-	547 -> 548
-	547 -> 545
-	8 -> 547
-	549 [label=owner]
-	550 [label=user_name]
-	549 -> 550
-	551 [label="create OR REPLACE DATABASE"]
-	552 [label=name]
-	551 -> 552
-	551 -> 549
-	8 -> 551
-	553 [label=mode]
-	554 [label=6]
-	553 -> 554
-	555 [label="create OR REPLACE DATABASE if not exist"]
-	556 [label=name]
-	555 -> 556
-	555 -> 553
-	8 -> 555
-	557 [label=owner]
-	558 [label=Carlos]
-	557 -> 558
-	559 [label="create OR REPLACE DATABASE"]
-	560 [label=db2]
-	559 -> 560
+	546 -> 544
+	7 -> 545
+	547 [label=first_name]
+	548 [label=last_name]
+	549 [label=customer]
+	550 [label=c]
+	550 -> 549
+	551 [label=1]
+	552 [label=payment]
+	553 [label=p]
+	553 -> 552
+	554 [label=p]
+	555 [label=customer_id]
+	556 [label="."]
+	556 -> 554
+	556 -> 555
+	557 [label=c]
+	558 [label=customer_id]
+	559 [label="."]
 	559 -> 557
-	8 -> 559
-	561 [label=nombre]
-	562 [label=EXP]
-	562 -> 561
-	563 [label=indentificacion]
-	562 -> 563
-	564 [label=salario]
-	565 [label=EXP]
+	559 -> 558
+	560 [label="="]
+	560 -> 556
+	560 -> 559
+	561 [label=amount]
+	562 [label=11]
+	563 [label=">"]
+	563 -> 561
+	563 -> 562
+	564 [label=AND]
+	564 -> 560
+	564 -> 563
+	565 [label=WHERE]
 	565 -> 564
-	566 [label=sum]
+	566 [label=select]
+	566 -> 551
+	567 [label=from]
+	566 -> 567
+	567 -> 553
 	566 -> 565
-	562 -> 566
-	567 [label=tbsujeto]
-	568 [label=EXP]
-	568 -> 567
-	569 [label=X]
-	570 [label=EXP]
-	570 -> 569
-	571 [label=where]
-	571 -> 570
-	572 [label=nombre]
-	573 [label=EXP]
-	573 -> 572
-	574 [label=indentificacion]
+	568 [label=exist]
+	568 -> 566
+	569 [label=WHERE]
+	569 -> 568
+	570 [label=first_name]
+	571 [label=last_name]
+	572 [label="order by"]
+	572 -> 570
+	572 -> 571
+	573 [label=select]
+	573 -> 547
+	573 -> 548
+	574 [label=from]
 	573 -> 574
-	575 [label="group by"]
-	575 -> 573
-	576 [label=salario]
-	577 [label=EXP]
-	577 -> 576
-	578 [label=sum]
-	578 -> 577
-	579 [label=100000]
-	580 [label=">"]
-	580 -> 578
-	580 -> 579
-	581 [label=EXP]
-	581 -> 580
-	582 [label=having]
+	574 -> 550
+	573 -> 569
+	573 -> 572
+	7 -> 573
+	575 [label=column1]
+	576 [label=table_1]
+	577 [label=1]
+	578 [label=table_2]
+	579 [label=column_2]
+	580 [label=table_1]
+	581 [label=column_1]
+	582 [label="."]
+	582 -> 580
 	582 -> 581
-	583 [label=select]
-	583 -> 562
-	584 [label=from]
-	583 -> 584
-	584 -> 568
-	583 -> 571
-	583 -> 575
+	583 [label="="]
+	583 -> 579
 	583 -> 582
-	8 -> 583
-	585 [label=puesto]
-	586 [label=EXP]
-	586 -> 585
-	587 [label=tbempleado]
-	588 [label=EXP]
+	584 [label=WHERE]
+	584 -> 583
+	585 [label=select]
+	585 -> 577
+	586 [label=from]
+	585 -> 586
+	586 -> 578
+	585 -> 584
+	587 [label=exist]
+	587 -> 585
+	588 [label=WHERE]
 	588 -> 587
 	589 [label=select]
-	589 -> 586
+	589 -> 575
 	590 [label=from]
 	589 -> 590
-	590 -> 588
-	8 -> 589
-	591 [label=puesto]
-	592 [label=EXP]
-	592 -> 591
-	593 [label=salario]
-	592 -> 593
-	594 [label=tbempleado]
-	595 [label=EXP]
-	595 -> 594
-	596 [label=select]
-	596 -> 592
-	597 [label=from]
-	596 -> 597
-	597 -> 595
-	8 -> 596
-	598 [label="*"]
-	599 [label=EXP]
+	590 -> 576
+	589 -> 588
+	7 -> 589
+	591 [label=col1]
+	592 [label=tab1]
+	593 [label=1]
+	594 [label=tab2]
+	595 [label=col2]
+	596 [label=tab1]
+	597 [label=col2]
+	598 [label="."]
+	598 -> 596
+	598 -> 597
+	599 [label="="]
+	599 -> 595
 	599 -> 598
-	600 [label=tbcolaborador]
-	601 [label=EXP]
+	600 [label=WHERE]
+	600 -> 599
+	601 [label=select]
+	601 -> 593
+	602 [label=from]
+	601 -> 602
+	602 -> 594
 	601 -> 600
-	602 [label=nombre]
-	603 [label=sujeto1]
-	604 [label="is distinct from"]
-	604 -> 602
+	603 [label=exist]
+	603 -> 601
+	604 [label=WHERE]
 	604 -> 603
-	605 [label=EXP]
+	605 [label=select]
+	605 -> 591
+	606 [label=from]
+	605 -> 606
+	606 -> 592
 	605 -> 604
-	606 [label=where]
-	606 -> 605
-	607 [label=select]
-	607 -> 599
-	608 [label=from]
-	607 -> 608
-	608 -> 601
-	607 -> 606
-	8 -> 607
-	609 [label=col1]
-	610 [label=EXP]
-	610 -> 609
-	611 [label=sum]
-	611 -> 610
-	612 [label=EXP]
-	612 -> 611
+	7 -> 605
+	607 [label=col1]
+	608 [label=tab1]
+	609 [label=1]
+	610 [label=tab2]
+	611 [label=1]
+	612 [label=tab2]
 	613 [label=col2]
-	614 [label=EXP]
-	614 -> 613
-	615 [label=avg]
-	615 -> 614
-	612 -> 615
-	616 [label=tbcolaborador]
-	617 [label=EXP]
+	614 [label=tab1]
+	615 [label=col2]
+	616 [label="."]
+	616 -> 614
+	616 -> 615
+	617 [label="="]
+	617 -> 613
 	617 -> 616
-	618 [label=nombre]
-	619 [label=sujeto1]
-	620 [label="is not distinct from"]
-	620 -> 618
-	620 -> 619
-	621 [label=EXP]
-	621 -> 620
-	622 [label=where]
+	618 [label=WHERE]
+	618 -> 617
+	619 [label=select]
+	619 -> 611
+	620 [label=from]
+	619 -> 620
+	620 -> 612
+	619 -> 618
+	621 [label=exist]
+	621 -> 619
+	622 [label=WHERE]
 	622 -> 621
 	623 [label=select]
-	623 -> 612
+	623 -> 609
 	624 [label=from]
 	623 -> 624
-	624 -> 617
+	624 -> 610
 	623 -> 622
-	8 -> 623
-	625 [label=343]
-	626 [label=EXP]
+	625 [label=WHERE]
+	625 -> 623
+	626 [label=select]
+	626 -> 607
+	627 [label=from]
+	626 -> 627
+	627 -> 608
 	626 -> 625
-	627 [label=CBRT]
-	627 -> 626
-	628 [label="AS CubeRoot"]
-	628 -> 627
-	629 [label=EXP]
-	629 -> 628
-	630 [label=select]
-	630 -> 629
-	8 -> 630
-	631 [label="cadena NOT LIKE M%"]
-	632 [label=EXP]
-	632 -> 631
-	633 [label=tbcolaborador]
-	634 [label=EXP]
+	7 -> 626
+	628 [label=customer_id]
+	629 [label=payment_id]
+	630 [label=amount]
+	631 [label=payment]
+	632 [label=amount]
+	633 [label=8]
+	634 [label=BETWEEN]
+	634 -> 632
 	634 -> 633
-	635 [label=select]
-	635 -> 632
-	636 [label=from]
-	635 -> 636
+	635 [label=9]
+	636 [label=AND]
 	636 -> 634
-	8 -> 635
-	637 [label="*"]
-	638 [label=EXP]
+	636 -> 635
+	637 [label=WHERE]
+	637 -> 636
+	638 [label=select]
+	638 -> 628
+	638 -> 629
+	638 -> 630
+	639 [label=from]
+	638 -> 639
+	639 -> 631
 	638 -> 637
-	639 [label=nombre]
-	640 [label=EXP]
-	640 -> 639
-	641 [label=fechanacimiento]
-	640 -> 641
-	642 [label=tbcolaborador]
-	643 [label=EXP]
-	643 -> 642
-	644 [label=nombre]
-	645 [label=EXP]
-	645 -> 644
-	646 [label=1]
-	645 -> 646
-	647 [label=4]
-	645 -> 647
-	648 [label=substring]
-	648 -> 645
-	649 [label=suje]
-	650 [label="="]
-	650 -> 648
+	7 -> 638
+	640 [label=customer_id]
+	641 [label=payment_id]
+	642 [label=amount]
+	643 [label=payment_date]
+	644 [label=payment]
+	645 [label=payment_date]
+	646 [label="2007-02-07"]
+	647 [label=BETWEEN]
+	647 -> 645
+	647 -> 646
+	648 [label="2007-02-15"]
+	649 [label=AND]
+	649 -> 647
+	649 -> 648
+	650 [label=WHERE]
 	650 -> 649
-	651 [label=EXP]
+	651 [label=select]
+	651 -> 640
+	651 -> 641
+	651 -> 642
+	651 -> 643
+	652 [label=from]
+	651 -> 652
+	652 -> 644
 	651 -> 650
-	652 [label=where]
-	652 -> 651
-	653 [label=select]
-	653 -> 640
-	654 [label=from]
-	653 -> 654
-	654 -> 643
-	653 -> 652
-	655 [label=A]
-	655 -> 653
-	656 [label=EXP]
-	656 -> 655
-	657 [label=select]
-	657 -> 638
-	658 [label=from]
-	657 -> 658
-	658 -> 656
-	8 -> 657
-	659 [label="*"]
-	660 [label=EXP]
-	660 -> 659
-	661 [label=usuario]
-	662 [label=EXP]
+	7 -> 651
+	653 [label=customer_id]
+	654 [label=payment_id]
+	655 [label=amount]
+	656 [label=payment]
+	657 [label=amount]
+	658 [label=8]
+	659 [label="NOT BETWEEN"]
+	659 -> 657
+	659 -> 658
+	660 [label=9]
+	661 [label=AND]
+	661 -> 659
+	661 -> 660
+	662 [label=WHERE]
 	662 -> 661
 	663 [label=select]
-	663 -> 660
+	663 -> 653
+	663 -> 654
+	663 -> 655
 	664 [label=from]
 	663 -> 664
-	664 -> 662
-	8 -> 663
-	665 [label=first_name]
-	666 [label=EXP]
-	666 -> 665
-	667 [label=last_name]
-	666 -> 667
-	668 [label=customer]
-	669 [label=c]
-	669 -> 668
-	670 [label=EXP]
-	670 -> 669
-	671 [label=1]
-	672 [label=EXP]
+	664 -> 656
+	663 -> 662
+	7 -> 663
+	665 [label=customer_id]
+	666 [label=rental_id]
+	667 [label=return_date]
+	668 [label=rental]
+	669 [label=customer_id]
+	670 [label=1]
+	671 [label=2]
+	672 [label=in]
+	672 -> 669
+	672 -> 670
 	672 -> 671
-	673 [label=payment]
-	674 [label=p]
-	674 -> 673
-	675 [label=EXP]
-	675 -> 674
-	676 [label=p]
-	677 [label=customer_id]
-	678 [label="."]
-	678 -> 676
-	678 -> 677
-	679 [label=c]
-	680 [label=customer_id]
-	681 [label="."]
-	681 -> 679
-	681 -> 680
-	682 [label="="]
-	682 -> 678
-	682 -> 681
-	683 [label=amount]
-	684 [label=11]
-	685 [label=">"]
-	685 -> 683
-	685 -> 684
-	686 [label=AND]
-	686 -> 682
-	686 -> 685
-	687 [label=EXP]
-	687 -> 686
-	688 [label=WHERE]
+	673 [label=WHERE]
+	673 -> 672
+	674 [label=return_date]
+	675 [label=DESC]
+	676 [label="order by"]
+	676 -> 674
+	676 -> 675
+	677 [label=select]
+	677 -> 665
+	677 -> 666
+	677 -> 667
+	678 [label=from]
+	677 -> 678
+	678 -> 668
+	677 -> 673
+	677 -> 676
+	7 -> 677
+	679 [label=customer_id]
+	680 [label=first_name]
+	681 [label=last_name]
+	682 [label=customer]
+	683 [label=customer_id]
+	684 [label=customer_id]
+	685 [label=rental]
+	686 [label=CAST]
+	687 [label="2005-05-27"]
+	688 [label="="]
+	688 -> 686
 	688 -> 687
-	689 [label=select]
-	689 -> 672
-	690 [label=from]
-	689 -> 690
-	690 -> 675
+	689 [label=WHERE]
 	689 -> 688
-	691 [label=exist]
-	691 -> 689
-	692 [label=WHERE]
-	692 -> 691
-	693 [label=first_name]
-	694 [label=EXP]
-	694 -> 693
-	695 [label=last_name]
-	694 -> 695
-	696 [label="order by"]
-	696 -> 694
-	697 [label=select]
-	697 -> 666
-	698 [label=from]
-	697 -> 698
-	698 -> 670
-	697 -> 692
-	697 -> 696
-	8 -> 697
-	699 [label=column1]
-	700 [label=EXP]
-	700 -> 699
-	701 [label=table_1]
-	702 [label=EXP]
-	702 -> 701
+	690 [label=select]
+	690 -> 684
+	691 [label=from]
+	690 -> 691
+	691 -> 685
+	690 -> 689
+	692 [label=in]
+	692 -> 683
+	692 -> 690
+	693 [label=WHERE]
+	693 -> 692
+	694 [label=customer_id]
+	695 [label="order by"]
+	695 -> 694
+	696 [label=select]
+	696 -> 679
+	696 -> 680
+	696 -> 681
+	697 [label=from]
+	696 -> 697
+	697 -> 682
+	696 -> 693
+	696 -> 695
+	7 -> 696
+	698 [label=customer_id]
+	699 [label=rental_id]
+	700 [label=return_date]
+	701 [label=rental]
+	702 [label=customer_id]
 	703 [label=1]
-	704 [label=EXP]
-	704 -> 703
-	705 [label=table_2]
-	706 [label=EXP]
+	704 [label=2]
+	705 [label="not in"]
+	705 -> 702
+	705 -> 703
+	705 -> 704
+	706 [label=WHERE]
 	706 -> 705
-	707 [label=column_2]
-	708 [label=table_1]
-	709 [label=column_1]
-	710 [label="."]
-	710 -> 708
-	710 -> 709
-	711 [label="="]
-	711 -> 707
-	711 -> 710
-	712 [label=EXP]
-	712 -> 711
-	713 [label=WHERE]
-	713 -> 712
-	714 [label=select]
-	714 -> 704
-	715 [label=from]
-	714 -> 715
-	715 -> 706
-	714 -> 713
-	716 [label=exist]
-	716 -> 714
-	717 [label=WHERE]
-	717 -> 716
-	718 [label=select]
-	718 -> 700
-	719 [label=from]
-	718 -> 719
-	719 -> 702
+	707 [label=select]
+	707 -> 698
+	707 -> 699
+	707 -> 700
+	708 [label=from]
+	707 -> 708
+	708 -> 701
+	707 -> 706
+	7 -> 707
+	709 [label=customer_id]
+	710 [label=first_name]
+	711 [label=last_name]
+	712 [label=customer]
+	713 [label=customer_id]
+	714 [label=customer_id]
+	715 [label=rental]
+	716 [label=CAST]
+	717 [label="2005-05-27"]
+	718 [label="="]
+	718 -> 716
 	718 -> 717
-	8 -> 718
-	720 [label=col1]
-	721 [label=EXP]
-	721 -> 720
-	722 [label=tab1]
-	723 [label=EXP]
+	719 [label=WHERE]
+	719 -> 718
+	720 [label=select]
+	720 -> 714
+	721 [label=from]
+	720 -> 721
+	721 -> 715
+	720 -> 719
+	722 [label="not in"]
+	722 -> 713
+	722 -> 720
+	723 [label=WHERE]
 	723 -> 722
-	724 [label=1]
-	725 [label=EXP]
+	724 [label=customer_id]
+	725 [label="order by"]
 	725 -> 724
-	726 [label=tab2]
-	727 [label=EXP]
-	727 -> 726
-	728 [label=col2]
-	729 [label=tab1]
-	730 [label=col2]
-	731 [label="."]
-	731 -> 729
-	731 -> 730
-	732 [label="="]
-	732 -> 728
+	726 [label=select]
+	726 -> 709
+	726 -> 710
+	726 -> 711
+	727 [label=from]
+	726 -> 727
+	727 -> 712
+	726 -> 723
+	726 -> 725
+	7 -> 726
+	728 [label=title]
+	729 [label=film]
+	730 [label=length]
+	731 [label=length]
+	732 [label=MAX]
 	732 -> 731
-	733 [label=EXP]
-	733 -> 732
-	734 [label=WHERE]
-	734 -> 733
-	735 [label=select]
-	735 -> 725
-	736 [label=from]
-	735 -> 736
-	736 -> 727
-	735 -> 734
-	737 [label=exist]
-	737 -> 735
+	733 [label=film]
+	734 [label=select]
+	734 -> 732
+	735 [label=from]
+	734 -> 735
+	735 -> 733
+	736 [label=ANY]
+	736 -> 734
+	737 [label=">="]
+	737 -> 730
+	737 -> 736
 	738 [label=WHERE]
 	738 -> 737
 	739 [label=select]
-	739 -> 721
+	739 -> 728
 	740 [label=from]
 	739 -> 740
-	740 -> 723
+	740 -> 729
 	739 -> 738
-	8 -> 739
-	741 [label=col1]
-	742 [label=EXP]
-	742 -> 741
-	743 [label=tab1]
-	744 [label=EXP]
-	744 -> 743
-	745 [label=1]
-	746 [label=EXP]
+	7 -> 739
+	741 [label=e]
+	742 [label=first_name]
+	743 [label="."]
+	743 -> 741
+	743 -> 742
+	744 [label=e]
+	745 [label=last_name]
+	746 [label="."]
+	746 -> 744
 	746 -> 745
-	747 [label=tab2]
-	748 [label=EXP]
-	748 -> 747
-	749 [label=1]
-	750 [label=EXP]
-	750 -> 749
-	751 [label=tab2]
-	752 [label=EXP]
-	752 -> 751
-	753 [label=col2]
-	754 [label=tab1]
-	755 [label=col2]
-	756 [label="."]
-	756 -> 754
-	756 -> 755
+	747 [label=e]
+	748 [label=department_id]
+	749 [label="."]
+	749 -> 747
+	749 -> 748
+	750 [label=employees]
+	751 [label=e]
+	751 -> 750
+	752 [label=department_id]
+	753 [label=DEPARTMENT_ID]
+	754 [label=departments]
+	755 [label=location_id]
+	756 [label=1700]
 	757 [label="="]
-	757 -> 753
+	757 -> 755
 	757 -> 756
-	758 [label=EXP]
+	758 [label=WHERE]
 	758 -> 757
-	759 [label=WHERE]
+	759 [label=select]
+	759 -> 753
+	760 [label=from]
+	759 -> 760
+	760 -> 754
 	759 -> 758
-	760 [label=select]
-	760 -> 750
-	761 [label=from]
-	760 -> 761
-	761 -> 752
-	760 -> 759
-	762 [label=exist]
-	762 -> 760
+	761 [label=ANY]
+	761 -> 759
+	762 [label="="]
+	762 -> 752
+	762 -> 761
 	763 [label=WHERE]
 	763 -> 762
 	764 [label=select]
+	764 -> 743
 	764 -> 746
+	764 -> 749
 	765 [label=from]
 	764 -> 765
-	765 -> 748
+	765 -> 751
 	764 -> 763
-	766 [label=EXP]
-	766 -> 764
-	767 [label=WHERE]
-	767 -> 766
-	768 [label=select]
-	768 -> 742
-	769 [label=from]
-	768 -> 769
-	769 -> 744
-	768 -> 767
-	8 -> 768
-	770 [label=customer_id]
-	771 [label=EXP]
-	771 -> 770
-	772 [label=payment_id]
-	771 -> 772
-	773 [label=amount]
-	771 -> 773
-	774 [label=payment]
-	775 [label=EXP]
-	775 -> 774
-	776 [label=amount]
-	777 [label=8]
-	778 [label=BETWEEN]
-	778 -> 776
+	7 -> 764
+	766 [label=title]
+	767 [label=category_id]
+	768 [label=film]
+	769 [label=category_id]
+	770 [label=category_id]
+	771 [label=category]
+	772 [label=NAME]
+	773 [label=Action]
+	774 [label="="]
+	774 -> 772
+	774 -> 773
+	775 [label=NAME]
+	776 [label=Drama]
+	777 [label="="]
+	777 -> 775
+	777 -> 776
+	778 [label=OR]
+	778 -> 774
 	778 -> 777
-	779 [label=9]
-	780 [label=AND]
-	780 -> 778
+	779 [label=WHERE]
+	779 -> 778
+	780 [label=select]
+	780 -> 770
+	781 [label=from]
+	780 -> 781
+	781 -> 771
 	780 -> 779
-	781 [label=EXP]
-	781 -> 780
-	782 [label=WHERE]
-	782 -> 781
-	783 [label=select]
-	783 -> 771
-	784 [label=from]
-	783 -> 784
-	784 -> 775
+	782 [label=ANY]
+	782 -> 780
+	783 [label="="]
+	783 -> 769
 	783 -> 782
-	8 -> 783
-	785 [label=customer_id]
-	786 [label=EXP]
-	786 -> 785
-	787 [label=payment_id]
-	786 -> 787
-	788 [label=amount]
-	786 -> 788
-	789 [label=payment_date]
-	786 -> 789
-	790 [label=payment]
-	791 [label=EXP]
-	791 -> 790
-	792 [label=payment_date]
-	793 [label="2007-02-07"]
-	794 [label=BETWEEN]
-	794 -> 792
-	794 -> 793
-	795 [label="2007-02-15"]
-	796 [label=AND]
-	796 -> 794
-	796 -> 795
-	797 [label=EXP]
-	797 -> 796
-	798 [label=WHERE]
-	798 -> 797
-	799 [label=select]
-	799 -> 786
-	800 [label=from]
-	799 -> 800
-	800 -> 791
+	784 [label=WHERE]
+	784 -> 783
+	785 [label=select]
+	785 -> 766
+	785 -> 767
+	786 [label=from]
+	785 -> 786
+	786 -> 768
+	785 -> 784
+	7 -> 785
+	787 [label=name]
+	788 [label=population]
+	789 [label=countries]
+	790 [label=population]
+	791 [label="*"]
+	792 [label=8000000]
+	793 [label=22000000]
+	794 [label=null]
+	795 [label=unnest]
+	795 -> 792
+	795 -> 793
+	795 -> 794
+	796 [label=select]
+	796 -> 791
+	797 [label=from]
+	796 -> 797
+	797 -> 795
+	798 [label=any]
+	798 -> 796
+	799 [label=">"]
+	799 -> 790
 	799 -> 798
-	8 -> 799
-	801 [label=customer_id]
-	802 [label=EXP]
-	802 -> 801
-	803 [label=payment_id]
-	802 -> 803
-	804 [label=amount]
-	802 -> 804
-	805 [label=payment]
-	806 [label=EXP]
-	806 -> 805
-	807 [label=amount]
-	808 [label=8]
-	809 [label="NOT BETWEEN"]
-	809 -> 807
-	809 -> 808
-	810 [label=9]
-	811 [label=AND]
-	811 -> 809
-	811 -> 810
-	812 [label=EXP]
-	812 -> 811
-	813 [label=WHERE]
-	813 -> 812
-	814 [label=select]
-	814 -> 802
-	815 [label=from]
-	814 -> 815
-	815 -> 806
+	800 [label=where]
+	800 -> 799
+	801 [label=population]
+	802 [label=name]
+	803 [label="order by"]
+	803 -> 801
+	803 -> 802
+	804 [label=select]
+	804 -> 787
+	804 -> 788
+	805 [label=from]
+	804 -> 805
+	805 -> 789
+	804 -> 800
+	804 -> 803
+	7 -> 804
+	806 [label=100]
+	807 [label=height]
+	808 [label=sys]
+	809 [label=summits]
+	810 [label="."]
+	810 -> 808
+	810 -> 809
+	811 [label=select]
+	811 -> 807
+	812 [label=from]
+	811 -> 812
+	812 -> 810
+	813 [label=ALL]
+	813 -> 811
+	814 [label=<>]
+	814 -> 806
 	814 -> 813
-	8 -> 814
-	816 [label=customer_id]
-	817 [label=EXP]
-	817 -> 816
-	818 [label=rental_id]
-	817 -> 818
-	819 [label=return_date]
-	817 -> 819
-	820 [label=rental]
-	821 [label=EXP]
-	821 -> 820
-	822 [label=customer_id]
-	823 [label=1]
-	824 [label=EXP]
-	824 -> 823
-	825 [label=2]
-	824 -> 825
-	826 [label=in]
-	826 -> 822
-	826 -> 824
-	827 [label=EXP]
+	815 [label="AS x"]
+	815 -> 814
+	816 [label=select]
+	816 -> 815
+	7 -> 816
+	817 [label="*"]
+	818 [label=t1]
+	819 [label=1]
+	820 [label=ROW]
+	820 -> 819
+	821 [label=column1]
+	822 [label=t2]
+	823 [label=select]
+	823 -> 821
+	824 [label=from]
+	823 -> 824
+	824 -> 822
+	825 [label="="]
+	825 -> 820
+	825 -> 823
+	826 [label=WHERE]
+	826 -> 825
+	827 [label=select]
+	827 -> 817
+	828 [label=from]
+	827 -> 828
+	828 -> 818
 	827 -> 826
-	828 [label=WHERE]
-	828 -> 827
-	829 [label=return_date]
-	830 [label=EXP]
-	830 -> 829
-	831 [label=DESC]
-	832 [label="order by"]
-	832 -> 830
+	7 -> 827
+	829 [label="*"]
+	830 [label=t1]
+	831 [label=1]
+	832 [label=ROW]
 	832 -> 831
-	833 [label=select]
-	833 -> 817
-	834 [label=from]
-	833 -> 834
-	834 -> 821
-	833 -> 828
-	833 -> 832
-	8 -> 833
-	835 [label=customer_id]
-	836 [label=EXP]
-	836 -> 835
-	837 [label=first_name]
-	836 -> 837
-	838 [label=last_name]
-	836 -> 838
-	839 [label=customer]
-	840 [label=EXP]
+	833 [label=column1]
+	834 [label=t2]
+	835 [label=select]
+	835 -> 833
+	836 [label=from]
+	835 -> 836
+	836 -> 834
+	837 [label=ANY]
+	837 -> 835
+	838 [label="="]
+	838 -> 832
+	838 -> 837
+	839 [label=WHERE]
+	839 -> 838
+	840 [label=select]
+	840 -> 829
+	841 [label=from]
+	840 -> 841
+	841 -> 830
 	840 -> 839
-	841 [label=customer_id]
-	842 [label=customer_id]
-	843 [label=EXP]
-	843 -> 842
-	844 [label=rental]
-	845 [label=EXP]
+	7 -> 840
+	842 [label="*"]
+	843 [label=public]
+	844 [label=Album]
+	845 [label="."]
+	845 -> 843
 	845 -> 844
-	846 [label=CAST]
-	847 [label="2005-05-27"]
-	848 [label="="]
-	848 -> 846
-	848 -> 847
-	849 [label=EXP]
-	849 -> 848
-	850 [label=WHERE]
-	850 -> 849
-	851 [label=select]
-	851 -> 843
-	852 [label=from]
-	851 -> 852
-	852 -> 845
-	851 -> 850
-	853 [label=EXP]
-	853 -> 851
-	854 [label=in]
-	854 -> 841
+	846 [label="limit 4"]
+	847 [label=select]
+	847 -> 842
+	848 [label=from]
+	847 -> 848
+	848 -> 845
+	847 -> 846
+	7 -> 847
+	849 [label="*"]
+	850 [label=public]
+	851 [label=MediaType]
+	852 [label="."]
+	852 -> 850
+	852 -> 851
+	853 [label="offset 3"]
+	854 [label=select]
+	854 -> 849
+	855 [label=from]
+	854 -> 855
+	855 -> 852
 	854 -> 853
-	855 [label=EXP]
-	855 -> 854
-	856 [label=WHERE]
-	856 -> 855
-	857 [label=customer_id]
-	858 [label=EXP]
-	858 -> 857
-	859 [label="order by"]
+	7 -> 854
+	856 [label="*"]
+	857 [label=public]
+	858 [label=Album]
+	859 [label="."]
+	859 -> 857
 	859 -> 858
-	860 [label=select]
-	860 -> 836
-	861 [label=from]
-	860 -> 861
-	861 -> 840
-	860 -> 856
-	860 -> 859
-	8 -> 860
-	862 [label=customer_id]
-	863 [label=EXP]
-	863 -> 862
-	864 [label=rental_id]
+	860 [label=AlbumId]
+	861 [label="order by"]
+	861 -> 860
+	862 [label="offset 300 limit 1"]
+	863 [label=select]
+	863 -> 856
+	864 [label=from]
 	863 -> 864
-	865 [label=return_date]
-	863 -> 865
-	866 [label=rental]
-	867 [label=EXP]
-	867 -> 866
-	868 [label=customer_id]
-	869 [label=1]
-	870 [label=EXP]
-	870 -> 869
-	871 [label=2]
+	864 -> 859
+	863 -> 861
+	863 -> 862
+	7 -> 863
+	865 [label="*"]
+	866 [label=public]
+	867 [label=Album]
+	868 [label="."]
+	868 -> 866
+	868 -> 867
+	869 [label="limit 1 offset 1"]
+	870 [label=select]
+	870 -> 865
+	871 [label=from]
 	870 -> 871
-	872 [label="not in"]
-	872 -> 868
-	872 -> 870
-	873 [label=EXP]
-	873 -> 872
-	874 [label=WHERE]
-	874 -> 873
-	875 [label=select]
-	875 -> 863
-	876 [label=from]
-	875 -> 876
-	876 -> 867
+	871 -> 868
+	870 -> 869
+	7 -> 870
+	872 [label="*"]
+	873 [label=public]
+	874 [label=Album]
+	875 [label="."]
+	875 -> 873
 	875 -> 874
-	8 -> 875
-	877 [label=customer_id]
-	878 [label=EXP]
-	878 -> 877
-	879 [label=first_name]
-	878 -> 879
-	880 [label=last_name]
-	878 -> 880
-	881 [label=customer]
-	882 [label=EXP]
-	882 -> 881
-	883 [label=customer_id]
-	884 [label=customer_id]
-	885 [label=EXP]
-	885 -> 884
-	886 [label=rental]
-	887 [label=EXP]
-	887 -> 886
-	888 [label=CAST]
-	889 [label="2005-05-27"]
-	890 [label="="]
-	890 -> 888
-	890 -> 889
-	891 [label=EXP]
-	891 -> 890
-	892 [label=WHERE]
-	892 -> 891
-	893 [label=select]
-	893 -> 885
-	894 [label=from]
-	893 -> 894
-	894 -> 887
+	876 [label="limit all"]
+	877 [label=select]
+	877 -> 872
+	878 [label=from]
+	877 -> 878
+	878 -> 875
+	877 -> 876
+	7 -> 877
+	879 [label=name]
+	880 [label=rollnumber]
+	881 [label=student]
+	882 [label=name]
+	883 [label=rollnumber]
+	884 [label=marks]
+	885 [label=select]
+	885 -> 882
+	885 -> 883
+	886 [label=from]
+	885 -> 886
+	886 -> 884
+	887 [label=UNION]
+	887 -> 885
+	888 [label=select]
+	888 -> 879
+	888 -> 880
+	889 [label=from]
+	888 -> 889
+	889 -> 881
+	888 -> 887
+	7 -> 888
+	890 [label=city]
+	891 [label=travel]
+	892 [label=sample]
+	893 [label="-"]
+	893 -> 891
 	893 -> 892
-	895 [label=EXP]
-	895 -> 893
-	896 [label="not in"]
-	896 -> 883
+	894 [label=tipo]
+	895 [label=airport]
+	896 [label="="]
+	896 -> 894
 	896 -> 895
-	897 [label=EXP]
+	897 [label=WHERE]
 	897 -> 896
-	898 [label=WHERE]
-	898 -> 897
-	899 [label=customer_id]
-	900 [label=EXP]
-	900 -> 899
-	901 [label="order by"]
+	898 [label=city]
+	899 [label=travel]
+	900 [label=sample]
+	901 [label="-"]
+	901 -> 899
 	901 -> 900
-	902 [label=select]
-	902 -> 878
-	903 [label=from]
-	902 -> 903
-	903 -> 882
-	902 -> 898
-	902 -> 901
-	8 -> 902
-	904 [label=title]
-	905 [label=EXP]
+	902 [label=tipo]
+	903 [label=hotel]
+	904 [label="="]
+	904 -> 902
+	904 -> 903
+	905 [label=WHERE]
 	905 -> 904
-	906 [label=film]
-	907 [label=EXP]
-	907 -> 906
-	908 [label=length]
-	909 [label=length]
-	910 [label=EXP]
-	910 -> 909
-	911 [label=MAX]
-	911 -> 910
-	912 [label=EXP]
-	912 -> 911
-	913 [label=film]
-	914 [label=EXP]
+	906 [label=select]
+	906 -> 898
+	907 [label=from]
+	906 -> 907
+	907 -> 901
+	906 -> 905
+	908 [label=UNION]
+	908 -> 906
+	909 [label=select]
+	909 -> 890
+	910 [label=from]
+	909 -> 910
+	910 -> 893
+	909 -> 897
+	909 -> 908
+	7 -> 909
+	911 [label=city]
+	912 [label=travel]
+	913 [label=sample]
+	914 [label="-"]
+	914 -> 912
 	914 -> 913
-	915 [label=select]
-	915 -> 912
-	916 [label=from]
-	915 -> 916
-	916 -> 914
-	917 [label=EXP]
+	915 [label=tipo]
+	916 [label=airport]
+	917 [label="="]
 	917 -> 915
-	918 [label=ANY]
+	917 -> 916
+	918 [label=WHERE]
 	918 -> 917
-	919 [label=">="]
-	919 -> 908
-	919 -> 918
-	920 [label=EXP]
-	920 -> 919
-	921 [label=WHERE]
-	921 -> 920
-	922 [label=select]
-	922 -> 905
-	923 [label=from]
-	922 -> 923
-	923 -> 907
+	919 [label=city]
+	920 [label=travel]
+	921 [label=sample]
+	922 [label="-"]
+	922 -> 920
 	922 -> 921
-	8 -> 922
-	924 [label=e]
-	925 [label=first_name]
-	926 [label="."]
-	926 -> 924
+	923 [label=tipo]
+	924 [label=hotel]
+	925 [label="="]
+	925 -> 923
+	925 -> 924
+	926 [label=WHERE]
 	926 -> 925
-	927 [label=EXP]
+	927 [label=select]
+	927 -> 919
+	928 [label=from]
+	927 -> 928
+	928 -> 922
 	927 -> 926
-	928 [label=e]
-	929 [label=last_name]
-	930 [label="."]
-	930 -> 928
+	929 [label=INTERSECT]
+	929 -> 927
+	930 [label=select]
+	930 -> 911
+	931 [label=from]
+	930 -> 931
+	931 -> 914
+	930 -> 918
 	930 -> 929
-	927 -> 930
-	931 [label=e]
-	932 [label=department_id]
-	933 [label="."]
-	933 -> 931
-	933 -> 932
-	927 -> 933
-	934 [label=employees]
-	935 [label=e]
+	7 -> 930
+	932 [label=city]
+	933 [label=travel]
+	934 [label=sample]
+	935 [label="-"]
+	935 -> 933
 	935 -> 934
-	936 [label=EXP]
-	936 -> 935
-	937 [label=department_id]
-	938 [label=DEPARTMENT_ID]
-	939 [label=EXP]
+	936 [label=tipo]
+	937 [label=airport]
+	938 [label="="]
+	938 -> 936
+	938 -> 937
+	939 [label=WHERE]
 	939 -> 938
-	940 [label=departments]
-	941 [label=EXP]
-	941 -> 940
-	942 [label=location_id]
-	943 [label=1700]
-	944 [label="="]
-	944 -> 942
-	944 -> 943
-	945 [label=EXP]
-	945 -> 944
-	946 [label=WHERE]
+	940 [label=city]
+	941 [label=travel]
+	942 [label=sample]
+	943 [label="-"]
+	943 -> 941
+	943 -> 942
+	944 [label=tipo]
+	945 [label=hotel]
+	946 [label="="]
+	946 -> 944
 	946 -> 945
-	947 [label=select]
-	947 -> 939
-	948 [label=from]
-	947 -> 948
-	948 -> 941
+	947 [label=WHERE]
 	947 -> 946
-	949 [label=EXP]
-	949 -> 947
-	950 [label=ANY]
-	950 -> 949
-	951 [label="="]
-	951 -> 937
+	948 [label=select]
+	948 -> 940
+	949 [label=from]
+	948 -> 949
+	949 -> 943
+	948 -> 947
+	950 [label=EXCEPT]
+	950 -> 948
+	951 [label=select]
+	951 -> 932
+	952 [label=from]
+	951 -> 952
+	952 -> 935
+	951 -> 939
 	951 -> 950
-	952 [label=EXP]
-	952 -> 951
-	953 [label=WHERE]
-	953 -> 952
-	954 [label=select]
-	954 -> 927
-	955 [label=from]
-	954 -> 955
-	955 -> 936
-	954 -> 953
-	8 -> 954
-	956 [label=title]
-	957 [label=EXP]
-	957 -> 956
-	958 [label=category_id]
-	957 -> 958
-	959 [label=film]
-	960 [label=EXP]
+	7 -> 951
+	953 [label=city]
+	954 [label=travel]
+	955 [label=sample]
+	956 [label="-"]
+	956 -> 954
+	956 -> 955
+	957 [label=tipo]
+	958 [label=airport]
+	959 [label="="]
+	959 -> 957
+	959 -> 958
+	960 [label=WHERE]
 	960 -> 959
-	961 [label=category_id]
-	962 [label=category_id]
-	963 [label=EXP]
-	963 -> 962
-	964 [label=category]
-	965 [label=EXP]
-	965 -> 964
-	966 [label=NAME]
-	967 [label=Action]
-	968 [label="="]
-	968 -> 966
+	961 [label=city]
+	962 [label=travel]
+	963 [label=sample]
+	964 [label="-"]
+	964 -> 962
+	964 -> 963
+	965 [label=tipo]
+	966 [label=hotel]
+	967 [label="="]
+	967 -> 965
+	967 -> 966
+	968 [label=WHERE]
 	968 -> 967
-	969 [label=NAME]
-	970 [label=Drama]
-	971 [label="="]
+	969 [label=select]
+	969 -> 961
+	970 [label=from]
+	969 -> 970
+	970 -> 964
+	969 -> 968
+	971 [label="UNION ALL"]
 	971 -> 969
-	971 -> 970
-	972 [label=OR]
-	972 -> 968
+	972 [label=select]
+	972 -> 953
+	973 [label=from]
+	972 -> 973
+	973 -> 956
+	972 -> 960
 	972 -> 971
-	973 [label=EXP]
-	973 -> 972
-	974 [label=WHERE]
-	974 -> 973
-	975 [label=select]
-	975 -> 963
-	976 [label=from]
-	975 -> 976
-	976 -> 965
-	975 -> 974
-	977 [label=EXP]
+	7 -> 972
+	974 [label=city]
+	975 [label=travel]
+	976 [label=sample]
+	977 [label="-"]
 	977 -> 975
-	978 [label=ANY]
-	978 -> 977
-	979 [label="="]
-	979 -> 961
-	979 -> 978
-	980 [label=EXP]
+	977 -> 976
+	978 [label=tipo]
+	979 [label=airport]
+	980 [label="="]
+	980 -> 978
 	980 -> 979
 	981 [label=WHERE]
 	981 -> 980
-	982 [label=select]
-	982 -> 957
-	983 [label=from]
-	982 -> 983
-	983 -> 960
-	982 -> 981
-	8 -> 982
-	984 [label=name]
-	985 [label=EXP]
+	982 [label=city]
+	983 [label=travel]
+	984 [label=sample]
+	985 [label="-"]
+	985 -> 983
 	985 -> 984
-	986 [label=population]
-	985 -> 986
-	987 [label=countries]
-	988 [label=EXP]
+	986 [label=tipo]
+	987 [label=hotel]
+	988 [label="="]
+	988 -> 986
 	988 -> 987
-	989 [label=population]
-	990 [label="*"]
-	991 [label=EXP]
-	991 -> 990
-	992 [label=8000000]
-	993 [label=EXP]
-	993 -> 992
-	994 [label=22000000]
+	989 [label=WHERE]
+	989 -> 988
+	990 [label=select]
+	990 -> 982
+	991 [label=from]
+	990 -> 991
+	991 -> 985
+	990 -> 989
+	992 [label="INTERSECT ALL"]
+	992 -> 990
+	993 [label=select]
+	993 -> 974
+	994 [label=from]
 	993 -> 994
-	995 [label=null]
-	993 -> 995
-	996 [label=unnest]
-	996 -> 993
-	997 [label=EXP]
-	997 -> 996
-	998 [label=select]
-	998 -> 991
-	999 [label=from]
-	998 -> 999
-	999 -> 997
-	1000 [label=EXP]
-	1000 -> 998
-	1001 [label=any]
+	994 -> 977
+	993 -> 981
+	993 -> 992
+	7 -> 993
+	995 [label=city]
+	996 [label=travel]
+	997 [label=sample]
+	998 [label="-"]
+	998 -> 996
+	998 -> 997
+	999 [label=tipo]
+	1000 [label=airport]
+	1001 [label="="]
+	1001 -> 999
 	1001 -> 1000
-	1002 [label=">"]
-	1002 -> 989
+	1002 [label=WHERE]
 	1002 -> 1001
-	1003 [label=EXP]
-	1003 -> 1002
-	1004 [label=where]
-	1004 -> 1003
-	1005 [label=population]
-	1006 [label=EXP]
+	1003 [label=city]
+	1004 [label=travel]
+	1005 [label=sample]
+	1006 [label="-"]
+	1006 -> 1004
 	1006 -> 1005
-	1007 [label=name]
-	1006 -> 1007
-	1008 [label="order by"]
-	1008 -> 1006
-	1009 [label=select]
-	1009 -> 985
-	1010 [label=from]
-	1009 -> 1010
-	1010 -> 988
-	1009 -> 1004
+	1007 [label=tipo]
+	1008 [label=hotel]
+	1009 [label="="]
+	1009 -> 1007
 	1009 -> 1008
-	8 -> 1009
-	1011 [label=100]
-	1012 [label=height]
-	1013 [label=EXP]
-	1013 -> 1012
-	1014 [label=sys]
-	1015 [label=summits]
-	1016 [label="."]
-	1016 -> 1014
-	1016 -> 1015
-	1017 [label=EXP]
+	1010 [label=WHERE]
+	1010 -> 1009
+	1011 [label=select]
+	1011 -> 1003
+	1012 [label=from]
+	1011 -> 1012
+	1012 -> 1006
+	1011 -> 1010
+	1013 [label="EXCEPT ALL"]
+	1013 -> 1011
+	1014 [label=select]
+	1014 -> 995
+	1015 [label=from]
+	1014 -> 1015
+	1015 -> 998
+	1014 -> 1002
+	1014 -> 1013
+	7 -> 1014
+	1016 [label=343]
+	1017 [label=CBRT]
 	1017 -> 1016
-	1018 [label=select]
-	1018 -> 1013
-	1019 [label=from]
-	1018 -> 1019
-	1019 -> 1017
-	1020 [label=EXP]
-	1020 -> 1018
-	1021 [label=ALL]
-	1021 -> 1020
-	1022 [label=<>]
-	1022 -> 1011
+	1018 [label="AS cube"]
+	1018 -> 1017
+	1019 [label=select]
+	1019 -> 1018
+	7 -> 1019
+	1020 [label=columna]
+	1021 [label=int]
+	1022 [label="-"]
+	1022 -> 1020
 	1022 -> 1021
-	1023 [label="AS x"]
+	1023 [label=abs]
 	1023 -> 1022
-	1024 [label=EXP]
+	1024 [label=select]
 	1024 -> 1023
-	1025 [label=select]
-	1025 -> 1024
-	8 -> 1025
-	1026 [label="*"]
-	1027 [label=EXP]
+	7 -> 1024
+	1025 [label=5]
+	1026 [label="-"]
+	1026 -> 1025
+	1027 [label=abc]
 	1027 -> 1026
-	1028 [label=t1]
-	1029 [label=EXP]
-	1029 -> 1028
-	1030 [label=1]
-	1031 [label=EXP]
-	1031 -> 1030
-	1032 [label=ROW]
+	1028 [label=select]
+	1028 -> 1027
+	7 -> 1028
+	1029 [label="*"]
+	1030 [label=tbempleado]
+	1031 [label=antiguedad]
+	1032 [label=abs]
 	1032 -> 1031
-	1033 [label=column1]
-	1034 [label=EXP]
+	1033 [label=0]
+	1034 [label=">"]
+	1034 -> 1032
 	1034 -> 1033
-	1035 [label=t2]
-	1036 [label=EXP]
+	1035 [label=Where]
+	1035 -> 1034
+	1036 [label=select]
+	1036 -> 1029
+	1037 [label=from]
+	1036 -> 1037
+	1037 -> 1030
 	1036 -> 1035
-	1037 [label=select]
-	1037 -> 1034
-	1038 [label=from]
-	1037 -> 1038
-	1038 -> 1036
-	1039 [label="="]
-	1039 -> 1032
-	1039 -> 1037
-	1040 [label=EXP]
+	7 -> 1036
+	1038 [label=53]
+	1039 [label=7]
+	1040 [label="."]
+	1040 -> 1038
 	1040 -> 1039
-	1041 [label=WHERE]
+	1041 [label=CEIL]
 	1041 -> 1040
-	1042 [label=select]
-	1042 -> 1027
-	1043 [label=from]
-	1042 -> 1043
-	1043 -> 1029
+	1042 [label="AS ceil"]
 	1042 -> 1041
-	8 -> 1042
-	1044 [label="*"]
-	1045 [label=EXP]
-	1045 -> 1044
-	1046 [label=t1]
-	1047 [label=EXP]
+	1043 [label=select]
+	1043 -> 1042
+	7 -> 1043
+	1044 [label=19]
+	1045 [label=3]
+	1046 [label=DIV]
+	1046 -> 1044
+	1046 -> 1045
+	1047 [label="AS Quotient"]
 	1047 -> 1046
-	1048 [label=1]
-	1049 [label=EXP]
-	1049 -> 1048
-	1050 [label=ROW]
-	1050 -> 1049
-	1051 [label=column1]
-	1052 [label=EXP]
-	1052 -> 1051
-	1053 [label=t2]
-	1054 [label=EXP]
-	1054 -> 1053
-	1055 [label=select]
-	1055 -> 1052
-	1056 [label=from]
-	1055 -> 1056
-	1056 -> 1054
-	1057 [label=EXP]
-	1057 -> 1055
-	1058 [label=ANY]
-	1058 -> 1057
-	1059 [label="="]
-	1059 -> 1050
-	1059 -> 1058
-	1060 [label=EXP]
-	1060 -> 1059
-	1061 [label=WHERE]
-	1061 -> 1060
-	1062 [label=select]
-	1062 -> 1045
-	1063 [label=from]
-	1062 -> 1063
-	1063 -> 1047
-	1062 -> 1061
-	8 -> 1062
-	1064 [label="*"]
-	1065 [label=EXP]
-	1065 -> 1064
-	1066 [label=public]
-	1067 [label=Album]
-	1068 [label="."]
-	1068 -> 1066
-	1068 -> 1067
-	1069 [label=EXP]
-	1069 -> 1068
-	1070 [label="limit 4"]
-	1071 [label=select]
-	1071 -> 1065
-	1072 [label=from]
-	1071 -> 1072
-	1072 -> 1069
-	1071 -> 1070
-	8 -> 1071
-	1073 [label="*"]
-	1074 [label=EXP]
-	1074 -> 1073
-	1075 [label=public]
-	1076 [label=MediaType]
-	1077 [label="."]
-	1077 -> 1075
-	1077 -> 1076
-	1078 [label=EXP]
-	1078 -> 1077
-	1079 [label="offset 3"]
-	1080 [label=select]
-	1080 -> 1074
-	1081 [label=from]
-	1080 -> 1081
-	1081 -> 1078
-	1080 -> 1079
-	8 -> 1080
-	1082 [label="*"]
-	1083 [label=EXP]
-	1083 -> 1082
-	1084 [label=public]
-	1085 [label=Album]
-	1086 [label="."]
-	1086 -> 1084
-	1086 -> 1085
-	1087 [label=EXP]
-	1087 -> 1086
-	1088 [label=AlbumId]
-	1089 [label=EXP]
-	1089 -> 1088
-	1090 [label="order by"]
-	1090 -> 1089
-	1091 [label="offset 300 limit 1"]
-	1092 [label=select]
-	1092 -> 1083
-	1093 [label=from]
-	1092 -> 1093
-	1093 -> 1087
-	1092 -> 1090
-	1092 -> 1091
-	8 -> 1092
-	1094 [label="*"]
-	1095 [label=EXP]
-	1095 -> 1094
-	1096 [label=public]
-	1097 [label=Album]
-	1098 [label="."]
-	1098 -> 1096
-	1098 -> 1097
-	1099 [label=EXP]
-	1099 -> 1098
-	1100 [label="limit 1 offset 1"]
-	1101 [label=select]
-	1101 -> 1095
-	1102 [label=from]
-	1101 -> 1102
-	1102 -> 1099
-	1101 -> 1100
-	8 -> 1101
-	1103 [label="*"]
-	1104 [label=EXP]
-	1104 -> 1103
-	1105 [label=public]
-	1106 [label=Album]
-	1107 [label="."]
-	1107 -> 1105
-	1107 -> 1106
-	1108 [label=EXP]
-	1108 -> 1107
-	1109 [label="limit all"]
-	1110 [label=select]
-	1110 -> 1104
-	1111 [label=from]
-	1110 -> 1111
-	1111 -> 1108
-	1110 -> 1109
-	8 -> 1110
-	1112 [label=name]
-	1113 [label=EXP]
-	1113 -> 1112
-	1114 [label=rollnumber]
-	1113 -> 1114
-	1115 [label=student]
-	1116 [label=EXP]
-	1116 -> 1115
-	1117 [label=name]
-	1118 [label=EXP]
-	1118 -> 1117
-	1119 [label=rollnumber]
-	1118 -> 1119
-	1120 [label=marks]
-	1121 [label=EXP]
-	1121 -> 1120
-	1122 [label=select]
-	1122 -> 1118
-	1123 [label=from]
-	1122 -> 1123
-	1123 -> 1121
-	1124 [label=EXP]
-	1124 -> 1122
-	1125 [label=UNION]
-	1125 -> 1124
-	1126 [label=select]
-	1126 -> 1113
-	1127 [label=from]
-	1126 -> 1127
-	1127 -> 1116
-	1126 -> 1125
-	8 -> 1126
-	1128 [label=city]
-	1129 [label=EXP]
-	1129 -> 1128
-	1130 [label=travel]
-	1131 [label=sample]
-	1132 [label="-"]
-	1132 -> 1130
-	1132 -> 1131
-	1133 [label=EXP]
-	1133 -> 1132
-	1134 [label=tipo]
-	1135 [label=airport]
-	1136 [label="="]
-	1136 -> 1134
-	1136 -> 1135
-	1137 [label=EXP]
-	1137 -> 1136
-	1138 [label=WHERE]
-	1138 -> 1137
-	1139 [label=city]
-	1140 [label=EXP]
-	1140 -> 1139
-	1141 [label=travel]
-	1142 [label=sample]
-	1143 [label="-"]
-	1143 -> 1141
-	1143 -> 1142
-	1144 [label=EXP]
-	1144 -> 1143
-	1145 [label=tipo]
-	1146 [label=hotel]
-	1147 [label="="]
-	1147 -> 1145
-	1147 -> 1146
-	1148 [label=EXP]
-	1148 -> 1147
-	1149 [label=WHERE]
-	1149 -> 1148
-	1150 [label=select]
-	1150 -> 1140
-	1151 [label=from]
-	1150 -> 1151
-	1151 -> 1144
-	1150 -> 1149
-	1152 [label=EXP]
-	1152 -> 1150
-	1153 [label=UNION]
-	1153 -> 1152
-	1154 [label=select]
-	1154 -> 1129
-	1155 [label=from]
-	1154 -> 1155
-	1155 -> 1133
-	1154 -> 1138
-	1154 -> 1153
-	8 -> 1154
-	1156 [label=city]
-	1157 [label=EXP]
-	1157 -> 1156
-	1158 [label=travel]
-	1159 [label=sample]
-	1160 [label="-"]
-	1160 -> 1158
-	1160 -> 1159
-	1161 [label=EXP]
-	1161 -> 1160
-	1162 [label=tipo]
-	1163 [label=airport]
-	1164 [label="="]
-	1164 -> 1162
-	1164 -> 1163
-	1165 [label=EXP]
-	1165 -> 1164
-	1166 [label=WHERE]
-	1166 -> 1165
-	1167 [label=city]
-	1168 [label=EXP]
-	1168 -> 1167
-	1169 [label=travel]
-	1170 [label=sample]
-	1171 [label="-"]
-	1171 -> 1169
-	1171 -> 1170
-	1172 [label=EXP]
-	1172 -> 1171
-	1173 [label=tipo]
-	1174 [label=hotel]
-	1175 [label="="]
-	1175 -> 1173
-	1175 -> 1174
-	1176 [label=EXP]
-	1176 -> 1175
-	1177 [label=WHERE]
-	1177 -> 1176
-	1178 [label=select]
-	1178 -> 1168
-	1179 [label=from]
-	1178 -> 1179
-	1179 -> 1172
-	1178 -> 1177
-	1180 [label=EXP]
-	1180 -> 1178
-	1181 [label=INTERSECT]
-	1181 -> 1180
-	1182 [label=select]
-	1182 -> 1157
-	1183 [label=from]
-	1182 -> 1183
-	1183 -> 1161
-	1182 -> 1166
-	1182 -> 1181
-	8 -> 1182
-	1184 [label=city]
-	1185 [label=EXP]
-	1185 -> 1184
-	1186 [label=travel]
-	1187 [label=sample]
-	1188 [label="-"]
-	1188 -> 1186
-	1188 -> 1187
-	1189 [label=EXP]
-	1189 -> 1188
-	1190 [label=tipo]
-	1191 [label=airport]
-	1192 [label="="]
-	1192 -> 1190
-	1192 -> 1191
-	1193 [label=EXP]
-	1193 -> 1192
-	1194 [label=WHERE]
-	1194 -> 1193
-	1195 [label=city]
-	1196 [label=EXP]
-	1196 -> 1195
-	1197 [label=travel]
-	1198 [label=sample]
-	1199 [label="-"]
-	1199 -> 1197
-	1199 -> 1198
-	1200 [label=EXP]
-	1200 -> 1199
-	1201 [label=tipo]
-	1202 [label=hotel]
-	1203 [label="="]
-	1203 -> 1201
-	1203 -> 1202
-	1204 [label=EXP]
-	1204 -> 1203
-	1205 [label=WHERE]
-	1205 -> 1204
-	1206 [label=select]
-	1206 -> 1196
-	1207 [label=from]
-	1206 -> 1207
-	1207 -> 1200
-	1206 -> 1205
-	1208 [label=EXP]
-	1208 -> 1206
-	1209 [label=EXCEPT]
-	1209 -> 1208
-	1210 [label=select]
-	1210 -> 1185
-	1211 [label=from]
-	1210 -> 1211
-	1211 -> 1189
-	1210 -> 1194
-	1210 -> 1209
-	8 -> 1210
-	1212 [label=city]
-	1213 [label=EXP]
-	1213 -> 1212
-	1214 [label=travel]
-	1215 [label=sample]
-	1216 [label="-"]
-	1216 -> 1214
-	1216 -> 1215
-	1217 [label=EXP]
-	1217 -> 1216
-	1218 [label=tipo]
-	1219 [label=airport]
-	1220 [label="="]
-	1220 -> 1218
-	1220 -> 1219
-	1221 [label=EXP]
-	1221 -> 1220
-	1222 [label=WHERE]
-	1222 -> 1221
-	1223 [label=city]
-	1224 [label=EXP]
-	1224 -> 1223
-	1225 [label=travel]
-	1226 [label=sample]
-	1227 [label="-"]
-	1227 -> 1225
-	1227 -> 1226
-	1228 [label=EXP]
-	1228 -> 1227
-	1229 [label=tipo]
-	1230 [label=hotel]
-	1231 [label="="]
-	1231 -> 1229
-	1231 -> 1230
-	1232 [label=EXP]
-	1232 -> 1231
-	1233 [label=WHERE]
-	1233 -> 1232
-	1234 [label=select]
-	1234 -> 1224
-	1235 [label=from]
-	1234 -> 1235
-	1235 -> 1228
-	1234 -> 1233
-	1236 [label=EXP]
-	1236 -> 1234
-	1237 [label="UNION ALL"]
-	1237 -> 1236
-	1238 [label=select]
-	1238 -> 1213
-	1239 [label=from]
-	1238 -> 1239
-	1239 -> 1217
-	1238 -> 1222
-	1238 -> 1237
-	8 -> 1238
-	1240 [label=city]
-	1241 [label=EXP]
-	1241 -> 1240
-	1242 [label=travel]
-	1243 [label=sample]
-	1244 [label="-"]
-	1244 -> 1242
-	1244 -> 1243
-	1245 [label=EXP]
-	1245 -> 1244
-	1246 [label=tipo]
-	1247 [label=airport]
-	1248 [label="="]
-	1248 -> 1246
-	1248 -> 1247
-	1249 [label=EXP]
-	1249 -> 1248
-	1250 [label=WHERE]
-	1250 -> 1249
-	1251 [label=city]
-	1252 [label=EXP]
-	1252 -> 1251
-	1253 [label=travel]
-	1254 [label=sample]
-	1255 [label="-"]
-	1255 -> 1253
-	1255 -> 1254
-	1256 [label=EXP]
-	1256 -> 1255
-	1257 [label=tipo]
-	1258 [label=hotel]
-	1259 [label="="]
-	1259 -> 1257
-	1259 -> 1258
-	1260 [label=EXP]
-	1260 -> 1259
-	1261 [label=WHERE]
-	1261 -> 1260
-	1262 [label=select]
-	1262 -> 1252
-	1263 [label=from]
-	1262 -> 1263
-	1263 -> 1256
-	1262 -> 1261
-	1264 [label=EXP]
-	1264 -> 1262
-	1265 [label="INTERSECT ALL"]
-	1265 -> 1264
-	1266 [label=select]
-	1266 -> 1241
-	1267 [label=from]
-	1266 -> 1267
-	1267 -> 1245
-	1266 -> 1250
-	1266 -> 1265
-	8 -> 1266
-	1268 [label=city]
-	1269 [label=EXP]
-	1269 -> 1268
-	1270 [label=travel]
-	1271 [label=sample]
-	1272 [label="-"]
-	1272 -> 1270
-	1272 -> 1271
-	1273 [label=EXP]
-	1273 -> 1272
-	1274 [label=tipo]
-	1275 [label=airport]
-	1276 [label="="]
-	1276 -> 1274
-	1276 -> 1275
-	1277 [label=EXP]
-	1277 -> 1276
-	1278 [label=WHERE]
-	1278 -> 1277
-	1279 [label=city]
-	1280 [label=EXP]
-	1280 -> 1279
-	1281 [label=travel]
-	1282 [label=sample]
-	1283 [label="-"]
-	1283 -> 1281
-	1283 -> 1282
-	1284 [label=EXP]
-	1284 -> 1283
-	1285 [label=tipo]
-	1286 [label=hotel]
-	1287 [label="="]
-	1287 -> 1285
-	1287 -> 1286
-	1288 [label=EXP]
-	1288 -> 1287
-	1289 [label=WHERE]
-	1289 -> 1288
-	1290 [label=select]
-	1290 -> 1280
-	1291 [label=from]
-	1290 -> 1291
-	1291 -> 1284
-	1290 -> 1289
-	1292 [label=EXP]
-	1292 -> 1290
-	1293 [label="EXCEPT ALL"]
-	1293 -> 1292
-	1294 [label=select]
-	1294 -> 1269
-	1295 [label=from]
-	1294 -> 1295
-	1295 -> 1273
-	1294 -> 1278
-	1294 -> 1293
-	8 -> 1294
-	1296 [label=343]
-	1297 [label=EXP]
-	1297 -> 1296
-	1298 [label=CBRT]
-	1298 -> 1297
-	1299 [label="AS cube"]
-	1299 -> 1298
-	1300 [label=EXP]
-	1300 -> 1299
-	1301 [label=select]
-	1301 -> 1300
-	8 -> 1301
-	1302 [label=columna]
-	1303 [label=int]
-	1304 [label="-"]
-	1304 -> 1302
-	1304 -> 1303
-	1305 [label=EXP]
-	1305 -> 1304
-	1306 [label=abs]
-	1306 -> 1305
-	1307 [label=EXP]
-	1307 -> 1306
-	1308 [label=select]
-	1308 -> 1307
-	8 -> 1308
-	1309 [label=5]
-	1310 [label="-"]
-	1310 -> 1309
-	1311 [label=EXP]
-	1311 -> 1310
-	1312 [label=abc]
-	1312 -> 1311
-	1313 [label=EXP]
-	1313 -> 1312
-	1314 [label=select]
-	1314 -> 1313
-	8 -> 1314
-	1315 [label="*"]
-	1316 [label=EXP]
-	1316 -> 1315
-	1317 [label=tbempleado]
-	1318 [label=EXP]
-	1318 -> 1317
-	1319 [label=antiguedad]
-	1320 [label=EXP]
-	1320 -> 1319
-	1321 [label=abs]
-	1321 -> 1320
-	1322 [label=0]
-	1323 [label=">"]
-	1323 -> 1321
-	1323 -> 1322
-	1324 [label=EXP]
-	1324 -> 1323
-	1325 [label=Where]
-	1325 -> 1324
-	1326 [label=select]
-	1326 -> 1316
-	1327 [label=from]
-	1326 -> 1327
-	1327 -> 1318
-	1326 -> 1325
-	8 -> 1326
-	1328 [label=53.7]
-	1329 [label=EXP]
-	1329 -> 1328
-	1330 [label=CEIL]
-	1330 -> 1329
-	1331 [label="AS ceil"]
-	1331 -> 1330
-	1332 [label=EXP]
-	1332 -> 1331
-	1333 [label=select]
-	1333 -> 1332
-	8 -> 1333
-	1334 [label=19]
-	1335 [label=EXP]
-	1335 -> 1334
-	1336 [label=3]
-	1335 -> 1336
-	1337 [label=DIV]
-	1337 -> 1335
-	1338 [label="AS Quotient"]
-	1338 -> 1337
-	1339 [label=EXP]
-	1339 -> 1338
-	1340 [label=select]
-	1340 -> 1339
-	8 -> 1340
-	1341 [label=INIT]
-	1341 -> 8
+	1048 [label=select]
+	1048 -> 1047
+	7 -> 1048
+	1049 [label=INIT]
+	1049 -> 7
 }

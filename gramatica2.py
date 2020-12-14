@@ -205,7 +205,8 @@ def t_newline(t):
 
 
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
+    print("Caracter invalido '%s'" % t.value[0])
+    reporteerrores.append(Lerrores("Error Lexico","Caracter incorrecto '%s'" % t.value[0],t.lexer.lineno, t.lexer.lexpos)) 
     t.lexer.skip(1)
 
 
@@ -215,33 +216,28 @@ import ply.lex as lex
 lexer = lex.lex()
 
 from graphviz import Digraph
-arbol = Digraph(comment='Árbol Sintáctico Abstracto (AST)')
+#arbol = Digraph(comment='Árbol Sintáctico Abstracto (AST)')
 
-i = 0
-def inc():
-    global i
-    i += 1
-    return i
 
 # Asociación de operadores y precedencia
 precedence = (
-    ('left', 'lsel'),
-    ('left', 'punto'),
-    ('right', 'umenos', 'umas'),
-    ('left', 'elevado'),
-    ('left', 'multiplicacion', 'division', 'modulo'),
-    ('left', 'mas', 'menos'),
-    ('left', 'mayor', 'menor', 'mayor_igual', 'menor_igual', 'igual', 'diferente1', 'diferente2'),
-    ('left', 'predicates'),
-    ('right', 'not'),
-    ('left', 'and'),
     ('left', 'or'),
+    ('left', 'and'),
+    ('right', 'not'),
+    ('left', 'predicates'),
+    ('left', 'mayor', 'menor', 'mayor_igual', 'menor_igual', 'igual', 'diferente1', 'diferente2'),
+    ('left', 'mas', 'menos'),
+    ('left', 'multiplicacion', 'division', 'modulo'),
+    ('left', 'elevado'),
+    ('right', 'umenos', 'umas'),
+    ('left', 'punto'),
+    ('left', 'lsel'),
 )
 
 
 # ----------------------------------------------DEFINIMOS LA GRAMATICA------------------------------------------
 # Definición de la gramática
-
+from reportes import *
 
 def p_init(t):
     'init            : instrucciones'
@@ -611,27 +607,18 @@ def p_EXPT(t):
             | id
             | multiplicacion %prec lsel
             | null
-            | default
             | current_time
             | current_date
             | timestamp cadena 
             | interval cadena
             | cadena like cadena
-            | cadena not like cadena'''
-    
-    l = len(t)
-    print("tamano",l)
-    if l == 2:
-        iden = inc()
-        t[0] = iden
-        print("id es", iden)
-        arbol.node(str(iden),str(t[1]))
-    
-
+            | cadena not like cadena
+            | default'''
 
 def p_error(t):
     print(t)
     print("Error sintáctico en '%s'" % t.value)
+    reporteerrores.append(Lerrores("Error Sintactico","Error en  '%s'" % t.value[0],t.lexer.lineno, t.lexer.lexpos))
 
 
 import ply.yacc as yacc
@@ -640,6 +627,6 @@ parser = yacc.yacc()
 
 
 def parse(input):
-    arbol.render('ast', view=False)  # doctest: +SKIP
-    'ast.pdf'
+    #arbol.render('ast', view=False)  # doctest: +SKIP
+    #'ast.pdf'
     return parser.parse(input)
