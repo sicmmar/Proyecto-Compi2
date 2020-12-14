@@ -20,6 +20,7 @@ def reporte_lex_sin():
 
         for error in reporteerrores:
             contenido += '<TR> <TD>' + error.tipo + '</TD><TD>' + error.linea +'</TD> <TD>' + error.columna +'</TD><TD>' + error.descripcion +'</TD></TR>'
+        
         contenido += '</TABLE>\n>, ];}'
 
     with open('reporteerrores.dot', 'w', encoding='utf8') as rep:
@@ -28,7 +29,7 @@ def reporte_lex_sin():
 def mostrarimagenre():
     rep = Source.from_file("reporteerrores.dot", format = "png", encoding='utf8')
     rep.render()
-    Tentrada = popup_reporte_png(ventana, "reporteerrores.dot.png")
+    #Tentrada = popup_reporte_png(ventana, "reporteerrores.dot.png")
 
 def send_data():
     print("Analizando Entrada:")
@@ -78,7 +79,7 @@ ej_menu.add_command(label="Analizar Entrada", command=send_data)
 
 reps_menu = Menu(menu_bar)
 menu_bar.add_cascade(label="Reportes",menu=reps_menu)
-reps_menu.add_command(label="Errores Lexicos y SIntacticos", command=mostrarimagenre)
+reps_menu.add_command(label="Errores Lexicos y SIntacticos", command=send_data)
 reps_menu.add_command(label="Tabla de Simbolos", command=send_data)
 reps_menu.add_command(label="AST", command=arbol_ast)
 reps_menu.add_command(label="Gramatica", command=send_data)
