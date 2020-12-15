@@ -2,8 +2,9 @@ import arbol.AST as a
 import gramatica2 as g
 from tkinter import *
 from reportes import *
-from graphviz import Source
+from subprocess import check_call
 from Entorno.Entorno import Entorno
+
 
 ventana= Tk()
 ventana.geometry("1000x900")
@@ -23,14 +24,13 @@ def reporte_lex_sin():
             contenido += '<TR> <TD>' + error.tipo + '</TD><TD>' + error.linea +'</TD> <TD>' + error.columna +'</TD><TD>' + error.descripcion +'</TD></TR>'
         
         contenido += '</TABLE>\n>, ];}'
-
-    with open('reporteerrores.dot', 'w', encoding='utf8') as rep:
-        rep.write(contenido)
+    
+        with open('reporteerrores.dot','w',encoding='utf8') as reporte:
+             reporte.write(contenido)
+      
 
 def mostrarimagenre():
-    rep = Source.from_file("reporteerrores.dot", format = "png", encoding='utf8')
-    rep.render()
-    #Tentrada = popup_reporte_png(ventana, "reporteerrores.dot.png")
+    check_call(['dot','-Tpng','reporteerrores.dot','-o','imagenerrores.png'])
 
 def send_data():
     print("Analizando Entrada:")
@@ -43,14 +43,17 @@ def send_data():
     Tsalida.configure(state='disabled')
    
     #print(contenido)
+    Principal = Entorno()
 
-    globalEnt = Entorno()
-    raiz = g.parse(contenido)
-    for x in raiz:
-        if x != None:
-            x.ejecutar(globalEnt)
+    Principal.database = "DB1"
+    instrucciones = g.parse(contenido)
+    for instr in instrucciones:
+        if instr != None:
+            instr.ejecutar(Principal)
 
-    #reporte_lex_sin()
+    Principal.mostrarSimbolos()
+
+    reporte_lex_sin()
 
 def arbol_ast():
     contenido = Tentrada.get(1.0, 'end')
@@ -85,7 +88,7 @@ ej_menu.add_command(label="Analizar Entrada", command=send_data)
 
 reps_menu = Menu(menu_bar)
 menu_bar.add_cascade(label="Reportes",menu=reps_menu)
-reps_menu.add_command(label="Errores Lexicos y SIntacticos", command=send_data)
+reps_menu.add_command(label="Errores Lexicos y SIntacticos", command=mostrarimagenre)
 reps_menu.add_command(label="Tabla de Simbolos", command=send_data)
 reps_menu.add_command(label="AST", command=arbol_ast)
 reps_menu.add_command(label="Gramatica", command=send_data)

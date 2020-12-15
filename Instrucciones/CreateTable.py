@@ -11,7 +11,7 @@ class CreateTable(Instruccion):
         self.listaDef = listaDef
         self.numColumnas = 0
 
-    def ejecutar(self, ent):
+    def ejecutar(self, ent:Entorno):
         tam = len(self.listaDef)
         print (tam)
         nuevaTabla = Simbolo(TipoSimbolo.TABLA,self.id)
@@ -24,16 +24,15 @@ class CreateTable(Instruccion):
                 listaColumnas.append(nuevaColumna)
         
         nuevaTabla.valor = listaColumnas
-        
-
-
-        DBMS.dropAll()
-        DBMS.createDatabase("prueba")
-        DBMS.createTable("prueba",self.id,self.numColumnas)
-        print("---------------------------------------------")
-        DBMS.showCollection()
-        print("---------------------------------------------")
-
+        dbActual = ent.getDataBase()
+        if dbActual != None:
+            estado = DBMS.createTable(dbActual,self.id, self.numColumnas)
+            if estado == 0: 
+                nuevaTabla.baseDatos = dbActual
+                ent.nuevoSimbolo(nuevaTabla)
+                print("Tabla Creada")
+                DBMS.showCollection()
+            #elif estado == 1: 
 
 class Check(CreateTable):
     def __init__(self, condiciones):
