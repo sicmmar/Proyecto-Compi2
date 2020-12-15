@@ -31,6 +31,12 @@ create table hija (
     fechahora timestamp (5) REFERENCES table1
 )inherits(tabla_1);
 
+create table sencilla (
+    columna653 integer,
+    otra_columna date,
+    nueva money
+);
+
 
 
 ALTER DATABASE name OWNER TO  new_owner ;

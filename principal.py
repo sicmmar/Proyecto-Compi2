@@ -34,7 +34,7 @@ def mostrarimagenre():
 def send_data():
     print("Analizando Entrada:")
     print("==============================================")
-    reporteerrores = []
+    #reporteerrores = []
     contenido = Tentrada.get(1.0, 'end')
     Tsalida.delete("1.0", "end")
     Tsalida.configure(state='normal')
@@ -43,8 +43,12 @@ def send_data():
    
     #print(contenido)
 
-    g.parse(contenido)
-    reporte_lex_sin()
+    raiz = g.parse(contenido)
+    for x in raiz:
+        if x != None:
+            x.ejecutar()
+
+    #reporte_lex_sin()
 
 def arbol_ast():
     contenido = Tentrada.get(1.0, 'end')

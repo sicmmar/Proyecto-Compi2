@@ -36,7 +36,7 @@ def showDatabases() -> list:
     with open('data/json/databases') as file:
         data = json.load(file)
         for d in data:
-            databases.append(d)
+            databases.append(d);
     return databases
 
 # UPDATE and rename a database name by inserting new_key and deleting old_key
@@ -117,7 +117,7 @@ def showTables(database: str) -> list:
         if not database in data:
             return None
         for d in data[database]:
-            tables.append(d)
+            tables.append(d);
     return tables
 
 # extract all register of a table
@@ -134,7 +134,7 @@ def extractTable(database: str, table: str) -> list:
     with open('data/json/'+database+'-'+table) as file:
         data = json.load(file)
         for d in data:
-            rows.append(data[d])
+            rows.append(data[d]);
     return rows
 
 # extract a range registers of a table
@@ -152,7 +152,7 @@ def extractRangeTable(database: str, table: str, lower: any, upper: any) -> list
         data = json.load(file)
         for d in data:
             if (str(d)<=str(upper) and str(d)>=str(lower)):
-                rows.append(data[d])
+                rows.append(data[d]);
     return rows
 
 # Add a PK list to specific table and database
@@ -548,7 +548,7 @@ def showCollection():
     with open('data/json/databases') as file:
         data = json.load(file)
         for d in data:
-            databases.append(d)
+            databases.append(d);
             for t in data[d]:
                 tables.append(t)
                 datatables.append(d+'-'+t)
