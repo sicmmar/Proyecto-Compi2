@@ -3,6 +3,7 @@ import gramatica2 as g
 from tkinter import *
 from reportes import *
 from graphviz import Source
+from Entorno.Entorno import Entorno
 
 ventana= Tk()
 ventana.geometry("1000x900")
@@ -43,10 +44,11 @@ def send_data():
    
     #print(contenido)
 
+    globalEnt = Entorno()
     raiz = g.parse(contenido)
     for x in raiz:
         if x != None:
-            x.ejecutar()
+            x.ejecutar(globalEnt)
 
     #reporte_lex_sin()
 

@@ -1,5 +1,5 @@
 from Expresion.Binaria import Binaria
-
+from Entorno import Entorno
 
 class Relacional(Binaria):
     def __init__(self, exp1, exp2, operador):
@@ -7,19 +7,24 @@ class Relacional(Binaria):
         Binaria.__init__(self, exp1, exp2, operador)
 
 
-    def getval(self ):
-        valizq = self.exp1.getval()
-        valder = self.exp2.getval()
-        if self.operador == '>':
-            self.val = valizq > valder
-        elif self.operador == '<':
-            self.val = valizq < valder
-        elif self.operador == '>=':
-            self.val = valizq >= valder
-        elif self.operador == '<=':
-            self.val = valizq <= valder
-        elif self.operador == '<>':
-            self.val = valizq != valder
-        elif self.operador == '==':
-            self.val = valizq == valder
-        return self.val
+    def getval(self,entorno):
+        valizq = self.exp1.getval(entorno);
+        valder = self.exp2.getval(entorno);
+        try:
+            if self.operador == '>':
+                self.val = valizq > valder;
+            elif self.operador == '<':
+                self.val = valizq < valder;
+            elif self.operador == '>=':
+                self.val = valizq >= valder;
+            elif self.operador == '<=':
+                self.val = valizq <= valder;
+            elif self.operador == '<>':
+                self.val = valizq != valder;
+            elif self.operador == '==':
+                self.val = valizq == valder;
+            print(self.val)
+            return self.val
+        except :
+             return 'Los tipos que se estan comparando no coinciden'
+

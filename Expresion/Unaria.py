@@ -1,4 +1,5 @@
 from Expresion.Expresion import Expresion
+from Entorno import Entorno
 
 class Unaria(Expresion) :
     '''
@@ -10,8 +11,8 @@ class Unaria(Expresion) :
         self.exp1 = exp1
         self.operador = operador
 
-    def getval(self):
-        valexp=self.exp1.getval()
+    def getval(self,entorno):
+        valexp=self.exp1.getval(entorno)
         if self.operador == '+':
             self.valor= valexp
         elif self.operador == '-':
@@ -19,5 +20,7 @@ class Unaria(Expresion) :
         elif self.operador == 'not':
             self.valor =  not valexp
 
+        print(self.valor)
         return self.valor
+
 

@@ -25,7 +25,7 @@ class Tipo():
         if size<= 4:
             return 'real'
         elif size<=8:
-            if self.val>=-92233720368547758.08  and self.val <=92233720368547758.07:
+            if self.valor >=-92233720368547758.08  and self.valor <=92233720368547758.07:
                 return 'money'
             return 'double'
         else:

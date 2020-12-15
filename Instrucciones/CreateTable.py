@@ -11,7 +11,7 @@ class CreateTable(Instruccion):
         self.listaDef = listaDef
         self.numColumnas = 0
 
-    def ejecutar(self):
+    def ejecutar(self, ent):
         tam = len(self.listaDef)
         print (tam)
         nuevaTabla = Simbolo(TipoSimbolo.TABLA,self.id)

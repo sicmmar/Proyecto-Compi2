@@ -1,17 +1,18 @@
 from Expresion.Expresion import Expresion
 from datetime import date
 from datetime import datetime
+from Entorno import Entorno
 
 class Terminal(Expresion) :
     '''
         Esta clase representa un terminal.
     '''
-    def __init__(self,tipo,valor):
+    def __init__(self,tipo,valor) :
        Expresion.__init__(self)
        self.tipo=tipo
        self.valor=valor
 
-    def getval(self):
+    def getval(self,entorno):
 
         if self.tipo=='identificador':
             'buscar columna'
@@ -22,3 +23,4 @@ class Terminal(Expresion) :
             return datetime.now()
 
         return self.valor
+
