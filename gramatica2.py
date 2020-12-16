@@ -312,8 +312,7 @@ def p_ELSE(t):
 
 
 def p_INSERT(t):
-    '''INSERT : insert into id values para LEXP parc
-    '''
+    '''INSERT : insert into id values para LEXP parc'''
 
 
 def p_DROP(t):
@@ -478,7 +477,7 @@ def p_OPCOLUMN2(t):
 
 def p_OPCOLUMN3(t):
     '''OPCOLUMN : default EXP'''
-    t[0] = Atributo(AtributosColumna.DEFAULT)
+    t[0] = Atributo(AtributosColumna.DEFAULT, t[2])
 
 def p_OPCOLUMN4(t):
     '''OPCOLUMN : not null'''
@@ -494,7 +493,7 @@ def p_OPCOLUMN6(t):
 
 def p_OPCOLUMN7(t):
     '''OPCOLUMN : references id'''
-    t[0] = Atributo(AtributosColumna.REFERENCES, str(id))
+    t[0] = Atributo(AtributosColumna.REFERENCES, str(t[2]))
 
 def p_OPCONST1(t):
     '''OPCONST : primary key para LEXP parc'''
@@ -601,7 +600,7 @@ def p_EXIST(t):
 
 def p_LEXP1(t):
     'LEXP : LEXP coma EXP'
-    t[1].append(t[2])
+    t[1].append(t[3])
     t[0]=t[1]
 
 def p_LEXP2(t):

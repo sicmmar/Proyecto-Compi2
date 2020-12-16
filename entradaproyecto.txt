@@ -31,10 +31,8 @@ create table hija (
     fechahora timestamp (5) REFERENCES table1
 )inherits(tabla_1);
 
-create table sencilla (
-    columna653 integer,
-    otra_columna date,
-    nueva money
+create table t1(
+	col1 integer constraint u1 unique REFERENCES table2
 );
 
 

@@ -13,6 +13,6 @@ class Funcion(Expresion):
 
     def getval(self,entorno):
             'Metodo Abstracto para obtener el valor de la Instrruccion'
-            if self.namefunc=='DATE_PART':
+            if self.namefund=='DATE_PART':
                 return Date_Part(self.parametros[0],self.parametros[1])
 
