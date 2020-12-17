@@ -13,11 +13,6 @@ class Use(Instruccion):
         bases=DBMS.showDatabases()
         for db in bases:
             if db == self.id:
-                ent.database=id;
+                ent.database=self.id
                 #print(ent.database)
                 return
-
-
-
-
-

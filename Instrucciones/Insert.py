@@ -7,7 +7,7 @@ from Entorno.TipoSimbolo import TipoSimbolo
 
 
 class Insert(Instruccion):
-    def _init_(self, nombre,valores=[]):
+    def __init__(self, nombre,valores=[]):
         self.nombre=nombre
         self.valores=valores
 

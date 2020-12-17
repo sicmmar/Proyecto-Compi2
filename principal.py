@@ -40,20 +40,23 @@ def send_data():
     contenido = Tentrada.get(1.0, 'end')
     Tsalida.delete("1.0", "end")
     Tsalida.configure(state='normal')
-    Tsalida.insert(INSERT, "Salida de consultas")
-    Tsalida.configure(state='disabled')
 
     # print(contenido)
     Principal = Entorno()
     jsonMode.dropAll()
-    jsonMode.createDatabase("DB1")
-    Principal.database = "DB1"
-    
+
+    #Principal.database = "DB1"
     instrucciones = g.parse(contenido)
+    Tsalida.insert(INSERT, "Salida de consultas\n")
     for instr in instrucciones:
         if instr != None:
-            instr.ejecutar(Principal)
-
+            
+            res=instr.ejecutar(Principal)
+            if res!= None:
+                res = str(res) + '\n'
+                Tsalida.insert(INSERT, res)
+                
+    Tsalida.configure(state='disabled')
     Principal.mostrarSimbolos()
 
     reporte_lex_sin()
