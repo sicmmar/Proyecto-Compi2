@@ -28,6 +28,3 @@ class Extract(Expresion):
             return splitedhora[1]
         elif self.field == 'second':
             return splitedhora[2]
-
-
-

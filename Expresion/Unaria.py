@@ -14,10 +14,13 @@ class Unaria(Expresion) :
     def getval(self,entorno):
         valexp=self.exp1.getval(entorno)
         if self.operador == '+':
+            self.valor=self.exp1.tipo
             self.valor= valexp
         elif self.operador == '-':
+            self.tipo=self.exp1.tipo
             self.valor = valexp*-1
         elif self.operador == 'not':
+            self.valor='boolean'
             self.valor =  not valexp
 
         print(self.valor)

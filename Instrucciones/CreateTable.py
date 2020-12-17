@@ -14,9 +14,10 @@ class CreateTable(Instruccion):
     def ejecutar(self, ent:Entorno):
         dbActual = ent.getDataBase()
         tam = len(self.listaDef)
-        print (tam)
         nuevaTabla = Simbolo(TipoSimbolo.TABLA,self.id)
         listaColumnas = []
+        listaAtrCol = []
+        hayPrimaria = False
         for x in range(0,tam,1):
             tt = self.listaDef[x]
             if tt.tipo == AtributosColumna.COLUMNA_SIMPLE:
@@ -25,19 +26,30 @@ class CreateTable(Instruccion):
                 if tt.lista != None: #aca se mete si viene por ejemplo: columna1 integer references tabla2
                     tamano = len(tt.lista)
                     for y in range(tamano):
-                        atrColumna = tt.lista[y]
+                        hayAtr = False
+                        nuevoSym = Simbolo("tipo","nombre")
+                        nuevoSym.baseDatos = dbActual
+                        nuevoSym.tabla = self.id
+                        atrColumna:Atributo = tt.lista[y]
                         if atrColumna.tipo == AtributosColumna.UNICO:
-                            nuevoUnico = Simbolo(TipoSimbolo.CONSTRAINT_UNIQUE,atrColumna.valor)
-                            nuevoUnico.baseDatos = dbActual
-                            nuevoUnico.tabla = self.id
-                            ent.nuevoSimbolo(nuevoUnico)
-                            nuevaColumna.atributos.update({'unique':atrColumna.valor})
+                            hayAtr = True
+                            nuevoSym.tipo = TipoSimbolo.CONSTRAINT_UNIQUE
+                            if atrColumna.valor != None:
+                                nuevoSym.nombre = str("UNIQUE_" + atrColumna.valor)
+                                nuevaColumna.atributos.update({'unique':atrColumna.valor})
+                            else:
+                                nuevoSym.nombre = str("UNIQUE_" + tt.identificador)
+                                nuevaColumna.atributos.update({'unique':str("UNIQUE_" + tt.identificador)})
                         elif atrColumna.tipo == AtributosColumna.CHECK:
-                            nuevoCheck = Simbolo(TipoSimbolo.CONSTRAINT_CHECK,atrColumna.valor)
-                            nuevoCheck.baseDatos = dbActual
-                            nuevoCheck.tabla = self.id
-                            ent.nuevoSimbolo(nuevoCheck)
-                            nuevaColumna.atributos.update({'check':atrColumna.valor})
+                            hayAtr = True
+                            nuevoSym.tipo = TipoSimbolo.CONSTRAINT_CHECK
+                            nuevoSym.valor = atrColumna.exp
+                            if atrColumna.valor != None:
+                                nuevoSym.nombre = str("CHECK_" + atrColumna.valor)
+                                nuevaColumna.atributos.update({'check':atrColumna.valor})
+                            else:
+                                nuevoSym.nombre = str("CHECK_" + self.id + "_" + tt.identificador)
+                                nuevaColumna.atributos.update({'check':str("CHECK_" + self.id + "_" + tt.identificador)})
                         elif atrColumna.tipo == AtributosColumna.DEFAULT:
                             nuevaColumna.atributos.update({'default':atrColumna.valor})
                         elif atrColumna.tipo == AtributosColumna.NO_NULO:
@@ -45,33 +57,49 @@ class CreateTable(Instruccion):
                         elif atrColumna.tipo == AtributosColumna.NULO:
                             nuevaColumna.atributos.update({'null':True})
                         elif atrColumna.tipo == AtributosColumna.PRIMARY:
-                            nuevaPrimaria = Simbolo(TipoSimbolo.CONSTRAINT_PRIMARY,str("PK_" + self.id))
-                            nuevaPrimaria.baseDatos = dbActual
-                            nuevaPrimaria.tabla = self.id
-                            ent.nuevoSimbolo(nuevaPrimaria)
-                            nuevaColumna.atributos.update({'primary':str("PK_" + self.id)})
+                            hayAtr = True
+                            hayPrimaria = True
+                            nuevoSym.nombre = str("PK_" + self.id)
+                            nuevoSym.tipo = TipoSimbolo.CONSTRAINT_PRIMARY
+                            nuevaColumna.atributos.update({'primary':str("PK_" + self.id + "_" + tt.identificador)})
                         elif atrColumna.tipo == AtributosColumna.REFERENCES:
                             rr = DBMS.extractTable(dbActual,atrColumna.valor)
-                            if rr == []:
+                            if rr == None:
                                 return str("La tabla \'" + atrColumna.valor + "\' a la que está referenciando, no existe")
                             else:
-                                nuevaForanea = Simbolo(TipoSimbolo.CONSTRAINT_FOREIGN,str("FK_" + self.id))
-                                nuevaForanea.baseDatos = dbActual
-                                nuevaForanea.tabla = self.id
-                                ent.nuevoSimbolo(nuevaForanea)
-                                nuevaColumna.atributos.update({'foreign':str("FK_" + self.id)})
+                                #tablaReferencia:Simbolo = ent.buscarSimbolo(atrColumna.valor)
+
+                                hayAtr = True
+                                nuevoSym.tipo = TipoSimbolo.CONSTRAINT_FOREIGN
+                                nuevoSym.nombre = str("FK_" + self.id + "_" + tt.identificador)
+                                nuevaColumna.atributos.update({'foreign':str("FK_" + self.id + "_" + tt.identificador)})
+                        
+                        if hayAtr: listaAtrCol.append(nuevoSym)
                 
                 listaColumnas.append(nuevaColumna)
+            
+            if tt.tipo == AtributosColumna.PRIMARY:
+                if hayPrimaria: return str("La tabla \'" + self.id + "\' ya contiene llave primaria declarada")
+                #else:
+                    
 
-        #considerar la situacion de cuando no se haya creado la tabla pero ya se hayan 
-        #agregado los constraint a la tabla de simbolos 
+
         nuevaTabla.valor = listaColumnas
         if dbActual != None:
             estado = DBMS.createTable(dbActual,self.id, self.numColumnas)
             if estado == 0: 
                 nuevaTabla.baseDatos = dbActual
                 ent.nuevoSimbolo(nuevaTabla)
+                for x in listaAtrCol:
+                    ent.nuevoSimbolo(x)
                 
+                alreadyPrimary = False
+                for x in range(len(listaColumnas)):
+                    if not alreadyPrimary:
+                        pk = listaColumnas[x].atributos.get('primary')
+                        if pk != None: print("res PK:",DBMS.alterAddPK(dbActual,self.id,[x]))
+                        alreadyPrimary = True
+
                 DBMS.showCollection()
                 return str("Tabla " + nuevaTabla.nombre + " creada exitosamente")
             #elif estado == 1: 

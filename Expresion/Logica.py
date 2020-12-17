@@ -19,4 +19,6 @@ class Logica(Binaria):
             self.val = valizq and valder;
         elif self.operador == 'or':
             self.val = valizq or valder;
+
+        self.tipo='boolean'
         return self.val

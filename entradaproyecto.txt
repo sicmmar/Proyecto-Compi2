@@ -31,8 +31,13 @@ create table hija (
     fechahora timestamp (5) REFERENCES table1
 )inherits(tabla_1);
 
-create table t1(
-	col1 integer constraint u1 unique REFERENCES table2
+CREATE TABLE tbusuario (
+    idusuario integer NOT NULL primary key,
+	nombre integer,
+	apellido integer,
+	usuario integer  UNIQUE NOT NULL,
+	password integer NOT NULL,
+	fechacreacion date 
 );
 
 

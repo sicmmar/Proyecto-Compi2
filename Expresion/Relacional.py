@@ -1,5 +1,6 @@
 from Expresion.Binaria import Binaria
 from Entorno import Entorno
+from Tipo import Tipo
 
 class Relacional(Binaria):
     def __init__(self, exp1, exp2, operador):
@@ -23,7 +24,8 @@ class Relacional(Binaria):
                 self.val = valizq != valder;
             elif self.operador == '==':
                 self.val = valizq == valder;
-            print(self.val)
+
+            self.tipo = 'boolean'
             return self.val
         except :
              return 'Los tipos que se estan comparando no coinciden'
