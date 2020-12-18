@@ -1,389 +1,50 @@
-CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
+drop all();
+create database prueba;
+create database prueba2;
+create database prueba3;
+create database wenas;
 
-UPDATE products SET price = 10 WHERE price = 5;
-DELETE FROM products WHERE price = 10;
-select *
-from (select nombre,fechanacimiento
- from tbcolaborador
- where nombre = 'suje') A;
-
-select A.nombre,A.fechanacimiento,(select identificacion from
-tbidentificacioncolaborador B where B.idcolaborador = A.id )
- from tbcolaborador A
- where nombre = 'suje' order by A.nombre;
-
-select A.nombre,A.fechanacimiento
- from tbcolaborador A
- where substring(nombre,1,4) = 'suje'
- and A.id not in (select idcolaborador from
-tbidentificacioncolaborador B) ;
-
-create table tabla_1 (
-    id_codigo varchar(50) CONSTRAINT uni_id_codigo unique CONSTRAINT check_2 CHECK ( age >= 25 AND age < 89),
-    primary key (id_codigo, id_fre),
-    foreign key (id_fre) REFERENCES TABla (tabla_3),
-    unique (columna_54),
-    CONSTRAINT check_1 CHECK ( tabla.atr >= 25 )
+show databases;
+use wenas;
+ CREATE TABLE pruebita (
+nombre_prueba VARCHAR (50) primary key,
+numero integer,
+salary real 
 );
 
-create table hija (
-    columna653 varchar(897) default 'hola' primary key,
-    fechahora timestamp (5) REFERENCES table1
-)inherits(tabla_1);
-
-CREATE TABLE tbusuario (
-    idusuario integer NOT NULL primary key,
-	nombre integer,
-	apellido integer,
-	usuario integer  UNIQUE NOT NULL,
-	password integer NOT NULL,
-	fechacreacion date 
+ CREATE TABLE employees (
+first_name VARCHAR (50),
+last_name VARCHAR (50) references pruebita,
+salary  money ,
+salard double precision,
+primary key (first_name, salary)
 );
 
 
-
-ALTER DATABASE name OWNER TO  new_owner ;
-ALTER DATABASE name rename TO new_nombre;
-
---agregar columna
-ALTER TABLE usuario ADD COLUMN mombre smallint;
-
---eliminar columnas
-ALTER TABLE products DROP COLUMN description;
-
---check
-ALTER TABLE tabla ADD CHECK (name <> '');
-
---UNIQUE
-ALTER TABLE usuarios ADD CONSTRAINT nombre unique (alumno);
---constraint
-ALTER TABLE tabla ADD FOREIGN KEY (usuario) REFERENCES alumno (usuario);
-
---set
-ALTER TABLE tabla ALTER COLUMN usuario SET NOT NULL;
-
---drop alter
-ALTER TABLE tabla DROP CONSTRAINT some_name;
-
-ALTER TABLE distributors ALTER COLUMN address TYPE smallint,ALTER COLUMN name TYPE smallint;
-
-
-----DROP
-
-DROP database cliente;
-
-drop table asignacion;
-
---INSERT
-
-INSERT INTO products VALUES (1, 'Cheese', 9.99);
-
-SELECT EXTRACT(YEAR FROM TIMESTAMP '2001-02-16 20:38:40');
-SELECT date_part('hour', INTERVAL '4 hours 3 minutes');
-SELECT now();
-SELECT EXTRACT(HOUR FROM TIMESTAMP '2001-02-16 20:38:40');
-SELECT EXTRACT(MINUTE FROM TIMESTAMP '2001-02-16 20:38:40');
-SELECT EXTRACT(SECOND FROM TIMESTAMP '2001-02-16 20:38:40');
-SELECT EXTRACT(YEAR FROM TIMESTAMP '2001-02-16 20:38:40');
-SELECT EXTRACT(MONTH FROM TIMESTAMP '2001-02-16 20:38:40');
-SELECT EXTRACT(DAY FROM TIMESTAMP '2001-02-16 20:38:40');
-SELECT date_part('minutes', INTERVAL '4 hours 3 minutes');
-SELECT date_part('seconds', INTERVAL '4 hours 3 minutes 15 seconds');
-SELECT CURRENT_DATE;
-SELECT CURRENT_TIME;
-SELECT TIMESTAMP 'now';
-
-select columna1 as sualias
-from tbsujeto
-where fechanacimiento between '2004-01-01' and '2005-01-01';
-select *
-from tbsujeto
-where edad between 5 and 25;
-
-
-select greatest(1,2,3,4,5);
-select greatest('1970-12-10','2000-11-11','2019-01-01');
-select GREATEST('2030-02-20',now());
-select least(1,2,3,3,5);
-select least('a','b','c','aa');
-
-
-select CASE when nombre = 'sujeto3' then 'Juan Carlos'
-when nombre = 'sujeto4' then 'Luis Espino'
-end alias11
-from tbcolaborador A
-where substring(nombre,1,4) = 'suje'
-and A.id not in (select idcolaborador from
-tbidentificacioncolaborador B) ;
-
-select greatest(1,2,3,4,5);
-select greatest('1970-12-10','2000-11-11','2019-01-01');
-
-select least(1,2,3,3,5);
-select least('a','b\b\n\f\r\t','c','aa');
-
-CASE when nombre = 's' then 'Juan Carlos'
-     when nombre = 's' then 'Luis Espino'
-end
-
-CREATE DATABASE IF NOT EXISTS name
- OWNER = user_name
- MODE = 6;
-
-CREATE OR REPLACE DATABASE IF NOT EXISTS name
- OWNER = user_name
- MODE = 6;
-
-CREATE OR REPLACE DATABASE name
- OWNER = user_name
- MODE = 6;
-
- CREATE OR REPLACE DATABASE name
- MODE = 6;
-
- CREATE DATABASE  IF NOT EXISTS   name
- OWNER = user_name
- MODE = 6;
-
-  CREATE DATABASE  IF NOT EXISTS   name
- MODE = 6;
-
-  CREATE DATABASE  IF NOT EXISTS   name OWNER = user_name ;
-  CREATE OR REPLACE DATABASE  IF NOT EXISTS   name OWNER = user_name ;
-  CREATE OR REPLACE DATABASE name OWNER = user_name;
-
-
-  CREATE OR REPLACE DATABASE  IF NOT EXISTS   name
- MODE = 6;
-
-CREATE OR REPLACE DATABASE db2 OWNER = Carlos;
-
-SELECT nombre,indentificacion,sum(salario)
-FROM tbsujeto
-where X
-GROUP BY nombre,indentificacion
-HAVING sum(salario)>100000;
-
-select distinct puesto
-from tbempleado;
-select distinct puesto,salario
-from tbempleado;
-select *
-from tbcolaborador
-where nombre is distinct from 'sujeto1';
-
-select sum(col1), avg(col2)
-from tbcolaborador
-where nombre is not distinct from 'sujeto1';
-
-SELECT CBRT(343) AS CubeRoot;
-
-select 'cadena' NOT LIKE 'M%'
-from tbcolaborador;
-
-select *
-from (select nombre,fechanacimiento
-from tbcolaborador
-where substring(nombre,1,4) = 'suje') A;
-
-
-select * from usuario;
-
-SELECT first_name, last_name
-FROM customer c
-WHERE EXISTS
-    (
-     SELECT 1
-     FROM payment p
-     WHERE p.customer_id = c.customer_id
-       AND amount > 11 
-    )
-ORDER BY first_name,last_name;
-
-
-SELECT 
-    column1
-FROM 
-    table_1
-WHERE 
-    EXISTS( SELECT 
-                1 
-            FROM 
-                table_2 
-            WHERE 
-                column_2 = table_1.column_1);
-
-SELECT col1 FROM tab1
-    WHERE EXISTS(SELECT 1 FROM tab2 WHERE col2 = tab1.col2);
-
-SELECT col1 FROM tab1
-    WHERE (
-        SELECT 1 FROM tab2 
-              WHERE EXISTS
-              (
-                  SELECT 1 FROM tab2 WHERE col2 = tab1.col2
-              )
-         );
-
-SELECT
-	customer_id,
-	payment_id,
-	amount
-FROM
-	payment
-WHERE
-	amount BETWEEN 8 AND 9;
-
-SELECT
-	customer_id,
-	payment_id,
-	amount,
- payment_date
-FROM
-	payment
-WHERE
-	payment_date BETWEEN '2007-02-07' AND '2007-02-15';
-
-
-SELECT
-	customer_id,
-	payment_id,
-	amount
-FROM
-	payment
-WHERE
-	amount NOT BETWEEN 8 AND 9;
-
-
-SELECT customer_id,
-	rental_id,
-	return_date
-FROM
-	rental
-WHERE
-	customer_id IN (1, 2)
-ORDER BY
-	return_date DESC;
-
-SELECT
-	customer_id,
-	first_name,
-	last_name
-FROM
-	customer
-WHERE
-	customer_id IN (
-		SELECT customer_id
-		FROM rental
-		WHERE CAST = '2005-05-27'
-	)
-ORDER BY customer_id;
-
-SELECT
-	customer_id,
-	rental_id,
-	return_date
-FROM
-	rental
-WHERE
-	customer_id NOT IN (1, 2);
-
-
-
-    SELECT
-	customer_id,
-	first_name,
-	last_name
-FROM
-	customer
-WHERE
-	customer_id NOT IN (
-		SELECT customer_id
-		FROM rental
-		WHERE CAST = '2005-05-27'
-	)
-ORDER BY customer_id;
-
-SELECT title
-FROM film
-WHERE length >= ANY(
-    SELECT MAX( length )
-    FROM film
+ CREATE TABLE pruebita2 (
+nombre_prueba VARCHAR (50),
+numero integer,
+salary real 
 );
 
-SELECT e.first_name, e.last_name,e.department_id 
-FROM employees e
-WHERE department_id= ANY
-(SELECT DEPARTMENT_ID 
-FROM departments WHERE location_id=1700);
+ CREATE TABLE pruebita3 (
+nombre_prueba VARCHAR (50),
+numero integer,
+salary real 
+);
 
+show tables(wenas);
 
-SELECT
-    title,
-    category_id
-FROM
-    film
-WHERE
-    category_id = ANY(
-        SELECT
-            category_id
-        FROM
-            category
-        WHERE
-            NAME = 'Action'
-            OR NAME = 'Drama'
-    );
+insert into employees values ('juan','perez',20.4,20.4);
+insert into employees values ('juan2','perez2',20.4,20.4);
+insert into employees values ('juan3','perez3',20.4,20.4);
 
-select name, population from countries
-where population > any (select * from unnest(8000000, 22000000, null))
-order by population, name;
+insert into pruebita values ('prueba1',32,63.41);
+insert into pruebita values ('prueba2',33,63.44);
+insert into pruebita values ('prueba3',42,67.34);
 
-select 100 <> ALL (select height from sys.summits) AS x;
+insert into pruebita2 values ('prueba1',32,63.41);
+insert into pruebita2 values ('prueba2',33,63.44);
+insert into pruebita2 values ('prueba3',42,67.34);
 
-SELECT * FROM t1 WHERE ROW(1) = (SELECT column1 FROM t2);
-
-SELECT * FROM t1 WHERE ROW(1) = ANY (SELECT column1 FROM t2);
-
- select * from public.Album limit 4;
- select * from public.MediaType offset 3;
- select *  from public.Album order by AlbumId offset 300 limit 1;
- select *  from public.Album  limit 1 offset 1;
-
- select * from public.Album limit all;
-
-
- select name, rollnumber 
-from student 
-UNION 
-select name, rollnumber 
-from marks;
-
-SELECT DISTINCT city FROM travel-sample WHERE tipo = 'airport' 
-UNION SELECT DISTINCT city FROM travel-sample WHERE tipo = 'hotel';
-
-SELECT DISTINCT city FROM travel-sample WHERE tipo = 'airport'
-INTERSECT SELECT DISTINCT city FROM travel-sample WHERE  tipo = 'hotel';
-
-SELECT DISTINCT city FROM travel-sample WHERE tipo = 'airport'
-EXCEPT SELECT DISTINCT city FROM travel-sample WHERE tipo = 'hotel';
-
-SELECT DISTINCT city FROM travel-sample WHERE tipo = 'airport' 
-UNION ALL SELECT DISTINCT city FROM travel-sample WHERE tipo = 'hotel';
-
-SELECT DISTINCT city FROM travel-sample WHERE tipo = 'airport' 
-INTERSECT ALL SELECT DISTINCT city FROM travel-sample WHERE tipo = 'hotel';
-
-SELECT DISTINCT city FROM travel-sample WHERE tipo = 'airport' 
-EXCEPT ALL SELECT DISTINCT city FROM travel-sample WHERE tipo = 'hotel';
-
-SELECT CBRT(343) AS cube;
-
-Select abs(columna-int);
-Select abc(-5);
-Select * from tbempleado
-Where abs(antiguedad) > 0;
-
-SELECT CEIL(53.7) AS
-ceil;
-SELECT DIV(19,3) AS
-Quotient;
+select * from employees,pruebita,pruebita2;

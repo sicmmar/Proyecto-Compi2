@@ -4,6 +4,8 @@ from storageManager import jsonMode as DBMS
 from Entorno.Entorno import Entorno
 from Entorno.Simbolo import Simbolo
 from Entorno.TipoSimbolo import TipoSimbolo
+from Expresion.variablesestaticas import variables
+from tkinter import *
 
 class CreateTable(Instruccion):
     def __init__(self, id:str, listaDef):
@@ -18,6 +20,9 @@ class CreateTable(Instruccion):
         listaColumnas = []
         listaAtrCol = []
         hayPrimaria = False
+        hayForanea = False
+        primariaAdd:Primaria = None
+        foraneaAdd:Foranea = None
         for x in range(0,tam,1):
             tt = self.listaDef[x]
             if tt.tipo == AtributosColumna.COLUMNA_SIMPLE:
@@ -57,30 +62,53 @@ class CreateTable(Instruccion):
                         elif atrColumna.tipo == AtributosColumna.NULO:
                             nuevaColumna.atributos.update({'null':True})
                         elif atrColumna.tipo == AtributosColumna.PRIMARY:
-                            hayAtr = True
                             hayPrimaria = True
-                            nuevoSym.nombre = str("PK_" + self.id)
-                            nuevoSym.tipo = TipoSimbolo.CONSTRAINT_PRIMARY
-                            nuevaColumna.atributos.update({'primary':str("PK_" + self.id + "_" + tt.identificador)})
+                            nuevaColumna.atributos.update({'primary':str("PK_" + dbActual + "_" + self.id)}) # PK_database_tabla
                         elif atrColumna.tipo == AtributosColumna.REFERENCES:
                             rr = DBMS.extractTable(dbActual,atrColumna.valor)
                             if rr == None:
                                 return str("La tabla \'" + atrColumna.valor + "\' a la que está referenciando, no existe")
                             else:
-                                #tablaReferencia:Simbolo = ent.buscarSimbolo(atrColumna.valor)
-
-                                hayAtr = True
-                                nuevoSym.tipo = TipoSimbolo.CONSTRAINT_FOREIGN
-                                nuevoSym.nombre = str("FK_" + self.id + "_" + tt.identificador)
-                                nuevaColumna.atributos.update({'foreign':str("FK_" + self.id + "_" + tt.identificador)})
+                                tablaReferencia:Simbolo = ent.buscarSimbolo(atrColumna.valor + "_" + dbActual)
+                                colRef = tablaReferencia.valor
+                                for col in colRef:
+                                    nomConstraintPK = col.atributos.get('primary')
+                                    if nomConstraintPK != None:
+                                        consPK:Simbolo = ent.buscarSimbolo(nomConstraintPK)
+                                        arrPk = consPK.valor
+                                        if len(arrPk) == 1:
+                                            if tablaReferencia.valor[arrPk[0]].tipo.tipo == nuevaColumna.tipo.tipo:
+                                                hayForanea = True
+                                                hayAtr = True
+                                                nuevoSym.tipo = TipoSimbolo.CONSTRAINT_FOREIGN # FK_database_tabla_tablaReferencia
+                                                nuevoSym.nombre = str("FK_" + dbActual + "_" + self.id + "_" + atrColumna.valor)
+                                                nuevaColumna.atributos.update({'foreign':str("FK_" + dbActual + "_" + self.id + "_" + atrColumna.valor)})
+                                                break
+                                
+                                print(hayForanea)
+                                if not hayForanea:
+                                    variables.consola.insert(INSERT,"No se puede establecer llave foranea entre tabla '" + self.id + "' y '" + atrColumna.valor + "'\n")
                         
                         if hayAtr: listaAtrCol.append(nuevoSym)
                 
                 listaColumnas.append(nuevaColumna)
             
             if tt.tipo == AtributosColumna.PRIMARY:
-                if hayPrimaria: return str("La tabla \'" + self.id + "\' ya contiene llave primaria declarada")
-                #else:
+                if hayPrimaria: 
+                    variables.consola.insert(INSERT,str("La tabla \'" + self.id + "\' ya contiene llave primaria declarada\n"))
+                else: 
+                    primariaAdd:Primaria = tt
+            
+            if tt.tipo == AtributosColumna.REFERENCES:
+                if hayForanea: 
+                    variables.consola.insert(INSERT,str("La tabla \'" + self.id + "\' ya contiene llave foranea declarada\n"))
+                else:
+                    foraneaAdd:Foranea == tt
+                    rr = DBMS.extractTable(dbActual,foraneaAdd.tabla)
+            
+            if tt.tipo == AtributosColumna.CONSTRAINT:
+                print(tt.contenido)
+
                     
 
 
@@ -99,8 +127,42 @@ class CreateTable(Instruccion):
                     for x in range(len(listaColumnas)):
                         if not alreadyPrimary:
                             pk = listaColumnas[x].atributos.get('primary')
-                            if pk != None: print("res PK:",DBMS.alterAddPK(dbActual,self.id,[x]))
-                            alreadyPrimary = True
+                            if pk != None: 
+                                rrr = DBMS.alterAddPK(dbActual,self.id,[x])
+                                if rrr != 0: 
+                                    variables.consola.insert(INSERT,"No se ha podido agregar PK en tabla \'" + self.id + "\'\n")
+                                else: 
+                                    alreadyPrimary = True
+                                    sym = Simbolo(TipoSimbolo.CONSTRAINT_PRIMARY,str("PK_" + dbActual + "_" + self.id))
+                                    sym.valor = [x]
+                                    ent.nuevoSimbolo(sym)
+                    
+
+                    if not alreadyPrimary:
+                        tablaB:Simbolo = ent.buscarSimbolo(nuevaTabla.nombre)
+                        if tablaB != None:
+                            if primariaAdd != None:
+                                listaPrim = primariaAdd.primarias
+                                listPK = []
+                                for p in listaPrim:
+                                    for col in range(len(tablaB.valor)):
+                                        if p.valor == tablaB.valor[col].nombre:
+                                            listPK.append(col)
+                                        #print(p.valor)
+                                        #print(col.nombre)
+                                
+                                if len(listPK) > 0:
+                                    n = DBMS.alterAddPK(dbActual,self.id,listPK)
+                                    if n != 0:
+                                        variables.consola.insert(INSERT,"No se ha podido agregar PK en tabla \'" + self.id + "\'\n")
+                                    else: 
+                                        alreadyPrimary = True
+                                        sym = Simbolo(TipoSimbolo.CONSTRAINT_PRIMARY,str("PK_" + dbActual + "_" + self.id))
+                                        sym.valor = listPK
+                                        ent.nuevoSimbolo(sym)
+
+
+                        
 
                     DBMS.showCollection()
                     return str("Tabla " + self.id + " creada exitosamente")
@@ -148,3 +210,20 @@ class Columna(CreateTable):
         self.lista = lista #este recibe una lista
         self.tipoDato = tipoDato
         self.tipo = AtributosColumna.COLUMNA_SIMPLE
+
+class ShowTables(Instruccion):
+    def __init__(self, id):
+        self.id = id
+
+    def ejecutar(self, ent):
+        variables.consola.insert(INSERT,"Ejecutando Show Tables para la base de datos: "+self.id+" \n")
+        resultado = DBMS.showTables(self.id) 
+        if(resultado==None):
+            return "ERROR >> En la instrucción Show Tables("+self.id+"), base de datos: "+self.id+" NO existe"
+        else:
+            variables.x.title="DB: "+self.id
+            variables.x.add_column("Tables",resultado)
+            variables.consola.insert(INSERT,variables.x)
+            variables.x.clear()
+            variables.consola.insert(INSERT,"\n")
+            return "Show Tables Exitoso"
