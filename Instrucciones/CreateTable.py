@@ -14,7 +14,7 @@ class CreateTable(Instruccion):
     def ejecutar(self, ent:Entorno):
         dbActual = ent.getDataBase()
         tam = len(self.listaDef)
-        nuevaTabla = Simbolo(TipoSimbolo.TABLA,self.id)
+        nuevaTabla = Simbolo(TipoSimbolo.TABLA,(self.id + "_" + dbActual))
         listaColumnas = []
         listaAtrCol = []
         hayPrimaria = False
@@ -89,19 +89,23 @@ class CreateTable(Instruccion):
             estado = DBMS.createTable(dbActual,self.id, self.numColumnas)
             if estado == 0: 
                 nuevaTabla.baseDatos = dbActual
-                ent.nuevoSimbolo(nuevaTabla)
-                for x in listaAtrCol:
-                    ent.nuevoSimbolo(x)
-                
-                alreadyPrimary = False
-                for x in range(len(listaColumnas)):
-                    if not alreadyPrimary:
-                        pk = listaColumnas[x].atributos.get('primary')
-                        if pk != None: print("res PK:",DBMS.alterAddPK(dbActual,self.id,[x]))
-                        alreadyPrimary = True
+                r = ent.nuevoSimbolo(nuevaTabla)
+                print(r)
+                if r == "ok":
+                    for x in listaAtrCol:
+                        ent.nuevoSimbolo(x)
+                    
+                    alreadyPrimary = False
+                    for x in range(len(listaColumnas)):
+                        if not alreadyPrimary:
+                            pk = listaColumnas[x].atributos.get('primary')
+                            if pk != None: print("res PK:",DBMS.alterAddPK(dbActual,self.id,[x]))
+                            alreadyPrimary = True
 
-                DBMS.showCollection()
-                return str("Tabla " + nuevaTabla.nombre + " creada exitosamente")
+                    DBMS.showCollection()
+                    return str("Tabla " + self.id + " creada exitosamente")
+                
+                return r
             #elif estado == 1: 
 
 class Check(CreateTable):

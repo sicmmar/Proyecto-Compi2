@@ -1,8 +1,7 @@
-
 reservadas = {
     'show': 'show',
     'database': 'databases',
-    'databases': 'dbs',
+     'databases': 'dbs',
     'like': 'like',
     'select': 'select',
     'distinct': 'distinct',
@@ -102,7 +101,8 @@ reservadas = {
     'except': 'except',
     'intersect': 'intersect',
     'with': 'with',
-    'use': 'use'
+    'use':'use',
+    'int': 't_int'
 
 }
 
@@ -129,7 +129,8 @@ tokens = [
              'cadena',
              'cadenaString',
              'parc',
-             'id'
+             'id',
+	     'idPunto'
          ] + list(reservadas.values())
 
 # Tokens
@@ -152,15 +153,13 @@ t_ptcoma = r';'
 t_coma = r','
 t_punto = r'\.'
 
-
 def t_decimales(t):
     r'\d+\.\d+([e][+-]\d+)?'
     try:
         t.value = float(t.value)
     except ValueError:
         print("Error no se puede convertir %d", t.value)
-        reporteerrores.append(
-            Lerrores("Error Semantico", "No se puede convertir '%s'" % t.value[0], t.lexer.lineno, t.lexer.lexpos))
+        reporteerrores.append(Lerrores("Error Semantico","No se puede convertir '%s'" % t.value[0],t.lexer.lineno, t.lexer.lexpos)) 
         t.value = 0
     return t
 
@@ -171,10 +170,15 @@ def t_int(t):
         t.value = int(t.value)
     except ValueError:
         print("Valor numerico incorrecto %d", t.value)
-        reporteerrores.append(
-            Lerrores("Error semantico", "Valor Numerico Invalido '%s'" % t.value[0], t.lexer.lineno, t.lexer.lexpos))
+        reporteerrores.append(Lerrores("Error semantico","Valor Numerico Invalido '%s'" % t.value[0],t.lexer.lineno, t.lexer.lexpos)) 
         t.value = 0
     return t
+
+def t_PUNTOPUNTO(t):
+    r'[a-zA-Z_][a-zA-Z_0-9]*\.[a-zA-Z_][a-zA-Z_0-9]*'
+    t.type = reservadas.get(t.value.lower(), 'idPunto')
+    return t
+
 
 
 def t_ID(t):
@@ -214,12 +218,12 @@ t_ignore = " \t"
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += t.value.count("\n")
+  
 
 
 def t_error(t):
     print("Caracter invalido '%s'" % t.value[0])
-    reporteerrores.append(
-        Lerrores("Error Lexico", "Caracter incorrecto '%s'" % t.value[0], t.lexer.lineno, t.lexer.lexpos))
+    reporteerrores.append(Lerrores("Error Lexico","Caracter incorrecto '%s'" % t.value[0],t.lexer.lineno, t.lexer.lexpos)) 
     t.lexer.skip(1)
 
 
@@ -231,10 +235,10 @@ lexer = lex.lex()
 from Expresion.Aritmetica import Aritmetica
 from Expresion.Relacional import Relacional
 from Expresion.Extract import Extract
-from Tipo import Tipo
-from Expresion.Terminal import Terminal
-from Expresion.Logica import Logica
-from Expresion.Unaria import Unaria
+from Tipo import  Tipo
+from Expresion.Terminal import  Terminal
+from Expresion.Logica import  Logica
+from Expresion.Unaria import  Unaria
 from Instrucciones.CreateTable import *
 from Instrucciones.Select import Select
 from Instrucciones.CreateDB import *
@@ -257,18 +261,17 @@ precedence = (
     ('left', 'lsel'),
 )
 
+
 # ----------------------------------------------DEFINIMOS LA GRAMATICA------------------------------------------
 # Definición de la gramática
 
 from reportes import *
-
 
 def p_init(t):
     'init            : instrucciones'
     t[0] = t[1]
     print("ok")
     return t[0]
-
 
 def p_instrucciones_lista(t):
     'instrucciones    : instrucciones instruccion'
@@ -296,10 +299,9 @@ def p_instruccion(t):
     '''
     t[0] = t[1]
 
-
 def p_instruccion1(t):
     '''instruccion      :  use id ptcoma'''
-    t[0] = Use(t[2])
+    t[0]=Use(t[2])
 
 
 def p_CASE(t):
@@ -323,44 +325,44 @@ def p_ELSE(t):
     '''ELSE : else LEXP
     '''
 
-
 def p_INSERT(t):
     'INSERT : insert into id values para LEXP parc'
-    t[0] = Insert(t[3], t[6])
-
+    t[0]=Insert(t[3],t[6])
 
 def p_INSERT2(t):
     'INSERT : insert into id para LEXP parc values para LEXP parc'
+
 
 
 def p_DROP(t):
     '''DROP : drop table id
              | drop databases if exist id
              | drop databases id '''
-    if len(t) == 4:
-        if (t[2] == 'table'):
+    if len(t)==4:
+        if(t[2]=='table'):
             print("eliminar tabla")
-
+         
         else:
             t[0] = DropDb(str(t[3]))
 
-    elif len(t) == 5:
-        t[0] = DropDb(str(t[5]))
+    elif len(t)==5:
+        t[0]=DropDb(str(t[5]))
 
 
 def p_ALTER(t):
-    '''ALTER : alter databases id rename to id
-               | alter databases id owner to id
-               | altertable
-    '''
-    if len(t) == 7:
-        if (t[4] == 'rename'):
-            print("renombrar db")
-            t[0] = AlterDb(str(t[3]), t[6])
-        else:
-            print("renombrar owner")
-    elif len(t) == 1:
-        print("altertable")
+ '''ALTER : alter databases id rename to id
+            | alter databases id owner to id
+            | altertable
+ '''
+ if len(t)==7:
+     if(t[4]=='rename'):
+         print("renombrar db")
+         t[0]=AlterDb(str(t[3]),t[6])
+     else:
+         print("renombrar owner")
+ elif len(t)==1:
+     print("altertable")
+
 
 
 def p_altertable(t):
@@ -408,7 +410,7 @@ def p_ADD(t):
 def p_SHOWDB(t):
     ''' SHOWDB : show dbs
     '''
-    t[0] = ShowDb()
+    t[0] =ShowDb()
 
 
 def p_CREATEDB(t):
@@ -417,15 +419,14 @@ def p_CREATEDB(t):
         | create RD id
         | create RD id OPCCDB
     '''
-    if len(t) == 7:
+    if len(t)==7:
         t[0] = CreateDb(str(t[6]))
-    elif len(t) == 8:
-        t[0] = CreateDb(str(t[6]))
-    elif len(t) == 4:
-        t[0] = CreateDb(str(t[3]))
-    elif len(t) == 5:
-        t[0] = CreateDb(str(t[4]))
-
+    elif len(t)==8:
+        t[0]=CreateDb(str(t[6]))
+    elif len(t)==4:
+        t[0]=CreateDb(str(t[3]))
+    elif len(t)==5:
+        t[0]=CreateDb(str(t[4]))
 
 def p_OPCCDB(t):
     '''OPCCDB : PROPIETARIO
@@ -457,42 +458,34 @@ def p_MODO(t):
 
 def p_CREATETABLE1(t):
     '''CREATETABLE : create table id para LDEF parc ptcoma'''
-    t[0] = CreateTable(str(t[3]), t[5])
-
+    t[0] = CreateTable(str(t[3]),t[5])
 
 def p_CREATETABLE2(t):
     '''CREATETABLE : create table id para LDEF parc HERENCIA ptcoma'''
-    t[0] = CreateTable(str(t[3]), t[5])
-
+    t[0] = CreateTable(str(t[3]),t[5])
 
 def p_LDEF1(t):
     '''LDEF : LDEF coma COLDEF'''
     t[1].append(t[3])
     t[0] = t[1]
 
-
 def p_LDEF2(t):
     '''LDEF : COLDEF'''
     t[0] = [t[1]]
 
-
-def p_COLDEF1(t):  # opconst: primary, foreign, check, unique
+def p_COLDEF1(t): #opconst: primary, foreign, check, unique
     '''COLDEF : OPCONST '''
     t[0] = t[1]
 
-
 def p_COLDEF2(t):
     '''COLDEF : constraint id OPCONST'''
-    t[0] = Constraint(str(t[2]), t[3])
-
+    t[0] = Constraint(str(t[2]),t[3])
 
 def p_COLDEF3(t):
     '''COLDEF : id TIPO
             | id TIPO LOPCOLUMN'''
-    if len(t) == 3:
-        t[0] = Columna(str(t[1]), t[2])
-    else:
-        t[0] = Columna(str(t[1]), t[2], t[3])
+    if len(t) == 3: t[0] = Columna(str(t[1]),t[2])
+    else: t[0] = Columna(str(t[1]),t[2],t[3])
 
 
 def p_LOPCOLUMN1(t):
@@ -500,26 +493,21 @@ def p_LOPCOLUMN1(t):
     t[1].append(t[2])
     t[0] = t[1]
 
-
 def p_LOPCOLUMN2(t):
     '''LOPCOLUMN : OPCOLUMN'''
     t[0] = [t[1]]
 
-
 def p_OPCOLUMN1(t):
     '''OPCOLUMN : constraint id unique'''
-    t[0] = Atributo(AtributosColumna.UNICO, str(t[2]))
-
+    t[0] = Atributo(AtributosColumna.UNICO,str(t[2]))
 
 def p_OPCOLUMN12(t):
     '''OPCOLUMN : unique'''
     t[0] = Atributo(AtributosColumna.UNICO)
 
-
 def p_OPCOLUMN2(t):
     '''OPCOLUMN : constraint id check para EXP parc'''
     t[0] = Atributo(AtributosColumna.CHECK, str(t[2]), t[5])
-
 
 def p_OPCOLUMN22(t):
     '''OPCOLUMN : check para EXP parc'''
@@ -527,55 +515,44 @@ def p_OPCOLUMN22(t):
     atrCheck.exp = t[3]
     t[0] = atrCheck
 
-
 def p_OPCOLUMN3(t):
     '''OPCOLUMN : default EXP'''
     t[0] = Atributo(AtributosColumna.DEFAULT, t[2])
-
 
 def p_OPCOLUMN4(t):
     '''OPCOLUMN : not null'''
     t[0] = Atributo(AtributosColumna.NO_NULO)
 
-
 def p_OPCOLUMN5(t):
     '''OPCOLUMN : null'''
     t[0] = Atributo(AtributosColumna.NULO)
-
 
 def p_OPCOLUMN6(t):
     '''OPCOLUMN : primary key'''
     t[0] = Atributo(AtributosColumna.PRIMARY)
 
-
 def p_OPCOLUMN7(t):
     '''OPCOLUMN : references id'''
     t[0] = Atributo(AtributosColumna.REFERENCES, str(t[2]))
-
 
 def p_OPCONST1(t):
     '''OPCONST : primary key para LEXP parc'''
     t[0] = Primaria(t[4])
 
-
 def p_OPCONST2(t):
     '''OPCONST : foreign key para LEXP parc references id para LEXP parc'''
-    t[0] = Foranea(t[4], str(t[7]), t[9])
-
+    t[0] = Foranea(t[4],str(t[7]),t[9])
 
 def p_OPCONST3(t):
     '''OPCONST : unique para LEXP parc'''
     t[0] = Unique(t[3])
 
-
 def p_OPCONST4(t):
     '''OPCONST : check para LEXP parc'''
     t[0] = Check(t[3])
 
-
 def p_HERENCIA(t):
     'HERENCIA : inherits para LEXP parc'
-
 
 def p_CREATETYPE(t):
     'CREATETYPE : create type id as enum para LEXP parc'
@@ -586,11 +563,11 @@ def p_SELECT(t):
 	    | select  LEXP r_from LEXP WHERE  GROUP HAVING  COMBINING ORDER LIMIT
 	    | select  LEXP WHERE  GROUP HAVING  COMBINING ORDER LIMIT
     '''
-    if len(t) == 9:
-        t[0] = Select(None, t[2], None, t[4], t[5], t[6], t[7], t[8], t[9])
-    elif len(t) == 10:
+    if len(t)==9:
+    	t[0] = Select(None, t[2], None, t[3], t[4], t[5], t[6], t[7], t[8])
+    elif  len(t)==10:
         t[0] = Select(None, t[2], t[4], t[5], t[6], t[7], t[8], t[9], t[10])
-    elif len(t) == 11:
+    elif  len(t)==11:
         t[0] = Select(t[1], t[2], t[4], t[5], t[6], t[7], t[8], t[9], t[10])
 
 
@@ -606,8 +583,10 @@ def p_LIMIT(t):
 
 
 def p_WHERE(t):
-    ''' WHERE : where EXP
+    ''' WHERE : where LEXP
                 | where EXIST
+                | union LEXP
+                | union all LEXP
 	            | '''
 
 
@@ -634,7 +613,7 @@ def p_HAVING(t):
 def p_ORDER(t):
     ''' ORDER : order by LEXP ORD
     | order by LEXP
-	|  '''''
+	|  '''
 
 
 def p_ORD(t):
@@ -647,7 +626,7 @@ def p_UPDATE(t):
 
 
 def p_LCAMPOS(t):
-    '''LCAMPOS :  LCAMPOS id igual EXP
+    '''LCAMPOS :  LCAMPOS coma id igual EXP
 		| id igual EXP'''
 
 
@@ -667,30 +646,27 @@ def p_EXIST(t):
 def p_LEXP1(t):
     'LEXP : LEXP coma EXP'
     t[1].append(t[3])
-    t[0] = t[1]
-
+    t[0]=t[1]
 
 def p_LEXP2(t):
     'LEXP : EXP'
-    t[0] = [t[1]]
+    t[0]=[t[1]]
 
 
 def p_TIPOE(t):
     'TIPO : interval cadena'
-    tipo = Tipo('interval', None, -1, -1)
-    t[0] = tipo
-
-
+    tipo = Tipo('interval',None,-1,-1)
+    t[0]=tipo
 def p_TIPOE2(t):
     '''TIPO : decimal para  int coma int parc
             | decimal para int parc
             | decimal '''
-    tipo = None
-    if len(t) == 7:
+    tipo=None
+    if len(t)==7:
         tipo = Tipo('decimal', None, t[3], t[5])
-    elif len(t) == 5:
+    elif len(t)==5:
         tipo = Tipo('decimal', None, t[3], -1)
-    elif len(t) == 2:
+    elif len(t)==2:
         tipo = Tipo('decimal', None, -1, -1)
 
     t[0] = tipo
@@ -710,43 +686,30 @@ def p_TIPOE3(t):
 
     t[0] = tipo
 
-
 def p_TIPOE4(t):
     'TIPO : varchar para int parc'
-    tipo = Tipo('varchar', None, t[3], -1)
-    t[0] = tipo
-
-
+    tipo = Tipo('varchar',None,t[3],-1)
+    t[0]=tipo
 def p_TIPOE5(t):
     'TIPO : timestamp para int parc'
     tipo = Tipo('timestap', None, t[3], -1)
     t[0] = tipo
-
-
 def p_TIPOE6(t):
     'TIPO : character para int parc'
     tipo = Tipo('character', None, t[3], -1)
     t[0] = tipo
-
-
 def p_TIPOE7(t):
     'TIPO : interval para int parc'
     tipo = Tipo('interval', None, t[3], -1)
     t[0] = tipo
-
-
 def p_TIPOE8(t):
     'TIPO : char para int parc'
     tipo = Tipo('char', None, t[3], -1)
     t[0] = tipo
-
-
 def p_TIPOE9(t):
     'TIPO : time para int parc'
     tipo = Tipo('time', None, t[3], -1)
     t[0] = tipo
-
-
 def p_TIPOE10(t):
     'TIPO : character varying para int parc'
     tipo = Tipo('varchar', None, t[3], -1)
@@ -759,7 +722,6 @@ def p_TIPOL(t):
             | time para int parc without time zone
             | time para int parc with time zone
             | interval para int parc cadena '''
-
 
 def p_TIPO(t):
     '''TIPO : smallint
@@ -791,7 +753,7 @@ def p_FIELDS(t):
         | hour
         | minute
         | second'''
-    t[0] = t[1].lower()
+    t[0 ] =t[1].lower()
 
 
 def p_EXP3(t):
@@ -812,30 +774,31 @@ def p_EXP3(t):
             | EXP diferente2 EXP
             | EXP punto EXP
             | EXP between EXP %prec predicates'''
-    if t[2] == '+':
+    if t[2] == '+'  :
         t[0] = Aritmetica(t[1], t[3], '+')
-    elif t[2] == '-':
+    elif t[2] == '-' :
         t[0] = Aritmetica(t[1], t[3], '-')
-    elif t[2] == '*':
+    elif t[2] == '*' :
         t[0] = Aritmetica(t[1], t[3], '*')
-    elif t[2] == '/':
+    elif t[2] == '/' :
         t[0] = Aritmetica(t[1], t[3], '/')
-    elif t[2] == '>':
+    elif t[2] == '>' :
         t[0] = Relacional(t[1], t[3], '>')
-    elif t[2] == '<':
+    elif t[2] == '<' :
         t[0] = Relacional(t[1], t[3], '<')
-    elif t[2] == '>=':
+    elif t[2] == '>=' :
         t[0] = Relacional(t[1], t[3], '>=')
-    elif t[2] == '<=':
+    elif t[2] == '<=' :
         t[0] = Relacional(t[1], t[3], '<=')
-    elif t[2] == '<>' or t[2] == '!=':
+    elif t[2] == '<>' or t[2] =='!=' :
         t[0] = Relacional(t[1], t[3], '<>')
-    elif t[2] == '==':
+    elif t[2] == '==' :
         t[0] = Relacional(t[1], t[3], '==')
     elif t[2] == 'or':
         t[0] = Logica(t[1], t[3], 'or')
     elif t[2] == 'and':
         t[0] = Logica(t[1], t[3], 'and')
+
 
 
 def p_EXP2(t):
@@ -861,13 +824,12 @@ def p_EXP1(t):
     '''EXP : mas EXP %prec umas
             | menos EXP %prec umenos
             | not EXP'''
-    if t[1] == '+':
+    if t[1] == '+'  :
         t[0] = Unaria(t[2], '+')
-    elif t[1] == '-':
+    elif t[1] == '-' :
         t[0] = Unaria(t[2], '-')
-    elif t[2] == 'not':
+    elif t[2] == 'not' :
         t[0] = Unaria(t[2], '*')
-
 
 def p_EXPV(t):
     '''EXP : EXP in para EXP parc %prec predicates
@@ -891,88 +853,87 @@ def p_EXPJ(t):
     '''EXP : SELECT
             | CASE
             | para EXP parc'''
-    if t[1] == '(':
-        t[0] = t[2]
+    if t[1 ]=='(':
+        t[0 ]= t[2]
     else:
-        t[0] = t[1]
+        t[0 ] =t[1]
 
 
 def p_EXP_FuncNativas(t):
     '''EXP : id para LEXP parc '''
-    t[0] = FuncionesNativas(t[1], t[3])
-
+    t[0] = FuncionesNativas(t[1],t[3])
 
 def p_EXP_FuncNativas2(t):
     '''EXP : id para parc '''
-    t[0] = Terminal('identificador', t[1])
+    tipo=None
+    if t[1].lower() =='now':
+        tipo = Tipo('timestamp without time zone', t[1], len(t[1]), -1)
+    elif t[1].lower() =='random':
+        tipo = Tipo('double', t[1], len(t[1]), -1)
+    elif t[1].lower()=='pi':
+        tipo = Tipo('double', t[1], len(t[1]), -1)
 
+
+    t[0] = Terminal(tipo, t[1])
 
 def p_EXP(t):
     '''EXP : any para LEXP parc
             | all para LEXP parc
             | some para LEXP parc'''
 
-
 def p_EXPext(t):
     ' EXP : extract para FIELDS r_from timestamp cadena parc'
-    t[0] = Extract(t[3], t[6])
+    t[0 ]= Extract(t[3] ,t[6])
+
 
 
 def p_EXPT1(t):
     'EXP : int'
-    tipo = Tipo('int', t[1], len(str(t[1])), -1)
+    tipo = Tipo('int',t[1],len(str(t[1])),-1)
     tipo.getTipo()
     t[0] = Terminal(tipo, t[1])
-
 
 def p_EXPT2(t):
     'EXP : decimales'
-    tipo = Tipo('decimal', t[1], len(str(t[1])), -1)
+    tipo = Tipo('decimal', t[1],len(str(t[1])),-1)
     tipo.getTipo()
     t[0] = Terminal(tipo, t[1])
-
 
 def p_EXPT3(t):
     'EXP : cadena'
-    tipo = Tipo('varchar', t[1], len(t[1]), -1)
+    tipo = Tipo('varchar', t[1],len(t[1]),-1)
     tipo.getTipo()
     t[0] = Terminal(tipo, t[1])
-
-
 def p_EXPT4(t):
     'EXP : cadenaString'
-    tipo = Tipo('varchar', t[1], len(t[1]), -1)
+    tipo = Tipo('varchar', t[1],len(t[1]),-1)
     tipo.getTipo()
     t[0] = Terminal(tipo, t[1])
-
 
 def p_EXPT5(t):
     'EXP : true'
-    tipo = Tipo('boolean', t[1], len(t[1]), -1)
+    tipo = Tipo('boolean', t[1],len(t[1]),-1)
     tipo.getTipo()
     t[0] = Terminal(tipo, t[1])
-
 
 def p_EXPT6(t):
     'EXP : false'
-    tipo = Tipo('boolean', t[1], len(t[1]), -1)
+    tipo = Tipo('boolean', t[1],len(t[1]),-1)
     tipo.getTipo()
     t[0] = Terminal(tipo, t[1])
 
-
 def p_EXPT7(t):
     'EXP : id'
-    tipo = Tipo('identificador', t[1], len(t[1]), -1)
+    tipo = Tipo('identificador', t[1],len(t[1]),-1)
     tipo.getTipo()
     t[0] = Terminal(tipo, t[1])
 
 
 def p_EXPT8(t):
     'EXP : multiplicacion %prec lsel'
-    tipo = Tipo('todo', t[1], len(t[1]), -1)
+    tipo = Tipo('todo', t[1],len(t[1]),-1)
     tipo.getTipo()
     t[0] = Terminal(tipo, t[1])
-
 
 def p_EXPT9(t):
     'EXP : null'
@@ -980,13 +941,11 @@ def p_EXPT9(t):
     tipo.getTipo()
     t[0] = Terminal(tipo, t[1])
 
-
 def p_EXPT10(t):
     'EXP : current_time'
     tipo = Tipo('time without time zone', t[1], len(t[1]), -1)
     tipo.getTipo()
     t[0] = Terminal(tipo, t[1])
-
 
 def p_EXPT11(t):
     'EXP : current_date'
@@ -1009,24 +968,30 @@ def p_EXPT13(t):
     tipo.getTipo()
     t[0] = Terminal(tipo, t[2])
 
-
 def p_EXPT14(t):
     'EXP : cadena as TIPO'
-    # aqui es en donde va el convert
+    #aqui es en donde va el convert
     t[0] = Terminal(t[3], t[1])
-
 
 def p_EXPT16(t):
     'EXP : default'
     tipo = Tipo('default', t[1], len(t[1]), -1)
     tipo.getTipo()
     t[0] = Terminal(tipo, t[1])
+	
+def p_EXPT17(t):
+    'EXP : idPunto'
+    tipo = Tipo('acceso', t[1], len(t[1]), -1)
+    tipo.getTipo()
+    t[0] = Terminal(tipo, t[1])
+
 
 
 def p_error(t):
     print(t)
     print("Error sintáctico en '%s'" % t.value)
-    reporteerrores.append(Lerrores("Error Sintactico", "Error en  '%s'" % t.value[0], t.lexer.lineno, t.lexer.lexpos))
+    reporteerrores.append(Lerrores("Error Sintactico","Error en  '%s'" % t.value[0],t.lexer.lineno, t.lexer.lexpos))
+
 
 
 import ply.yacc as yacc

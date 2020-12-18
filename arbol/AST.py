@@ -1,6 +1,7 @@
 reservadas = {
     'show': 'show',
     'database': 'databases',
+    'databases': 'dbs',
     'like': 'like',
     'select': 'select',
     'distinct': 'distinct',
@@ -81,25 +82,26 @@ reservadas = {
     'is': 'is',
     'delete': 'delete',
     'order': 'order',
-    'asc' : 'asc',
-    'desc' : 'desc',
+    'asc': 'asc',
+    'desc': 'desc',
     'when': 'when',
     'case': 'case',
     'else': 'else',
     'then': 'then',
     'end': 'end',
-    'extract':'extract',
-    'current_time':'current_time',
-    'current_date':'current_date',
-    'any':'any',
-    'all':'all',
-    'some':'some',
+    'extract': 'extract',
+    'current_time': 'current_time',
+    'current_date': 'current_date',
+    'any': 'any',
+    'all': 'all',
+    'some': 'some',
     'limit': 'limit',
     'offset': 'offset',
     'union': 'union',
     'except': 'except',
     'intersect': 'intersect',
-    'with':'with'
+    'with': 'with',
+    'use': 'use'
 
 }
 
@@ -149,14 +151,18 @@ t_ptcoma = r';'
 t_coma = r','
 t_punto = r'\.'
 
+
 def t_decimales(t):
     r'\d+\.\d+([e][+-]\d+)?'
     try:
         t.value = float(t.value)
     except ValueError:
         print("Error no se puede convertir %d", t.value)
+        #reporteerrores.append(
+            #Lerrores("Error Semantico", "No se puede convertir '%s'" % t.value[0], t.lexer.lineno, t.lexer.lexpos))
         t.value = 0
     return t
+
 
 def t_int(t):
     r'\d+'
@@ -164,18 +170,23 @@ def t_int(t):
         t.value = int(t.value)
     except ValueError:
         print("Valor numerico incorrecto %d", t.value)
+        #reporteerrores.append(
+            #Lerrores("Error semantico", "Valor Numerico Invalido '%s'" % t.value[0], t.lexer.lineno, t.lexer.lexpos))
         t.value = 0
     return t
+
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     t.type = reservadas.get(t.value.lower(), 'id')
     return t
 
+
 def t_cadena(t):
     r'\'.*?\''
     t.value = t.value[1:-1]  # remuevo las comillas
     return t
+
 
 def t_cadenaString(t):
     r'".*?"'
@@ -205,7 +216,9 @@ def t_newline(t):
 
 
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
+    print("Caracter invalido '%s'" % t.value[0])
+    #reporteerrores.append(
+        #Lerrores("Error Lexico", "Caracter incorrecto '%s'" % t.value[0], t.lexer.lineno, t.lexer.lexpos))
     t.lexer.skip(1)
 
 
@@ -284,6 +297,14 @@ def p_instruccion(t):
                     | SHOWDB ptcoma'''
     t[0] = t[1]
 
+def p_instruccion1(t):
+    '''instruccion      :  use id ptcoma'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"USE")
+    iden = inc()
+    arbol.node(iden,str(t[2]))
+    arbol.edge(id,iden)
 
 def p_CASE(t):
     ''' CASE : case  LISTAWHEN ELSE end
@@ -345,6 +366,28 @@ def p_INSERT(t):
     arbol.node(val,"values")
     arbol.edge(id,val)
     lxpA = t[6]
+    for x in range(len(lxpA)):
+        arbol.edge(val,str(lxpA[x]))
+
+def p_INSERT2(t):
+    '''INSERT : insert into id para LEXP parc values para LEXP parc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"insert")
+    into = inc()
+    arbol.node(into,"into")
+    arbol.edge(id,into)
+    iden = inc()
+    arbol.node(iden,str(t[3]))
+    arbol.edge(into,iden)
+    lCol = t[5]
+    for x in lCol:
+        arbol.edge(iden,str(x))
+
+    val = inc()
+    arbol.node(val,"values")
+    arbol.edge(id,val)
+    lxpA = t[9]
     for x in range(len(lxpA)):
         arbol.edge(val,str(lxpA[x]))
 
@@ -550,8 +593,33 @@ def p_ADD4(t):
     for x in range(len(lxpA)):
         arbol.edge(rr,str(lxpA[x]))
 
+def p_ADD114(t):
+    '''ADD : constraint id foreign key para LEXP parc references id para LEXP parc'''
+    id1 = inc()
+    t[0] = id1
+    arbol.node(id1,"constraint")
+    id2 = inc()
+    arbol.node(id2,str(t[2]))
+    id = inc()
+    arbol.node(id,"foreign key")
+    arbol.edge(id1,id2)
+    arbol.edge(id1,id)
+    lxpA = t[4]
+    for x in range(len(lxpA)):
+        arbol.edge(id,str(lxpA[x]))
+
+    rr = inc()
+    arbol.node(rr,"references")
+    arbol.edge(id,rr)
+    ir = inc()
+    arbol.node(ir,str(t[7]))
+    arbol.edge(rr,ir)
+    lxpA = t[9]
+    for x in range(len(lxpA)):
+        arbol.edge(rr,str(lxpA[x]))
+
 def p_SHOWDB(t) : 
-   ''' SHOWDB : show databases'''
+   ''' SHOWDB : show dbs'''
    id = inc()
    t[0] = id
    arbol.node(id, "show databases")
@@ -603,7 +671,11 @@ def p_RD(t) :
  
 def p_PROPIETARIO(t):
     '''PROPIETARIO : owner igual id
-		| owner id'''
+		| owner id
+        | owner igual cadena
+		| owner cadena
+        | owner igual cadenaString
+		| owner cadenaString'''
     id = inc()
     t[0] = id
     arbol.node(id,"owner")
@@ -677,6 +749,21 @@ def p_COLDEF2(t):
     if len(t) > 3:
         arbol.edge(id,t[3])
 
+def p_COLDEF222(t):
+    '''COLDEF : id id
+                | id id LOPCOLUMN'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"columna")
+    iden = inc()
+    arbol.node(iden,str(t[1]))
+    tipoo = inc()
+    arbol.node(tipoo, str(t[2]))
+    arbol.edge(id,iden)
+    arbol.edge(id,tipoo)
+    if len(t) > 3:
+        arbol.edge(id,t[3])
+
 def p_LOPCOLUMN1(t):
     '''LOPCOLUMN : LOPCOLUMN OPCOLUMN'''
     t[0] = t[1]
@@ -704,7 +791,8 @@ def p_OPCOLUMN11(t):
 def p_OPCOLUMN12(t):
     '''OPCOLUMN : not null
                 | primary key
-                | null'''
+                | null
+                | unique'''
     id = inc()
     t[0] = id
     if len(t) == 2:
@@ -733,6 +821,13 @@ def p_OPCOLUMN2(t):
     arbol.node(cc,"check")
     arbol.edge(id,cc)
     arbol.edge(cc,t[5])
+    
+def p_OPCOLUMN22(t):
+    '''OPCOLUMN : check para EXP parc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"check")
+    arbol.edge(id,t[3])
 
 def p_OPCOLUMN3(t):
     '''OPCOLUMN : default EXP'''
@@ -897,25 +992,16 @@ def p_LIMIT(t):
     else: t[0] = None
 
 def p_WHERE(t):
-    ''' WHERE : where LEXP
-                | union LEXP
-                | union all LEXP
-	            | '''
+    ''' WHERE : where LEXP 
+                | '''
     tam = len(t)
     if tam > 1:
         id = inc()
         t[0] = id
-        if tam == 3:
-            arbol.node(id,str(t[1]))
-            lxpA = t[2]
-            for x in range(len(lxpA)):
-                arbol.edge(id,str(lxpA[x]))
-
-        elif tam == 4:
-            arbol.node(id,str(t[1] + " " + t[2]))
-            lxpA = t[3]
-            for x in range(len(lxpA)):
-                arbol.edge(id,str(lxpA[x]))
+        arbol.node(id,str(t[1]))
+        lxpA = t[2]
+        for x in range(len(lxpA)):
+            arbol.edge(id,str(lxpA[x]))
 
     else: t[0] = None
 
@@ -1065,6 +1151,13 @@ def p_EXIST(t):
     arbol.node(id,"exist")
     arbol.edge(id,str(t[3]))
 
+def p_EXIST1(t):
+    '''EXIST : not exist para SELECT parc'''
+    id = inc()
+    t[0] = id
+    arbol.node(id,"not exist")
+    arbol.edge(id,str(t[4]))
+
 def p_LEXP1(t):
     '''LEXP : LEXP coma EXP'''
     t[1].append(t[3])
@@ -1153,6 +1246,8 @@ def p_TIPO(t):
             | time 
             | interval
             | boolean
+            | decimal
+            | numeric
             | timestamp without time zone
             | timestamp with time zone
             | time without time zone
@@ -1212,7 +1307,8 @@ def p_EXP21(t):
     '''EXP : EXP is not null %prec predicates
             | EXP is not true %prec predicates
             | EXP is not false %prec predicates
-            | EXP is not unknown %prec predicates'''
+            | EXP is not unknown %prec predicates
+            | EXP not like cadena %prec predicates'''
     id = inc()
     t[0] = id
     arbol.node(id,str(t[2] + " " + t[3] + " " + t[4]))
@@ -1225,6 +1321,7 @@ def p_EXP22(t):
             | EXP as cadena %prec lsel
             | EXP as id %prec lsel
             | EXP as cadenaString %prec lsel
+            | EXP like cadena %prec predicates
             | EXP is false %prec predicates'''
     id = inc()
     t[0] = id
@@ -1335,6 +1432,12 @@ def p_EXP(t):
         arbol.node(dos,str(t[6]))
         arbol.edge(id,dos)
 
+def p_EXPPP(t):
+    'EXP : cadena as TIPO'
+    id = inc()
+    t[0] = id
+    arbol.node(id,str(t[1] + " as"))
+    arbol.edge(id,t[3])
 
 def p_EXPT(t):
     '''EXP : int
@@ -1350,9 +1453,7 @@ def p_EXPT(t):
             | current_time
             | current_date
             | timestamp cadena 
-            | interval cadena
-            | cadena like cadena
-            | cadena not like cadena'''
+            | interval cadena'''
     l = len(t)
     if l == 2:
         id = inc()
