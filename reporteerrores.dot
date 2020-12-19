@@ -1,0 +1,12 @@
+Digraph  reporte{label="REPORTE ERRORES LEXICOS Y SINTACTICOS"
+node [shape=record,style=rounded,color="#4b8dc5"];
+arset [label=<
+<TABLE border= "2"  cellspacing= "-1" color="#4b8dc5">
+<TR>
+<TD bgcolor="#1ED0EC">Tipo</TD>
+<TD bgcolor="#1ED0EC">Linea</TD>
+<TD bgcolor="#1ED0EC">Columna</TD>
+<TD bgcolor="#1ED0EC">Descripcion</TD>
+</TR>
+<TR> <TD>Error Sintactico</TD><TD>9</TD> <TD>165</TD><TD>Error en  '('</TD></TR></TABLE>
+>, ];}

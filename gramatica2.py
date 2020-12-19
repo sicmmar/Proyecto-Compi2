@@ -351,7 +351,7 @@ def p_DROP(t):
              | drop databases id '''
     if len(t) == 4:
         if (t[2] == 'table'):
-            print("eliminar tabla")
+            t[0] = DropTable(t[3])
 
         else:
             t[0] = DropDb(str(t[3]))
@@ -483,7 +483,7 @@ def p_CREATETABLE1(t):
 
 def p_CREATETABLE2(t):
     '''CREATETABLE : create table id para LDEF parc HERENCIA ptcoma'''
-    t[0] = CreateTable(str(t[3]), t[5])
+    t[0] = CreateTable(str(t[3]), t[5], t[7])
 
 
 def p_LDEF1(t):
@@ -515,6 +515,14 @@ def p_COLDEF3(t):
     else:
         t[0] = Columna(str(t[1]), t[2], t[3])
 
+def p_COLDEF23(t):
+    '''COLDEF : id id
+            | id id LOPCOLUMN'''
+    if len(t) == 3:
+        t[0] = Columna(str(t[1]), str(t[2]))
+    else:
+        t[0] = Columna(str(t[1]), str(t[2]), t[3])
+
 
 def p_LOPCOLUMN1(t):
     '''LOPCOLUMN : LOPCOLUMN OPCOLUMN'''
@@ -538,12 +546,12 @@ def p_OPCOLUMN12(t):
 
 
 def p_OPCOLUMN2(t):
-    '''OPCOLUMN : constraint id check para EXP parc'''
+    '''OPCOLUMN : constraint id check para CONDCHECK parc'''
     t[0] = Atributo(AtributosColumna.CHECK, str(t[2]), t[5])
 
 
 def p_OPCOLUMN22(t):
-    '''OPCOLUMN : check para EXP parc'''
+    '''OPCOLUMN : check para CONDCHECK parc'''
     atrCheck = Atributo(AtributosColumna.CHECK)
     atrCheck.exp = t[3]
     t[0] = atrCheck
@@ -590,12 +598,23 @@ def p_OPCONST3(t):
 
 
 def p_OPCONST4(t):
-    '''OPCONST : check para LEXP parc'''
+    '''OPCONST : check para CONDCHECK parc'''
     t[0] = Check(t[3])
+
+def p_CONDCHECK(t):
+    '''CONDCHECK : EXP mayor EXP
+                | EXP menor EXP
+                | EXP mayor_igual EXP
+                | EXP menor_igual EXP
+                | EXP igual EXP
+                | EXP diferente1 EXP
+                | EXP diferente2 EXP'''
+    t[0] = CondicionCheck(t[1],str(t[2]),t[3])
 
 
 def p_HERENCIA(t):
-    'HERENCIA : inherits para LEXP parc'
+    'HERENCIA : inherits para id parc'
+    t[0] = t[3]
 
 
 def p_CREATETYPE(t):

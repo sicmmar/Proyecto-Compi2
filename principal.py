@@ -97,7 +97,7 @@ ej_menu.add_command(label="Analizar Entrada", command=send_data)
 
 reps_menu = Menu(menu_bar)
 menu_bar.add_cascade(label="Reportes", menu=reps_menu)
-reps_menu.add_command(label="Errores Lexicos y SIntacticos", command=mostrarimagenre)
+reps_menu.add_command(label="Errores Lexicos y Sintacticos", command=mostrarimagenre)
 reps_menu.add_command(label="Tabla de Simbolos", command=send_data)
 reps_menu.add_command(label="AST", command=arbol_ast)
 reps_menu.add_command(label="Gramatica", command=send_data)

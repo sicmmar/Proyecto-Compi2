@@ -1,0 +1,15 @@
+digraph G {
+    /* Entities */
+    shortName [shape=record label=<<TABLE>
+        <TR><TD>U_wenas_pruebita_numero_uq</TD><TD>TipoSimbolo.CONSTRAINT_UNIQUE</TD><TD></TD><TD></TD></TR>
+        <TR><TD>U_wenas_pruebita_salary_uq</TD><TD>TipoSimbolo.CONSTRAINT_UNIQUE</TD><TD></TD><TD></TD></TR>
+        <TR><TD>pruebita_wenas</TD><TD>TipoSimbolo.TABLA</TD><TD>wenas</TD><TD></TD></TR>
+        <TR><TD>PK_wenas_pruebita</TD><TD>TipoSimbolo.CONSTRAINT_PRIMARY</TD><TD></TD><TD></TD></TR>
+        <TR><TD>employees_wenas</TD><TD>TipoSimbolo.TABLA</TD><TD>wenas</TD><TD></TD></TR>
+        <TR><TD>FK_wenas_employees_pruebita</TD><TD>TipoSimbolo.CONSTRAINT_FOREIGN</TD><TD>wenas</TD><TD>employees</TD></TR>
+        <TR><TD>PK_wenas_employees_pk</TD><TD>TipoSimbolo.CONSTRAINT_PRIMARY</TD><TD></TD><TD></TD></TR>
+        <TR><TD>pruebita2_wenas</TD><TD>TipoSimbolo.TABLA</TD><TD>wenas</TD><TD></TD></TR>
+        <TR><TD>PK_wenas_pruebita2</TD><TD>TipoSimbolo.CONSTRAINT_PRIMARY</TD><TD></TD><TD></TD></TR>
+    </TABLE>>]
+    
+}

@@ -9,7 +9,8 @@ use wenas;
  CREATE TABLE pruebita (
 nombre_prueba VARCHAR (50) primary key,
 numero integer,
-salary real 
+salary real,
+constraint uq unique(numero,salary) 
 );
 
  CREATE TABLE employees (
@@ -17,15 +18,16 @@ first_name VARCHAR (50),
 last_name VARCHAR (50) references pruebita,
 salary  money ,
 salard double precision,
-primary key (first_name, salary)
+constraint pk primary key (first_name, salary)
 );
 
 
  CREATE TABLE pruebita2 (
 nombre_prueba VARCHAR (50),
 numero integer,
-salary real 
-);
+salary real, 
+primary key (numero)
+)inherits(employees);
 
  CREATE TABLE pruebita3 (
 nombre_prueba VARCHAR (50),
