@@ -17,7 +17,8 @@ create table tblibrosalario
 
 create table tblibrosalariohis
 ( 
-    idhistorico integer not null primary key
+    idhistorico integer not null primary key,
+    constraint ch1 CHECK (idhistorico >= 589.4)
 ) INHERITS (tblibrosalario);
 
  CREATE TABLE pruebita (

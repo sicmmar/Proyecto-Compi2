@@ -66,6 +66,7 @@ class CreateTable(Instruccion):
                                     #formato: U_database_tabla_nombreColumna
                                     nuevoSym.nombre = str("U_" + dbActual + "_" + self.id + "_" + tt.identificador)
                                     nuevaColumna.atributos.update({'unique':str("U_" + dbActual + "_" + self.id + "_" + tt.identificador)})
+                                nuevoSym.valor = tt.identificador
                             elif atrColumna.tipo == AtributosColumna.CHECK:
                                 hayAtr = True
                                 nuevoSym.tipo = TipoSimbolo.CONSTRAINT_CHECK
@@ -151,11 +152,14 @@ class CreateTable(Instruccion):
                                     col.atributos.update({'unique':str("U_" + dbActual + "_" + self.id + "_" + col.nombre + "_" + tt.id)})
                                     sym = Simbolo(TipoSimbolo.CONSTRAINT_UNIQUE,str("U_" + dbActual + "_" + self.id + "_" + col.nombre + "_" + tt.id))
                                     ent.nuevoSimbolo(sym)
-                    '''elif tt.contenido.tipo == AtributosColumna.CHECK:
-                        #formato: C_database_tabla_nombreColumna_idConstraint
-                        col.atributos.update({'unique':str("C_" + dbActual + "_" + self.id + "_" + col.nombre + "_" + tt.id)})
-                        sym = Simbolo(TipoSimbolo.CONSTRAINT_UNIQUE,str("C_" + dbActual + "_" + self.id + "_" + col.nombre + "_" + tt.id))
-                        ent.nuevoSimbolo(sym)'''
+                    elif tt.contenido.tipo == AtributosColumna.CHECK:
+                        #formato: C_database_tabla_idConstraint
+                        sym = Simbolo(TipoSimbolo.CONSTRAINT_CHECK,str("C_" + dbActual + "_" + self.id + "_" + tt.id))
+                        sym.tabla = self.id
+                        sym.baseDatos = dbActual
+                        sym.valor = tt.contenido.condiciones
+                        ent.nuevoSimbolo(sym)
+                        
                   
             nuevaTabla.valor = listaColumnas
             estado = DBMS.createTable(dbActual,self.id, len(listaColumnas))

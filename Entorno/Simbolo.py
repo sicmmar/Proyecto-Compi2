@@ -12,13 +12,37 @@ class Simbolo:
     
     def toString(self):
         cadena:str = ""
+        #nombre,tipoSym,baseDatos,tabla,valor
         if self.nombre != None:
-            cadena += "<TR>"
             if self.tipo == TipoSimbolo.TABLA:
-                cadena += "<TD>" + self.nombre + "</TD><TD>TABLA</TD><TD>" + self.baseDatos + "</TD><TD>" + self.tabla + "</TD>"
-                #for col in self.valor:
-                    #cadena += "<TD>" +  + "</TD>"
+                columnas:Simbolo = [] 
+                columnas = self.valor
+                cadena += "<TR><TD rowspan='" + str(len(columnas)) + "'>" + self.nombre.split('_')[0] + "</TD><TD rowspan='" + str(len(columnas)) + "'>TABLA</TD><TD rowspan='" + str(len(columnas)) + "'>" + self.baseDatos + "</TD><TD rowspan='" + str(len(columnas)) + "'>"
+                cadena += self.tabla + "</TD><TD>" + columnas[0].nombre + ":" + columnas[0].tipo.tipo + "</TD></TR>\n"
+                for col in range(1,len(columnas),1):
+                    cadena += "<TR><TD>" + columnas[col].nombre + ":" + columnas[col].tipo.tipo + "</TD></TR>\n"
+            
+            elif self.tipo == TipoSimbolo.CONSTRAINT_UNIQUE:
+                cadena += "<TR><TD>" + self.nombre + "</TD><TD>UNIQUE</TD><TD>" + self.baseDatos + "</TD><TD>"
+                cadena += self.tabla + "</TD><TD>" + self.valor + "</TD></TR>\n\n"
+            
+            elif self.tipo == TipoSimbolo.CONSTRAINT_CHECK:
+                cond:str = self.valor.simbolo
+                if cond in ">":
+                    cond = cond.replace(">","&#62;")
+                if cond in "<":
+                    cond = cond.replace("<","&#60;")
+                if cond in "<=":
+                    cond = cond.replace("<=","&#60;&#61;")
+                if cond in ">=":
+                    cond = cond.replace(">=","&#62;&#61;")
 
-            cadena += "</TR>"
+                cadena += "<TR><TD>" + self.nombre + "</TD><TD>CHECK</TD><TD>" + self.baseDatos + "</TD><TD>"
+                cadena += self.tabla + "</TD><TD>" + str(self.valor.exp1.valor) + " " + cond + " " + str(self.valor.exp2.valor) + "</TD></TR>\\n"
+            elif self.tipo == TipoSimbolo.CONSTRAINT_FOREIGN:
+                cadena += "<TR><TD>" + self.nombre + "</TD><TD>FORANEA</TD><TD>" + self.baseDatos + "</TD><TD>"
+                cadena += self.tabla + "</TD><TD>" + str(self.valor.exp1.valor) + " " + cond + " " + str(self.valor.exp2.valor) + "</TD></TR>"
+
+
         return cadena
         

@@ -1,15 +1,12 @@
-digraph G {
-    /* Entities */
-    shortName [shape=record label=<<TABLE>
-        <TR><TD>U_wenas_pruebita_numero_uq</TD><TD>TipoSimbolo.CONSTRAINT_UNIQUE</TD><TD></TD><TD></TD></TR>
-        <TR><TD>U_wenas_pruebita_salary_uq</TD><TD>TipoSimbolo.CONSTRAINT_UNIQUE</TD><TD></TD><TD></TD></TR>
-        <TR><TD>pruebita_wenas</TD><TD>TipoSimbolo.TABLA</TD><TD>wenas</TD><TD></TD></TR>
-        <TR><TD>PK_wenas_pruebita</TD><TD>TipoSimbolo.CONSTRAINT_PRIMARY</TD><TD></TD><TD></TD></TR>
-        <TR><TD>employees_wenas</TD><TD>TipoSimbolo.TABLA</TD><TD>wenas</TD><TD></TD></TR>
-        <TR><TD>FK_wenas_employees_pruebita</TD><TD>TipoSimbolo.CONSTRAINT_FOREIGN</TD><TD>wenas</TD><TD>employees</TD></TR>
-        <TR><TD>PK_wenas_employees_pk</TD><TD>TipoSimbolo.CONSTRAINT_PRIMARY</TD><TD></TD><TD></TD></TR>
-        <TR><TD>pruebita2_wenas</TD><TD>TipoSimbolo.TABLA</TD><TD>wenas</TD><TD></TD></TR>
-        <TR><TD>PK_wenas_pruebita2</TD><TD>TipoSimbolo.CONSTRAINT_PRIMARY</TD><TD></TD><TD></TD></TR>
-    </TABLE>>]
-    
-}
+digraph G {shortName [shape=record label=<<TABLE><TR><TD>NOMBRE</TD><TD>TIPO</TD><TD>BASE DE DATOS</TD><TD>TABLA</TD><TD>VALOR</TD></TR><TR><TD rowspan='5'>tblibrosalario</TD><TD rowspan='5'>TABLA</TD><TD rowspan='5'>wenas</TD><TD rowspan='5'></TD><TD>idempleado:integer</TD></TR>
+<TR><TD>aniocalculo:integer</TD></TR>
+<TR><TD>mescalculo:integer</TD></TR>
+<TR><TD>salariobase:money</TD></TR>
+<TR><TD>comision:decimal</TD></TR>
+<TR><TD>C_wenas_tblibrosalario_aniocalculo_aniosalario</TD><TD>CHECK</TD><TD>wenas</TD><TD>tblibrosalario</TD><TD>aniocalculo &#62; 0</TD></TR>\n<TR><TD>C_wenas_tblibrosalario_mescalculo_mescalculo</TD><TD>CHECK</TD><TD>wenas</TD><TD>tblibrosalario</TD><TD>mescalculo &#60; 12</TD></TR>\n<TR><TD>C_wenas_tblibrosalariohis_ch1</TD><TD>CHECK</TD><TD></TD><TD></TD><TD>idhistorico &#62;&#61; 589.4</TD></TR>\n<TR><TD rowspan='6'>tblibrosalariohis</TD><TD rowspan='6'>TABLA</TD><TD rowspan='6'>wenas</TD><TD rowspan='6'></TD><TD>idempleado:integer</TD></TR>
+<TR><TD>aniocalculo:integer</TD></TR>
+<TR><TD>mescalculo:integer</TD></TR>
+<TR><TD>salariobase:money</TD></TR>
+<TR><TD>comision:decimal</TD></TR>
+<TR><TD>idhistorico:integer</TD></TR>
+</TABLE>>]}
