@@ -11,7 +11,6 @@ class CreateTable(Instruccion):
     def __init__(self, id:str, listaDef,herencia = None):
         self.id = id
         self.listaDef = listaDef
-        self.numColumnas = 0
         self.herencia = herencia
 
     def ejecutar(self, ent:Entorno):
@@ -25,10 +24,27 @@ class CreateTable(Instruccion):
             hayForanea = False
             primariaAdd:Primaria = None
             foraneaAdd:Foranea = None
+            inicioHerencia = 0
+            listPK = []
+
+
+            if self.herencia != None:
+                r:Simbolo = ent.buscarSimbolo(self.herencia + "_" + dbActual)
+                if r != None:
+                    for colPadre in r.valor:
+                        listaColumnas.append(colPadre)
+                        if colPadre.atributos.get('primary') != None:
+                            coPrimary:Simbolo = ent.buscarSimbolo(colPadre.atributos.get('primary'))
+                            if coPrimary != None:
+                                listPK = coPrimary.valor
+                    
+                    inicioHerencia = len(r.valor) - 1
+
+                else: return "La tabla padre '" + self.herencia + "' no existe"
+
             for x in range(0,tam,1):
                 tt = self.listaDef[x]
                 if tt.tipo == AtributosColumna.COLUMNA_SIMPLE:
-                    self.numColumnas += 1
                     nuevaColumna = Simbolo(tt.tipoDato,tt.identificador)
                     if tt.lista != None: #aca se mete si viene por ejemplo: columna1 integer references tabla2
                         tamano = len(tt.lista)
@@ -140,10 +156,9 @@ class CreateTable(Instruccion):
                         col.atributos.update({'unique':str("C_" + dbActual + "_" + self.id + "_" + col.nombre + "_" + tt.id)})
                         sym = Simbolo(TipoSimbolo.CONSTRAINT_UNIQUE,str("C_" + dbActual + "_" + self.id + "_" + col.nombre + "_" + tt.id))
                         ent.nuevoSimbolo(sym)'''
-
                   
             nuevaTabla.valor = listaColumnas
-            estado = DBMS.createTable(dbActual,self.id, self.numColumnas)
+            estado = DBMS.createTable(dbActual,self.id, len(listaColumnas))
             if estado == 0: 
                 nuevaTabla.baseDatos = dbActual
                 r = ent.nuevoSimbolo(nuevaTabla)
@@ -152,17 +167,18 @@ class CreateTable(Instruccion):
                         ent.nuevoSimbolo(x)
                     
                     alreadyPrimary = False
-                    for x in range(len(listaColumnas)):
+                    for x in range(inicioHerencia,len(listaColumnas),1):
                         if not alreadyPrimary:
                             pk = listaColumnas[x].atributos.get('primary')
                             if pk != None: 
-                                rrr = DBMS.alterAddPK(dbActual,self.id,[x])
+                                listPK.append(x)
+                                rrr = DBMS.alterAddPK(dbActual,self.id,listPK)
                                 if rrr != 0: 
                                     variables.consola.insert(INSERT,"No se ha podido agregar PK en tabla \'" + self.id + "\'\n")
                                 else: 
                                     alreadyPrimary = True
                                     sym = Simbolo(TipoSimbolo.CONSTRAINT_PRIMARY,str("PK_" + dbActual + "_" + self.id))
-                                    sym.valor = [x]
+                                    sym.valor = listPK
                                     ent.nuevoSimbolo(sym)
                     
 
@@ -171,7 +187,6 @@ class CreateTable(Instruccion):
                         if tablaB != None:
                             if primariaAdd != None:
                                 listaPrim = primariaAdd.primarias
-                                listPK = []
                                 for p in listaPrim:
                                     for col in range(len(tablaB.valor)):
                                         if p.valor == tablaB.valor[col].nombre:
@@ -184,19 +199,22 @@ class CreateTable(Instruccion):
                                     if n != 0:
                                         variables.consola.insert(INSERT,"No se ha podido agregar PK en tabla \'" + self.id + "\'\n")
                                     else: 
+                                        idPk = ""
                                         alreadyPrimary = True
                                         if primariaAdd.idConstraint != "":
-                                            sym = Simbolo(TipoSimbolo.CONSTRAINT_PRIMARY,str("PK_" + dbActual + "_" + self.id + "_" + primariaAdd.idConstraint))    
-                                        else: sym = Simbolo(TipoSimbolo.CONSTRAINT_PRIMARY,str("PK_" + dbActual + "_" + self.id))
+                                            idPk = str("PK_" + dbActual + "_" + self.id + "_" + primariaAdd.idConstraint)
+                                            sym = Simbolo(TipoSimbolo.CONSTRAINT_PRIMARY,idPk)    
+                                        else: 
+                                            idPk = str("PK_" + dbActual + "_" + self.id)
+                                            sym = Simbolo(TipoSimbolo.CONSTRAINT_PRIMARY,idPk)
+
+                                        for y in listPK:
+                                            tablaB.valor[y].atributos.update({'primary':idPk})
+                                            
                                         sym.valor = listPK
                                         ent.nuevoSimbolo(sym)
 
                     DBMS.showCollection()
-
-                    '''if self.herencia != None:
-                        for idPadre in self.herencia:
-                            '''
-
                     return str("Tabla " + self.id + " creada exitosamente")
                 
                 return r

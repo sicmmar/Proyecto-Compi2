@@ -109,7 +109,7 @@ Rule 99    CONDCHECK -> EXP menor_igual EXP
 Rule 100   CONDCHECK -> EXP igual EXP
 Rule 101   CONDCHECK -> EXP diferente1 EXP
 Rule 102   CONDCHECK -> EXP diferente2 EXP
-Rule 103   HERENCIA -> inherits para LEXP parc
+Rule 103   HERENCIA -> inherits para id parc
 Rule 104   CREATETYPE -> create type id as enum para LEXP parc
 Rule 105   SELECT -> select distinct LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
 Rule 106   SELECT -> select LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
@@ -316,7 +316,7 @@ foreign              : 49 50 93
 group                : 126
 having               : 128
 hour                 : 183
-id                   : 16 23 24 26 27 28 29 29 30 30 32 35 36 39 39 42 43 45 46 48 48 49 50 50 52 54 55 56 57 63 64 71 72 76 77 78 79 79 80 80 83 85 91 93 104 135 136 137 138 139 214 215 233 234 245
+id                   : 16 23 24 26 27 28 29 29 30 30 32 35 36 39 39 42 43 45 46 48 48 49 50 50 52 54 55 56 57 63 64 71 72 76 77 78 79 79 80 80 83 85 91 93 103 104 135 136 137 138 139 214 215 233 234 245
 idPunto              : 254
 if                   : 27 54 55
 igual                : 63 65 67 69 100 136 137 198
@@ -420,7 +420,7 @@ HERENCIA             : 72
 INSERT               : 10
 LCAMPOS              : 135 136
 LDEF                 : 71 72 73
-LEXP                 : 21 21 22 23 24 24 44 47 49 49 50 50 92 93 93 94 103 104 105 105 106 106 107 126 130 131 135 138 142 233 235 236 237
+LEXP                 : 21 21 22 23 24 24 44 47 49 49 50 50 92 93 93 94 104 105 105 106 106 107 126 130 131 135 138 142 233 235 236 237
 LIMIT                : 105 106 107
 LISTAWHEN            : 17 18 19
 LOPCOLUMN            : 78 80 81
@@ -16430,7 +16430,7 @@ state 364
 
     (71) CREATETABLE -> create table id para LDEF parc . ptcoma
     (72) CREATETABLE -> create table id para LDEF parc . HERENCIA ptcoma
-    (103) HERENCIA -> . inherits para LEXP parc
+    (103) HERENCIA -> . inherits para id parc
 
     ptcoma          shift and go to state 438
     inherits        shift and go to state 440
@@ -19622,7 +19622,7 @@ state 439
 
 state 440
 
-    (103) HERENCIA -> inherits . para LEXP parc
+    (103) HERENCIA -> inherits . para id parc
 
     para            shift and go to state 490
 
@@ -21786,114 +21786,10 @@ state 489
 
 state 490
 
-    (103) HERENCIA -> inherits para . LEXP parc
-    (142) LEXP -> . LEXP coma EXP
-    (143) LEXP -> . EXP
-    (186) EXP -> . EXP mas EXP
-    (187) EXP -> . EXP menos EXP
-    (188) EXP -> . EXP multiplicacion EXP
-    (189) EXP -> . EXP division EXP
-    (190) EXP -> . EXP modulo EXP
-    (191) EXP -> . EXP elevado EXP
-    (192) EXP -> . EXP and EXP
-    (193) EXP -> . EXP or EXP
-    (194) EXP -> . EXP mayor EXP
-    (195) EXP -> . EXP menor EXP
-    (196) EXP -> . EXP mayor_igual EXP
-    (197) EXP -> . EXP menor_igual EXP
-    (198) EXP -> . EXP igual EXP
-    (199) EXP -> . EXP diferente1 EXP
-    (200) EXP -> . EXP diferente2 EXP
-    (201) EXP -> . EXP between EXP
-    (202) EXP -> . EXP is not null
-    (203) EXP -> . EXP is null
-    (204) EXP -> . EXP isnull
-    (205) EXP -> . EXP notnull
-    (206) EXP -> . EXP is true
-    (207) EXP -> . EXP is not true
-    (208) EXP -> . EXP is false
-    (209) EXP -> . EXP is not false
-    (210) EXP -> . EXP is unknown
-    (211) EXP -> . EXP is not unknown
-    (212) EXP -> . EXP as cadenaString
-    (213) EXP -> . EXP cadenaString
-    (214) EXP -> . EXP as id
-    (215) EXP -> . EXP id
-    (216) EXP -> . EXP as cadena
-    (217) EXP -> . EXP cadena
-    (218) EXP -> . mas EXP
-    (219) EXP -> . menos EXP
-    (220) EXP -> . not EXP
-    (221) EXP -> . EXP in para EXP parc
-    (222) EXP -> . EXP not in para EXP parc
-    (223) EXP -> . EXP not between EXP
-    (224) EXP -> . EXP between symetric EXP
-    (225) EXP -> . EXP not between symetric EXP
-    (226) EXP -> . EXP is distinct r_from EXP
-    (227) EXP -> . EXP is not distinct r_from EXP
-    (228) EXP -> . EXP like cadena
-    (229) EXP -> . EXP not like cadena
-    (230) EXP -> . SELECT
-    (231) EXP -> . CASE
-    (232) EXP -> . para EXP parc
-    (233) EXP -> . id para LEXP parc
-    (234) EXP -> . id para parc
-    (235) EXP -> . any para LEXP parc
-    (236) EXP -> . all para LEXP parc
-    (237) EXP -> . some para LEXP parc
-    (238) EXP -> . extract para FIELDS r_from timestamp cadena parc
-    (239) EXP -> . int
-    (240) EXP -> . decimales
-    (241) EXP -> . cadena
-    (242) EXP -> . cadenaString
-    (243) EXP -> . true
-    (244) EXP -> . false
-    (245) EXP -> . id
-    (246) EXP -> . multiplicacion
-    (247) EXP -> . null
-    (248) EXP -> . current_time
-    (249) EXP -> . current_date
-    (250) EXP -> . timestamp cadena
-    (251) EXP -> . interval cadena
-    (252) EXP -> . cadena as TIPO
-    (253) EXP -> . default
-    (254) EXP -> . idPunto
-    (105) SELECT -> . select distinct LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (106) SELECT -> . select LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (107) SELECT -> . select LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (17) CASE -> . case LISTAWHEN ELSE end
-    (18) CASE -> . case LISTAWHEN end
+    (103) HERENCIA -> inherits para . id parc
 
-    mas             shift and go to state 42
-    menos           shift and go to state 43
-    not             shift and go to state 45
-    para            shift and go to state 52
-    id              shift and go to state 50
-    any             shift and go to state 55
-    all             shift and go to state 56
-    some            shift and go to state 57
-    extract         shift and go to state 58
-    int             shift and go to state 60
-    decimales       shift and go to state 61
-    cadena          shift and go to state 51
-    cadenaString    shift and go to state 49
-    true            shift and go to state 47
-    false           shift and go to state 48
-    multiplicacion  shift and go to state 44
-    null            shift and go to state 46
-    current_time    shift and go to state 62
-    current_date    shift and go to state 63
-    timestamp       shift and go to state 59
-    interval        shift and go to state 64
-    default         shift and go to state 65
-    idPunto         shift and go to state 66
-    select          shift and go to state 17
-    case            shift and go to state 25
+    id              shift and go to state 530
 
-    LEXP                           shift and go to state 530
-    EXP                            shift and go to state 41
-    SELECT                         shift and go to state 53
-    CASE                           shift and go to state 54
 
 state 491
 
@@ -23600,11 +23496,9 @@ state 529
 
 state 530
 
-    (103) HERENCIA -> inherits para LEXP . parc
-    (142) LEXP -> LEXP . coma EXP
+    (103) HERENCIA -> inherits para id . parc
 
     parc            shift and go to state 559
-    coma            shift and go to state 90
 
 
 state 531
@@ -25170,9 +25064,9 @@ state 558
 
 state 559
 
-    (103) HERENCIA -> inherits para LEXP parc .
+    (103) HERENCIA -> inherits para id parc .
 
-    ptcoma          reduce using rule 103 (HERENCIA -> inherits para LEXP parc .)
+    ptcoma          reduce using rule 103 (HERENCIA -> inherits para id parc .)
 
 
 state 560

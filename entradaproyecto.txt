@@ -6,6 +6,20 @@ create database wenas;
 
 show databases;
 use wenas;
+create table tblibrosalario
+( idempleado integer not null,
+  aniocalculo integer not null CONSTRAINT aniosalario CHECK (aniocalculo > 0),
+  mescalculo  integer not null CONSTRAINT mescalculo CHECK (mescalculo < 12),
+  salariobase  money not null,
+  comision     decimal,
+  primary key(idempleado)
+ );
+
+create table tblibrosalariohis
+( 
+    idhistorico integer not null primary key
+) INHERITS (tblibrosalario);
+
  CREATE TABLE pruebita (
 nombre_prueba VARCHAR (50) primary key,
 numero integer,
@@ -25,7 +39,7 @@ constraint pk primary key (first_name, salary)
  CREATE TABLE pruebita2 (
 nombre_prueba VARCHAR (50),
 numero integer,
-salary real, 
+salary1 real, 
 primary key (numero)
 )inherits(employees);
 
@@ -50,3 +64,59 @@ insert into pruebita2 values ('prueba2',33,63.44);
 insert into pruebita2 values ('prueba3',42,67.34);
 
 select * from employees,pruebita,pruebita2;
+
+
+drop all();
+create database prueba;
+create database prueba2;
+create database prueba3;
+create database wenas;
+
+show databases;
+use wenas;
+ CREATE TABLE employees (
+first_name VARCHAR (50),
+last_name VARCHAR (50),
+salary  money ,
+salard double precision 
+);
+
+ CREATE TABLE pruebita (
+nombre_prueba VARCHAR (50),
+numero integer,
+salary real 
+);
+
+ CREATE TABLE pruebita2 (
+nombre_prueba VARCHAR (50),
+numero integer,
+salary real 
+);
+
+ CREATE TABLE pruebita3 (
+nombre_prueba VARCHAR (50),
+numero integer,
+salary real 
+);
+
+show tables(wenas);
+
+insert into employees values ('juan','perez',10.4,20.4);
+insert into employees values ('juan2','perez2',20.4,20.4);
+insert into employees values ('juan3','perez3',30.4,20.4);
+insert into employees values ('juan4','peresdz2',40.4,20.4);
+insert into employees values ('juan5','perez3d',50.4,20.4);
+insert into employees values ('juan6','perez2d',60.4,20.4);
+insert into employees values ('juan7','perez334',70.4,20.4);
+
+insert into pruebita values ('prueba1',32,63.41);
+insert into pruebita values ('prueba2',33,63.44);
+insert into pruebita values ('prueba3',42,67.34);
+
+insert into pruebita2 values ('prueba1',32,63.41);
+insert into pruebita2 values ('prueba2',33,63.44);
+insert into pruebita2 values ('prueba3',42,67.34);
+
+select * from employees where salary>40;
+select * from employees where salary>salard;
+select * from employees where salary=salard;

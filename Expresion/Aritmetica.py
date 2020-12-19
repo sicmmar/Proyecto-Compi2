@@ -1,5 +1,6 @@
 
 
+
 from Expresion.Binaria import Binaria
 from Entorno import Entorno
 from Tipo import Tipo
@@ -11,8 +12,11 @@ class Aritmetica(Binaria):
         Binaria.__init__(self,exp1,exp2,operador)
 
     def getval(self,entorno):
-        valizq=self.exp1.getval(entorno);
-        valder=self.exp2.getval(entorno);
+        if (self.exp1.tipo.tipo == 'identificador' or self.exp2.tipo.tipo == 'identificador'):
+            return self
+
+        valizq=self.exp1.getval(entorno)
+        valder=self.exp2.getval(entorno)
 
 
         if type(valizq) not in (int, float, complex) or type(valder) not in (int, float, complex) :
