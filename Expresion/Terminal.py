@@ -19,13 +19,13 @@ class Terminal(Expresion) :
         if self.tipo.tipo=='identificador':
             'buscar columna'
 
-        if self.valor == 'CURRENT_DATE':
+        if str(self.valor) == 'CURRENT_DATE':
             return date.today()
-        elif self.valor== 'CURRENT_TIME' or (self.valor=='now' and self.tipo.tipo=='timestamp without time zone'):
+        elif str(self.valor)== 'CURRENT_TIME' or (self.valor=='now' and self.tipo.tipo=='timestamp without time zone'):
             return datetime.now()
-        elif(self.valor.lower()=='random'):
+        elif(str(self.valor).lower()=='random'):
                 value = rn.randint(0,1)
                 return value
-        elif (self.valor.lower()=="pi"):
+        elif (str(self.valor).lower()=="pi"):
                 return math.pi
-        return self.valor
+        return str(self.valor)

@@ -181,7 +181,7 @@ def t_int(t):
     return t
 
 def t_PUNTOPUNTO(t):
-    r'[a-zA-Z_][a-zA-Z_0-9]*\.[a-zA-Z_][a-zA-Z_0-9]*'
+    r'[a-zA-Z_][a-zA-Z_0-9]*\.([a-zA-Z_][a-zA-Z_0-9]*|\*)'
     t.type = reservadas.get(t.value.lower(), 'idPunto')
     return t
 
@@ -247,8 +247,9 @@ from Instrucciones.CreateTable import *
 from Instrucciones.Select import Select
 from Instrucciones.CreateDB import *
 from Expresion.FuncionesNativas import FuncionesNativas
-from Instrucciones.Insert import Insert
+from Instrucciones.Insert import *
 from Instrucciones.Drop import *
+from Instrucciones.Delete import Delete
 
 # Asociación de operadores y precedencia
 precedence = (
@@ -340,6 +341,7 @@ def p_INSERT(t):
 
 def p_INSERT2(t):
     'INSERT : insert into id para LEXP parc values para LEXP parc'
+    t[0] = InsertWhitColum(t[3],t[5],t[9])
 
 def p_DROPALL(t):
     '''DROP : drop all para parc '''
@@ -350,7 +352,7 @@ def p_DROP(t):
              | drop databases if exist id
              | drop databases id '''
     if len(t) == 4:
-        if (t[2] == 'table'):
+        if (t[2].lower() == 'table'):
             t[0] = DropTable(t[3])
 
         else:
@@ -701,9 +703,9 @@ def p_LCAMPOS(t):
 
 def p_DELETE(t):
     '''
-    DELETE : delete   r_from id where LEXP
-            | delete  r_from id
+    DELETE : delete   r_from EXP WHERE
     '''
+    t[0] = Delete(t[3].t[4])
 
 
 def p_EXIST(t):

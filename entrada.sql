@@ -54,22 +54,22 @@ insert into tbrol values (3,'Ventas');
 select * from tbrol;
 
 
-insert into tbusuario values(1,'Luis Fernando','Salazar Rodriguez','lsalazar',MD5('paswword'),now());
+--insert into tbusuario values(1,'Luis Fernando','Salazar Rodriguez','lsalazar',MD5('paswword'),now());
 --Error 22001
 
 ALTER TABLE tbusuario
     ALTER COLUMN password TYPE varchar(80);
 	
-insert into tbusuario values(1,'Luis Fernando','Salazar Rodriguez','lsalazar',MD5('paswword'),now());
-insert into tbusuario values(1,'Maria Cristina','Lopez Ramirez','mlopez',MD5('Diciembre'),now());
-insert into tbusuario values(1,'Hugo Alberto','Huard Ordoñez','hhuard',MD5('Rafael'),now());
+--insert into tbusuario values(1,'Luis Fernando','Salazar Rodriguez','lsalazar',MD5('paswword'),now());
+--insert into tbusuario values(1,'Maria Cristina','Lopez Ramirez','mlopez',MD5('Diciembre'),now());
+--insert into tbusuario values(1,'Hugo Alberto','Huard Ordoñez','hhuard',MD5('Rafael'),now());
 --Error 23505
 
 select * from tbusuario;
 
-insert into tbusuario values(1,'Luis Fernando','Salazar Rodriguez','lsalazar',MD5('paswword'),now());
-insert into tbusuario values(2,'Maria Cristina','Lopez Ramirez','mlopez',MD5('Diciembre'),now());
-insert into tbusuario values(3,'Hugo Alberto','Huard Ordoñez','hhuard',MD5('Rafael'),now());
+--insert into tbusuario values(1,'Luis Fernando','Salazar Rodriguez','lsalazar',MD5('paswword'),now());
+--insert into tbusuario values(2,'Maria Cristina','Lopez Ramirez','mlopez',MD5('Diciembre'),now());
+--insert into tbusuario values(3,'Hugo Alberto','Huard Ordoñez','hhuard',MD5('Rafael'),now());
 
 insert into tbrolxusuario values(1,1);
 insert into tbrolxusuario values(2,2);
@@ -77,15 +77,11 @@ insert into tbrolxusuario values(2,3);
 
 
 select rol,nombre,apellido
-from tbrolxusuario RU
-inner join tbusuario U on U.idusuario = RU.idusuario
-inner join tbrol R on R.idrol = RU.idrol;
+from tbrolxusuario RU;
 
 
 select rol,nombre,apellido
-from tbrolxusuario RU
-right join tbusuario U on U.idusuario = RU.idusuario
-right join tbrol R on R.idrol = RU.idrol;
+from tbrolxusuario RU;
 
 
 select *
