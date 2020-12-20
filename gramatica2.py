@@ -483,7 +483,9 @@ def p_CREATETABLE1(t):
 
 def p_CREATETABLE2(t):
     '''CREATETABLE : create table id para LDEF parc HERENCIA ptcoma'''
-    t[0] = CreateTable(str(t[3]), t[5], t[7])
+    tabla:CreateTable = CreateTable(str(t[3]), t[5])
+    tabla.herencia = t[7]
+    t[0] = tabla
 
 
 def p_LDEF1(t):
@@ -911,8 +913,8 @@ def p_EXP1(t):
         t[0] = Unaria(t[2], '+')
     elif t[1] == '-':
         t[0] = Unaria(t[2], '-')
-    elif t[2] == 'not':
-        t[0] = Unaria(t[2], '*')
+    elif t[1] == 'not':
+        t[0] = Unaria(t[2], 'not')
 
 
 def p_EXPV(t):
@@ -959,7 +961,7 @@ def p_EXP_FuncNativas2(t):
         tipo = Tipo('double', t[1], len(t[1]), -1)
 
 
-    t[0] = Terminal(tipo, t[1])
+    t[0] = Terminal(tipo, t[1].lower())
 
 
 def p_EXP(t):

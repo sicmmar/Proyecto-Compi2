@@ -37,11 +37,14 @@ class Simbolo:
                 if cond in ">=":
                     cond = cond.replace(">=","&#62;&#61;")
 
-                cadena += "<TR><TD>" + self.nombre + "</TD><TD>CHECK</TD><TD>" + self.baseDatos + "</TD><TD>"
+                cadena += "<TR><TD>" + self.nombre + "</TD><TD>CONSTRAINT CHECK</TD><TD>" + self.baseDatos + "</TD><TD>"
                 cadena += self.tabla + "</TD><TD>" + str(self.valor.exp1.valor) + " " + cond + " " + str(self.valor.exp2.valor) + "</TD></TR>\\n"
             elif self.tipo == TipoSimbolo.CONSTRAINT_FOREIGN:
-                cadena += "<TR><TD>" + self.nombre + "</TD><TD>FORANEA</TD><TD>" + self.baseDatos + "</TD><TD>"
-                cadena += self.tabla + "</TD><TD>" + str(self.valor.exp1.valor) + " " + cond + " " + str(self.valor.exp2.valor) + "</TD></TR>"
+                cadena += "<TR><TD>" + self.nombre + "</TD><TD>CONSTRAINT FORANEA</TD><TD>" + self.baseDatos + "</TD><TD>"
+                cadena += self.tabla + "</TD><TD></TD></TR>"
+            elif self.tipo == TipoSimbolo.CONSTRAINT_PRIMARY:
+                cadena += "<TR><TD>" + self.nombre + "</TD><TD>CONSTRAINT PRIMARIA</TD><TD>" + self.baseDatos + "</TD><TD>"
+                cadena += self.tabla + "</TD><TD>" + str(self.valor) + "</TD></TR>"
 
 
         return cadena

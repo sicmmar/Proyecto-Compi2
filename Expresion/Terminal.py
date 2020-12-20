@@ -23,9 +23,9 @@ class Terminal(Expresion) :
             return date.today()
         elif self.valor== 'CURRENT_TIME' or (self.valor=='now' and self.tipo.tipo=='timestamp without time zone'):
             return datetime.now()
-        elif(self.valor=='random'):
+        elif(self.valor.lower()=='random'):
                 value = rn.randint(0,1)
                 return value
-        elif (self.valor=="pi"):
+        elif (self.valor.lower()=="pi"):
                 return math.pi
         return self.valor
