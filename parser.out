@@ -235,8 +235,8 @@ Rule 225   EXP -> EXP is not distinct r_from EXP
 Rule 226   EXP -> EXP like cadena
 Rule 227   EXP -> EXP not like cadena
 Rule 228   EXP -> SELECT
-Rule 229   EXP -> CASE
-Rule 230   EXP -> para EXP parc
+Rule 229   EXP -> para EXP parc
+Rule 230   EXP -> CASE
 Rule 231   EXP -> id para LEXP parc
 Rule 232   EXP -> id para parc
 Rule 233   EXP -> any para LEXP parc
@@ -351,8 +351,8 @@ offset               : 108 109 110 111 112
 or                   : 61 191
 order                : 128 129
 owner                : 30 63 64 65 66 67 68
-para                 : 23 24 24 25 47 48 49 49 50 50 52 53 71 72 83 84 90 91 91 92 93 101 102 137 138 142 143 145 146 148 149 150 151 152 153 154 155 156 157 158 159 219 220 230 231 232 233 234 235 236
-parc                 : 23 24 24 25 47 48 49 49 50 50 52 53 71 72 83 84 90 91 91 92 93 101 102 137 138 142 143 145 146 148 149 150 151 152 153 154 155 156 157 158 159 219 220 230 231 232 233 234 235 236
+para                 : 23 24 24 25 47 48 49 49 50 50 52 53 71 72 83 84 90 91 91 92 93 101 102 137 138 142 143 145 146 148 149 150 151 152 153 154 155 156 157 158 159 219 220 229 231 232 233 234 235 236
+parc                 : 23 24 24 25 47 48 49 49 50 50 52 53 71 72 83 84 90 91 91 92 93 101 102 137 138 142 143 145 146 148 149 150 151 152 153 154 155 156 157 158 159 219 220 229 231 232 233 234 235 236
 precision            : 165
 primary              : 88 90
 ptcoma               : 4 6 7 8 9 10 11 13 14 15 16 71 72
@@ -399,7 +399,7 @@ Nonterminals, with rules where they appear
 ADD                  : 33
 ALTER                : 8
 ALTERDROP            : 34 38
-CASE                 : 12 229
+CASE                 : 12 230
 COLDEF               : 73 74
 COMBINING            : 103 104 105
 CONDCHECK            : 83 84 93
@@ -410,7 +410,7 @@ DELETE               : 7
 DROP                 : 9
 ELSE                 : 17
 EXIST                : 115
-EXP                  : 85 94 94 95 95 96 96 97 97 98 98 99 99 100 100 114 117 118 119 120 121 122 126 134 135 136 139 140 184 184 185 185 186 186 187 187 188 188 189 189 190 190 191 191 192 192 193 193 194 194 195 195 196 196 197 197 198 198 199 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 219 220 220 221 221 222 222 223 223 224 224 225 225 226 227 230
+EXP                  : 85 94 94 95 95 96 96 97 97 98 98 99 99 100 100 114 117 118 119 120 121 122 126 134 135 136 139 140 184 184 185 185 186 186 187 187 188 188 189 189 190 190 191 191 192 192 193 193 194 194 195 195 196 196 197 197 198 198 199 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 219 220 220 221 221 222 222 223 223 224 224 225 225 226 227 229
 FIELDS               : 236
 GROUP                : 103 104 105
 HAVING               : 103 104 105
@@ -780,8 +780,8 @@ state 17
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -1180,8 +1180,8 @@ state 39
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -1512,8 +1512,8 @@ state 42
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -1620,8 +1620,8 @@ state 43
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -1786,8 +1786,8 @@ state 45
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -2203,7 +2203,7 @@ state 51
 
 state 52
 
-    (230) EXP -> para . EXP parc
+    (229) EXP -> para . EXP parc
     (184) EXP -> . EXP mas EXP
     (185) EXP -> . EXP menos EXP
     (186) EXP -> . EXP multiplicacion EXP
@@ -2249,8 +2249,8 @@ state 52
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -2369,60 +2369,60 @@ state 53
 
 state 54
 
-    (229) EXP -> CASE .
+    (230) EXP -> CASE .
 
-    r_from          reduce using rule 229 (EXP -> CASE .)
-    coma            reduce using rule 229 (EXP -> CASE .)
-    where           reduce using rule 229 (EXP -> CASE .)
-    group           reduce using rule 229 (EXP -> CASE .)
-    having          reduce using rule 229 (EXP -> CASE .)
-    union           reduce using rule 229 (EXP -> CASE .)
-    intersect       reduce using rule 229 (EXP -> CASE .)
-    except          reduce using rule 229 (EXP -> CASE .)
-    order           reduce using rule 229 (EXP -> CASE .)
-    limit           reduce using rule 229 (EXP -> CASE .)
-    offset          reduce using rule 229 (EXP -> CASE .)
-    ptcoma          reduce using rule 229 (EXP -> CASE .)
-    mas             reduce using rule 229 (EXP -> CASE .)
-    menos           reduce using rule 229 (EXP -> CASE .)
-    multiplicacion  reduce using rule 229 (EXP -> CASE .)
-    division        reduce using rule 229 (EXP -> CASE .)
-    modulo          reduce using rule 229 (EXP -> CASE .)
-    elevado         reduce using rule 229 (EXP -> CASE .)
-    and             reduce using rule 229 (EXP -> CASE .)
-    or              reduce using rule 229 (EXP -> CASE .)
-    mayor           reduce using rule 229 (EXP -> CASE .)
-    menor           reduce using rule 229 (EXP -> CASE .)
-    mayor_igual     reduce using rule 229 (EXP -> CASE .)
-    menor_igual     reduce using rule 229 (EXP -> CASE .)
-    igual           reduce using rule 229 (EXP -> CASE .)
-    diferente1      reduce using rule 229 (EXP -> CASE .)
-    diferente2      reduce using rule 229 (EXP -> CASE .)
-    between         reduce using rule 229 (EXP -> CASE .)
-    is              reduce using rule 229 (EXP -> CASE .)
-    isnull          reduce using rule 229 (EXP -> CASE .)
-    notnull         reduce using rule 229 (EXP -> CASE .)
-    as              reduce using rule 229 (EXP -> CASE .)
-    cadenaString    reduce using rule 229 (EXP -> CASE .)
-    id              reduce using rule 229 (EXP -> CASE .)
-    cadena          reduce using rule 229 (EXP -> CASE .)
-    in              reduce using rule 229 (EXP -> CASE .)
-    not             reduce using rule 229 (EXP -> CASE .)
-    like            reduce using rule 229 (EXP -> CASE .)
-    parc            reduce using rule 229 (EXP -> CASE .)
-    then            reduce using rule 229 (EXP -> CASE .)
-    end             reduce using rule 229 (EXP -> CASE .)
-    else            reduce using rule 229 (EXP -> CASE .)
-    when            reduce using rule 229 (EXP -> CASE .)
-    constraint      reduce using rule 229 (EXP -> CASE .)
-    unique          reduce using rule 229 (EXP -> CASE .)
-    check           reduce using rule 229 (EXP -> CASE .)
-    default         reduce using rule 229 (EXP -> CASE .)
-    null            reduce using rule 229 (EXP -> CASE .)
-    primary         reduce using rule 229 (EXP -> CASE .)
-    references      reduce using rule 229 (EXP -> CASE .)
-    asc             reduce using rule 229 (EXP -> CASE .)
-    desc            reduce using rule 229 (EXP -> CASE .)
+    r_from          reduce using rule 230 (EXP -> CASE .)
+    coma            reduce using rule 230 (EXP -> CASE .)
+    where           reduce using rule 230 (EXP -> CASE .)
+    group           reduce using rule 230 (EXP -> CASE .)
+    having          reduce using rule 230 (EXP -> CASE .)
+    union           reduce using rule 230 (EXP -> CASE .)
+    intersect       reduce using rule 230 (EXP -> CASE .)
+    except          reduce using rule 230 (EXP -> CASE .)
+    order           reduce using rule 230 (EXP -> CASE .)
+    limit           reduce using rule 230 (EXP -> CASE .)
+    offset          reduce using rule 230 (EXP -> CASE .)
+    ptcoma          reduce using rule 230 (EXP -> CASE .)
+    mas             reduce using rule 230 (EXP -> CASE .)
+    menos           reduce using rule 230 (EXP -> CASE .)
+    multiplicacion  reduce using rule 230 (EXP -> CASE .)
+    division        reduce using rule 230 (EXP -> CASE .)
+    modulo          reduce using rule 230 (EXP -> CASE .)
+    elevado         reduce using rule 230 (EXP -> CASE .)
+    and             reduce using rule 230 (EXP -> CASE .)
+    or              reduce using rule 230 (EXP -> CASE .)
+    mayor           reduce using rule 230 (EXP -> CASE .)
+    menor           reduce using rule 230 (EXP -> CASE .)
+    mayor_igual     reduce using rule 230 (EXP -> CASE .)
+    menor_igual     reduce using rule 230 (EXP -> CASE .)
+    igual           reduce using rule 230 (EXP -> CASE .)
+    diferente1      reduce using rule 230 (EXP -> CASE .)
+    diferente2      reduce using rule 230 (EXP -> CASE .)
+    between         reduce using rule 230 (EXP -> CASE .)
+    is              reduce using rule 230 (EXP -> CASE .)
+    isnull          reduce using rule 230 (EXP -> CASE .)
+    notnull         reduce using rule 230 (EXP -> CASE .)
+    as              reduce using rule 230 (EXP -> CASE .)
+    cadenaString    reduce using rule 230 (EXP -> CASE .)
+    id              reduce using rule 230 (EXP -> CASE .)
+    cadena          reduce using rule 230 (EXP -> CASE .)
+    in              reduce using rule 230 (EXP -> CASE .)
+    not             reduce using rule 230 (EXP -> CASE .)
+    like            reduce using rule 230 (EXP -> CASE .)
+    parc            reduce using rule 230 (EXP -> CASE .)
+    then            reduce using rule 230 (EXP -> CASE .)
+    end             reduce using rule 230 (EXP -> CASE .)
+    else            reduce using rule 230 (EXP -> CASE .)
+    when            reduce using rule 230 (EXP -> CASE .)
+    constraint      reduce using rule 230 (EXP -> CASE .)
+    unique          reduce using rule 230 (EXP -> CASE .)
+    check           reduce using rule 230 (EXP -> CASE .)
+    default         reduce using rule 230 (EXP -> CASE .)
+    null            reduce using rule 230 (EXP -> CASE .)
+    primary         reduce using rule 230 (EXP -> CASE .)
+    references      reduce using rule 230 (EXP -> CASE .)
+    asc             reduce using rule 230 (EXP -> CASE .)
+    desc            reduce using rule 230 (EXP -> CASE .)
 
 
 state 55
@@ -2911,8 +2911,8 @@ state 73
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -3091,8 +3091,8 @@ state 82
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -3249,8 +3249,8 @@ state 88
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -3422,8 +3422,8 @@ state 90
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -3531,8 +3531,8 @@ state 91
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -3643,8 +3643,8 @@ state 92
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -3751,8 +3751,8 @@ state 93
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -3859,8 +3859,8 @@ state 94
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -3967,8 +3967,8 @@ state 95
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -4075,8 +4075,8 @@ state 96
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -4183,8 +4183,8 @@ state 97
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -4291,8 +4291,8 @@ state 98
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -4399,8 +4399,8 @@ state 99
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -4507,8 +4507,8 @@ state 100
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -4615,8 +4615,8 @@ state 101
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -4723,8 +4723,8 @@ state 102
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -4831,8 +4831,8 @@ state 103
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -4939,8 +4939,8 @@ state 104
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -5047,8 +5047,8 @@ state 105
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -5155,8 +5155,8 @@ state 106
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -5264,8 +5264,8 @@ state 107
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -6102,8 +6102,8 @@ state 121
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -6229,7 +6229,7 @@ state 122
 
 state 123
 
-    (230) EXP -> para EXP . parc
+    (229) EXP -> para EXP . parc
     (184) EXP -> EXP . mas EXP
     (185) EXP -> EXP . menos EXP
     (186) EXP -> EXP . multiplicacion EXP
@@ -6351,8 +6351,8 @@ state 124
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -6462,8 +6462,8 @@ state 125
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -6573,8 +6573,8 @@ state 126
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -7116,8 +7116,8 @@ state 147
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -7250,8 +7250,8 @@ state 151
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -7861,8 +7861,8 @@ state 158
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -9993,8 +9993,8 @@ state 176
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -10363,8 +10363,8 @@ state 184
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -10653,8 +10653,8 @@ state 189
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -11827,60 +11827,60 @@ state 212
 
 state 213
 
-    (230) EXP -> para EXP parc .
+    (229) EXP -> para EXP parc .
 
-    r_from          reduce using rule 230 (EXP -> para EXP parc .)
-    coma            reduce using rule 230 (EXP -> para EXP parc .)
-    where           reduce using rule 230 (EXP -> para EXP parc .)
-    group           reduce using rule 230 (EXP -> para EXP parc .)
-    having          reduce using rule 230 (EXP -> para EXP parc .)
-    union           reduce using rule 230 (EXP -> para EXP parc .)
-    intersect       reduce using rule 230 (EXP -> para EXP parc .)
-    except          reduce using rule 230 (EXP -> para EXP parc .)
-    order           reduce using rule 230 (EXP -> para EXP parc .)
-    limit           reduce using rule 230 (EXP -> para EXP parc .)
-    offset          reduce using rule 230 (EXP -> para EXP parc .)
-    ptcoma          reduce using rule 230 (EXP -> para EXP parc .)
-    mas             reduce using rule 230 (EXP -> para EXP parc .)
-    menos           reduce using rule 230 (EXP -> para EXP parc .)
-    multiplicacion  reduce using rule 230 (EXP -> para EXP parc .)
-    division        reduce using rule 230 (EXP -> para EXP parc .)
-    modulo          reduce using rule 230 (EXP -> para EXP parc .)
-    elevado         reduce using rule 230 (EXP -> para EXP parc .)
-    and             reduce using rule 230 (EXP -> para EXP parc .)
-    or              reduce using rule 230 (EXP -> para EXP parc .)
-    mayor           reduce using rule 230 (EXP -> para EXP parc .)
-    menor           reduce using rule 230 (EXP -> para EXP parc .)
-    mayor_igual     reduce using rule 230 (EXP -> para EXP parc .)
-    menor_igual     reduce using rule 230 (EXP -> para EXP parc .)
-    igual           reduce using rule 230 (EXP -> para EXP parc .)
-    diferente1      reduce using rule 230 (EXP -> para EXP parc .)
-    diferente2      reduce using rule 230 (EXP -> para EXP parc .)
-    between         reduce using rule 230 (EXP -> para EXP parc .)
-    is              reduce using rule 230 (EXP -> para EXP parc .)
-    isnull          reduce using rule 230 (EXP -> para EXP parc .)
-    notnull         reduce using rule 230 (EXP -> para EXP parc .)
-    as              reduce using rule 230 (EXP -> para EXP parc .)
-    cadenaString    reduce using rule 230 (EXP -> para EXP parc .)
-    id              reduce using rule 230 (EXP -> para EXP parc .)
-    cadena          reduce using rule 230 (EXP -> para EXP parc .)
-    in              reduce using rule 230 (EXP -> para EXP parc .)
-    not             reduce using rule 230 (EXP -> para EXP parc .)
-    like            reduce using rule 230 (EXP -> para EXP parc .)
-    parc            reduce using rule 230 (EXP -> para EXP parc .)
-    then            reduce using rule 230 (EXP -> para EXP parc .)
-    end             reduce using rule 230 (EXP -> para EXP parc .)
-    else            reduce using rule 230 (EXP -> para EXP parc .)
-    when            reduce using rule 230 (EXP -> para EXP parc .)
-    constraint      reduce using rule 230 (EXP -> para EXP parc .)
-    unique          reduce using rule 230 (EXP -> para EXP parc .)
-    check           reduce using rule 230 (EXP -> para EXP parc .)
-    default         reduce using rule 230 (EXP -> para EXP parc .)
-    null            reduce using rule 230 (EXP -> para EXP parc .)
-    primary         reduce using rule 230 (EXP -> para EXP parc .)
-    references      reduce using rule 230 (EXP -> para EXP parc .)
-    asc             reduce using rule 230 (EXP -> para EXP parc .)
-    desc            reduce using rule 230 (EXP -> para EXP parc .)
+    r_from          reduce using rule 229 (EXP -> para EXP parc .)
+    coma            reduce using rule 229 (EXP -> para EXP parc .)
+    where           reduce using rule 229 (EXP -> para EXP parc .)
+    group           reduce using rule 229 (EXP -> para EXP parc .)
+    having          reduce using rule 229 (EXP -> para EXP parc .)
+    union           reduce using rule 229 (EXP -> para EXP parc .)
+    intersect       reduce using rule 229 (EXP -> para EXP parc .)
+    except          reduce using rule 229 (EXP -> para EXP parc .)
+    order           reduce using rule 229 (EXP -> para EXP parc .)
+    limit           reduce using rule 229 (EXP -> para EXP parc .)
+    offset          reduce using rule 229 (EXP -> para EXP parc .)
+    ptcoma          reduce using rule 229 (EXP -> para EXP parc .)
+    mas             reduce using rule 229 (EXP -> para EXP parc .)
+    menos           reduce using rule 229 (EXP -> para EXP parc .)
+    multiplicacion  reduce using rule 229 (EXP -> para EXP parc .)
+    division        reduce using rule 229 (EXP -> para EXP parc .)
+    modulo          reduce using rule 229 (EXP -> para EXP parc .)
+    elevado         reduce using rule 229 (EXP -> para EXP parc .)
+    and             reduce using rule 229 (EXP -> para EXP parc .)
+    or              reduce using rule 229 (EXP -> para EXP parc .)
+    mayor           reduce using rule 229 (EXP -> para EXP parc .)
+    menor           reduce using rule 229 (EXP -> para EXP parc .)
+    mayor_igual     reduce using rule 229 (EXP -> para EXP parc .)
+    menor_igual     reduce using rule 229 (EXP -> para EXP parc .)
+    igual           reduce using rule 229 (EXP -> para EXP parc .)
+    diferente1      reduce using rule 229 (EXP -> para EXP parc .)
+    diferente2      reduce using rule 229 (EXP -> para EXP parc .)
+    between         reduce using rule 229 (EXP -> para EXP parc .)
+    is              reduce using rule 229 (EXP -> para EXP parc .)
+    isnull          reduce using rule 229 (EXP -> para EXP parc .)
+    notnull         reduce using rule 229 (EXP -> para EXP parc .)
+    as              reduce using rule 229 (EXP -> para EXP parc .)
+    cadenaString    reduce using rule 229 (EXP -> para EXP parc .)
+    id              reduce using rule 229 (EXP -> para EXP parc .)
+    cadena          reduce using rule 229 (EXP -> para EXP parc .)
+    in              reduce using rule 229 (EXP -> para EXP parc .)
+    not             reduce using rule 229 (EXP -> para EXP parc .)
+    like            reduce using rule 229 (EXP -> para EXP parc .)
+    parc            reduce using rule 229 (EXP -> para EXP parc .)
+    then            reduce using rule 229 (EXP -> para EXP parc .)
+    end             reduce using rule 229 (EXP -> para EXP parc .)
+    else            reduce using rule 229 (EXP -> para EXP parc .)
+    when            reduce using rule 229 (EXP -> para EXP parc .)
+    constraint      reduce using rule 229 (EXP -> para EXP parc .)
+    unique          reduce using rule 229 (EXP -> para EXP parc .)
+    check           reduce using rule 229 (EXP -> para EXP parc .)
+    default         reduce using rule 229 (EXP -> para EXP parc .)
+    null            reduce using rule 229 (EXP -> para EXP parc .)
+    primary         reduce using rule 229 (EXP -> para EXP parc .)
+    references      reduce using rule 229 (EXP -> para EXP parc .)
+    asc             reduce using rule 229 (EXP -> para EXP parc .)
+    desc            reduce using rule 229 (EXP -> para EXP parc .)
 
 
 state 214
@@ -12236,8 +12236,8 @@ state 248
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -12425,8 +12425,8 @@ state 251
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -12753,8 +12753,8 @@ state 257
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -12863,8 +12863,8 @@ state 258
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -13355,8 +13355,8 @@ state 267
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -13463,8 +13463,8 @@ state 268
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -13697,8 +13697,8 @@ state 270
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -14586,8 +14586,8 @@ state 311
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -14696,8 +14696,8 @@ state 312
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -14877,8 +14877,8 @@ state 322
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -15036,8 +15036,8 @@ state 329
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -15366,8 +15366,8 @@ state 336
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -15475,8 +15475,8 @@ state 337
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -15584,8 +15584,8 @@ state 338
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -15924,8 +15924,8 @@ state 343
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -16617,8 +16617,8 @@ state 368
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -16733,8 +16733,8 @@ state 369
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -16844,8 +16844,8 @@ state 370
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -17188,8 +17188,8 @@ state 383
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -17315,8 +17315,8 @@ state 386
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -17862,8 +17862,8 @@ state 401
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -18123,8 +18123,8 @@ state 403
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -18384,8 +18384,8 @@ state 405
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -19551,8 +19551,8 @@ state 431
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -19745,8 +19745,8 @@ state 441
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -19856,8 +19856,8 @@ state 442
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -20076,8 +20076,8 @@ state 448
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -20288,8 +20288,8 @@ state 455
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -20644,8 +20644,8 @@ state 465
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -20860,7 +20860,7 @@ state 466
 state 467
 
     (234) EXP -> all para . LEXP parc
-    (230) EXP -> para . EXP parc
+    (229) EXP -> para . EXP parc
     (139) LEXP -> . LEXP coma EXP
     (140) LEXP -> . EXP
     (184) EXP -> . EXP mas EXP
@@ -20908,8 +20908,8 @@ state 467
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -21627,8 +21627,8 @@ state 482
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -21928,8 +21928,8 @@ state 493
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -22037,8 +22037,8 @@ state 494
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -22146,8 +22146,8 @@ state 495
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -22255,8 +22255,8 @@ state 496
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -22364,8 +22364,8 @@ state 497
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -22473,8 +22473,8 @@ state 498
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -22582,8 +22582,8 @@ state 499
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -22840,8 +22840,8 @@ state 511
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -23297,7 +23297,7 @@ state 517
 
 state 518
 
-    (230) EXP -> para EXP . parc
+    (229) EXP -> para EXP . parc
     (140) LEXP -> EXP .
     (184) EXP -> EXP . mas EXP
     (185) EXP -> EXP . menos EXP
@@ -24348,8 +24348,8 @@ state 540
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -25039,8 +25039,8 @@ state 555
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -25544,8 +25544,8 @@ state 573
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -25662,8 +25662,8 @@ state 575
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
@@ -25806,8 +25806,8 @@ state 580
     (226) EXP -> . EXP like cadena
     (227) EXP -> . EXP not like cadena
     (228) EXP -> . SELECT
-    (229) EXP -> . CASE
-    (230) EXP -> . para EXP parc
+    (229) EXP -> . para EXP parc
+    (230) EXP -> . CASE
     (231) EXP -> . id para LEXP parc
     (232) EXP -> . id para parc
     (233) EXP -> . any para LEXP parc
