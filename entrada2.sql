@@ -1,3 +1,9 @@
+CREATE DATABASE IF NOT EXISTS test
+    OWNER = 'root'
+    MODE = 1;
+
+USE test;
+
 create table tbpuesto 
 ( idpuesto smallint not null,
   puesto character(25),
@@ -94,7 +100,7 @@ from tbventa V,tbempleado E
 where V.idempleado = E.idempleado
 group by primernombre,segundonombre,primerapellido;
 
-select primernombre,primerapellido,EXTRACT(DAY FROM fechaventa) diaventa,sum(montoventa)
+select primernombre,primerapellido,EXTRACT(DAY FROM TIMESTAMP '2001-02-16 20:38:40') diaventa,sum(montoventa)
 from tbventa V,tbempleado E
 where V.idempleado = E.idempleado
 group by 1,2,3

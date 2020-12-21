@@ -415,8 +415,8 @@ def p_ADD(t):
             | check para LEXP parc
             | constraint id unique para id parc
             | foreign key para LEXP parc references id para LEXP parc
-            | constraint id foreign key para LEXP parc references id para LEXP parc
-    '''
+            | constraint id foreign key para LEXP parc references id para LEXP parc'''
+            
 
 
 def p_SHOWDB(t):
@@ -519,14 +519,6 @@ def p_COLDEF3(t):
     else:
         t[0] = Columna(str(t[1]), t[2], t[3])
 
-def p_COLDEF23(t):
-    '''COLDEF : id id
-            | id id LOPCOLUMN'''
-    if len(t) == 3:
-        t[0] = Columna(str(t[1]), str(t[2]))
-    else:
-        t[0] = Columna(str(t[1]), str(t[2]), t[3])
-
 
 def p_LOPCOLUMN1(t):
     '''LOPCOLUMN : LOPCOLUMN OPCOLUMN'''
@@ -623,6 +615,7 @@ def p_HERENCIA(t):
 
 def p_CREATETYPE(t):
     'CREATETYPE : create type id as enum para LEXP parc'
+    t[0] = CreateType(str(t[3]),t[7])
 
 
 def p_SELECT(t):
@@ -705,7 +698,7 @@ def p_DELETE(t):
     '''
     DELETE : delete   r_from EXP WHERE
     '''
-    t[0] = Delete(t[3].t[4])
+    t[0] = Delete(t[3],t[4])
 
 
 def p_EXIST(t):
@@ -833,6 +826,10 @@ def p_TIPO22(t):
             | timestamp with time zone
             | time without time zone
             | time with time zone'''
+
+def p_TIPOTYPE(t):
+    'TIPO : id'
+    t[0] = Tipo(str(t[1]),str(t[1]))
 
 
 def p_FIELDS(t):

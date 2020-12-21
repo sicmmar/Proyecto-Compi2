@@ -228,6 +228,20 @@ class CreateTable(Instruccion):
                 return r
             #elif estado == 1: 
 
+class CreateType(Instruccion):
+    def __init__(self,iden,lexp):
+        self.id = iden
+        self.contenido = lexp
+
+    def ejecutar(self,ent:Entorno):
+        #formato para el enum: ENUM_database_identificador
+        nuevoType:Simbolo = Simbolo(TipoSimbolo.TYPE_ENUM,("ENUM_" + ent.getDataBase() + "_" + self.id),self.contenido)
+        nuevoType.baseDatos = ent.getDataBase()
+        r = ent.nuevoSimbolo(nuevoType)
+        if r == "ok":
+            return "Nuevo tipo '" + self.id + "' creado"
+
+        return "El tipo '" + self.id + "' ya existe declarado"
 
 
 class Check(CreateTable):

@@ -1,3 +1,9 @@
+CREATE DATABASE IF NOT EXISTS test
+    OWNER = 'root'
+    MODE = 1;
+
+USE test;
+
 create table tblibrosalario
 ( idempleado integer not null,
   aniocalculo integer not null CONSTRAINT aniosalario CHECK (aniocalculo > 0),

@@ -45,6 +45,13 @@ class Simbolo:
             elif self.tipo == TipoSimbolo.CONSTRAINT_PRIMARY:
                 cadena += "<TR><TD>" + self.nombre + "</TD><TD>CONSTRAINT PRIMARIA</TD><TD>" + self.baseDatos + "</TD><TD>"
                 cadena += self.tabla + "</TD><TD>" + str(self.valor) + "</TD></TR>"
+            elif self.tipo == TipoSimbolo.TYPE_ENUM:
+                columnas:Simbolo = [] 
+                columnas = self.valor
+                cadena += "<TR><TD rowspan='" + str(len(columnas)) + "'>" + self.nombre.split('_')[2] + "</TD><TD rowspan='" + str(len(columnas)) + "'>ENUM</TD><TD rowspan='" + str(len(columnas)) + "'>" + self.baseDatos + "</TD><TD rowspan='" + str(len(columnas)) + "'>"
+                cadena += self.tabla + "</TD><TD>" + columnas[0].valor + "</TD></TR>\n"
+                for col in range(1,len(columnas),1):
+                    cadena += "<TR><TD>" + columnas[col].valor + "</TD></TR>\n"
 
 
         return cadena
