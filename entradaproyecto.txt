@@ -121,3 +121,48 @@ insert into pruebita2 values ('prueba3',42,67.34);
 select * from employees where salary>40;
 select * from employees where salary>salard;
 select * from employees where salary=salard;
+
+
+drop all();
+create database prueba;
+create database wenas;
+
+show databases;
+use wenas;
+CREATE TABLE employees (
+id integer,
+first_name VARCHAR (50),
+last_name VARCHAR (50),
+salary  money,
+codarea integer
+);
+
+ CREATE TABLE area (
+codigo integer,
+nombre VARCHAR (50) 
+);
+
+ 
+
+show tables(wenas);
+
+insert into area values (1,'area1');
+insert into area values (2,'area2');
+insert into area values (3,'area3');
+
+insert into employees values (1,'juan','perez',10.4,1);
+insert into employees values (2,'juan2','perez2',20.4,1);
+insert into employees values (3,'juan3','perez3',30.4,1);
+insert into employees values (4,'juan4','peresdz2',40.4,2);
+insert into employees values (5,'juan5','perez3d',50.4,2);
+insert into employees values (6,'juan6','perez2d',60.4,2);
+insert into employees values (7,'juan7','perez334',70.4,3);
+
+
+
+select * from employees;
+select * from employees where 40<salary;
+select * from employees,area where codarea=1;
+select * from employees,area where codarea=codigo;
+
+

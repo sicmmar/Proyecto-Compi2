@@ -250,6 +250,10 @@ from Expresion.FuncionesNativas import FuncionesNativas
 from Instrucciones.Insert import *
 from Instrucciones.Drop import *
 from Instrucciones.Delete import Delete
+from graphviz import Digraph
+
+global listaBNF
+listaBNF = []
 
 # Asociación de operadores y precedencia
 precedence = (
@@ -274,6 +278,7 @@ from reportes import *
 
 def p_init(t):
     'init            : instrucciones'
+    listaBNF.append("INIT ::= INSTRUCCIONES")
     t[0] = t[1]
     print("ok")
     return t[0]
@@ -281,34 +286,85 @@ def p_init(t):
 
 def p_instrucciones_lista(t):
     'instrucciones    : instrucciones instruccion'
+    listaBNF.append("INSTRUCCIONES ::= INSTRUCCIONES INSTRUCCION")
     t[1].append(t[2])
     t[0] = t[1]
 
 
 def p_instrucciones_instruccion(t):
     'instrucciones    : instruccion '
+    listaBNF.append("INSTRUCCIONES ::= INSTRUCCION")
     t[0] = [t[1]]
 
 
-def p_instruccion(t):
+def p_instruccion1(t):
     '''instruccion      :  SELECT ptcoma
-                    | CREATETABLE
-                    | UPDATE ptcoma
-                    | DELETE  ptcoma
-                    | ALTER  ptcoma
-                    | DROP ptcoma
-                    | INSERT ptcoma
-                    | CREATETYPE ptcoma
-                    | CASE
-                    | CREATEDB ptcoma
-                    | SHOWDB ptcoma
-                    | SHOW ptcoma
     '''
+    listaBNF.append("INSTRUCCION ::= SELECT ptcoma")
     t[0] = t[1]
 
+def p_instruccion2(t):
+    '''instruccion      : CREATETABLE
+    '''
+    listaBNF.append("INSTRUCCION ::= CREATETABLE")
+    t[0] = t[1]
 
-def p_instruccion1(t):
+def p_instruccion3(t):
+    '''instruccion      : UPDATE ptcoma
+    '''
+    listaBNF.append("INSTRUCCION ::= UPDATE ptcoma")
+    t[0] = t[1]
+
+def p_instruccion4(t):
+    '''instruccion      : DELETE  ptcoma
+    '''
+    listaBNF.append("INSTRUCCION ::= DELETE ptcoma")
+    t[0] = t[1]
+
+def p_instruccion5(t):
+    '''instruccion      : ALTER  ptcoma
+    '''
+    listaBNF.append("INSTRUCCION ::= ALTER ptcoma")
+    t[0] = t[1]
+
+def p_instruccion6(t):
+    '''instruccion      : DROP ptcoma'''
+    listaBNF.append("INSTRUCCION ::= DROP ptcoma")
+    t[0] = t[1]
+
+def p_instruccion7(t):
+    '''instruccion      : INSERT ptcoma'''
+    listaBNF.append("INSTRUCCION ::= INSERT ptcoma")
+    t[0] = t[1]
+
+def p_instruccion8(t):
+    '''instruccion      : CREATETYPE ptcoma'''
+    listaBNF.append("INSTRUCCION ::= CREATETYPE ptcoma")
+    t[0] = t[1]
+
+def p_instruccion9(t):
+    '''instruccion      : CASE'''
+    listaBNF.append("INSTRUCCION ::= CASE")
+    t[0] = t[1]
+
+def p_instruccion10(t):
+    '''instruccion      : CREATEDB ptcoma'''
+    listaBNF.append("INSTRUCCION ::= CREATEDB ptcoma")
+    t[0] = t[1]
+
+def p_instruccion11(t):
+    '''instruccion      : SHOWDB ptcoma'''
+    listaBNF.append("INSTRUCCION ::= SHOWDB ptcoma")
+    t[0] = t[1]
+
+def p_instruccion12(t):
+    '''instruccion      : SHOW ptcoma'''
+    listaBNF.append("INSTRUCCION ::= SHOW ptcoma")
+    t[0] = t[1]
+
+def p_instruccion13(t):
     '''instruccion      :  use id ptcoma'''
+    listaBNF.append("INSTRUCCION ::= use id ptcoma")
     t[0] = Use(t[2])
 
 
@@ -336,15 +392,18 @@ def p_ELSE(t):
 
 def p_INSERT(t):
     'INSERT : insert into id values para LEXP parc'
+    listaBNF.append("INSERT ::= insert into " + str(t[3]) + " values para LEXP parc")
     t[0] = Insert(t[3], t[6])
 
 
 def p_INSERT2(t):
     'INSERT : insert into id para LEXP parc values para LEXP parc'
+    listaBNF.append("INSERT ::= insert into " + str(t[3]) + " para LEXP parc values para LEXP parc")
     t[0] = InsertWhitColum(t[3],t[5],t[9])
 
 def p_DROPALL(t):
     '''DROP : drop all para parc '''
+    listaBNF.append("DROP ::= drop all para parc")
     t[0] = DropAll()
 
 def p_DROP(t):
@@ -353,12 +412,15 @@ def p_DROP(t):
              | drop databases id '''
     if len(t) == 4:
         if (t[2].lower() == 'table'):
+            listaBNF.append("DROP ::= drop table " + str(t[3]))
             t[0] = DropTable(t[3])
 
         else:
+            listaBNF.append("DROP ::= drop databases " + str(t[3]))
             t[0] = DropDb(str(t[3]))
 
     elif len(t) == 5:
+        listaBNF.append("DROP ::= drop databases if exist " + str(t[5]))
         t[0] = DropDb(str(t[5]))
 
 
@@ -368,12 +430,13 @@ def p_ALTER(t):
                | altertable
     '''
     if len(t) == 7:
+        listaBNF.append("ALTER ::= alter databases " + str(t[3]) + " " + str(t[4]) + " to " + str(t[6]))
         if (t[4] == 'rename'):
-            print("renombrar db")
             t[0] = AlterDb(str(t[3]), t[6])
         else:
             print("renombrar owner")
     elif len(t) == 1:
+
         print("altertable")
 
 
@@ -416,22 +479,22 @@ def p_ADD(t):
             | constraint id unique para id parc
             | foreign key para LEXP parc references id para LEXP parc
             | constraint id foreign key para LEXP parc references id para LEXP parc'''
-            
+
 
 
 def p_SHOWDB(t):
-    ''' SHOWDB : show dbs
-    '''
+    ''' SHOWDB : show dbs'''
+    listaBNF.append("SHOWDB ::= show database")
     t[0] = ShowDb()
 
 def p_SHOWTABLES(t):
-    ''' SHOW : show tables para id parc
-    '''
+    ''' SHOW : show tables para id parc'''
+    listaBNF.append("SHOW ::= show tables para " + str(t[4]) + " parc")
     t[0] = ShowTables(t[4])
 
 def p_SHOWCOLLECTION(t):
-    ''' SHOW : show collection para parc
-    '''
+    ''' SHOW : show collection para parc'''
+    listaBNF.append("SHOW ::= show collection para parc")
     t[0] = ShowCollection()
 
 def p_CREATEDB(t):
@@ -441,50 +504,70 @@ def p_CREATEDB(t):
         | create RD id OPCCDB
     '''
     if len(t) == 7:
+        listaBNF.append("CREATEDB ::= create RD if not exist " + str(t[6]))
         t[0] = CreateDb(str(t[6]))
     elif len(t) == 8:
+        listaBNF.append("CREATEDB ::= create RD if not exist " + str(t[6]) + " OPCCDB")
         t[0] = CreateDb(str(t[6]))
     elif len(t) == 4:
+        listaBNF.append("CREATEDB ::= create RD " + str(t[3]))
         t[0] = CreateDb(str(t[3]))
     elif len(t) == 5:
+        listaBNF.append("CREATEDB ::= create RD " + str(t[3]) + " OPCCDB")
         t[0] = CreateDb(str(t[4]))
 
 
 def p_OPCCDB(t):
-    '''OPCCDB : PROPIETARIO
-        | MODO
-        | PROPIETARIO MODO'''
+    '''OPCCDB : PROPIETARIO'''
+    listaBNF.append("OPCCDB ::= PROPIETARIO")
 
+def p_OPCCDB1(t):
+    '''OPCCDB : MODO'''
+    listaBNF.append("OPCCDB :: = MODO")
+
+def p_OPCCDB2(t):
+    '''OPCCDB : PROPIETARIO MODO'''
+    listaBNF.append("OPCCDB ::= PROPIETARIO MODO")
 
 def p_RD(t):
     '''RD : or replace databases
         | databases
     '''
+    if len(t) == 2:
+        listaBNF.append("RD ::= databases")
+    else:
+        listaBNF.append("RD ::= or replace databases")
 
 
 def p_PROPIETARIO(t):
     '''PROPIETARIO : owner igual id
-		| owner id
-        | owner igual cadena
-		| owner cadena
-        | owner igual cadenaString
-		| owner cadenaString
-    '''
+                    | owner igual cadena
+                    | owner igual cadenaString'''
+    listaBNF.append("PROPIETARIO ::= owner igual " + str(t[3]))
+
+def p_PROPIETARIO1(t):
+    '''PROPIETARIO : owner id
+                    | owner cadena
+                    | owner cadenaString'''
+    listaBNF.append("PROPIETARIO ::= owner " + str(t[2]))
 
 
 def p_MODO(t):
     '''MODO : mode  igual int
-	    | mode int
-    '''
+	    | mode int'''
+    if len(t) == 3: listaBNF.append("MODO ::= mode " + str(t[2]))
+    else : listaBNF.append("MODO ::= mode igual " + str(t[3]))
 
 
 def p_CREATETABLE1(t):
     '''CREATETABLE : create table id para LDEF parc ptcoma'''
+    listaBNF.append("CREATETABLE ::= create table " + str(t[3]) + " para LDEF parc ptcoma")
     t[0] = CreateTable(str(t[3]), t[5])
 
 
 def p_CREATETABLE2(t):
     '''CREATETABLE : create table id para LDEF parc HERENCIA ptcoma'''
+    listaBNF.append("CREATETABLE ::= create table " + str(t[3]) + " para LDEF parc HERENCIA ptcoma")
     tabla:CreateTable = CreateTable(str(t[3]), t[5])
     tabla.herencia = t[7]
     t[0] = tabla
@@ -492,12 +575,14 @@ def p_CREATETABLE2(t):
 
 def p_LDEF1(t):
     '''LDEF : LDEF coma COLDEF'''
+    listaBNF.append("LDEF ::= LDEF coma COLDEF")
     t[1].append(t[3])
     t[0] = t[1]
 
 
 def p_LDEF2(t):
     '''LDEF : COLDEF'''
+    listaBNF.append("LDEF ::= COLDEF")
     t[0] = [t[1]]
 
 
@@ -1097,4 +1182,17 @@ parser = yacc.yacc()
 
 
 def parse(input):
-    return parser.parse(input)
+    r = parser.parse(input)
+    reporteBNF = Digraph("ReporteBNF", node_attr={'shape':'record'}, graph_attr={'label':'REPORTE GRAMÁTICA BNF (Grupo 14)'})
+    entr:str = "<<TABLE BORDER=\"0\" COLOR=\"WHITE\" CELLBORDER=\"1\" CELLSPACING=\"0\">"
+    i = len(listaBNF) - 1
+    while i >= 0:
+        entr += "<TR><TD>" + listaBNF[i] + "</TD></TR>\n"
+        i = i - 1        
+    
+    entr += "</TABLE>>"
+
+    reporteBNF.node('bnf',entr)
+    reporteBNF.render('bnf', view=False)  # doctest: +SKIP
+    'bnf.pdf'
+    return r

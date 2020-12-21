@@ -70,10 +70,10 @@ Rule 60    OPCCDB -> PROPIETARIO MODO
 Rule 61    RD -> or replace databases
 Rule 62    RD -> databases
 Rule 63    PROPIETARIO -> owner igual id
-Rule 64    PROPIETARIO -> owner id
-Rule 65    PROPIETARIO -> owner igual cadena
-Rule 66    PROPIETARIO -> owner cadena
-Rule 67    PROPIETARIO -> owner igual cadenaString
+Rule 64    PROPIETARIO -> owner igual cadena
+Rule 65    PROPIETARIO -> owner igual cadenaString
+Rule 66    PROPIETARIO -> owner id
+Rule 67    PROPIETARIO -> owner cadena
 Rule 68    PROPIETARIO -> owner cadenaString
 Rule 69    MODO -> mode igual int
 Rule 70    MODO -> mode int
@@ -273,8 +273,8 @@ between              : 199 221 222 223
 bigint               : 163
 boolean              : 172
 by                   : 124 128 129
-cadena               : 65 66 141 159 214 215 226 227 236 239 248 249 250
-cadenaString         : 67 68 210 211 240
+cadena               : 64 67 141 159 214 215 226 227 236 239 248 249 250
+cadenaString         : 65 68 210 211 240
 case                 : 17 18
 char                 : 152
 character            : 150 154
@@ -314,10 +314,10 @@ foreign              : 49 50 91
 group                : 124
 having               : 126
 hour                 : 181
-id                   : 16 23 24 26 27 28 29 29 30 30 32 35 36 39 39 42 43 45 46 48 48 49 50 50 52 54 55 56 57 63 64 71 72 76 77 78 81 83 89 91 101 102 133 134 135 177 212 213 231 232 243
+id                   : 16 23 24 26 27 28 29 29 30 30 32 35 36 39 39 42 43 45 46 48 48 49 50 50 52 54 55 56 57 63 66 71 72 76 77 78 81 83 89 91 101 102 133 134 135 177 212 213 231 232 243
 idPunto              : 252
 if                   : 27 54 55
-igual                : 63 65 67 69 98 134 135 196
+igual                : 63 64 65 69 98 134 135 196
 in                   : 219 220
 inherits             : 101
 insert               : 23 24
@@ -6800,10 +6800,10 @@ state 133
     (59) OPCCDB -> . MODO
     (60) OPCCDB -> . PROPIETARIO MODO
     (63) PROPIETARIO -> . owner igual id
-    (64) PROPIETARIO -> . owner id
-    (65) PROPIETARIO -> . owner igual cadena
-    (66) PROPIETARIO -> . owner cadena
-    (67) PROPIETARIO -> . owner igual cadenaString
+    (64) PROPIETARIO -> . owner igual cadena
+    (65) PROPIETARIO -> . owner igual cadenaString
+    (66) PROPIETARIO -> . owner id
+    (67) PROPIETARIO -> . owner cadena
     (68) PROPIETARIO -> . owner cadenaString
     (69) MODO -> . mode igual int
     (70) MODO -> . mode int
@@ -12029,10 +12029,10 @@ state 229
 state 230
 
     (63) PROPIETARIO -> owner . igual id
-    (64) PROPIETARIO -> owner . id
-    (65) PROPIETARIO -> owner . igual cadena
-    (66) PROPIETARIO -> owner . cadena
-    (67) PROPIETARIO -> owner . igual cadenaString
+    (64) PROPIETARIO -> owner . igual cadena
+    (65) PROPIETARIO -> owner . igual cadenaString
+    (66) PROPIETARIO -> owner . id
+    (67) PROPIETARIO -> owner . cadena
     (68) PROPIETARIO -> owner . cadenaString
 
     igual           shift and go to state 305
@@ -14492,8 +14492,8 @@ state 304
 state 305
 
     (63) PROPIETARIO -> owner igual . id
-    (65) PROPIETARIO -> owner igual . cadena
-    (67) PROPIETARIO -> owner igual . cadenaString
+    (64) PROPIETARIO -> owner igual . cadena
+    (65) PROPIETARIO -> owner igual . cadenaString
 
     id              shift and go to state 372
     cadena          shift and go to state 373
@@ -14502,18 +14502,18 @@ state 305
 
 state 306
 
-    (64) PROPIETARIO -> owner id .
+    (66) PROPIETARIO -> owner id .
 
-    mode            reduce using rule 64 (PROPIETARIO -> owner id .)
-    ptcoma          reduce using rule 64 (PROPIETARIO -> owner id .)
+    mode            reduce using rule 66 (PROPIETARIO -> owner id .)
+    ptcoma          reduce using rule 66 (PROPIETARIO -> owner id .)
 
 
 state 307
 
-    (66) PROPIETARIO -> owner cadena .
+    (67) PROPIETARIO -> owner cadena .
 
-    mode            reduce using rule 66 (PROPIETARIO -> owner cadena .)
-    ptcoma          reduce using rule 66 (PROPIETARIO -> owner cadena .)
+    mode            reduce using rule 67 (PROPIETARIO -> owner cadena .)
+    ptcoma          reduce using rule 67 (PROPIETARIO -> owner cadena .)
 
 
 state 308
@@ -16913,10 +16913,10 @@ state 371
     (59) OPCCDB -> . MODO
     (60) OPCCDB -> . PROPIETARIO MODO
     (63) PROPIETARIO -> . owner igual id
-    (64) PROPIETARIO -> . owner id
-    (65) PROPIETARIO -> . owner igual cadena
-    (66) PROPIETARIO -> . owner cadena
-    (67) PROPIETARIO -> . owner igual cadenaString
+    (64) PROPIETARIO -> . owner igual cadena
+    (65) PROPIETARIO -> . owner igual cadenaString
+    (66) PROPIETARIO -> . owner id
+    (67) PROPIETARIO -> . owner cadena
     (68) PROPIETARIO -> . owner cadenaString
     (69) MODO -> . mode igual int
     (70) MODO -> . mode int
@@ -16939,18 +16939,18 @@ state 372
 
 state 373
 
-    (65) PROPIETARIO -> owner igual cadena .
+    (64) PROPIETARIO -> owner igual cadena .
 
-    mode            reduce using rule 65 (PROPIETARIO -> owner igual cadena .)
-    ptcoma          reduce using rule 65 (PROPIETARIO -> owner igual cadena .)
+    mode            reduce using rule 64 (PROPIETARIO -> owner igual cadena .)
+    ptcoma          reduce using rule 64 (PROPIETARIO -> owner igual cadena .)
 
 
 state 374
 
-    (67) PROPIETARIO -> owner igual cadenaString .
+    (65) PROPIETARIO -> owner igual cadenaString .
 
-    mode            reduce using rule 67 (PROPIETARIO -> owner igual cadenaString .)
-    ptcoma          reduce using rule 67 (PROPIETARIO -> owner igual cadenaString .)
+    mode            reduce using rule 65 (PROPIETARIO -> owner igual cadenaString .)
+    ptcoma          reduce using rule 65 (PROPIETARIO -> owner igual cadenaString .)
 
 
 state 375
