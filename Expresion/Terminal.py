@@ -3,6 +3,7 @@ from datetime import date
 from datetime import datetime
 from Entorno import Entorno
 import random as rn
+from Tipo import  Tipo
 import math
 
 class Terminal(Expresion) :
@@ -14,18 +15,34 @@ class Terminal(Expresion) :
        self.tipo=tipo
        self.valor=valor
 
+
     def getval(self,entorno):
 
         if self.tipo.tipo=='identificador':
             'buscar columna'
 
-        if str(self.valor) == 'CURRENT_DATE':
+        if self.valor == 'CURRENT_DATE':
             return date.today()
-        elif str(self.valor)== 'CURRENT_TIME' or (self.valor=='now' and self.tipo.tipo=='timestamp without time zone'):
+        elif self.valor== 'CURRENT_TIME':
+            'retornar solo  la hora'
+            now = datetime.now()
+            return now.hour
+        elif self.valor=='now' and self.tipo.tipo=='timestamp without time zone':
             return datetime.now()
-        elif(str(self.valor).lower()=='random'):
-                value = rn.randint(0,1)
+
+        elif(self.valor=='random'):
+                value = rn.uniform(0,1)
                 return value
-        elif (str(self.valor).lower()=="pi"):
+        elif (self.valor=="pi"):
                 return math.pi
-        return str(self.valor)
+        else:
+            if str(self.valor).count('-')==2 and self.valor.count(':')==2:
+                if len(str(self.valor))>10:
+                    self.tipo = Tipo('timestamp without time zone', None, -1, -1)
+            elif str(self.valor).count('-')==2:
+                if len(str(self.valor))==10:
+                    self.tipo=Tipo('date',None,-1,-1)
+            elif str(self.valor).count(':') == 2:
+                if len(str(self.valor)) >= 8:
+                    self.tipo = Tipo('time without time zone', None, -1, -1)
+            return self.valor

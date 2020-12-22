@@ -11,20 +11,26 @@ create table tbpuesto
  primary key (idpuesto)
 );
 
-insert into tbpuesto values (1,'Recepcionista','4,000');
+alter table tbpuesto add check (salariobase > 54.00);
+
+insert into tbpuesto values (1,'Recepcionista',4000.00);
 
 alter table tbpuesto
 add column tinecomision boolean;
 
-insert into tbpuesto values (2,'Asistente Contable','4,500',false);
-insert into tbpuesto values(3,'Contador General','9000',false);
-insert into tbpuesto values(4,'Asistente de RRHH','4000',false);
-insert into tbpuesto values(5,'Recepcionista Gerencia','5000',false);
-insert into tbpuesto values(6,'Vendedor 1','2500',true);
-insert into tbpuesto values(7,'Vendedor 2','2750',true);
-insert into tbpuesto values(8,'Vendedor 3','3000',true);
-insert into tbpuesto values(9,'Jefe de Ventas','4000',true);
-insert into tbpuesto values(10,'Jefe de Ventas Regional','2500',true);
+select * from tbpuesto;
+
+insert into tbpuesto values (2,'Asistente Contable',4500.00,false);
+insert into tbpuesto values(3,'Contador General',9000.00,false);
+insert into tbpuesto values(4,'Asistente de RRHH',4000.00,false);
+insert into tbpuesto values(5,'Recepcionista Gerencia',5000.00,false);
+insert into tbpuesto values(6,'Vendedor 1',2500.00,true);
+insert into tbpuesto values(7,'Vendedor 2',2750.00,true);
+insert into tbpuesto values(8,'Vendedor 3',3000.00,true);
+insert into tbpuesto values(9,'Jefe de Ventas',4000.00,true);
+insert into tbpuesto values(10,'Jefe de Ventas Regional',2500.00,true);
+
+select * from tbpuesto;
 
 CREATE TYPE area AS ENUM ('CONTABILIDAD','ADMINISTRACION','VENTAS','TECNOLOGIA','FABRICA');
 
@@ -35,16 +41,6 @@ CREATE TABLE tbempleadopuesto
 	idpuesto   integer not null,
 	departamento area
 );
-
- alter table tbempleadopuesto
- add constraint FK_empleado
- foreign key (idempleado)
- references tbempleado(idempleado);
-  
- alter table tbempleadopuesto
- add constraint FK_empleado
- foreign key (idempleado)
- references tbempleado(idempleado);
   
   
 insert into tbempleadopuesto values(1,1,'ADMINISTRACION');

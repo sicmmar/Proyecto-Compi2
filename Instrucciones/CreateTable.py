@@ -153,13 +153,18 @@ class CreateTable(Instruccion):
                                     sym = Simbolo(TipoSimbolo.CONSTRAINT_UNIQUE,str("U_" + dbActual + "_" + self.id + "_" + col.nombre + "_" + tt.id))
                                     ent.nuevoSimbolo(sym)
                     elif tt.contenido.tipo == AtributosColumna.CHECK:
-                        #formato: C_database_tabla_idConstraint
-                        sym = Simbolo(TipoSimbolo.CONSTRAINT_CHECK,str("C_" + dbActual + "_" + self.id + "_" + tt.id))
-                        sym.tabla = self.id
-                        sym.baseDatos = dbActual
-                        sym.valor = tt.contenido.condiciones
-                        listaAtrCol.append(sym)
-                        
+                        #formato: C_database_tabla_nombreColumna_idConstraint
+                        nombreColCheck = str(tt.contenido.condiciones.exp1.valor)
+                        for x in listaColumnas:
+                            if x.nombre == nombreColCheck:
+                                x.atributos.update({'check':str("C_" + dbActual + "_" + self.id + "_" + x.nombre + "_" + tt.id)})
+                                sym = Simbolo(TipoSimbolo.CONSTRAINT_CHECK,str("C_" + dbActual + "_" + self.id + "_" + x.nombre + "_" + tt.id))
+                                sym.tabla = self.id
+                                sym.baseDatos = dbActual
+                                sym.valor = tt.contenido.condiciones
+                                listaAtrCol.append(sym)
+                                break
+            
             nuevaTabla.valor = listaColumnas
             estado = DBMS.createTable(dbActual,self.id, len(listaColumnas))
             if estado == 0:
@@ -221,7 +226,7 @@ class CreateTable(Instruccion):
                                         sym.tabla = self.id
                                         sym.baseDatos = dbActual
                                         ent.nuevoSimbolo(sym)
-
+                    
                     DBMS.showCollection()
                     return str("Tabla " + self.id + " creada exitosamente")
                 

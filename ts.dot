@@ -1,8 +1,4 @@
-digraph G {shortName [shape=record label=<<TABLE><TR><TD>NOMBRE</TD><TD>TIPO</TD><TD>BASE DE DATOS</TD><TD>TABLA</TD><TD>VALOR</TD></TR><TR><TD rowspan='5'>employees</TD><TD rowspan='5'>TABLA</TD><TD rowspan='5'>wenas</TD><TD rowspan='5'></TD><TD>id:integer</TD></TR>
-<TR><TD>first_name:varchar</TD></TR>
-<TR><TD>last_name:varchar</TD></TR>
-<TR><TD>salary:money</TD></TR>
-<TR><TD>codarea:integer</TD></TR>
-<TR><TD rowspan='2'>area</TD><TD rowspan='2'>TABLA</TD><TD rowspan='2'>wenas</TD><TD rowspan='2'></TD><TD>codigo:integer</TD></TR>
-<TR><TD>nombre:varchar</TD></TR>
-</TABLE>>]}
+digraph G {shortName [shape=record label=<<TABLE><TR><TD>NOMBRE</TD><TD>TIPO</TD><TD>BASE DE DATOS</TD><TD>TABLA</TD><TD>VALOR</TD></TR><TR><TD rowspan='3'>tbpuesto</TD><TD rowspan='3'>TABLA</TD><TD rowspan='3'>test</TD><TD rowspan='3'></TD><TD>idpuesto:smallint</TD></TR>
+<TR><TD>puesto:character</TD></TR>
+<TR><TD>salariobase:money</TD></TR>
+<TR><TD>PK_test_tbpuesto</TD><TD>CONSTRAINT PRIMARIA</TD><TD>test</TD><TD>tbpuesto</TD><TD>[0]</TD></TR><TR><TD>C_test_tbpuesto_salariobase</TD><TD>CONSTRAINT CHECK</TD><TD>test</TD><TD>tbpuesto</TD><TD>salariobase &#62; 54.0</TD></TR>\n</TABLE>>]}
