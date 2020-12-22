@@ -35,20 +35,69 @@ class AlterTable(Instruccion):
                     #formato: C_database_tabla_nombreColumna
                     addCheck:AddCheck = self.opcion
                     nombreColCheck:str = str(addCheck.condicion.exp1.valor)
-                    tablaCheck:Simbolo = ent.buscarSimbolo(self.tabla + "_" + dbActual)
-                    if tablaCheck != None: 
-                        for col in tablaCheck.valor:
-                            if col.nombre == nombreColCheck:
-                                col.atributos.update({'check':str("C_" + dbActual + "_" + self.tabla + "_" + col.nombre)})
-                                nuevoSym:Simbolo = Simbolo(TipoSimbolo.CONSTRAINT_CHECK,str("C_" + dbActual + "_" + self.tabla + "_" + col.nombre),addCheck.condicion)
+                    for col in tablaAlterada.valor:
+                        if col.nombre == nombreColCheck:
+                            idCheck:str = str("C_" + dbActual + "_" + self.tabla + "_" + col.nombre)
+                            if addCheck.constraint != None:
+                                idCheck += "_" + str(addCheck.constraint)
+                            
+                            col.atributos.update({'check':idCheck})
+                            nuevoSym:Simbolo = Simbolo(TipoSimbolo.CONSTRAINT_CHECK,idCheck,addCheck.condicion)
+                            nuevoSym.baseDatos = dbActual
+                            nuevoSym.tabla = self.tabla
+                            ent.nuevoSimbolo(nuevoSym)
+                            break
+                
+                elif self.opcion.tipoAlter == TipoAlter.ADDUNIQUE:
+                    addUnique:AddUnique = self.opcion
+                    for add in addUnique.columnas:
+                        for col in tablaAlterada.valor:
+                            if col.nombre == add.valor:
+                                idUnique:str = str("U_" + dbActual + "_" + self.tabla + "_" + col.nombre)
+                                if addUnique.constraint != None:
+                                    idUnique += "_" + str(addUnique.constraint)
+                                
+                                col.atributos.update({'unique':idUnique})
+                                nuevoSym:Simbolo = Simbolo(TipoSimbolo.CONSTRAINT_UNIQUE,idUnique,col.nombre)
                                 nuevoSym.baseDatos = dbActual
                                 nuevoSym.tabla = self.tabla
                                 ent.nuevoSimbolo(nuevoSym)
+
+                elif self.opcion.tipoAlter == TipoAlter.ADDFOREIGN:
+                    addForeign:AddForeign = self.opcion
+                    tablaReferenciada:Simbolo = ent.buscarSimbolo(addForeign.referenceTable + "_" + dbActual)
+                    if tablaReferenciada != None:
+                        if len(addForeign.colAddForeign) == len(addForeign.colReferences):
+                            idFk:str = str("FK_" + dbActual + "_" + self.tabla + "_" + addForeign.referenceTable)
+                            if addForeign.constraint != None: idFk += "_" + addForeign.constraint
+                            n:Simbolo = Simbolo(TipoSimbolo.CONSTRAINT_FOREIGN,idFk)
+                            n.baseDatos = dbActual
+                            n.tabla = self.tabla
+                            ent.nuevoSimbolo(n)
+                        else: return ("La cantidad de columnas no coinciden en llave foránea de tabla '" + self.tabla + "'")
+
+                elif self.opcion.tipoAlter == TipoAlter.ADDNULL:
+                    addNulo:AddNull = self.opcion
+                    for col in tablaAlterada.valor:
+                        if col.nombre == addNulo.columna:
+                            if addNulo.nulo: #setea a nulos
+                                col.atributos.update({'null':True})
                                 break
+                            else:
+                                col.atributos.update({'not null':True})
+                
+                elif self.opcion.tipoAlter == TipoAlter.DROPCONSTRAINT:
+                    dropConstr:DropConstraint = self.opcion
+                    concat:str = "_" + dbActual + "_" + self.tabla + "_"
+                            
 
 class TipoAlter(Enum):
     ADDCOLUMNA = 1,
-    ADDCHECK = 2
+    ADDCHECK = 2,
+    ADDUNIQUE = 3,
+    ADDFOREIGN = 4,
+    ADDNULL = 5,
+    DROPCONSTRAINT = 6
 
 class AddColumn():
     def __init__(self,id:str,tipo):
@@ -61,3 +110,28 @@ class AddCheck():
         self.constraint = id
         self.condicion = condicion
         self.tipoAlter = TipoAlter.ADDCHECK
+
+class AddUnique():
+    def __init__(self,id,columnas):
+        self.constraint = id
+        self.columnas = columnas
+        self.tipoAlter = TipoAlter.ADDUNIQUE
+
+class AddForeign():
+    def __init__(self,id,colAddForeign,referenceTable,colReferences):
+        self.constraint = id
+        self.colAddForeign = colAddForeign
+        self.referenceTable = referenceTable
+        self.colReferences = colReferences
+        self.tipoAlter = TipoAlter.ADDFOREIGN
+
+class AddNull():
+    def __init__(self,columna,nulo:bool):
+        self.columna = columna
+        self.nulo = nulo
+        self.tipoAlter = TipoAlter.ADDNULL
+
+class DropConstraint():
+    def __init__(self,constraint):
+        self.constraint = constraint
+        self.tipoAlter = TipoAlter.DROPCONSTRAINT

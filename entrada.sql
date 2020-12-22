@@ -54,22 +54,23 @@ insert into tbrol values (3,'Ventas');
 select * from tbrol;
 
 
---insert into tbusuario values(1,'Luis Fernando','Salazar Rodriguez','lsalazar',MD5('paswword'),now());
+insert into tbusuario values(1,'Luis Fernando','Salazar Rodriguez','lsalazar',MD5('paswword'),now());
+select * from tbusuario;
 --Error 22001
 
 ALTER TABLE tbusuario
     ALTER COLUMN password TYPE varchar(80);
 	
---insert into tbusuario values(1,'Luis Fernando','Salazar Rodriguez','lsalazar',MD5('paswword'),now());
---insert into tbusuario values(1,'Maria Cristina','Lopez Ramirez','mlopez',MD5('Diciembre'),now());
---insert into tbusuario values(1,'Hugo Alberto','Huard Ordoñez','hhuard',MD5('Rafael'),now());
+insert into tbusuario values(1,'Luis Fernando','Salazar Rodriguez','lsalazar',MD5('paswword'),now());
+insert into tbusuario values(1,'Maria Cristina','Lopez Ramirez','mlopez',MD5('Diciembre'),now());
+insert into tbusuario values(1,'Hugo Alberto','Huard Ordoñez','hhuard',MD5('Rafael'),now());
 --Error 23505
 
 select * from tbusuario;
 
---insert into tbusuario values(1,'Luis Fernando','Salazar Rodriguez','lsalazar',MD5('paswword'),now());
---insert into tbusuario values(2,'Maria Cristina','Lopez Ramirez','mlopez',MD5('Diciembre'),now());
---insert into tbusuario values(3,'Hugo Alberto','Huard Ordoñez','hhuard',MD5('Rafael'),now());
+insert into tbusuario values(1,'Luis Fernando','Salazar Rodriguez','lsalazar',MD5('paswword'),now());
+insert into tbusuario values(2,'Maria Cristina','Lopez Ramirez','mlopez',MD5('Diciembre'),now());
+insert into tbusuario values(3,'Hugo Alberto','Huard Ordoñez','hhuard',MD5('Rafael'),now());
 
 insert into tbrolxusuario values(1,1);
 insert into tbrolxusuario values(2,2);

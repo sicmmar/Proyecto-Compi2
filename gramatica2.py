@@ -449,24 +449,46 @@ def p_ADD1(t):
     listaBNF.append("OP ::= add check para CONDCHECK parc")
     t[0] = AddCheck(None,t[4])
 
+def p_ADD11(t):
+    '''OP : add constraint id check para CONDCHECK parc'''
+    listaBNF.append("OP ::= constraint " + str(t[3]) + " add check para CONDCHECK parc")
+    t[0] = AddCheck(str(t[3]),t[6])
+
 def p_ADD2(t):
-    '''OP : add constraint id unique para id parc'''
+    '''OP : add constraint id unique para LEXP parc'''
+    listaBNF.append("OP ::= add constraint " + str(t[3]) + " unique para LEXP parc")
+    t[0] = AddUnique(str(t[3]),t[6])
+
+def p_ADD21(t):
+    '''OP : add unique para LEXP parc'''
+    listaBNF.append("OP ::= add unique para LEXP parc")
+    t[0] = AddUnique(None,t[4])
 
 
 def p_ADD3(t):
     '''OP : add foreign key para LEXP parc references id para LEXP parc'''
+    listaBNF.append("OP ::= add foreign key para LEXP parc references " + str(t[8]) + " para LEXP parc")
+    t[0] = AddForeign(None,t[5],str(t[8]),t[10])
 
 def p_ADD4(t):
     '''OP : add constraint id foreign key para LEXP parc references id para LEXP parc'''
+    listaBNF.append("OP ::= add constraint " + str(t[3]) + " foreign key para LEXP parc references " + str(t[10]) + " para LEXP parc")
+    t[0] = AddForeign(str(t[3]),t[7],str(t[10]),t[12])
 
 def p_op3(t):
     '''OP : alter column id set not null'''
+    listaBNF.append("OP ::= alter column " + str(t[3]) + " set not null")
+    t[0] = AddNull(str(t[3]),False)
 
 def p_op4(t):
     '''OP : alter column id set null '''
+    listaBNF.append("OP ::= alter column " + str(t[3]) + " set null")
+    t[0] = AddNull(str(t[3]),True)
 
 def p_ALTERDROP(t):
     '''OP : drop constraint id'''
+    listaBNF.append("OP ::= ")
+    t[0] = DropConstraint(str(t[3]))
 
 def p_ALTERDROP1(t):
     '''OP : drop column LEXP'''
@@ -492,7 +514,6 @@ def p_listaalc1(t):
     '''listaalc : alc'''
     listaBNF.append("LISTAALC ::= ALC")
     t[0] = [t[1]]
-
 
 def p_alc(t):
     '''alc : alter column id type TIPO'''

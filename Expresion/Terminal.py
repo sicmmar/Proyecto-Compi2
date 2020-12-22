@@ -22,13 +22,13 @@ class Terminal(Expresion) :
             'buscar columna'
 
         if self.valor == 'CURRENT_DATE':
-            return date.today()
+            return str(date.today())
         elif self.valor== 'CURRENT_TIME':
             'retornar solo  la hora'
             now = datetime.now()
-            return now.hour
+            return str(now.hour)
         elif self.valor=='now' and self.tipo.tipo=='timestamp without time zone':
-            return datetime.now()
+            return str(datetime.now())
 
         elif(self.valor=='random'):
                 value = rn.uniform(0,1)

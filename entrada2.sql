@@ -11,7 +11,7 @@ create table tbpuesto
  primary key (idpuesto)
 );
 
-alter table tbpuesto add check (salariobase > 54.00);
+alter table tbpuesto add constraint c54 unique (puesto,salariobase);
 
 insert into tbpuesto values (1,'Recepcionista',4000.00);
 

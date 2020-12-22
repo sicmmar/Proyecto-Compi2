@@ -105,7 +105,8 @@ class CreateTable(Instruccion):
                                                 if tablaReferencia.valor[arrPk[0]].tipo.tipo == nuevaColumna.tipo.tipo:
                                                     hayForanea = True
                                                     hayAtr = True
-                                                    nuevoSym.tipo = TipoSimbolo.CONSTRAINT_FOREIGN # FK_database_tabla_tablaReferencia
+                                                    nuevoSym.tipo = TipoSimbolo.CONSTRAINT_FOREIGN 
+                                                    # FK_database_tabla_tablaReferencia
                                                     nuevoSym.nombre = str("FK_" + dbActual + "_" + self.id + "_" + atrColumna.valor)
                                                     nuevaColumna.atributos.update({'foreign':str("FK_" + dbActual + "_" + self.id + "_" + atrColumna.valor)})
                                                     break
