@@ -55,7 +55,6 @@ select * from tbrol;
 
 
 insert into tbusuario values(1,'Luis Fernando','Salazar Rodriguez','lsalazar',MD5('paswword'),now());
-select * from tbusuario;
 --Error 22001
 
 ALTER TABLE tbusuario

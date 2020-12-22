@@ -48,7 +48,7 @@ class Insert(Instruccion):
                             #print("-----",v)
                             if v:
                                 print('Error Violacion de Constraint Unique en:',colunique,' : ',self.valores[i].getval(ent))
-                                return 'Error Violacion de Constraint Unique en columna:'+colunique +' : '+self.valores[i].getval(ent)
+                                return 'Error Violacion de Constraint Unique en columna:'+colunique +' : '+str(self.valores[i].getval(ent))
 
                     if(verificarcheck!=None):
                         check=ent.buscarSimbolo(verificarcheck)

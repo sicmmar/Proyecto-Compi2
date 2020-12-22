@@ -8,5 +8,9 @@ digraph TablaSym {
 <TR><TD>fechacreacion:date</TD></TR>
 <TR><TD>U_test_tbusuario_usuario</TD><TD>UNIQUE</TD><TD>test</TD><TD>tbusuario</TD><TD>usuario</TD></TR>
 
-<TR><TD>PK_test_tbusuario</TD><TD>CONSTRAINT PRIMARIA</TD><TD>test</TD><TD>tbusuario</TD><TD>[0]</TD></TR></TABLE>>]
+<TR><TD>PK_test_tbusuario</TD><TD>CONSTRAINT PRIMARIA</TD><TD>test</TD><TD>tbusuario</TD><TD>[0]</TD></TR><TR><TD rowspan='2'>tbrol</TD><TD rowspan='2'>TABLA</TD><TD rowspan='2'>test</TD><TD rowspan='2'></TD><TD>idrol:integer</TD></TR>
+<TR><TD>rol:varchar</TD></TR>
+<TR><TD>PK_test_tbrol</TD><TD>CONSTRAINT PRIMARIA</TD><TD>test</TD><TD>tbrol</TD><TD>[0]</TD></TR><TR><TD rowspan='2'>tbrolxusuario</TD><TD rowspan='2'>TABLA</TD><TD rowspan='2'>test</TD><TD rowspan='2'></TD><TD>idrol:integer</TD></TR>
+<TR><TD>idusuario:integer</TD></TR>
+<TR><TD>FK_test_tbrolxusuario_tbrol_FK_rol</TD><TD>CONSTRAINT FORANEA</TD><TD>test</TD><TD>tbrolxusuario</TD><TD></TD></TR><TR><TD>FK_test_tbrolxusuario_tbusuario_FK_usuario</TD><TD>CONSTRAINT FORANEA</TD><TD>test</TD><TD>tbrolxusuario</TD><TD></TD></TR></TABLE>>]
 }
