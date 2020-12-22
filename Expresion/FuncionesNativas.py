@@ -83,144 +83,154 @@ class FuncionesNativas(Expresion):
             return "Error: La función: " + funcion + " no existe"
 
     def FunctionWithOneParameter(self, funcion, parametros, exp):
-        result=None
+        result = None
         if (parametros == 1):
             if (funcion == "abs"):
                 if (exp < 0):
-                    return Terminal(Tipo('numeric', exp * -1, -1, -1), exp * -1)
+                    return Terminal(Tipo('numeric', exp * -1, self.l(exp * -1), -1), exp * -1)
 
                 else:
-                    return Terminal(Tipo('numeric', exp, -1, -1), exp)
+                    return Terminal(Tipo('numeric', exp, self.l(exp), -1), exp)
 
             elif (funcion == "cbrt"):
-                return Terminal(Tipo('decimal', math.pow(exp, 3), -1, -1), math.pow(exp, 3))
+                return Terminal(Tipo('decimal', math.pow(exp, 3), self.l(math.pow(exp, 3)), -1), math.pow(exp, 3))
 
             elif (funcion == "ceil"):
-                return Terminal(Tipo('numeric', math.ceil(exp), -1, -1), math.ceil(exp))
+                return Terminal(Tipo('numeric', math.ceil(exp), self.l(math.ceil(exp)), -1), math.ceil(exp))
 
             elif (funcion == "ceiling"):
-                return Terminal(Tipo('numeric', math.ceil(exp), -1, -1), math.ceil(exp))
+                return Terminal(Tipo('numeric', math.ceil(exp), self.l(math.ceil(exp)), -1), math.ceil(exp))
 
             elif (funcion == "degrees"):
-                return Terminal(Tipo('decimal', math.degrees(exp), -1, -1), math.degrees(exp))
+                return Terminal(Tipo('decimal', math.degrees(exp), self.l(math.degrees(exp)), -1), math.degrees(exp))
 
             elif (funcion == "exp"):
-                return Terminal(Tipo('numeric', math.exp(exp), -1, -1), math.exp(exp))
+                return Terminal(Tipo('numeric', math.exp(exp), self.l(math.exp(exp)), -1), math.exp(exp))
 
             elif (funcion == "factorial"):
 
-                return Terminal(Tipo('numeric', math.factorial(exp), -1, -1), math.factorial(exp))
+                return Terminal(Tipo('numeric', math.factorial(exp), self.l(math.factorial(exp)), -1),
+                                math.factorial(exp))
 
             elif (funcion == "floor"):
 
-                return Terminal(Tipo('integer', math.floor(exp), -1, -1), math.floor(exp))
+                return Terminal(Tipo('integer', math.floor(exp), self.l(math.floor(exp)), -1), math.floor(exp))
 
             elif (funcion == "ln"):
-                return Terminal(Tipo('decimal', math.log(exp), -1, -1), math.log(exp))
+                return Terminal(Tipo('decimal', math.log(exp), self.l(math.log(exp)), -1), math.log(exp))
 
 
             elif (funcion == "log"):
-                return Terminal(Tipo('decimal', math.log10(exp), -1, -1), math.log10(exp))
+                return Terminal(Tipo('decimal', math.log10(exp), self.l(math.log10(exp)), -1), math.log10(exp))
 
             elif (funcion == "radians"):
-                return Terminal(Tipo('decimal', math.radians(exp), -1, -1), math.radians(exp))
+                return Terminal(Tipo('decimal', math.radians(exp), self.l(math.radians(exp)), -1), math.radians(exp))
 
             elif (funcion == "sing"):
                 if (exp > 0):
-                    return Terminal(Tipo('integer', 1, -1, -1), 1)
+                    return Terminal(Tipo('integer', 1, self.l(1), -1), 1)
 
                 else:
-                    return Terminal(Tipo('integer', -1, -1, -1), -1)
+                    return Terminal(Tipo('integer', -1, self.l(-1), -1), -1)
 
             elif (funcion == "sqrt"):
-                return Terminal(Tipo('decimal', math.sqrt(exp), -1, -1), math.sqrt(exp))
+                return Terminal(Tipo('decimal', math.sqrt(exp), self.l(math.sqrt(exp)), -1), math.sqrt(exp))
 
             elif (funcion == "trunc"):
-                return Terminal(Tipo('numeric', math.trunc(exp), -1, -1), math.trunc(exp))
+                return Terminal(Tipo('numeric', math.trunc(exp), self.l(math.trunc(exp)), -1), math.trunc(exp))
 
             elif (funcion == "acos"):
 
-                return Terminal(Tipo('decimal', math.acos(exp), -1, -1), math.acos(exp))
+                return Terminal(Tipo('decimal', math.acos(exp), self.l(math.acos(exp)), -1), math.acos(exp))
 
             elif (funcion == "acosd"):
-                return Terminal(Tipo('decimal', math.degrees(math.acos(exp)), -1, -1), math.degrees(math.acos(exp)))
+                return Terminal(Tipo('decimal', math.degrees(math.acos(exp)), self.l(math.degrees(math.acos(exp))), -1),
+                                math.degrees(math.acos(exp)))
 
             elif (funcion == "asin"):
-                return Terminal(Tipo('decimal', math.asin(exp), -1, -1), math.asin(exp))
+                return Terminal(Tipo('decimal', math.asin(exp), self.l(math.asin(exp)), -1), math.asin(exp))
 
             elif (funcion == "asind"):
-                return Terminal(Tipo('decimal', math.degrees(math.asin(exp)), -1, -1), math.degrees(math.asin(exp)))
+                return Terminal(Tipo('decimal', math.degrees(math.asin(exp)), self.l(math.degrees(math.asin(exp))), -1),
+                                math.degrees(math.asin(exp)))
 
             elif (funcion == "atan"):
-                return Terminal(Tipo('decimal', math.atan(exp), -1, -1), math.atan(exp))
+                return Terminal(Tipo('decimal', math.atan(exp), self.l(math.atan(exp)), -1), math.atan(exp))
 
             elif (funcion == "atand"):
-                return Terminal(Tipo('decimal', math.degrees(math.atan(exp)), -1, -1), math.degrees(math.atan(exp)))
+                return Terminal(Tipo('decimal', math.degrees(math.atan(exp)), self.l(math.degrees(math.atan(exp))), -1),
+                                math.degrees(math.atan(exp)))
 
             elif (funcion == "cos"):
-                return Terminal(Tipo('decimal', math.cos(exp), -1, -1), math.cos(exp))
+                return Terminal(Tipo('decimal', math.cos(exp), self.l(math.cos(exp)), -1), math.cos(exp))
 
             elif (funcion == "cosd"):
-                return Terminal(Tipo('decimal', math.degrees(math.cos(exp)), -1, -1), math.degrees(math.cos(exp)))
+                return Terminal(Tipo('decimal', math.degrees(math.cos(exp)), self.l(math.degrees(math.cos(exp))), -1),
+                                math.degrees(math.cos(exp)))
 
             elif (funcion == "cot"):
-                return Terminal(Tipo('decimal', (1 / math.tan(exp)), -1, -1), (1 / math.tan(exp)))
+                return Terminal(Tipo('decimal', (1 / math.tan(exp)), self.l((1 / math.tan(exp))), -1),
+                                (1 / math.tan(exp)))
 
             elif (funcion == "cotd"):
-                return Terminal(Tipo('decimal', math.degrees(1 / math.tan(exp)), -1, -1),
-                                math.degrees(1 / math.tan(exp)))
+                return Terminal(
+                    Tipo('decimal', math.degrees(1 / math.tan(exp)), self.l(math.degrees(1 / math.tan(exp))), -1),
+                    math.degrees(1 / math.tan(exp)))
 
             elif (funcion == "sin"):
 
-                return Terminal(Tipo('decimal', math.sin(exp), -1, -1), math.sin(exp))
+                return Terminal(Tipo('decimal', math.sin(exp), self.l(math.sin(exp)), -1), math.sin(exp))
 
             elif (funcion == "sind"):
 
-                return Terminal(Tipo('decimal', math.degrees(math.sin(exp)), -1, -1), math.degrees(math.sin(exp)))
+                return Terminal(Tipo('decimal', math.degrees(math.sin(exp)), self.l(math.degrees(math.sin(exp))), -1),
+                                math.degrees(math.sin(exp)))
 
             elif (funcion == "sin"):
-                return Terminal(Tipo('decimal', math.sin(exp), -1, -1), math.sin(exp))
+                return Terminal(Tipo('decimal', math.sin(exp), self.l(math.sin(exp)), -1), math.sin(exp))
 
             elif (funcion == "sind"):
-                return Terminal(Tipo('decimal', math.degrees(math.sin(exp)), -1, -1), math.degrees(math.sin(exp)))
+                return Terminal(Tipo('decimal', math.degrees(math.sin(exp)), self.l(math.degrees(math.sin(exp))), -1),
+                                math.degrees(math.sin(exp)))
 
             elif (funcion == "tan"):
-                return Terminal(Tipo('decimal', math.tan(exp), -1, -1), math.tan(exp))
+                return Terminal(Tipo('decimal', math.tan(exp), self.l(math.tan(exp)), -1), math.tan(exp))
 
             elif (funcion == "tand"):
-                return Terminal(Tipo('decimal', math.degrees(math.tan(exp)), -1, -1), math.degrees(math.tan(exp)))
+                return Terminal(Tipo('decimal', math.degrees(math.tan(exp)), self.l(math.degrees(math.tan(exp))), -1),
+                                math.degrees(math.tan(exp)))
 
             elif (funcion == "sinh"):
-                return Terminal(Tipo('decimal', math.sinh(exp), -1, -1), math.sinh(exp))
+                return Terminal(Tipo('decimal', math.sinh(exp), self.l(math.sinh(exp)), -1), math.sinh(exp))
 
             elif (funcion == "cosh"):
-                return Terminal(Tipo('decimal', math.cosh(exp), -1, -1), math.cosh(exp))
+                return Terminal(Tipo('decimal', math.cosh(exp), self.l(math.cosh(exp)), -1), math.cosh(exp))
 
             elif (funcion == "tanh"):
-                return Terminal(Tipo('decimal', math.tanh(exp), -1, -1), math.tanh(exp))
+                return Terminal(Tipo('decimal', math.tanh(exp), self.l(math.tanh(exp)), -1), math.tanh(exp))
 
             elif (funcion == "asinh"):
-                return Terminal(Tipo('decimal', math.asinh(exp), -1, -1), math.asinh(exp))
+                return Terminal(Tipo('decimal', math.asinh(exp), self.l(math.asinh(exp)), -1), math.asinh(exp))
 
             elif (funcion == "acosh"):
-                return Terminal(Tipo('decimal', math.acosh(exp), -1, -1), math.acosh(exp))
+                return Terminal(Tipo('decimal', math.acosh(exp), self.l(math.acosh(exp)), -1), math.acosh(exp))
 
             elif (funcion == "atanh"):
-                return math.atanh(exp)
-                return Terminal(Tipo('decimal', math.atanh(exp), -1, -1), math.atanh(exp))
+
+                return Terminal(Tipo('decimal', math.atanh(exp), self.l(math.atanh(exp)), -1), math.atanh(exp))
 
             elif (funcion == "length"):
                 self.leng = len(exp)
-                return Terminal(Tipo('smallint', self.leng, -1, -1), self.leng)
+                return Terminal(Tipo('smallint', self.leng, self.l(self.leng), -1), self.leng)
 
             elif (funcion == "md5"):
                 m = exp
                 result = hashlib.md5(m.encode())
-                return Terminal(Tipo('varchar', result.hexdigest(),len(result.hexdigest()), -1), result.hexdigest())
+                return Terminal(Tipo('varchar', result.hexdigest(), self.l(result.hexdigest()), -1), result.hexdigest())
             elif (funcion == "sha256"):
                 m = exp
                 result = hashlib.sha256(m.encode()).hexdigest()
-                return Terminal(Tipo('decimal', result, -1, -1), result)
+                return Terminal(Tipo('decimal', result, self.l(result), -1), result)
 
             elif (funcion == "convert"):
                 print("convert")
@@ -235,61 +245,71 @@ class FuncionesNativas(Expresion):
     def FunctionWithTwoParameter(self, funcion, parametros, exp1, exp2):
         if (parametros == 2):
             if (funcion == "div"):
-                return Terminal(Tipo('decimal', exp1 / exp2, -1, -1), exp1 / exp2)
+
+                return Terminal(Tipo('decimal', exp1 / exp2, self.l(exp1 / exp2), -1), exp1 / exp2)
 
             elif (funcion == "gcd"):
-                return Terminal(Tipo('integer', math.gcd(exp1, exp2), -1, -1), math.gcd(exp1, exp2))
+                return Terminal(Tipo('integer', math.gcd(exp1, exp2), self.l(math.gcd(exp1, exp2)), -1),
+                                math.gcd(exp1, exp2))
+
 
             elif (funcion == "mod"):
-                return Terminal(Tipo('integer', exp1 % exp2, -1, -1), exp1 % exp2)
+                return Terminal(Tipo('integer', exp1 % exp2, self.l(exp1 % exp2), -1), exp1 % exp2)
 
             elif (funcion == "power"):
-                return Terminal(Tipo('decimal', math.pow(exp1, exp2), -1, -1), math.pow(exp1, exp2))
+                return Terminal(Tipo('decimal', math.pow(exp1, exp2), self.l(math.pow(exp1, exp2)), -1),
+                                math.pow(exp1, exp2))
 
             elif (funcion == "round"):
-                return Terminal(Tipo('decimal', round(exp1, exp2), -1, -1), round(exp1, exp2))
+                return Terminal(Tipo('decimal', round(exp1, exp2), self.l(round(exp1, exp2)), -1), round(exp1, exp2))
 
             elif (funcion == "atan2"):
-                return Terminal(Tipo('decimal', math.atan(exp1 / exp2), -1, -1), math.atan(exp1 / exp2))
+                return Terminal(Tipo('decimal', math.atan(exp1 / exp2), self.l(math.atan(exp1 / exp2)), -1),
+                                math.atan(exp1 / exp2))
 
             elif (funcion == "atan2d"):
-                return Terminal(Tipo('decimal', math.degrees(math.atan(exp1 / exp2)), -1, -1),
-                                math.degrees(math.atan(exp1 / exp2)))
+                return Terminal(
+                    Tipo('decimal', math.degrees(math.atan(exp1 / exp2)), self.l(math.atan(exp1 / exp2)), -1),
+                    math.degrees(math.atan(exp1 / exp2)))
 
             elif (funcion == "encode"):
                 if (exp2.lower() == "base64"):
                     cascci = exp1.encode('ascii')
                     codificado = base64.b64encode(cascci)
-                    return Terminal(Tipo('varchar', codificado.decode('utf-8'), -1, -1), codificado.decode('utf-8'))
+                    return Terminal(Tipo('varchar', codificado.decode('utf-8'), self.l(codificado.decode('utf-8')), -1),
+                                    codificado.decode('utf-8'))
 
                 elif (exp2.lower() == "hex"):
                     cascci = exp1.encode('utf-8')
                     codificado = base64.b16encode(cascci)
-                    return Terminal(Tipo('varchar', codificado.decode('utf-8'), -1, -1), codificado.decode('utf-8'))
+                    return Terminal(Tipo('varchar', codificado.decode('utf-8'), self.l(codificado.decode('utf-8')), -1),
+                                    codificado.decode('utf-8'))
 
                 elif (exp2.lower() == "escape"):
                     codificado = exp1.encode('unicode_escape').decode('utf-8')
-                    return Terminal(Tipo('varchar', codificado, -1, -1), codificado)
+                    return Terminal(Tipo('varchar', codificado, self.l(codificado), -1), codificado)
 
             elif (funcion == "decode"):
                 if (exp2.lower() == "base64"):
                     codificado = base64.b64decode(exp1)
-                    return Terminal(Tipo('varchar', codificado.decode('utf-8'), -1, -1), codificado.decode('utf-8'))
+                    return Terminal(Tipo('varchar', codificado.decode('utf-8'), self.l(codificado.decode('utf-8')), -1),
+                                    codificado.decode('utf-8'))
 
                 elif (exp2.lower() == "hex"):
                     codificado = base64.b16decode(exp1)
-                    return codificado.decode('utf-8')
-                    return Terminal(Tipo('varchar', codificado.decode('utf-8'), -1, -1), codificado.decode('utf-8'))
+
+                    return Terminal(Tipo('varchar', codificado.decode('utf-8'), self.l(codificado.decode('utf-8')), -1),
+                                    codificado.decode('utf-8'))
 
                 elif (exp2.lower() == "escape"):
                     codificado = exp1.encode('utf-8').decode('unicode_escape')
-                    return codificado
-                    return Terminal(Tipo('varchar', codificado, -1, -1), codificado)
+
+                    return Terminal(Tipo('varchar', codificado, self.l(codificado), -1), codificado)
 
             elif (funcion == "date_part"):
                 datepart = Date_Part(exp1, exp2)
-                return datepart
-                return Terminal(Tipo('integer', datepart, -1, -1), datepart)
+
+                return Terminal(Tipo('integer', datepart, self.l(datepart), -1), datepart)
 
         else:
 
@@ -303,13 +323,13 @@ class FuncionesNativas(Expresion):
                 inicio = exp2 - 1
                 fin = inicio + exp3
                 sub = exp1[inicio:fin]
-                return Terminal(Tipo('decimal', sub, -1, -1), sub)
+                return Terminal(Tipo('decimal', sub, self.l(sub), -1), sub)
 
             elif (funcion == "substr"):
                 inicio = exp2 - 1
                 fin = inicio + exp3
                 sub = exp1[inicio:fin]
-                return Terminal(Tipo('decimal', sub, -1, -1), sub)
+                return Terminal(Tipo('decimal', sub, self.l(sub), -1), sub)
         else:
             reporteerrores.append(
                 Lerrores("Error Semantico", "La funcion" + funcion + "solo recibe 3 parametros", 0, 0))
@@ -342,6 +362,12 @@ class FuncionesNativas(Expresion):
             reporteerrores.append(
                 Lerrores("Error Semantico", "La funcion" + funcion + "solo recibe 2 parametros", 0, 0))
             return "Error: La funcion: " + funcion + " recibe 4 parametro"
+
+    def l(self, valor):
+        if type(valor) not in (int, float, complex):
+            return len(valor)
+        else:
+            return len(str(valor))
 
 
 class Date_Part(FuncionesNativas):

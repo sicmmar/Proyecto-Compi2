@@ -89,6 +89,7 @@ class AlterTable(Instruccion):
                 elif self.opcion.tipoAlter == TipoAlter.DROPCONSTRAINT:
                     dropConstr:DropConstraint = self.opcion
                     concat:str = "_" + dbActual + "_" + self.tabla + "_"
+                    
                             
 
 class TipoAlter(Enum):
