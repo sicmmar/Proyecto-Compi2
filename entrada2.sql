@@ -102,7 +102,7 @@ insert into tbventa values(13,5,'2020-10-14',200,false,'Compresor de aire acondi
 insert into tbventa values(14,5,'2020-10-15',2000,false,'Bomba Auxiliar de agua para volkswagen');
 select * from tbventa;
 
-alter table tbventa drop column fechaventa, drop column ventaregistrada;
+--alter table tbventa drop column fechaventa, ventaregistrada;
 select * from tbventa;
 
 

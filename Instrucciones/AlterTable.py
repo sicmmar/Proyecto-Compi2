@@ -132,6 +132,7 @@ class AlterTable(Instruccion):
                                 break
                     
                     elif opcionX.tipoAlter == TipoAlter.DROPCOLUMN:
+                        index = []
                         dropC:DropColumns = opcionX
                         for drop in dropC.columnas:
                             for x in range(len(tablaAlterada.valor)):
@@ -141,9 +142,9 @@ class AlterTable(Instruccion):
                                         for z in tablaAlterada.valor[x].atributos.values():
                                             ent.eliminarSimbolo(z)
                                         
-                                        tablaAlterada.valor.pop(x)
-                                        break
-
+                                        index.append(x)
+                        for g in index:
+                            tablaAlterada.valor.pop(g)
                     ent.editarSimbolo(self.tabla + "_" + dbActual,tablaAlterada)
                     
                             
