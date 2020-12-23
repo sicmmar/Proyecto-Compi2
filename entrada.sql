@@ -77,20 +77,20 @@ insert into tbrolxusuario values(2,3);
 
 
 select rol,nombre,apellido
-from tbrolxusuario RU;
+from tbrolxusuario;
 
 
 select rol,nombre,apellido
-from tbrolxusuario RU;
+from tbrolxusuario;
 
 
 select *
-from tbrol R
-where idrol not in (select idrol from tbrolxusuario);
+from tbrol;
+--where idrol not in (select idrol from tbrolxusuario);
 
 select *
-from tbrol R
-where not exists (select idrol from tbrolxusuario RU where RU.idrol = R.idrol);
+from tbrol;
+--where not exists (select idrol from tbrolxusuario RU where RU.idrol = R.idrol);
 
 
 create table tbestado

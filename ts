@@ -1,16 +1,20 @@
 digraph TablaSym {
 	node [shape=record]
-	TS [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0"><TR><TD>NOMBRE</TD><TD>TIPO</TD><TD>BASE DE DATOS</TD><TD>TABLA</TD><TD>VALOR</TD></TR><TR><TD rowspan='6'>tbusuario</TD><TD rowspan='6'>TABLA</TD><TD rowspan='6'>test</TD><TD rowspan='6'></TD><TD>idusuario:integer</TD></TR>
-<TR><TD>nombre:varchar</TD></TR>
-<TR><TD>apellido:varchar</TD></TR>
-<TR><TD>usuario:varchar</TD></TR>
-<TR><TD>password:varchar</TD></TR>
-<TR><TD>fechacreacion:date</TD></TR>
-<TR><TD>U_test_tbusuario_usuario</TD><TD>UNIQUE</TD><TD>test</TD><TD>tbusuario</TD><TD>usuario</TD></TR>
-
-<TR><TD>PK_test_tbusuario</TD><TD>CONSTRAINT PRIMARIA</TD><TD>test</TD><TD>tbusuario</TD><TD>[0]</TD></TR><TR><TD rowspan='2'>tbrol</TD><TD rowspan='2'>TABLA</TD><TD rowspan='2'>test</TD><TD rowspan='2'></TD><TD>idrol:integer</TD></TR>
-<TR><TD>rol:varchar</TD></TR>
-<TR><TD>PK_test_tbrol</TD><TD>CONSTRAINT PRIMARIA</TD><TD>test</TD><TD>tbrol</TD><TD>[0]</TD></TR><TR><TD rowspan='2'>tbrolxusuario</TD><TD rowspan='2'>TABLA</TD><TD rowspan='2'>test</TD><TD rowspan='2'></TD><TD>idrol:integer</TD></TR>
-<TR><TD>idusuario:integer</TD></TR>
-<TR><TD>FK_test_tbrolxusuario_tbrol_FK_rol</TD><TD>CONSTRAINT FORANEA</TD><TD>test</TD><TD>tbrolxusuario</TD><TD></TD></TR><TR><TD>FK_test_tbrolxusuario_tbusuario_FK_usuario</TD><TD>CONSTRAINT FORANEA</TD><TD>test</TD><TD>tbrolxusuario</TD><TD></TD></TR></TABLE>>]
+	TS [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0"><TR><TD>NOMBRE</TD><TD>TIPO</TD><TD>BASE DE DATOS</TD><TD>TABLA</TD><TD>VALOR</TD></TR><TR><TD rowspan='4'>tbpuesto</TD><TD rowspan='4'>TABLA</TD><TD rowspan='4'>test</TD><TD rowspan='4'></TD><TD>idpuesto:smallint</TD></TR>
+<TR><TD>puesto:character</TD></TR>
+<TR><TD>salariobase:money</TD></TR>
+<TR><TD>tinecomision:boolean</TD></TR>
+<TR><TD>PK_test_tbpuesto</TD><TD>CONSTRAINT PRIMARIA</TD><TD>test</TD><TD>tbpuesto</TD><TD>[0]</TD></TR><TR><TD rowspan='5'>area</TD><TD rowspan='5'>ENUM</TD><TD rowspan='5'>test</TD><TD rowspan='5'></TD><TD>CONTABILIDAD</TD></TR>
+<TR><TD>ADMINISTRACION</TD></TR>
+<TR><TD>VENTAS</TD></TR>
+<TR><TD>TECNOLOGIA</TD></TR>
+<TR><TD>FABRICA</TD></TR>
+<TR><TD rowspan='3'>tbempleadopuesto</TD><TD rowspan='3'>TABLA</TD><TD rowspan='3'>test</TD><TD rowspan='3'></TD><TD>idempleado:integer</TD></TR>
+<TR><TD>idpuesto:integer</TD></TR>
+<TR><TD>departamento:area</TD></TR>
+<TR><TD rowspan='4'>tbventa</TD><TD rowspan='4'>TABLA</TD><TD rowspan='4'>test</TD><TD rowspan='4'></TD><TD>idventa:integer</TD></TR>
+<TR><TD>idempleado:integer</TD></TR>
+<TR><TD>montoventa:money</TD></TR>
+<TR><TD>detalle:text</TD></TR>
+<TR><TD>C_test_tbventa_montoventa_ventavalida</TD><TD>CONSTRAINT CHECK</TD><TD>test</TD><TD>tbventa</TD><TD>montoventa &#62; 0</TD></TR>\n<TR><TD>PK_test_tbventa</TD><TD>CONSTRAINT PRIMARIA</TD><TD>test</TD><TD>tbventa</TD><TD>[0]</TD></TR></TABLE>>]
 }

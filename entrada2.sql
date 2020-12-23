@@ -11,7 +11,7 @@ create table tbpuesto
  primary key (idpuesto)
 );
 
---alter table tbpuesto add constraint c54 unique (puesto,salariobase);
+alter table tbpuesto add constraint c54 unique (puesto,salariobase);
 
 insert into tbpuesto values (1,'Recepcionista',4000.00);
 
@@ -32,8 +32,23 @@ insert into tbpuesto values(10,'Jefe de Ventas Regional',2500.00,true);
 
 select * from tbpuesto;
 
+alter table tbpuesto drop constraint  c54;
+
+insert into tbpuesto values (2,'Asistente Contable',4500.00,false);
+insert into tbpuesto values(3,'Contador General',9000.00,false);
+insert into tbpuesto values(4,'Asistente de RRHH',4000.00,false);
+insert into tbpuesto values(5,'Recepcionista Gerencia',5000.00,false);
+insert into tbpuesto values(6,'Vendedor 1',2500.00,true);
+insert into tbpuesto values(7,'Vendedor 2',2750.00,true);
+insert into tbpuesto values(8,'Vendedor 3',3000.00,true);
+insert into tbpuesto values(9,'Jefe de Ventas',4000.00,true);
+insert into tbpuesto values(10,'Jefe de Ventas Regional',2500.00,true);
+
+select * from tbpuesto;
+
 CREATE TYPE area AS ENUM ('CONTABILIDAD','ADMINISTRACION','VENTAS','TECNOLOGIA','FABRICA');
 
+alter table tbpuesto drop constraint  c54;
 
 CREATE TABLE tbempleadopuesto
 (
@@ -48,6 +63,9 @@ insert into tbempleadopuesto values(2,1,'CONTABILIDAD');
 insert into tbempleadopuesto values(3,3,'CONTABILIDAD');
 insert into tbempleadopuesto values(4,6,'VENTAS');
 insert into tbempleadopuesto values(5,6,'VENTAS');
+insert into tbempleadopuesto values(6,6,'OTRO');
+
+select * from tbempleadopuesto;
 
 
 UPDATE tbempleadopuesto SET idpuesto = 2 where idempleado = 2;
@@ -73,6 +91,8 @@ insert into tbventa values(4,4,'2020-10-13',125,false,'Filtro de aire volkswagen
 insert into tbventa values(5,4,'2020-10-13',175,false,'Juego de Candelas volkswagen');
 insert into tbventa values(6,4,'2020-10-13',220,false,'Aceite 20w50');
 insert into tbventa values(7,5,'2020-10-13',1250,false,'Cremallera Mazda 3');
+select * from tbventa;
+alter table tbventa rename column descripcion to detalle;
 insert into tbventa values(8,5,'2020-10-14',980,false,'Cremallera timon hidraulico mazda');
 insert into tbventa values(9,5,'2020-10-14',1200,false,'Lodera Universal para pickup');
 insert into tbventa values(10,5,'2020-10-14',475,false,'Sobre Lodera de Fibra de Carbon');
@@ -80,6 +100,11 @@ insert into tbventa values(11,5,'2020-10-14',780,false,'Bomba Auxiliar de agua p
 insert into tbventa values(12,4,'2020-10-14',3500,false,'Bomba de agua para volkswagen');
 insert into tbventa values(13,5,'2020-10-14',200,false,'Compresor de aire acondicionado');
 insert into tbventa values(14,5,'2020-10-15',2000,false,'Bomba Auxiliar de agua para volkswagen');
+select * from tbventa;
+
+alter table tbventa drop column fechaventa, drop column ventaregistrada;
+select * from tbventa;
+
 
 select primernombre,segundonombre,primerapellido,sum(montoventa)
 from tbventa V,tbempleado E

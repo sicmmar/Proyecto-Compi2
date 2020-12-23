@@ -428,7 +428,7 @@ def p_DROP(t):
 def p_ALTER(t):
     '''ALTER : alter databases id rename to id
                | alter databases id owner to id
-               | alter table id OP'''
+               | alter table id LOP'''
     if len(t) == 7:
         listaBNF.append("ALTER ::= alter databases " + str(t[3]) + " " + str(t[4]) + " to " + str(t[6]))
         if (t[4] == 'rename'):
@@ -436,8 +436,17 @@ def p_ALTER(t):
         else:
             print("renombrar owner")
     elif len(t) == 5:
-        listaBNF.append("ALTER ::= alter table " + str(t[3]) + " OP")
+        listaBNF.append("ALTER ::= alter table " + str(t[3]) + " LOP")
         t[0] = AlterTable(str(t[3]),t[4])
+
+def p_LOP(t):
+    'LOP : LOP coma OP'
+    t[1].append(t[3])
+    t[0] = t[1]
+
+def p_LOP1(t):
+    'LOP : OP'
+    t[0] = [t[1]]
 
 def p_ADD(t):
     '''OP : add column id TIPO'''
@@ -464,7 +473,6 @@ def p_ADD21(t):
     listaBNF.append("OP ::= add unique para LEXP parc")
     t[0] = AddUnique(None,t[4])
 
-
 def p_ADD3(t):
     '''OP : add foreign key para LEXP parc references id para LEXP parc'''
     listaBNF.append("OP ::= add foreign key para LEXP parc references " + str(t[8]) + " para LEXP parc")
@@ -487,36 +495,28 @@ def p_op4(t):
 
 def p_ALTERDROP(t):
     '''OP : drop constraint id'''
-    listaBNF.append("OP ::= ")
+    listaBNF.append("OP ::= drop constraint " + str(t[3]))
     t[0] = DropConstraint(str(t[3]))
 
 def p_ALTERDROP1(t):
     '''OP : drop column LEXP'''
+    listaBNF.append("OP ::= drop column LEXP")
+    t[0] = DropColumns(t[3])
 
 def p_ALTERDROP2(t):
     '''OP : drop check id'''
+    listaBNF.append("OP ::= drop check " + str(t[3]).lower())
+    t[0] = DropCheck(str(t[3]))
 
 def p_op7(t):
     '''OP : rename column id to id '''
-
-def p_op5(t):
-    '''OP : listaalc'''
-    listaBNF.append("OP ::= LISTAALC")
-    t[0] = t[1]
-
-def p_listaalc(t):
-    '''listaalc : listaalc coma alc'''
-    listaBNF.append("LISTAALC ::= LISTAALC coma ALC")
-    t[1].append(t[3])
-    t[0] = t[1]
-
-def p_listaalc1(t):
-    '''listaalc : alc'''
-    listaBNF.append("LISTAALC ::= ALC")
-    t[0] = [t[1]]
+    listaBNF.append("OP ::= rename column " + str(t[3]).lower() + " to " + str(t[5]).lower())
+    t[0] = RenameColumn(str(t[3]),str(t[5]))
 
 def p_alc(t):
-    '''alc : alter column id type TIPO'''
+    '''OP : alter column id type TIPO'''
+    listaBNF.append("ALC ::= alter column " + str(t[3]) + " type TIPO")
+    t[0] = AlterType(str(t[3]),t[5])
 
 def p_SHOWDB(t):
     ''' SHOWDB : show dbs'''

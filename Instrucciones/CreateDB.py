@@ -27,6 +27,7 @@ class DropDb(Instruccion):
         if (resultado==2):
             return "ERROR >> En la instrucción Drop Database "+self.id+", La base de datos a eliminar NO EXISTE"
         else:
+            ent.eliminarDataBase(self.id)
             return "La base de datos: ("+self.id+") ha sido eliminada con exito"
         
 

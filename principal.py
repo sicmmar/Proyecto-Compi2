@@ -10,8 +10,8 @@ from Expresion.variablesestaticas import variables
 from graphviz import Digraph
 
 #variables.ventana = Tk()
-variables.ventana.geometry("1000x600")
-variables.ventana.resizable(False, False)
+variables.ventana.geometry("1245x600")
+variables.ventana.resizable(False,False)
 variables.ventana.config(background="gray25")
 
 global tablaSym
@@ -93,14 +93,14 @@ def gramatica():
 
 entrada = StringVar()
 Tentrada = Text(variables.ventana)
-Tentrada.config(width=120, height=20)
+Tentrada.config(width=150, height=20)
 Tentrada.config(background="gray18")
 Tentrada.config(foreground="white")
 Tentrada.config(insertbackground="white")
 Tentrada.place(x=10, y=10)
 
 variables.consola = Text(variables.ventana)
-variables.consola.config(width=120, height=15)
+variables.consola.config(width=150, height=15)
 variables.consola.config(background="gray10")
 variables.consola.config(foreground="white")
 variables.consola.config(insertbackground="white")
