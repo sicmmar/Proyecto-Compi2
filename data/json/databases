@@ -1,1 +1,1 @@
-{"test": {"tbpuesto": {"NCOL": 4, "PKEY": [0]}, "tbempleadopuesto": {"NCOL": 3}, "tbventa": {"NCOL": 4, "PKEY": [0]}}}
+{"test": {"tblibrosalario": {"NCOL": 5, "PKEY": [0]}, "tblibrosalariohis": {"NCOL": 6, "PKEY": [0, 5]}, "tbfuncionesmath": {"NCOL": 3, "PKEY": [0]}}}

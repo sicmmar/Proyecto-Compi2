@@ -14,9 +14,11 @@ create table tblibrosalario
  );
 
 
-insert into tblibrosalario values(4,2020,10,2500,6885);
-insert into tblibrosalario values(5,2020,10,2750,5370);
-insert into tblibrosalario (idempleado,aniocalculo,mescalculo,salariobase) values(1,2020,10,4500);
+insert into tblibrosalario values(4,2020,10,2500.00,6885.00);
+insert into tblibrosalario values(5,2020,10,2750.00,5370.00);
+--insert into tblibrosalario (idempleado,aniocalculo,mescalculo,salariobase) values(1,2020,10,4500.00);
+
+select * from tblibrosalario;
 
 update tbventa set ventaregistrada = true 
 where idempleado = 4
@@ -30,7 +32,7 @@ select *
 from tbventa where ventaregistrada = false;
 
 SELECT EXTRACT(YEAR FROM TIMESTAMP '2001-02-16 20:38:40');
-SELECT date_part('hour', INTERVAL '4 hours 3 minutes');
+SELECT date_part('hours', INTERVAL '4 hours 3 minutes');
 SELECT now();
 SELECT EXTRACT(HOUR FROM TIMESTAMP '2001-02-16 20:38:40');
 SELECT EXTRACT(MINUTE FROM TIMESTAMP '2001-02-16 20:38:40');
@@ -48,12 +50,12 @@ create table tblibrosalariohis
 ( idhistorico integer not null primary key
 ) INHERITS (tblibrosalario);
 
-SELECT idempleado,abs(comision),cbrt(comision),DIV(325,5)
-FROM tblibrosalario;
+/*SELECT idempleado,abs(comision),cbrt(comision),DIV(325,5)
+FROM tblibrosalario;*/
 
-SELECT factorial(17) AS factorial, 
-EXP(2.0) as Exponencial,
-LN(5.0) "Logaritmo Natural",
+SELECT factorial(17), 
+EXP(2.0),
+LN(5.0),
 PI(),
 POWER(5,2);
 
@@ -82,6 +84,6 @@ update tbfuncionesmat set seno = SIND(1),coseno = TAN(0) where idfuncion = 1;
 update tbfuncionesmath set seno = SIND(1),coseno = TAN(0) where idfuncion = 1;
 update tbfuncionesmath set seno = TAND(0),coseno = COSD(0) where idfuncion = 2;
 
-delete from tbfuncionesmath where idfuncion = 1;
+--delete from tbfuncionesmath where idfuncion = 1;
 
 select * from tbfuncionesmath;
