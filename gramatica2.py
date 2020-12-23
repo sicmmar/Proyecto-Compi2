@@ -382,13 +382,12 @@ def p_LISTAWHEN(t):
 
 
 def p_WHEN(t):
-    ''' WHEN : when LEXP then LEXP
-    '''
+    ''' WHEN : when LEXP then LEXP'''
 
 
 def p_ELSE(t):
-    '''ELSE : else LEXP
-    '''
+    '''ELSE : else LEXP'''
+    listaBNF.append("ELSE ::= else LEXP")
 
 
 def p_INSERT(t):
@@ -431,7 +430,7 @@ def p_ALTER(t):
                | alter table id LOP'''
     if len(t) == 7:
         listaBNF.append("ALTER ::= alter databases " + str(t[3]) + " " + str(t[4]) + " to " + str(t[6]))
-        if (t[4] == 'rename'):
+        if (str(t[4]).lower() == 'rename'):
             t[0] = AlterDb(str(t[3]), t[6])
         else:
             print("renombrar owner")
@@ -541,16 +540,16 @@ def p_CREATEDB(t):
     '''
     if len(t) == 7:
         listaBNF.append("CREATEDB ::= create RD if not exist " + str(t[6]))
-        t[0] = CreateDb(str(t[6]))
+        t[0] = CreateDb(str(t[6]),str(t[2]).lower(),'if not exists')
     elif len(t) == 8:
         listaBNF.append("CREATEDB ::= create RD if not exist " + str(t[6]) + " OPCCDB")
-        t[0] = CreateDb(str(t[6]))
+        t[0] = CreateDb(str(t[6]),str(t[2]).lower(),'if not exists')
     elif len(t) == 4:
         listaBNF.append("CREATEDB ::= create RD " + str(t[3]))
-        t[0] = CreateDb(str(t[3]))
+        t[0] = CreateDb(str(t[3]),str(t[2]).lower(),'')
     elif len(t) == 5:
         listaBNF.append("CREATEDB ::= create RD " + str(t[3]) + " OPCCDB")
-        t[0] = CreateDb(str(t[4]))
+        t[0] = CreateDb(str(t[4]),str(t[2]).lower(),'')
 
 
 def p_OPCCDB(t):
@@ -571,8 +570,10 @@ def p_RD(t):
     '''
     if len(t) == 2:
         listaBNF.append("RD ::= databases")
+        t[0]='databases'
     else:
         listaBNF.append("RD ::= or replace databases")
+        t[0]='or replace'
 
 
 def p_PROPIETARIO(t):

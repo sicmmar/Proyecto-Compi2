@@ -1,1 +1,1 @@
-{"test": {"tbpuesto": {"NCOL": 4, "PKEY": [0]}, "tbempleadopuesto": {"NCOL": 3}}}
+{"test": {"tbpuesto": {"NCOL": 4, "PKEY": [0]}, "tbempleadopuesto": {"NCOL": 3}, "tbventa": {"NCOL": 4, "PKEY": [0]}}}

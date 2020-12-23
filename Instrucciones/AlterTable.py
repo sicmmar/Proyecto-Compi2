@@ -97,7 +97,6 @@ class AlterTable(Instruccion):
                         for col in tablaAlterada.valor:
                             for x in range(len(opcConstraint)):
                                 idCo:str = opcConstraint[x] + concat + col.nombre + "_" + dropConstr.constraint
-                                print(idCo)
                                 r:Simbolo = ent.buscarSimbolo(idCo)
                                 if r != None:
                                     encontrado = True
@@ -145,10 +144,9 @@ class AlterTable(Instruccion):
                                         index.append(x)
                         for g in index:
                             tablaAlterada.valor.pop(g)
-                    ent.editarSimbolo(self.tabla + "_" + dbActual,tablaAlterada)
-                    
-                            
 
+                    ent.editarSimbolo(self.tabla + "_" + dbActual,tablaAlterada)
+                        
 class TipoAlter(Enum):
     ADDCOLUMNA = 1,
     ADDCHECK = 2,

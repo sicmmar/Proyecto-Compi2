@@ -70,9 +70,9 @@ select * from tbempleadopuesto;
 
 UPDATE tbempleadopuesto SET idpuesto = 2 where idempleado = 2;
 
-select departamento,count(*) CantEmpleados
+/*select departamento,count(*) CantEmpleados
 from tbempleadopuesto
-group by departamento;
+group by departamento;*/
 
 create table tbventa 
 (  idventa integer not null primary key,
@@ -102,7 +102,8 @@ insert into tbventa values(13,5,'2020-10-14',200,false,'Compresor de aire acondi
 insert into tbventa values(14,5,'2020-10-15',2000,false,'Bomba Auxiliar de agua para volkswagen');
 select * from tbventa;
 
---alter table tbventa drop column fechaventa, ventaregistrada;
+alter table tbventa drop column fechaventa, ventaregistrada;
+
 select * from tbventa;
 
 
