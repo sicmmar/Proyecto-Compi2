@@ -8,6 +8,7 @@ from Expresion.variablesestaticas import variables
 from tkinter import *
 from enum import Enum
 from Instrucciones.CreateTable import *
+from reportes import *
 
 class AlterTable(Instruccion):
     def __init__(self,id,opcion):
@@ -30,7 +31,7 @@ class AlterTable(Instruccion):
                             tablaAlterada.valor.append(nuevaCol)
                             e = ent.editarSimbolo(self.tabla + "_" + dbActual,tablaAlterada)
                             if e == "ok": print("a la tabla se le agrego nueva col")
-                        else: return "No se ha podido agregar la columna '" + addColumna.id + "' a la tabla " + self.tabla
+                        else: reporteerrores.append(Lerrores("Error Semantico", "No se ha podido agregar la columna '" + addColumna.id + "' a la tabla " + self.tabla, 0, 0)) 
                     
                     elif opcionX.tipoAlter == TipoAlter.ADDCHECK:
                         #formato: C_database_tabla_nombreColumna

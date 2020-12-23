@@ -19,28 +19,10 @@ tablaSym = Digraph("TablaSym",node_attr={'shape':'record'})
 
 contenidoSym:str = ""
 
-
-def reporte_lex_sin():
-    if len(reporteerrores) != 0:
-        contenido = "Digraph  reporte{label=\"REPORTE ERRORES LEXICOS Y SINTACTICOS\"\n"
-        contenido += "node [shape=record,style=rounded,color=\"#4b8dc5\"];\n"
-        contenido += "arset [label=<\n<TABLE border= \"2\"  cellspacing= \"-1\" color=\"#4b8dc5\">\n"
-        contenido += "<TR>\n<TD bgcolor=\"#1ED0EC\">Tipo</TD>\n<TD bgcolor=\"#1ED0EC\">Linea</TD>\n"
-        contenido += "<TD bgcolor=\"#1ED0EC\">Columna</TD>\n<TD bgcolor=\"#1ED0EC\">Descripcion</TD>\n</TR>\n"
-
-        for error in reporteerrores:
-            contenido += '<TR> <TD>' + error.tipo + '</TD><TD>' + error.linea + '</TD> <TD>' + error.columna + '</TD><TD>' + error.descripcion + '</TD></TR>'
-
-        contenido += '</TABLE>\n>, ];}'
-
-        with open('reporteerrores.dot', 'w', encoding='utf8') as reporte:
-            reporte.write(contenido)
-
-
-def mostrarimagenre():
-    check_call(['dot', '-Tpng', 'reporteerrores.dot', '-o', 'imagenerrores.png'])
-
-
+global ErroresS
+ErroresS = Digraph("reporte",node_attr={'shape':'record'})
+ErroresS.attr(style='rounded',color='#4b8dc5')
+contenidoE:str = ""
 
 def send_data():
     print("Analizando Entrada:")
@@ -59,18 +41,32 @@ def send_data():
     variables.consola.insert(INSERT, "Salida de consultas\n")
     for instr in instrucciones:
         if instr != None:
-
-            res = instr.ejecutar(Principal)
-            if res != None:
-                res = str(res) + '\n'
-                variables.consola.insert(INSERT, res)
+            instr.ejecutar(Principal)
                 
     variables.consola.configure(state='disabled')
     #variables.consola.configure()
 
     setContenido(Principal.mostrarSimbolos())
 
+def reporte_lex_sin():
+    if len(reporteerrores) != 0:
+        global contenidoE 
+        contenidoE += "<<TABLE border= \"2\"  cellspacing= \"-1\" color=\"#4b8dc5\">"
+        contenidoE += "<TR><TD bgcolor=\"#1ED0EC\">Tipo</TD><TD bgcolor=\"#1ED0EC\">Linea</TD>"
+        contenidoE += "<TD bgcolor=\"#1ED0EC\">Columna</TD><TD bgcolor=\"#1ED0EC\">Descripcion</TD></TR>"
+
+        for error in reporteerrores:
+            contenidoE += '<TR> <TD>' + error.tipo + '</TD><TD>' + error.linea + '</TD> <TD>' + error.columna + '</TD><TD>' + error.descripcion + '</TD></TR>'
+
+        contenidoE += '</TABLE>>'
+
+
+
+def mostrarimagenre():
     reporte_lex_sin()
+    ErroresS.node("ErroresR",label=contenidoE)
+    ErroresS.render('erroresr', view=True)  # doctest: +SKIP
+    'erroresr.pdf'
 
 def setContenido(cont:str):
     global contenidoSym

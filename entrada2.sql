@@ -48,16 +48,13 @@ select * from tbpuesto;
 
 CREATE TYPE area AS ENUM ('CONTABILIDAD','ADMINISTRACION','VENTAS','TECNOLOGIA','FABRICA');
 
-alter table tbpuesto drop constraint  c54;
-
 CREATE TABLE tbempleadopuesto
 (
 	idempleado integer not null,
 	idpuesto   integer not null,
 	departamento area
 );
-  
-  
+
 insert into tbempleadopuesto values(1,1,'ADMINISTRACION');
 insert into tbempleadopuesto values(2,1,'CONTABILIDAD');
 insert into tbempleadopuesto values(3,3,'CONTABILIDAD');
@@ -78,28 +75,28 @@ create table tbventa
 (  idventa integer not null primary key,
    idempleado integer,
    fechaventa date constraint validaventa check (fechaventa > '1900-01-01'),
-   montoventa money constraint ventavalida check (montoventa > '0'),
+   montoventa money constraint ventavalida check (montoventa > 0.00),
    ventaregistrada boolean,
    descripcion text
 );
 
 
-insert into tbventa values(1,4,'2020-10-12',450,false,'Venta de bomba de agua para toyota');
-insert into tbventa values(2,4,'2020-10-13',250,false,'Tasa distribuidor Mazda 626');
-insert into tbventa values(3,4,'2020-10-13',650,false,'Radiador para Mazda 626');
-insert into tbventa values(4,4,'2020-10-13',125,false,'Filtro de aire volkswagen');
-insert into tbventa values(5,4,'2020-10-13',175,false,'Juego de Candelas volkswagen');
-insert into tbventa values(6,4,'2020-10-13',220,false,'Aceite 20w50');
-insert into tbventa values(7,5,'2020-10-13',1250,false,'Cremallera Mazda 3');
+insert into tbventa values(1,4,'2020-10-12',450.00,false,'Venta de bomba de agua para toyota');
+insert into tbventa values(2,4,'2020-10-13',250.00,false,'Tasa distribuidor Mazda 626');
+insert into tbventa values(3,4,'2020-10-13',650.00,false,'Radiador para Mazda 626');
+insert into tbventa values(4,4,'2020-10-13',125.00,false,'Filtro de aire volkswagen');
+insert into tbventa values(5,4,'2020-10-13',175.00,false,'Juego de Candelas volkswagen');
+insert into tbventa values(6,4,'2020-10-13',220.00,false,'Aceite 20w50');
+insert into tbventa values(7,5,'2020-10-13',1250.00,false,'Cremallera Mazda 3');
 select * from tbventa;
 alter table tbventa rename column descripcion to detalle;
-insert into tbventa values(8,5,'2020-10-14',980,false,'Cremallera timon hidraulico mazda');
-insert into tbventa values(9,5,'2020-10-14',1200,false,'Lodera Universal para pickup');
-insert into tbventa values(10,5,'2020-10-14',475,false,'Sobre Lodera de Fibra de Carbon');
-insert into tbventa values(11,5,'2020-10-14',780,false,'Bomba Auxiliar de agua para volkswagen');
-insert into tbventa values(12,4,'2020-10-14',3500,false,'Bomba de agua para volkswagen');
-insert into tbventa values(13,5,'2020-10-14',200,false,'Compresor de aire acondicionado');
-insert into tbventa values(14,5,'2020-10-15',2000,false,'Bomba Auxiliar de agua para volkswagen');
+insert into tbventa values(8,5,'2020-10-14',980.00,false,'Cremallera timon hidraulico mazda');
+insert into tbventa values(9,5,'2020-10-14',1200.00,false,'Lodera Universal para pickup');
+insert into tbventa values(10,5,'2020-10-14',475.00,false,'Sobre Lodera de Fibra de Carbon');
+insert into tbventa values(11,5,'2020-10-14',780.00,false,'Bomba Auxiliar de agua para volkswagen');
+insert into tbventa values(12,4,'2020-10-14',3500.00,false,'Bomba de agua para volkswagen');
+insert into tbventa values(13,5,'2020-10-14',200.00,false,'Compresor de aire acondicionado');
+insert into tbventa values(14,5,'2020-10-15',2000.00,false,'Bomba Auxiliar de agua para volkswagen');
 select * from tbventa;
 
 alter table tbventa drop column fechaventa, ventaregistrada;

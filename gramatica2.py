@@ -548,7 +548,7 @@ def p_CREATEDB(t):
         t[0] = CreateDb(str(t[3]),str(t[2]).lower(),'')
     elif len(t) == 5:
         listaBNF.append("CREATEDB ::= create RD " + str(t[3]) + " OPCCDB")
-        t[0] = CreateDb(str(t[4]),str(t[2]).lower(),'')
+        t[0] = CreateDb(str(t[3]),str(t[2]).lower(),'')
 
 
 def p_OPCCDB(t):
@@ -802,11 +802,13 @@ def p_LIMIT(t):
                | offset int limit all
                | '''
     if len(t) == 3:
+        listaBNF.append("LIMIT ::= " + str(t[1]) + " " + str(t[2]))
         if str(t[1]).lower() == 'limit':
             t[0] = Limit(t[2], -1)
         elif str(t[1]).lower() == 'offset':
             t[0] = Limit(-1, t[2])
     elif len(t) == 5:
+        listaBNF.append("LIMIT ::= " + str(t[1]) + " " + str(t[2]) + " " + str(t[3]) + " " + str(t[4]))
         if str(t[1]).lower() == 'limit':
             t[0] = Limit(t[2], t[4])
         elif str(t[1]).lower() == 'offset':
@@ -831,8 +833,10 @@ def p_COMBINING(t):
                 | except EXP
 	            | '''
     if len(t) == 3:
+        listaBNF.append("COMBINING ::= " + str(t[1]) + " EXP")
         t[0] = Combi(t[1], t[2], '')
     elif len(t) == 4:
+        listaBNF.append("COMBINING ::= " + str(t[1]) + " " + str(t[2]) + " EXP")
         t[0] = Combi(t[1], t[3], t[2])
 
 def p_GROUP(t):
