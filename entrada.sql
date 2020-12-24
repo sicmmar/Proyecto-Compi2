@@ -180,11 +180,11 @@ insert into tbempleadoidentificacion values(3,1,'2610-417055-0101');
 
 
 
-select E.*,estado,I.identificacion,tipoidentificacion
-from tbempleado E, tbestado ES,tbempleadoidentificacion I,tbidentificaciontipo IT
-where ES.idestado = E.idestado
-and I.idempleado = E.idempleado
-and IT.ididentificaciontipo = I.ididentificaciontipo;
+select *
+from tbempleado, tbestado,tbempleadoidentificacion,tbidentificaciontipo
+where tbestado.idestado = tbempleado.idestado
+and tbempleadoidentificacion.idempleado = tbempleado.idempleado
+and tbidentificaciontipo.ididentificaciontipo = tbempleadoidentificacion.ididentificaciontipo;
 
 select E.*,estado,I.identificacion,tipoidentificacion
 from tbempleado E, bestado ES ,tbempleadoidentificacion I,tbidentificaciontipo IT

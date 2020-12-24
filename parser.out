@@ -130,10 +130,10 @@ Rule 124   ORDER -> order by LEXP
 Rule 125   ORDER -> <empty>
 Rule 126   ORD -> asc
 Rule 127   ORD -> desc
-Rule 128   UPDATE -> update id set LCAMPOS where LEXP
+Rule 128   UPDATE -> update id set LCAMPOS WHERE
 Rule 129   LCAMPOS -> LCAMPOS coma id igual EXP
 Rule 130   LCAMPOS -> id igual EXP
-Rule 131   DELETE -> delete r_from EXP WHERE
+Rule 131   DELETE -> delete r_from id WHERE
 Rule 132   EXIST -> exist para SELECT parc
 Rule 133   EXIST -> not exist para SELECT parc
 Rule 134   LEXP -> LEXP coma EXP
@@ -305,7 +305,7 @@ foreign              : 39 40 88
 group                : 119
 having               : 121
 hour                 : 176
-id                   : 16 23 24 26 27 28 29 29 30 30 31 34 36 37 39 40 40 41 42 43 45 46 46 47 49 51 52 53 54 60 63 68 69 73 74 75 78 80 86 88 98 99 128 129 130 172 207 208 226 227 238
+id                   : 16 23 24 26 27 28 29 29 30 30 31 34 36 37 39 40 40 41 42 43 45 46 46 47 49 51 52 53 54 60 63 68 69 73 74 75 78 80 86 88 98 99 128 129 130 131 172 207 208 226 227 238
 idPunto              : 247
 if                   : 27 51 52
 igual                : 60 61 62 66 95 129 130 191
@@ -378,7 +378,7 @@ values               : 23 24
 varchar              : 143
 varying              : 149
 when                 : 21
-where                : 111 112 128
+where                : 111 112
 with                 : 151 153 169 171
 without              : 150 152 168 170
 year                 : 173
@@ -398,7 +398,7 @@ DELETE               : 7
 DROP                 : 9
 ELSE                 : 17
 EXIST                : 112
-EXP                  : 82 91 91 92 92 93 93 94 94 95 95 96 96 97 97 111 114 115 116 117 121 129 130 131 134 135 179 179 180 180 181 181 182 182 183 183 184 184 185 185 186 186 187 187 188 188 189 189 190 190 191 191 192 192 193 193 194 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 214 215 215 216 216 217 217 218 218 219 219 220 220 221 222 224
+EXP                  : 82 91 91 92 92 93 93 94 94 95 95 96 96 97 97 111 114 115 116 117 121 129 130 134 135 179 179 180 180 181 181 182 182 183 183 184 184 185 185 186 186 187 187 188 188 189 189 190 190 191 191 192 192 193 193 194 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 214 215 215 216 216 217 217 218 218 219 219 220 220 221 222 224
 FIELDS               : 231
 GROUP                : 100 101 102
 HAVING               : 100 101 102
@@ -406,7 +406,7 @@ HERENCIA             : 69
 INSERT               : 10
 LCAMPOS              : 128 129
 LDEF                 : 68 69 70
-LEXP                 : 21 21 22 23 24 24 37 38 39 39 40 40 44 87 88 88 89 99 100 100 101 101 102 119 123 124 128 134 226 228 229 230
+LEXP                 : 21 21 22 23 24 24 37 38 39 39 40 40 44 87 88 88 89 99 100 100 101 101 102 119 123 124 134 226 228 229 230
 LIMIT                : 100 101 102
 LISTAWHEN            : 17 18 19
 LOP                  : 31 32
@@ -426,7 +426,7 @@ SHOWDB               : 14
 TIPO                 : 34 47 74 75 245
 UPDATE               : 6
 WHEN                 : 19 20
-WHERE                : 100 101 102 131
+WHERE                : 100 101 102 128 131
 init                 : 0
 instruccion          : 2 3
 instrucciones        : 1 2
@@ -457,8 +457,8 @@ state 0
     (102) SELECT -> . select LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
     (68) CREATETABLE -> . create table id para LDEF parc ptcoma
     (69) CREATETABLE -> . create table id para LDEF parc HERENCIA ptcoma
-    (128) UPDATE -> . update id set LCAMPOS where LEXP
-    (131) DELETE -> . delete r_from EXP WHERE
+    (128) UPDATE -> . update id set LCAMPOS WHERE
+    (131) DELETE -> . delete r_from id WHERE
     (29) ALTER -> . alter databases id rename to id
     (30) ALTER -> . alter databases id owner to id
     (31) ALTER -> . alter table id LOP
@@ -534,8 +534,8 @@ state 2
     (102) SELECT -> . select LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
     (68) CREATETABLE -> . create table id para LDEF parc ptcoma
     (69) CREATETABLE -> . create table id para LDEF parc HERENCIA ptcoma
-    (128) UPDATE -> . update id set LCAMPOS where LEXP
-    (131) DELETE -> . delete r_from EXP WHERE
+    (128) UPDATE -> . update id set LCAMPOS WHERE
+    (131) DELETE -> . delete r_from id WHERE
     (29) ALTER -> . alter databases id rename to id
     (30) ALTER -> . alter databases id owner to id
     (31) ALTER -> . alter table id LOP
@@ -845,14 +845,14 @@ state 18
 
 state 19
 
-    (128) UPDATE -> update . id set LCAMPOS where LEXP
+    (128) UPDATE -> update . id set LCAMPOS WHERE
 
     id              shift and go to state 71
 
 
 state 20
 
-    (131) DELETE -> delete . r_from EXP WHERE
+    (131) DELETE -> delete . r_from id WHERE
 
     r_from          shift and go to state 72
 
@@ -2833,118 +2833,17 @@ state 70
 
 state 71
 
-    (128) UPDATE -> update id . set LCAMPOS where LEXP
+    (128) UPDATE -> update id . set LCAMPOS WHERE
 
     set             shift and go to state 134
 
 
 state 72
 
-    (131) DELETE -> delete r_from . EXP WHERE
-    (179) EXP -> . EXP mas EXP
-    (180) EXP -> . EXP menos EXP
-    (181) EXP -> . EXP multiplicacion EXP
-    (182) EXP -> . EXP division EXP
-    (183) EXP -> . EXP modulo EXP
-    (184) EXP -> . EXP elevado EXP
-    (185) EXP -> . EXP and EXP
-    (186) EXP -> . EXP or EXP
-    (187) EXP -> . EXP mayor EXP
-    (188) EXP -> . EXP menor EXP
-    (189) EXP -> . EXP mayor_igual EXP
-    (190) EXP -> . EXP menor_igual EXP
-    (191) EXP -> . EXP igual EXP
-    (192) EXP -> . EXP diferente1 EXP
-    (193) EXP -> . EXP diferente2 EXP
-    (194) EXP -> . EXP between EXP
-    (195) EXP -> . EXP is not null
-    (196) EXP -> . EXP is null
-    (197) EXP -> . EXP isnull
-    (198) EXP -> . EXP notnull
-    (199) EXP -> . EXP is true
-    (200) EXP -> . EXP is not true
-    (201) EXP -> . EXP is false
-    (202) EXP -> . EXP is not false
-    (203) EXP -> . EXP is unknown
-    (204) EXP -> . EXP is not unknown
-    (205) EXP -> . EXP as cadenaString
-    (206) EXP -> . EXP cadenaString
-    (207) EXP -> . EXP as id
-    (208) EXP -> . EXP id
-    (209) EXP -> . EXP as cadena
-    (210) EXP -> . EXP cadena
-    (211) EXP -> . mas EXP
-    (212) EXP -> . menos EXP
-    (213) EXP -> . not EXP
-    (214) EXP -> . EXP in para EXP parc
-    (215) EXP -> . EXP not in para EXP parc
-    (216) EXP -> . EXP not between EXP
-    (217) EXP -> . EXP between symetric EXP
-    (218) EXP -> . EXP not between symetric EXP
-    (219) EXP -> . EXP is distinct r_from EXP
-    (220) EXP -> . EXP is not distinct r_from EXP
-    (221) EXP -> . EXP like cadena
-    (222) EXP -> . EXP not like cadena
-    (223) EXP -> . SELECT
-    (224) EXP -> . para EXP parc
-    (225) EXP -> . CASE
-    (226) EXP -> . id para LEXP parc
-    (227) EXP -> . id para parc
-    (228) EXP -> . any para LEXP parc
-    (229) EXP -> . all para LEXP parc
-    (230) EXP -> . some para LEXP parc
-    (231) EXP -> . extract para FIELDS r_from timestamp cadena parc
-    (232) EXP -> . int
-    (233) EXP -> . decimales
-    (234) EXP -> . cadena
-    (235) EXP -> . cadenaString
-    (236) EXP -> . true
-    (237) EXP -> . false
-    (238) EXP -> . id
-    (239) EXP -> . multiplicacion
-    (240) EXP -> . null
-    (241) EXP -> . current_time
-    (242) EXP -> . current_date
-    (243) EXP -> . timestamp cadena
-    (244) EXP -> . interval cadena
-    (245) EXP -> . cadena as TIPO
-    (246) EXP -> . default
-    (247) EXP -> . idPunto
-    (100) SELECT -> . select distinct LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (101) SELECT -> . select LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (102) SELECT -> . select LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (17) CASE -> . case LISTAWHEN ELSE end
-    (18) CASE -> . case LISTAWHEN end
+    (131) DELETE -> delete r_from . id WHERE
 
-    mas             shift and go to state 41
-    menos           shift and go to state 42
-    not             shift and go to state 44
-    para            shift and go to state 51
-    id              shift and go to state 49
-    any             shift and go to state 54
-    all             shift and go to state 55
-    some            shift and go to state 56
-    extract         shift and go to state 57
-    int             shift and go to state 59
-    decimales       shift and go to state 60
-    cadena          shift and go to state 50
-    cadenaString    shift and go to state 48
-    true            shift and go to state 46
-    false           shift and go to state 47
-    multiplicacion  shift and go to state 43
-    null            shift and go to state 45
-    current_time    shift and go to state 61
-    current_date    shift and go to state 62
-    timestamp       shift and go to state 58
-    interval        shift and go to state 63
-    default         shift and go to state 64
-    idPunto         shift and go to state 65
-    select          shift and go to state 17
-    case            shift and go to state 24
+    id              shift and go to state 135
 
-    EXP                            shift and go to state 135
-    SELECT                         shift and go to state 52
-    CASE                           shift and go to state 53
 
 state 73
 
@@ -6800,7 +6699,7 @@ state 133
 
 state 134
 
-    (128) UPDATE -> update id set . LCAMPOS where LEXP
+    (128) UPDATE -> update id set . LCAMPOS WHERE
     (129) LCAMPOS -> . LCAMPOS coma id igual EXP
     (130) LCAMPOS -> . id igual EXP
 
@@ -6810,78 +6709,11 @@ state 134
 
 state 135
 
-    (131) DELETE -> delete r_from EXP . WHERE
-    (179) EXP -> EXP . mas EXP
-    (180) EXP -> EXP . menos EXP
-    (181) EXP -> EXP . multiplicacion EXP
-    (182) EXP -> EXP . division EXP
-    (183) EXP -> EXP . modulo EXP
-    (184) EXP -> EXP . elevado EXP
-    (185) EXP -> EXP . and EXP
-    (186) EXP -> EXP . or EXP
-    (187) EXP -> EXP . mayor EXP
-    (188) EXP -> EXP . menor EXP
-    (189) EXP -> EXP . mayor_igual EXP
-    (190) EXP -> EXP . menor_igual EXP
-    (191) EXP -> EXP . igual EXP
-    (192) EXP -> EXP . diferente1 EXP
-    (193) EXP -> EXP . diferente2 EXP
-    (194) EXP -> EXP . between EXP
-    (195) EXP -> EXP . is not null
-    (196) EXP -> EXP . is null
-    (197) EXP -> EXP . isnull
-    (198) EXP -> EXP . notnull
-    (199) EXP -> EXP . is true
-    (200) EXP -> EXP . is not true
-    (201) EXP -> EXP . is false
-    (202) EXP -> EXP . is not false
-    (203) EXP -> EXP . is unknown
-    (204) EXP -> EXP . is not unknown
-    (205) EXP -> EXP . as cadenaString
-    (206) EXP -> EXP . cadenaString
-    (207) EXP -> EXP . as id
-    (208) EXP -> EXP . id
-    (209) EXP -> EXP . as cadena
-    (210) EXP -> EXP . cadena
-    (214) EXP -> EXP . in para EXP parc
-    (215) EXP -> EXP . not in para EXP parc
-    (216) EXP -> EXP . not between EXP
-    (217) EXP -> EXP . between symetric EXP
-    (218) EXP -> EXP . not between symetric EXP
-    (219) EXP -> EXP . is distinct r_from EXP
-    (220) EXP -> EXP . is not distinct r_from EXP
-    (221) EXP -> EXP . like cadena
-    (222) EXP -> EXP . not like cadena
+    (131) DELETE -> delete r_from id . WHERE
     (111) WHERE -> . where EXP
     (112) WHERE -> . where EXIST
     (113) WHERE -> .
 
-    mas             shift and go to state 91
-    menos           shift and go to state 92
-    multiplicacion  shift and go to state 93
-    division        shift and go to state 94
-    modulo          shift and go to state 95
-    elevado         shift and go to state 96
-    and             shift and go to state 97
-    or              shift and go to state 98
-    mayor           shift and go to state 99
-    menor           shift and go to state 100
-    mayor_igual     shift and go to state 101
-    menor_igual     shift and go to state 102
-    igual           shift and go to state 103
-    diferente1      shift and go to state 104
-    diferente2      shift and go to state 105
-    between         shift and go to state 106
-    is              shift and go to state 107
-    isnull          shift and go to state 109
-    notnull         shift and go to state 110
-    as              shift and go to state 111
-    cadenaString    shift and go to state 112
-    id              shift and go to state 113
-    cadena          shift and go to state 114
-    in              shift and go to state 115
-    not             shift and go to state 108
-    like            shift and go to state 116
     where           shift and go to state 90
     ptcoma          reduce using rule 113 (WHERE -> .)
 
@@ -12047,18 +11879,23 @@ state 232
 
 state 233
 
-    (128) UPDATE -> update id set LCAMPOS . where LEXP
+    (128) UPDATE -> update id set LCAMPOS . WHERE
     (129) LCAMPOS -> LCAMPOS . coma id igual EXP
+    (111) WHERE -> . where EXP
+    (112) WHERE -> . where EXIST
+    (113) WHERE -> .
 
-    where           shift and go to state 310
     coma            shift and go to state 311
+    where           shift and go to state 90
+    ptcoma          reduce using rule 113 (WHERE -> .)
 
+    WHERE                          shift and go to state 310
 
 state 234
 
-    (131) DELETE -> delete r_from EXP WHERE .
+    (131) DELETE -> delete r_from id WHERE .
 
-    ptcoma          reduce using rule 131 (DELETE -> delete r_from EXP WHERE .)
+    ptcoma          reduce using rule 131 (DELETE -> delete r_from id WHERE .)
 
 
 state 235
@@ -14617,134 +14454,30 @@ state 309
 
 state 310
 
-    (128) UPDATE -> update id set LCAMPOS where . LEXP
-    (134) LEXP -> . LEXP coma EXP
-    (135) LEXP -> . EXP
-    (179) EXP -> . EXP mas EXP
-    (180) EXP -> . EXP menos EXP
-    (181) EXP -> . EXP multiplicacion EXP
-    (182) EXP -> . EXP division EXP
-    (183) EXP -> . EXP modulo EXP
-    (184) EXP -> . EXP elevado EXP
-    (185) EXP -> . EXP and EXP
-    (186) EXP -> . EXP or EXP
-    (187) EXP -> . EXP mayor EXP
-    (188) EXP -> . EXP menor EXP
-    (189) EXP -> . EXP mayor_igual EXP
-    (190) EXP -> . EXP menor_igual EXP
-    (191) EXP -> . EXP igual EXP
-    (192) EXP -> . EXP diferente1 EXP
-    (193) EXP -> . EXP diferente2 EXP
-    (194) EXP -> . EXP between EXP
-    (195) EXP -> . EXP is not null
-    (196) EXP -> . EXP is null
-    (197) EXP -> . EXP isnull
-    (198) EXP -> . EXP notnull
-    (199) EXP -> . EXP is true
-    (200) EXP -> . EXP is not true
-    (201) EXP -> . EXP is false
-    (202) EXP -> . EXP is not false
-    (203) EXP -> . EXP is unknown
-    (204) EXP -> . EXP is not unknown
-    (205) EXP -> . EXP as cadenaString
-    (206) EXP -> . EXP cadenaString
-    (207) EXP -> . EXP as id
-    (208) EXP -> . EXP id
-    (209) EXP -> . EXP as cadena
-    (210) EXP -> . EXP cadena
-    (211) EXP -> . mas EXP
-    (212) EXP -> . menos EXP
-    (213) EXP -> . not EXP
-    (214) EXP -> . EXP in para EXP parc
-    (215) EXP -> . EXP not in para EXP parc
-    (216) EXP -> . EXP not between EXP
-    (217) EXP -> . EXP between symetric EXP
-    (218) EXP -> . EXP not between symetric EXP
-    (219) EXP -> . EXP is distinct r_from EXP
-    (220) EXP -> . EXP is not distinct r_from EXP
-    (221) EXP -> . EXP like cadena
-    (222) EXP -> . EXP not like cadena
-    (223) EXP -> . SELECT
-    (224) EXP -> . para EXP parc
-    (225) EXP -> . CASE
-    (226) EXP -> . id para LEXP parc
-    (227) EXP -> . id para parc
-    (228) EXP -> . any para LEXP parc
-    (229) EXP -> . all para LEXP parc
-    (230) EXP -> . some para LEXP parc
-    (231) EXP -> . extract para FIELDS r_from timestamp cadena parc
-    (232) EXP -> . int
-    (233) EXP -> . decimales
-    (234) EXP -> . cadena
-    (235) EXP -> . cadenaString
-    (236) EXP -> . true
-    (237) EXP -> . false
-    (238) EXP -> . id
-    (239) EXP -> . multiplicacion
-    (240) EXP -> . null
-    (241) EXP -> . current_time
-    (242) EXP -> . current_date
-    (243) EXP -> . timestamp cadena
-    (244) EXP -> . interval cadena
-    (245) EXP -> . cadena as TIPO
-    (246) EXP -> . default
-    (247) EXP -> . idPunto
-    (100) SELECT -> . select distinct LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (101) SELECT -> . select LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (102) SELECT -> . select LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (17) CASE -> . case LISTAWHEN ELSE end
-    (18) CASE -> . case LISTAWHEN end
+    (128) UPDATE -> update id set LCAMPOS WHERE .
 
-    mas             shift and go to state 41
-    menos           shift and go to state 42
-    not             shift and go to state 44
-    para            shift and go to state 51
-    id              shift and go to state 49
-    any             shift and go to state 54
-    all             shift and go to state 55
-    some            shift and go to state 56
-    extract         shift and go to state 57
-    int             shift and go to state 59
-    decimales       shift and go to state 60
-    cadena          shift and go to state 50
-    cadenaString    shift and go to state 48
-    true            shift and go to state 46
-    false           shift and go to state 47
-    multiplicacion  shift and go to state 43
-    null            shift and go to state 45
-    current_time    shift and go to state 61
-    current_date    shift and go to state 62
-    timestamp       shift and go to state 58
-    interval        shift and go to state 63
-    default         shift and go to state 64
-    idPunto         shift and go to state 65
-    select          shift and go to state 17
-    case            shift and go to state 24
+    ptcoma          reduce using rule 128 (UPDATE -> update id set LCAMPOS WHERE .)
 
-    LEXP                           shift and go to state 374
-    EXP                            shift and go to state 40
-    SELECT                         shift and go to state 52
-    CASE                           shift and go to state 53
 
 state 311
 
     (129) LCAMPOS -> LCAMPOS coma . id igual EXP
 
-    id              shift and go to state 375
+    id              shift and go to state 374
 
 
 state 312
 
     (29) ALTER -> alter databases id rename to . id
 
-    id              shift and go to state 376
+    id              shift and go to state 375
 
 
 state 313
 
     (30) ALTER -> alter databases id owner to . id
 
-    id              shift and go to state 377
+    id              shift and go to state 376
 
 
 state 314
@@ -14753,7 +14486,7 @@ state 314
     (42) OP -> alter column . id set null
     (47) OP -> alter column . id type TIPO
 
-    id              shift and go to state 378
+    id              shift and go to state 377
 
 
 state 315
@@ -14779,20 +14512,20 @@ state 315
     drop            shift and go to state 241
     rename          shift and go to state 242
 
-    OP                             shift and go to state 379
+    OP                             shift and go to state 378
 
 state 316
 
     (34) OP -> add column . id TIPO
 
-    id              shift and go to state 380
+    id              shift and go to state 379
 
 
 state 317
 
     (35) OP -> add check . para CONDCHECK parc
 
-    para            shift and go to state 381
+    para            shift and go to state 380
 
 
 state 318
@@ -14801,28 +14534,28 @@ state 318
     (37) OP -> add constraint . id unique para LEXP parc
     (40) OP -> add constraint . id foreign key para LEXP parc references id para LEXP parc
 
-    id              shift and go to state 382
+    id              shift and go to state 381
 
 
 state 319
 
     (38) OP -> add unique . para LEXP parc
 
-    para            shift and go to state 383
+    para            shift and go to state 382
 
 
 state 320
 
     (39) OP -> add foreign . key para LEXP parc references id para LEXP parc
 
-    key             shift and go to state 384
+    key             shift and go to state 383
 
 
 state 321
 
     (43) OP -> drop constraint . id
 
-    id              shift and go to state 385
+    id              shift and go to state 384
 
 
 state 322
@@ -14931,7 +14664,7 @@ state 322
     select          shift and go to state 17
     case            shift and go to state 24
 
-    LEXP                           shift and go to state 386
+    LEXP                           shift and go to state 385
     EXP                            shift and go to state 40
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
@@ -14940,14 +14673,14 @@ state 323
 
     (45) OP -> drop check . id
 
-    id              shift and go to state 387
+    id              shift and go to state 386
 
 
 state 324
 
     (46) OP -> rename column . id to id
 
-    id              shift and go to state 388
+    id              shift and go to state 387
 
 
 state 325
@@ -15063,7 +14796,7 @@ state 326
     select          shift and go to state 17
     case            shift and go to state 24
 
-    LEXP                           shift and go to state 389
+    LEXP                           shift and go to state 388
     EXP                            shift and go to state 40
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
@@ -15073,7 +14806,7 @@ state 327
     (24) INSERT -> insert into id para LEXP . parc values para LEXP parc
     (134) LEXP -> LEXP . coma EXP
 
-    parc            shift and go to state 390
+    parc            shift and go to state 389
     coma            shift and go to state 89
 
 
@@ -15157,7 +14890,7 @@ state 330
 
   ! group           [ reduce using rule 120 (GROUP -> .) ]
 
-    GROUP                          shift and go to state 391
+    GROUP                          shift and go to state 390
 
 state 331
 
@@ -15221,7 +14954,7 @@ state 331
 
   ! having          [ reduce using rule 122 (HAVING -> .) ]
 
-    HAVING                         shift and go to state 392
+    HAVING                         shift and go to state 391
 
 state 332
 
@@ -15231,7 +14964,7 @@ state 332
     (125) ORDER -> .
 
   ! shift/reduce conflict for order resolved as shift
-    order           shift and go to state 394
+    order           shift and go to state 393
     r_from          reduce using rule 125 (ORDER -> .)
     coma            reduce using rule 125 (ORDER -> .)
     where           reduce using rule 125 (ORDER -> .)
@@ -15286,7 +15019,7 @@ state 332
 
   ! order           [ reduce using rule 125 (ORDER -> .) ]
 
-    ORDER                          shift and go to state 393
+    ORDER                          shift and go to state 392
 
 state 333
 
@@ -15367,7 +15100,7 @@ state 333
     (17) CASE -> . case LISTAWHEN ELSE end
     (18) CASE -> . case LISTAWHEN end
 
-    all             shift and go to state 396
+    all             shift and go to state 395
     mas             shift and go to state 41
     menos           shift and go to state 42
     not             shift and go to state 44
@@ -15393,7 +15126,7 @@ state 333
     select          shift and go to state 17
     case            shift and go to state 24
 
-    EXP                            shift and go to state 395
+    EXP                            shift and go to state 394
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
@@ -15501,7 +15234,7 @@ state 334
     select          shift and go to state 17
     case            shift and go to state 24
 
-    EXP                            shift and go to state 397
+    EXP                            shift and go to state 396
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
@@ -15609,7 +15342,7 @@ state 335
     select          shift and go to state 17
     case            shift and go to state 24
 
-    EXP                            shift and go to state 398
+    EXP                            shift and go to state 397
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
@@ -15836,13 +15569,13 @@ state 338
 
     select          shift and go to state 17
 
-    SELECT                         shift and go to state 399
+    SELECT                         shift and go to state 398
 
 state 339
 
     (132) EXIST -> exist para SELECT . parc
 
-    parc            shift and go to state 400
+    parc            shift and go to state 399
 
 
 state 340
@@ -15949,7 +15682,7 @@ state 340
     select          shift and go to state 17
     case            shift and go to state 24
 
-    EXP                            shift and go to state 401
+    EXP                            shift and go to state 400
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
@@ -16124,7 +15857,7 @@ state 342
     (221) EXP -> EXP . like cadena
     (222) EXP -> EXP . not like cadena
 
-    parc            shift and go to state 402
+    parc            shift and go to state 401
     mas             shift and go to state 91
     menos           shift and go to state 92
     multiplicacion  shift and go to state 93
@@ -16342,7 +16075,7 @@ state 345
     (146) TIPO -> interval para int . parc
     (154) TIPO -> interval para int . parc cadena
 
-    parc            shift and go to state 403
+    parc            shift and go to state 402
 
 
 state 346
@@ -16350,8 +16083,8 @@ state 346
     (137) TIPO -> decimal para int . coma int parc
     (138) TIPO -> decimal para int . parc
 
-    coma            shift and go to state 404
-    parc            shift and go to state 405
+    coma            shift and go to state 403
+    parc            shift and go to state 404
 
 
 state 347
@@ -16359,15 +16092,15 @@ state 347
     (140) TIPO -> numeric para int . coma int parc
     (141) TIPO -> numeric para int . parc
 
-    coma            shift and go to state 406
-    parc            shift and go to state 407
+    coma            shift and go to state 405
+    parc            shift and go to state 406
 
 
 state 348
 
     (143) TIPO -> varchar para int . parc
 
-    parc            shift and go to state 408
+    parc            shift and go to state 407
 
 
 state 349
@@ -16376,42 +16109,42 @@ state 349
     (150) TIPO -> timestamp para int . parc without time zone
     (151) TIPO -> timestamp para int . parc with time zone
 
-    parc            shift and go to state 409
+    parc            shift and go to state 408
 
 
 state 350
 
     (168) TIPO -> timestamp without time . zone
 
-    zone            shift and go to state 410
+    zone            shift and go to state 409
 
 
 state 351
 
     (169) TIPO -> timestamp with time . zone
 
-    zone            shift and go to state 411
+    zone            shift and go to state 410
 
 
 state 352
 
     (145) TIPO -> character para int . parc
 
-    parc            shift and go to state 412
+    parc            shift and go to state 411
 
 
 state 353
 
     (149) TIPO -> character varying para . int parc
 
-    int             shift and go to state 413
+    int             shift and go to state 412
 
 
 state 354
 
     (147) TIPO -> char para int . parc
 
-    parc            shift and go to state 414
+    parc            shift and go to state 413
 
 
 state 355
@@ -16420,28 +16153,28 @@ state 355
     (152) TIPO -> time para int . parc without time zone
     (153) TIPO -> time para int . parc with time zone
 
-    parc            shift and go to state 415
+    parc            shift and go to state 414
 
 
 state 356
 
     (170) TIPO -> time without time . zone
 
-    zone            shift and go to state 416
+    zone            shift and go to state 415
 
 
 state 357
 
     (171) TIPO -> time with time . zone
 
-    zone            shift and go to state 417
+    zone            shift and go to state 416
 
 
 state 358
 
     (231) EXP -> extract para FIELDS r_from timestamp . cadena parc
 
-    cadena          shift and go to state 418
+    cadena          shift and go to state 417
 
 
 state 359
@@ -16462,17 +16195,17 @@ state 359
 
     parc            reduce using rule 74 (COLDEF -> id TIPO .)
     coma            reduce using rule 74 (COLDEF -> id TIPO .)
-    constraint      shift and go to state 421
-    unique          shift and go to state 422
-    check           shift and go to state 423
-    default         shift and go to state 424
-    not             shift and go to state 425
-    null            shift and go to state 426
-    primary         shift and go to state 427
-    references      shift and go to state 428
+    constraint      shift and go to state 420
+    unique          shift and go to state 421
+    check           shift and go to state 422
+    default         shift and go to state 423
+    not             shift and go to state 424
+    null            shift and go to state 425
+    primary         shift and go to state 426
+    references      shift and go to state 427
 
-    LOPCOLUMN                      shift and go to state 419
-    OPCOLUMN                       shift and go to state 420
+    LOPCOLUMN                      shift and go to state 418
+    OPCOLUMN                       shift and go to state 419
 
 state 360
 
@@ -16480,10 +16213,10 @@ state 360
     (69) CREATETABLE -> create table id para LDEF parc . HERENCIA ptcoma
     (98) HERENCIA -> . inherits para id parc
 
-    ptcoma          shift and go to state 429
-    inherits        shift and go to state 431
+    ptcoma          shift and go to state 428
+    inherits        shift and go to state 430
 
-    HERENCIA                       shift and go to state 430
+    HERENCIA                       shift and go to state 429
 
 state 361
 
@@ -16504,7 +16237,7 @@ state 361
     unique          shift and go to state 298
     check           shift and go to state 299
 
-    COLDEF                         shift and go to state 432
+    COLDEF                         shift and go to state 431
     OPCONST                        shift and go to state 294
 
 state 362
@@ -16520,20 +16253,20 @@ state 362
     unique          shift and go to state 298
     check           shift and go to state 299
 
-    OPCONST                        shift and go to state 433
+    OPCONST                        shift and go to state 432
 
 state 363
 
     (87) OPCONST -> primary key . para LEXP parc
 
-    para            shift and go to state 434
+    para            shift and go to state 433
 
 
 state 364
 
     (88) OPCONST -> foreign key . para LEXP parc references id para LEXP parc
 
-    para            shift and go to state 435
+    para            shift and go to state 434
 
 
 state 365
@@ -16642,7 +16375,7 @@ state 365
     select          shift and go to state 17
     case            shift and go to state 24
 
-    LEXP                           shift and go to state 436
+    LEXP                           shift and go to state 435
     EXP                            shift and go to state 40
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
@@ -16758,8 +16491,8 @@ state 366
     select          shift and go to state 17
     case            shift and go to state 24
 
-    CONDCHECK                      shift and go to state 437
-    EXP                            shift and go to state 438
+    CONDCHECK                      shift and go to state 436
+    EXP                            shift and go to state 437
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
@@ -16869,7 +16602,7 @@ state 367
     select          shift and go to state 17
     case            shift and go to state 24
 
-    LEXP                           shift and go to state 439
+    LEXP                           shift and go to state 438
     EXP                            shift and go to state 40
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
@@ -16894,7 +16627,7 @@ state 368
     owner           shift and go to state 229
     mode            shift and go to state 230
 
-    OPCCDB                         shift and go to state 440
+    OPCCDB                         shift and go to state 439
     PROPIETARIO                    shift and go to state 227
     MODO                           shift and go to state 228
 
@@ -16974,8 +16707,9 @@ state 373
     (221) EXP -> EXP . like cadena
     (222) EXP -> EXP . not like cadena
 
-    where           reduce using rule 130 (LCAMPOS -> id igual EXP .)
     coma            reduce using rule 130 (LCAMPOS -> id igual EXP .)
+    where           reduce using rule 130 (LCAMPOS -> id igual EXP .)
+    ptcoma          reduce using rule 130 (LCAMPOS -> id igual EXP .)
     mas             shift and go to state 91
     menos           shift and go to state 92
     multiplicacion  shift and go to state 93
@@ -17006,45 +16740,36 @@ state 373
 
 state 374
 
-    (128) UPDATE -> update id set LCAMPOS where LEXP .
-    (134) LEXP -> LEXP . coma EXP
+    (129) LCAMPOS -> LCAMPOS coma id . igual EXP
 
-    ptcoma          reduce using rule 128 (UPDATE -> update id set LCAMPOS where LEXP .)
-    coma            shift and go to state 89
+    igual           shift and go to state 440
 
 
 state 375
-
-    (129) LCAMPOS -> LCAMPOS coma id . igual EXP
-
-    igual           shift and go to state 441
-
-
-state 376
 
     (29) ALTER -> alter databases id rename to id .
 
     ptcoma          reduce using rule 29 (ALTER -> alter databases id rename to id .)
 
 
-state 377
+state 376
 
     (30) ALTER -> alter databases id owner to id .
 
     ptcoma          reduce using rule 30 (ALTER -> alter databases id owner to id .)
 
 
-state 378
+state 377
 
     (41) OP -> alter column id . set not null
     (42) OP -> alter column id . set null
     (47) OP -> alter column id . type TIPO
 
-    set             shift and go to state 442
-    type            shift and go to state 443
+    set             shift and go to state 441
+    type            shift and go to state 442
 
 
-state 379
+state 378
 
     (32) LOP -> LOP coma OP .
 
@@ -17052,7 +16777,7 @@ state 379
     ptcoma          reduce using rule 32 (LOP -> LOP coma OP .)
 
 
-state 380
+state 379
 
     (34) OP -> add column id . TIPO
     (136) TIPO -> . interval cadena
@@ -17113,9 +16838,9 @@ state 380
     boolean         shift and go to state 210
     id              shift and go to state 211
 
-    TIPO                           shift and go to state 444
+    TIPO                           shift and go to state 443
 
-state 381
+state 380
 
     (35) OP -> add check para . CONDCHECK parc
     (91) CONDCHECK -> . EXP mayor EXP
@@ -17226,23 +16951,23 @@ state 381
     select          shift and go to state 17
     case            shift and go to state 24
 
-    CONDCHECK                      shift and go to state 445
-    EXP                            shift and go to state 438
+    CONDCHECK                      shift and go to state 444
+    EXP                            shift and go to state 437
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 382
+state 381
 
     (36) OP -> add constraint id . check para CONDCHECK parc
     (37) OP -> add constraint id . unique para LEXP parc
     (40) OP -> add constraint id . foreign key para LEXP parc references id para LEXP parc
 
-    check           shift and go to state 446
-    unique          shift and go to state 447
-    foreign         shift and go to state 448
+    check           shift and go to state 445
+    unique          shift and go to state 446
+    foreign         shift and go to state 447
 
 
-state 383
+state 382
 
     (38) OP -> add unique para . LEXP parc
     (134) LEXP -> . LEXP coma EXP
@@ -17348,19 +17073,19 @@ state 383
     select          shift and go to state 17
     case            shift and go to state 24
 
-    LEXP                           shift and go to state 449
+    LEXP                           shift and go to state 448
     EXP                            shift and go to state 40
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 384
+state 383
 
     (39) OP -> add foreign key . para LEXP parc references id para LEXP parc
 
-    para            shift and go to state 450
+    para            shift and go to state 449
 
 
-state 385
+state 384
 
     (43) OP -> drop constraint id .
 
@@ -17368,7 +17093,7 @@ state 385
     ptcoma          reduce using rule 43 (OP -> drop constraint id .)
 
 
-state 386
+state 385
 
     (44) OP -> drop column LEXP .
     (134) LEXP -> LEXP . coma EXP
@@ -17380,7 +17105,7 @@ state 386
   ! coma            [ reduce using rule 44 (OP -> drop column LEXP .) ]
 
 
-state 387
+state 386
 
     (45) OP -> drop check id .
 
@@ -17388,30 +17113,30 @@ state 387
     ptcoma          reduce using rule 45 (OP -> drop check id .)
 
 
-state 388
+state 387
 
     (46) OP -> rename column id . to id
 
-    to              shift and go to state 451
+    to              shift and go to state 450
 
 
-state 389
+state 388
 
     (23) INSERT -> insert into id values para LEXP . parc
     (134) LEXP -> LEXP . coma EXP
 
-    parc            shift and go to state 452
+    parc            shift and go to state 451
     coma            shift and go to state 89
 
 
-state 390
+state 389
 
     (24) INSERT -> insert into id para LEXP parc . values para LEXP parc
 
-    values          shift and go to state 453
+    values          shift and go to state 452
 
 
-state 391
+state 390
 
     (100) SELECT -> select distinct LEXP r_from LEXP WHERE GROUP . HAVING COMBINING ORDER LIMIT
     (121) HAVING -> . having EXP
@@ -17473,9 +17198,9 @@ state 391
 
   ! having          [ reduce using rule 122 (HAVING -> .) ]
 
-    HAVING                         shift and go to state 454
+    HAVING                         shift and go to state 453
 
-state 392
+state 391
 
     (101) SELECT -> select LEXP r_from LEXP WHERE GROUP HAVING . COMBINING ORDER LIMIT
     (114) COMBINING -> . union EXP
@@ -17544,9 +17269,9 @@ state 392
   ! intersect       [ reduce using rule 118 (COMBINING -> .) ]
   ! except          [ reduce using rule 118 (COMBINING -> .) ]
 
-    COMBINING                      shift and go to state 455
+    COMBINING                      shift and go to state 454
 
-state 393
+state 392
 
     (102) SELECT -> select LEXP WHERE GROUP HAVING COMBINING ORDER . LIMIT
     (103) LIMIT -> . limit int
@@ -17560,8 +17285,8 @@ state 393
 
   ! shift/reduce conflict for limit resolved as shift
   ! shift/reduce conflict for offset resolved as shift
-    limit           shift and go to state 457
-    offset          shift and go to state 458
+    limit           shift and go to state 456
+    offset          shift and go to state 457
     ptcoma          reduce using rule 110 (LIMIT -> .)
     r_from          reduce using rule 110 (LIMIT -> .)
     coma            reduce using rule 110 (LIMIT -> .)
@@ -17616,17 +17341,17 @@ state 393
   ! limit           [ reduce using rule 110 (LIMIT -> .) ]
   ! offset          [ reduce using rule 110 (LIMIT -> .) ]
 
-    LIMIT                          shift and go to state 456
+    LIMIT                          shift and go to state 455
 
-state 394
+state 393
 
     (123) ORDER -> order . by LEXP ORD
     (124) ORDER -> order . by LEXP
 
-    by              shift and go to state 459
+    by              shift and go to state 458
 
 
-state 395
+state 394
 
     (114) COMBINING -> union EXP .
     (179) EXP -> EXP . mas EXP
@@ -17778,7 +17503,7 @@ state 395
   ! like            [ reduce using rule 114 (COMBINING -> union EXP .) ]
 
 
-state 396
+state 395
 
     (115) COMBINING -> union all . EXP
     (229) EXP -> all . para LEXP parc
@@ -17857,7 +17582,7 @@ state 396
     (17) CASE -> . case LISTAWHEN ELSE end
     (18) CASE -> . case LISTAWHEN end
 
-    para            shift and go to state 461
+    para            shift and go to state 460
     mas             shift and go to state 41
     menos           shift and go to state 42
     not             shift and go to state 44
@@ -17883,11 +17608,11 @@ state 396
     select          shift and go to state 17
     case            shift and go to state 24
 
-    EXP                            shift and go to state 460
+    EXP                            shift and go to state 459
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 397
+state 396
 
     (116) COMBINING -> intersect EXP .
     (179) EXP -> EXP . mas EXP
@@ -18039,7 +17764,7 @@ state 397
   ! like            [ reduce using rule 116 (COMBINING -> intersect EXP .) ]
 
 
-state 398
+state 397
 
     (117) COMBINING -> except EXP .
     (179) EXP -> EXP . mas EXP
@@ -18191,14 +17916,14 @@ state 398
   ! like            [ reduce using rule 117 (COMBINING -> except EXP .) ]
 
 
-state 399
+state 398
 
     (133) EXIST -> not exist para SELECT . parc
 
-    parc            shift and go to state 462
+    parc            shift and go to state 461
 
 
-state 400
+state 399
 
     (132) EXIST -> exist para SELECT parc .
 
@@ -18256,7 +17981,7 @@ state 400
     desc            reduce using rule 132 (EXIST -> exist para SELECT parc .)
 
 
-state 401
+state 400
 
     (220) EXP -> EXP is not distinct r_from EXP .
     (179) EXP -> EXP . mas EXP
@@ -18382,7 +18107,7 @@ state 401
   ! like            [ shift and go to state 116 ]
 
 
-state 402
+state 401
 
     (215) EXP -> EXP not in para EXP parc .
 
@@ -18440,7 +18165,7 @@ state 402
     desc            reduce using rule 215 (EXP -> EXP not in para EXP parc .)
 
 
-state 403
+state 402
 
     (146) TIPO -> interval para int parc .
     (154) TIPO -> interval para int parc . cadena
@@ -18497,19 +18222,19 @@ state 403
     references      reduce using rule 146 (TIPO -> interval para int parc .)
     asc             reduce using rule 146 (TIPO -> interval para int parc .)
     desc            reduce using rule 146 (TIPO -> interval para int parc .)
-    cadena          shift and go to state 463
+    cadena          shift and go to state 462
 
   ! cadena          [ reduce using rule 146 (TIPO -> interval para int parc .) ]
 
 
-state 404
+state 403
 
     (137) TIPO -> decimal para int coma . int parc
 
-    int             shift and go to state 464
+    int             shift and go to state 463
 
 
-state 405
+state 404
 
     (138) TIPO -> decimal para int parc .
 
@@ -18567,14 +18292,14 @@ state 405
     desc            reduce using rule 138 (TIPO -> decimal para int parc .)
 
 
-state 406
+state 405
 
     (140) TIPO -> numeric para int coma . int parc
 
-    int             shift and go to state 465
+    int             shift and go to state 464
 
 
-state 407
+state 406
 
     (141) TIPO -> numeric para int parc .
 
@@ -18632,7 +18357,7 @@ state 407
     desc            reduce using rule 141 (TIPO -> numeric para int parc .)
 
 
-state 408
+state 407
 
     (143) TIPO -> varchar para int parc .
 
@@ -18690,7 +18415,7 @@ state 408
     desc            reduce using rule 143 (TIPO -> varchar para int parc .)
 
 
-state 409
+state 408
 
     (144) TIPO -> timestamp para int parc .
     (150) TIPO -> timestamp para int parc . without time zone
@@ -18748,11 +18473,11 @@ state 409
     references      reduce using rule 144 (TIPO -> timestamp para int parc .)
     asc             reduce using rule 144 (TIPO -> timestamp para int parc .)
     desc            reduce using rule 144 (TIPO -> timestamp para int parc .)
-    without         shift and go to state 466
-    with            shift and go to state 467
+    without         shift and go to state 465
+    with            shift and go to state 466
 
 
-state 410
+state 409
 
     (168) TIPO -> timestamp without time zone .
 
@@ -18810,7 +18535,7 @@ state 410
     desc            reduce using rule 168 (TIPO -> timestamp without time zone .)
 
 
-state 411
+state 410
 
     (169) TIPO -> timestamp with time zone .
 
@@ -18868,7 +18593,7 @@ state 411
     desc            reduce using rule 169 (TIPO -> timestamp with time zone .)
 
 
-state 412
+state 411
 
     (145) TIPO -> character para int parc .
 
@@ -18926,14 +18651,14 @@ state 412
     desc            reduce using rule 145 (TIPO -> character para int parc .)
 
 
-state 413
+state 412
 
     (149) TIPO -> character varying para int . parc
 
-    parc            shift and go to state 468
+    parc            shift and go to state 467
 
 
-state 414
+state 413
 
     (147) TIPO -> char para int parc .
 
@@ -18991,7 +18716,7 @@ state 414
     desc            reduce using rule 147 (TIPO -> char para int parc .)
 
 
-state 415
+state 414
 
     (148) TIPO -> time para int parc .
     (152) TIPO -> time para int parc . without time zone
@@ -19049,11 +18774,11 @@ state 415
     references      reduce using rule 148 (TIPO -> time para int parc .)
     asc             reduce using rule 148 (TIPO -> time para int parc .)
     desc            reduce using rule 148 (TIPO -> time para int parc .)
-    without         shift and go to state 469
-    with            shift and go to state 470
+    without         shift and go to state 468
+    with            shift and go to state 469
 
 
-state 416
+state 415
 
     (170) TIPO -> time without time zone .
 
@@ -19111,7 +18836,7 @@ state 416
     desc            reduce using rule 170 (TIPO -> time without time zone .)
 
 
-state 417
+state 416
 
     (171) TIPO -> time with time zone .
 
@@ -19169,14 +18894,14 @@ state 417
     desc            reduce using rule 171 (TIPO -> time with time zone .)
 
 
-state 418
+state 417
 
     (231) EXP -> extract para FIELDS r_from timestamp cadena . parc
 
-    parc            shift and go to state 471
+    parc            shift and go to state 470
 
 
-state 419
+state 418
 
     (75) COLDEF -> id TIPO LOPCOLUMN .
     (76) LOPCOLUMN -> LOPCOLUMN . OPCOLUMN
@@ -19192,18 +18917,18 @@ state 419
 
     parc            reduce using rule 75 (COLDEF -> id TIPO LOPCOLUMN .)
     coma            reduce using rule 75 (COLDEF -> id TIPO LOPCOLUMN .)
-    constraint      shift and go to state 421
-    unique          shift and go to state 422
-    check           shift and go to state 423
-    default         shift and go to state 424
-    not             shift and go to state 425
-    null            shift and go to state 426
-    primary         shift and go to state 427
-    references      shift and go to state 428
+    constraint      shift and go to state 420
+    unique          shift and go to state 421
+    check           shift and go to state 422
+    default         shift and go to state 423
+    not             shift and go to state 424
+    null            shift and go to state 425
+    primary         shift and go to state 426
+    references      shift and go to state 427
 
-    OPCOLUMN                       shift and go to state 472
+    OPCOLUMN                       shift and go to state 471
 
-state 420
+state 419
 
     (77) LOPCOLUMN -> OPCOLUMN .
 
@@ -19219,15 +18944,15 @@ state 420
     coma            reduce using rule 77 (LOPCOLUMN -> OPCOLUMN .)
 
 
-state 421
+state 420
 
     (78) OPCOLUMN -> constraint . id unique
     (80) OPCOLUMN -> constraint . id check para CONDCHECK parc
 
-    id              shift and go to state 473
+    id              shift and go to state 472
 
 
-state 422
+state 421
 
     (79) OPCOLUMN -> unique .
 
@@ -19243,14 +18968,14 @@ state 422
     coma            reduce using rule 79 (OPCOLUMN -> unique .)
 
 
-state 423
+state 422
 
     (81) OPCOLUMN -> check . para CONDCHECK parc
 
-    para            shift and go to state 474
+    para            shift and go to state 473
 
 
-state 424
+state 423
 
     (82) OPCOLUMN -> default . EXP
     (179) EXP -> . EXP mas EXP
@@ -19354,18 +19079,18 @@ state 424
     select          shift and go to state 17
     case            shift and go to state 24
 
-    EXP                            shift and go to state 475
+    EXP                            shift and go to state 474
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 425
+state 424
 
     (83) OPCOLUMN -> not . null
 
-    null            shift and go to state 476
+    null            shift and go to state 475
 
 
-state 426
+state 425
 
     (84) OPCOLUMN -> null .
 
@@ -19381,21 +19106,21 @@ state 426
     coma            reduce using rule 84 (OPCOLUMN -> null .)
 
 
-state 427
+state 426
 
     (85) OPCOLUMN -> primary . key
 
-    key             shift and go to state 477
+    key             shift and go to state 476
 
 
-state 428
+state 427
 
     (86) OPCOLUMN -> references . id
 
-    id              shift and go to state 478
+    id              shift and go to state 477
 
 
-state 429
+state 428
 
     (68) CREATETABLE -> create table id para LDEF parc ptcoma .
 
@@ -19412,21 +19137,21 @@ state 429
     $end            reduce using rule 68 (CREATETABLE -> create table id para LDEF parc ptcoma .)
 
 
-state 430
+state 429
 
     (69) CREATETABLE -> create table id para LDEF parc HERENCIA . ptcoma
 
-    ptcoma          shift and go to state 479
+    ptcoma          shift and go to state 478
 
 
-state 431
+state 430
 
     (98) HERENCIA -> inherits . para id parc
 
-    para            shift and go to state 480
+    para            shift and go to state 479
 
 
-state 432
+state 431
 
     (70) LDEF -> LDEF coma COLDEF .
 
@@ -19434,7 +19159,7 @@ state 432
     coma            reduce using rule 70 (LDEF -> LDEF coma COLDEF .)
 
 
-state 433
+state 432
 
     (73) COLDEF -> constraint id OPCONST .
 
@@ -19442,9 +19167,120 @@ state 433
     coma            reduce using rule 73 (COLDEF -> constraint id OPCONST .)
 
 
-state 434
+state 433
 
     (87) OPCONST -> primary key para . LEXP parc
+    (134) LEXP -> . LEXP coma EXP
+    (135) LEXP -> . EXP
+    (179) EXP -> . EXP mas EXP
+    (180) EXP -> . EXP menos EXP
+    (181) EXP -> . EXP multiplicacion EXP
+    (182) EXP -> . EXP division EXP
+    (183) EXP -> . EXP modulo EXP
+    (184) EXP -> . EXP elevado EXP
+    (185) EXP -> . EXP and EXP
+    (186) EXP -> . EXP or EXP
+    (187) EXP -> . EXP mayor EXP
+    (188) EXP -> . EXP menor EXP
+    (189) EXP -> . EXP mayor_igual EXP
+    (190) EXP -> . EXP menor_igual EXP
+    (191) EXP -> . EXP igual EXP
+    (192) EXP -> . EXP diferente1 EXP
+    (193) EXP -> . EXP diferente2 EXP
+    (194) EXP -> . EXP between EXP
+    (195) EXP -> . EXP is not null
+    (196) EXP -> . EXP is null
+    (197) EXP -> . EXP isnull
+    (198) EXP -> . EXP notnull
+    (199) EXP -> . EXP is true
+    (200) EXP -> . EXP is not true
+    (201) EXP -> . EXP is false
+    (202) EXP -> . EXP is not false
+    (203) EXP -> . EXP is unknown
+    (204) EXP -> . EXP is not unknown
+    (205) EXP -> . EXP as cadenaString
+    (206) EXP -> . EXP cadenaString
+    (207) EXP -> . EXP as id
+    (208) EXP -> . EXP id
+    (209) EXP -> . EXP as cadena
+    (210) EXP -> . EXP cadena
+    (211) EXP -> . mas EXP
+    (212) EXP -> . menos EXP
+    (213) EXP -> . not EXP
+    (214) EXP -> . EXP in para EXP parc
+    (215) EXP -> . EXP not in para EXP parc
+    (216) EXP -> . EXP not between EXP
+    (217) EXP -> . EXP between symetric EXP
+    (218) EXP -> . EXP not between symetric EXP
+    (219) EXP -> . EXP is distinct r_from EXP
+    (220) EXP -> . EXP is not distinct r_from EXP
+    (221) EXP -> . EXP like cadena
+    (222) EXP -> . EXP not like cadena
+    (223) EXP -> . SELECT
+    (224) EXP -> . para EXP parc
+    (225) EXP -> . CASE
+    (226) EXP -> . id para LEXP parc
+    (227) EXP -> . id para parc
+    (228) EXP -> . any para LEXP parc
+    (229) EXP -> . all para LEXP parc
+    (230) EXP -> . some para LEXP parc
+    (231) EXP -> . extract para FIELDS r_from timestamp cadena parc
+    (232) EXP -> . int
+    (233) EXP -> . decimales
+    (234) EXP -> . cadena
+    (235) EXP -> . cadenaString
+    (236) EXP -> . true
+    (237) EXP -> . false
+    (238) EXP -> . id
+    (239) EXP -> . multiplicacion
+    (240) EXP -> . null
+    (241) EXP -> . current_time
+    (242) EXP -> . current_date
+    (243) EXP -> . timestamp cadena
+    (244) EXP -> . interval cadena
+    (245) EXP -> . cadena as TIPO
+    (246) EXP -> . default
+    (247) EXP -> . idPunto
+    (100) SELECT -> . select distinct LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
+    (101) SELECT -> . select LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
+    (102) SELECT -> . select LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
+    (17) CASE -> . case LISTAWHEN ELSE end
+    (18) CASE -> . case LISTAWHEN end
+
+    mas             shift and go to state 41
+    menos           shift and go to state 42
+    not             shift and go to state 44
+    para            shift and go to state 51
+    id              shift and go to state 49
+    any             shift and go to state 54
+    all             shift and go to state 55
+    some            shift and go to state 56
+    extract         shift and go to state 57
+    int             shift and go to state 59
+    decimales       shift and go to state 60
+    cadena          shift and go to state 50
+    cadenaString    shift and go to state 48
+    true            shift and go to state 46
+    false           shift and go to state 47
+    multiplicacion  shift and go to state 43
+    null            shift and go to state 45
+    current_time    shift and go to state 61
+    current_date    shift and go to state 62
+    timestamp       shift and go to state 58
+    interval        shift and go to state 63
+    default         shift and go to state 64
+    idPunto         shift and go to state 65
+    select          shift and go to state 17
+    case            shift and go to state 24
+
+    LEXP                           shift and go to state 480
+    EXP                            shift and go to state 40
+    SELECT                         shift and go to state 52
+    CASE                           shift and go to state 53
+
+state 434
+
+    (88) OPCONST -> foreign key para . LEXP parc references id para LEXP parc
     (134) LEXP -> . LEXP coma EXP
     (135) LEXP -> . EXP
     (179) EXP -> . EXP mas EXP
@@ -19555,132 +19391,21 @@ state 434
 
 state 435
 
-    (88) OPCONST -> foreign key para . LEXP parc references id para LEXP parc
-    (134) LEXP -> . LEXP coma EXP
-    (135) LEXP -> . EXP
-    (179) EXP -> . EXP mas EXP
-    (180) EXP -> . EXP menos EXP
-    (181) EXP -> . EXP multiplicacion EXP
-    (182) EXP -> . EXP division EXP
-    (183) EXP -> . EXP modulo EXP
-    (184) EXP -> . EXP elevado EXP
-    (185) EXP -> . EXP and EXP
-    (186) EXP -> . EXP or EXP
-    (187) EXP -> . EXP mayor EXP
-    (188) EXP -> . EXP menor EXP
-    (189) EXP -> . EXP mayor_igual EXP
-    (190) EXP -> . EXP menor_igual EXP
-    (191) EXP -> . EXP igual EXP
-    (192) EXP -> . EXP diferente1 EXP
-    (193) EXP -> . EXP diferente2 EXP
-    (194) EXP -> . EXP between EXP
-    (195) EXP -> . EXP is not null
-    (196) EXP -> . EXP is null
-    (197) EXP -> . EXP isnull
-    (198) EXP -> . EXP notnull
-    (199) EXP -> . EXP is true
-    (200) EXP -> . EXP is not true
-    (201) EXP -> . EXP is false
-    (202) EXP -> . EXP is not false
-    (203) EXP -> . EXP is unknown
-    (204) EXP -> . EXP is not unknown
-    (205) EXP -> . EXP as cadenaString
-    (206) EXP -> . EXP cadenaString
-    (207) EXP -> . EXP as id
-    (208) EXP -> . EXP id
-    (209) EXP -> . EXP as cadena
-    (210) EXP -> . EXP cadena
-    (211) EXP -> . mas EXP
-    (212) EXP -> . menos EXP
-    (213) EXP -> . not EXP
-    (214) EXP -> . EXP in para EXP parc
-    (215) EXP -> . EXP not in para EXP parc
-    (216) EXP -> . EXP not between EXP
-    (217) EXP -> . EXP between symetric EXP
-    (218) EXP -> . EXP not between symetric EXP
-    (219) EXP -> . EXP is distinct r_from EXP
-    (220) EXP -> . EXP is not distinct r_from EXP
-    (221) EXP -> . EXP like cadena
-    (222) EXP -> . EXP not like cadena
-    (223) EXP -> . SELECT
-    (224) EXP -> . para EXP parc
-    (225) EXP -> . CASE
-    (226) EXP -> . id para LEXP parc
-    (227) EXP -> . id para parc
-    (228) EXP -> . any para LEXP parc
-    (229) EXP -> . all para LEXP parc
-    (230) EXP -> . some para LEXP parc
-    (231) EXP -> . extract para FIELDS r_from timestamp cadena parc
-    (232) EXP -> . int
-    (233) EXP -> . decimales
-    (234) EXP -> . cadena
-    (235) EXP -> . cadenaString
-    (236) EXP -> . true
-    (237) EXP -> . false
-    (238) EXP -> . id
-    (239) EXP -> . multiplicacion
-    (240) EXP -> . null
-    (241) EXP -> . current_time
-    (242) EXP -> . current_date
-    (243) EXP -> . timestamp cadena
-    (244) EXP -> . interval cadena
-    (245) EXP -> . cadena as TIPO
-    (246) EXP -> . default
-    (247) EXP -> . idPunto
-    (100) SELECT -> . select distinct LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (101) SELECT -> . select LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (102) SELECT -> . select LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (17) CASE -> . case LISTAWHEN ELSE end
-    (18) CASE -> . case LISTAWHEN end
-
-    mas             shift and go to state 41
-    menos           shift and go to state 42
-    not             shift and go to state 44
-    para            shift and go to state 51
-    id              shift and go to state 49
-    any             shift and go to state 54
-    all             shift and go to state 55
-    some            shift and go to state 56
-    extract         shift and go to state 57
-    int             shift and go to state 59
-    decimales       shift and go to state 60
-    cadena          shift and go to state 50
-    cadenaString    shift and go to state 48
-    true            shift and go to state 46
-    false           shift and go to state 47
-    multiplicacion  shift and go to state 43
-    null            shift and go to state 45
-    current_time    shift and go to state 61
-    current_date    shift and go to state 62
-    timestamp       shift and go to state 58
-    interval        shift and go to state 63
-    default         shift and go to state 64
-    idPunto         shift and go to state 65
-    select          shift and go to state 17
-    case            shift and go to state 24
-
-    LEXP                           shift and go to state 482
-    EXP                            shift and go to state 40
-    SELECT                         shift and go to state 52
-    CASE                           shift and go to state 53
-
-state 436
-
     (89) OPCONST -> unique para LEXP . parc
     (134) LEXP -> LEXP . coma EXP
 
-    parc            shift and go to state 483
+    parc            shift and go to state 482
     coma            shift and go to state 89
 
 
-state 437
+state 436
 
     (90) OPCONST -> check para CONDCHECK . parc
 
-    parc            shift and go to state 484
+    parc            shift and go to state 483
 
 
-state 438
+state 437
 
     (91) CONDCHECK -> EXP . mayor EXP
     (92) CONDCHECK -> EXP . menor EXP
@@ -19731,13 +19456,13 @@ state 438
     (221) EXP -> EXP . like cadena
     (222) EXP -> EXP . not like cadena
 
-    mayor           shift and go to state 485
-    menor           shift and go to state 486
-    mayor_igual     shift and go to state 487
-    menor_igual     shift and go to state 488
-    igual           shift and go to state 489
-    diferente1      shift and go to state 490
-    diferente2      shift and go to state 491
+    mayor           shift and go to state 484
+    menor           shift and go to state 485
+    mayor_igual     shift and go to state 486
+    menor_igual     shift and go to state 487
+    igual           shift and go to state 488
+    diferente1      shift and go to state 489
+    diferente2      shift and go to state 490
     mas             shift and go to state 91
     menos           shift and go to state 92
     multiplicacion  shift and go to state 93
@@ -19759,23 +19484,23 @@ state 438
     like            shift and go to state 116
 
 
-state 439
+state 438
 
     (99) CREATETYPE -> create type id as enum para LEXP . parc
     (134) LEXP -> LEXP . coma EXP
 
-    parc            shift and go to state 492
+    parc            shift and go to state 491
     coma            shift and go to state 89
 
 
-state 440
+state 439
 
     (52) CREATEDB -> create RD if not exist id OPCCDB .
 
     ptcoma          reduce using rule 52 (CREATEDB -> create RD if not exist id OPCCDB .)
 
 
-state 441
+state 440
 
     (129) LCAMPOS -> LCAMPOS coma id igual . EXP
     (179) EXP -> . EXP mas EXP
@@ -19879,20 +19604,20 @@ state 441
     select          shift and go to state 17
     case            shift and go to state 24
 
-    EXP                            shift and go to state 493
+    EXP                            shift and go to state 492
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 442
+state 441
 
     (41) OP -> alter column id set . not null
     (42) OP -> alter column id set . null
 
-    not             shift and go to state 494
-    null            shift and go to state 495
+    not             shift and go to state 493
+    null            shift and go to state 494
 
 
-state 443
+state 442
 
     (47) OP -> alter column id type . TIPO
     (136) TIPO -> . interval cadena
@@ -19953,9 +19678,9 @@ state 443
     boolean         shift and go to state 210
     id              shift and go to state 211
 
-    TIPO                           shift and go to state 496
+    TIPO                           shift and go to state 495
 
-state 444
+state 443
 
     (34) OP -> add column id TIPO .
 
@@ -19963,44 +19688,44 @@ state 444
     ptcoma          reduce using rule 34 (OP -> add column id TIPO .)
 
 
-state 445
+state 444
 
     (35) OP -> add check para CONDCHECK . parc
 
-    parc            shift and go to state 497
+    parc            shift and go to state 496
+
+
+state 445
+
+    (36) OP -> add constraint id check . para CONDCHECK parc
+
+    para            shift and go to state 497
 
 
 state 446
 
-    (36) OP -> add constraint id check . para CONDCHECK parc
+    (37) OP -> add constraint id unique . para LEXP parc
 
     para            shift and go to state 498
 
 
 state 447
 
-    (37) OP -> add constraint id unique . para LEXP parc
+    (40) OP -> add constraint id foreign . key para LEXP parc references id para LEXP parc
 
-    para            shift and go to state 499
+    key             shift and go to state 499
 
 
 state 448
 
-    (40) OP -> add constraint id foreign . key para LEXP parc references id para LEXP parc
-
-    key             shift and go to state 500
-
-
-state 449
-
     (38) OP -> add unique para LEXP . parc
     (134) LEXP -> LEXP . coma EXP
 
-    parc            shift and go to state 501
+    parc            shift and go to state 500
     coma            shift and go to state 89
 
 
-state 450
+state 449
 
     (39) OP -> add foreign key para . LEXP parc references id para LEXP parc
     (134) LEXP -> . LEXP coma EXP
@@ -20106,33 +19831,33 @@ state 450
     select          shift and go to state 17
     case            shift and go to state 24
 
-    LEXP                           shift and go to state 502
+    LEXP                           shift and go to state 501
     EXP                            shift and go to state 40
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 451
+state 450
 
     (46) OP -> rename column id to . id
 
-    id              shift and go to state 503
+    id              shift and go to state 502
 
 
-state 452
+state 451
 
     (23) INSERT -> insert into id values para LEXP parc .
 
     ptcoma          reduce using rule 23 (INSERT -> insert into id values para LEXP parc .)
 
 
-state 453
+state 452
 
     (24) INSERT -> insert into id para LEXP parc values . para LEXP parc
 
-    para            shift and go to state 504
+    para            shift and go to state 503
 
 
-state 454
+state 453
 
     (100) SELECT -> select distinct LEXP r_from LEXP WHERE GROUP HAVING . COMBINING ORDER LIMIT
     (114) COMBINING -> . union EXP
@@ -20201,9 +19926,9 @@ state 454
   ! intersect       [ reduce using rule 118 (COMBINING -> .) ]
   ! except          [ reduce using rule 118 (COMBINING -> .) ]
 
-    COMBINING                      shift and go to state 505
+    COMBINING                      shift and go to state 504
 
-state 455
+state 454
 
     (101) SELECT -> select LEXP r_from LEXP WHERE GROUP HAVING COMBINING . ORDER LIMIT
     (123) ORDER -> . order by LEXP ORD
@@ -20211,7 +19936,7 @@ state 455
     (125) ORDER -> .
 
   ! shift/reduce conflict for order resolved as shift
-    order           shift and go to state 394
+    order           shift and go to state 393
     r_from          reduce using rule 125 (ORDER -> .)
     coma            reduce using rule 125 (ORDER -> .)
     where           reduce using rule 125 (ORDER -> .)
@@ -20266,9 +19991,9 @@ state 455
 
   ! order           [ reduce using rule 125 (ORDER -> .) ]
 
-    ORDER                          shift and go to state 506
+    ORDER                          shift and go to state 505
 
-state 456
+state 455
 
     (102) SELECT -> select LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT .
 
@@ -20326,27 +20051,27 @@ state 456
     desc            reduce using rule 102 (SELECT -> select LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT .)
 
 
-state 457
+state 456
 
     (103) LIMIT -> limit . int
     (104) LIMIT -> limit . all
     (106) LIMIT -> limit . int offset int
     (108) LIMIT -> limit . all offset int
 
-    int             shift and go to state 507
-    all             shift and go to state 508
+    int             shift and go to state 506
+    all             shift and go to state 507
 
 
-state 458
+state 457
 
     (105) LIMIT -> offset . int
     (107) LIMIT -> offset . int limit int
     (109) LIMIT -> offset . int limit all
 
-    int             shift and go to state 509
+    int             shift and go to state 508
 
 
-state 459
+state 458
 
     (123) ORDER -> order by . LEXP ORD
     (124) ORDER -> order by . LEXP
@@ -20453,12 +20178,12 @@ state 459
     select          shift and go to state 17
     case            shift and go to state 24
 
-    LEXP                           shift and go to state 510
+    LEXP                           shift and go to state 509
     EXP                            shift and go to state 40
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 460
+state 459
 
     (115) COMBINING -> union all EXP .
     (179) EXP -> EXP . mas EXP
@@ -20610,7 +20335,7 @@ state 460
   ! like            [ reduce using rule 115 (COMBINING -> union all EXP .) ]
 
 
-state 461
+state 460
 
     (229) EXP -> all para . LEXP parc
     (224) EXP -> para . EXP parc
@@ -20718,11 +20443,11 @@ state 461
     case            shift and go to state 24
 
     LEXP                           shift and go to state 214
-    EXP                            shift and go to state 511
+    EXP                            shift and go to state 510
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 462
+state 461
 
     (133) EXIST -> not exist para SELECT parc .
 
@@ -20780,7 +20505,7 @@ state 462
     desc            reduce using rule 133 (EXIST -> not exist para SELECT parc .)
 
 
-state 463
+state 462
 
     (154) TIPO -> interval para int parc cadena .
 
@@ -20838,35 +20563,35 @@ state 463
     desc            reduce using rule 154 (TIPO -> interval para int parc cadena .)
 
 
-state 464
+state 463
 
     (137) TIPO -> decimal para int coma int . parc
+
+    parc            shift and go to state 511
+
+
+state 464
+
+    (140) TIPO -> numeric para int coma int . parc
 
     parc            shift and go to state 512
 
 
 state 465
 
-    (140) TIPO -> numeric para int coma int . parc
+    (150) TIPO -> timestamp para int parc without . time zone
 
-    parc            shift and go to state 513
+    time            shift and go to state 513
 
 
 state 466
 
-    (150) TIPO -> timestamp para int parc without . time zone
+    (151) TIPO -> timestamp para int parc with . time zone
 
     time            shift and go to state 514
 
 
 state 467
-
-    (151) TIPO -> timestamp para int parc with . time zone
-
-    time            shift and go to state 515
-
-
-state 468
 
     (149) TIPO -> character varying para int parc .
 
@@ -20924,21 +20649,21 @@ state 468
     desc            reduce using rule 149 (TIPO -> character varying para int parc .)
 
 
-state 469
+state 468
 
     (152) TIPO -> time para int parc without . time zone
+
+    time            shift and go to state 515
+
+
+state 469
+
+    (153) TIPO -> time para int parc with . time zone
 
     time            shift and go to state 516
 
 
 state 470
-
-    (153) TIPO -> time para int parc with . time zone
-
-    time            shift and go to state 517
-
-
-state 471
 
     (231) EXP -> extract para FIELDS r_from timestamp cadena parc .
 
@@ -20996,7 +20721,7 @@ state 471
     desc            reduce using rule 231 (EXP -> extract para FIELDS r_from timestamp cadena parc .)
 
 
-state 472
+state 471
 
     (76) LOPCOLUMN -> LOPCOLUMN OPCOLUMN .
 
@@ -21012,16 +20737,16 @@ state 472
     coma            reduce using rule 76 (LOPCOLUMN -> LOPCOLUMN OPCOLUMN .)
 
 
-state 473
+state 472
 
     (78) OPCOLUMN -> constraint id . unique
     (80) OPCOLUMN -> constraint id . check para CONDCHECK parc
 
-    unique          shift and go to state 518
-    check           shift and go to state 519
+    unique          shift and go to state 517
+    check           shift and go to state 518
 
 
-state 474
+state 473
 
     (81) OPCOLUMN -> check para . CONDCHECK parc
     (91) CONDCHECK -> . EXP mayor EXP
@@ -21132,12 +20857,12 @@ state 474
     select          shift and go to state 17
     case            shift and go to state 24
 
-    CONDCHECK                      shift and go to state 520
-    EXP                            shift and go to state 438
+    CONDCHECK                      shift and go to state 519
+    EXP                            shift and go to state 437
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 475
+state 474
 
     (82) OPCOLUMN -> default EXP .
     (179) EXP -> EXP . mas EXP
@@ -21222,7 +20947,7 @@ state 475
   ! not             [ reduce using rule 82 (OPCOLUMN -> default EXP .) ]
 
 
-state 476
+state 475
 
     (83) OPCOLUMN -> not null .
 
@@ -21238,7 +20963,7 @@ state 476
     coma            reduce using rule 83 (OPCOLUMN -> not null .)
 
 
-state 477
+state 476
 
     (85) OPCOLUMN -> primary key .
 
@@ -21254,7 +20979,7 @@ state 477
     coma            reduce using rule 85 (OPCOLUMN -> primary key .)
 
 
-state 478
+state 477
 
     (86) OPCOLUMN -> references id .
 
@@ -21270,7 +20995,7 @@ state 478
     coma            reduce using rule 86 (OPCOLUMN -> references id .)
 
 
-state 479
+state 478
 
     (69) CREATETABLE -> create table id para LDEF parc HERENCIA ptcoma .
 
@@ -21287,16 +21012,25 @@ state 479
     $end            reduce using rule 69 (CREATETABLE -> create table id para LDEF parc HERENCIA ptcoma .)
 
 
-state 480
+state 479
 
     (98) HERENCIA -> inherits para . id parc
 
-    id              shift and go to state 521
+    id              shift and go to state 520
+
+
+state 480
+
+    (87) OPCONST -> primary key para LEXP . parc
+    (134) LEXP -> LEXP . coma EXP
+
+    parc            shift and go to state 521
+    coma            shift and go to state 89
 
 
 state 481
 
-    (87) OPCONST -> primary key para LEXP . parc
+    (88) OPCONST -> foreign key para LEXP . parc references id para LEXP parc
     (134) LEXP -> LEXP . coma EXP
 
     parc            shift and go to state 522
@@ -21305,22 +21039,13 @@ state 481
 
 state 482
 
-    (88) OPCONST -> foreign key para LEXP . parc references id para LEXP parc
-    (134) LEXP -> LEXP . coma EXP
-
-    parc            shift and go to state 523
-    coma            shift and go to state 89
-
-
-state 483
-
     (89) OPCONST -> unique para LEXP parc .
 
     parc            reduce using rule 89 (OPCONST -> unique para LEXP parc .)
     coma            reduce using rule 89 (OPCONST -> unique para LEXP parc .)
 
 
-state 484
+state 483
 
     (90) OPCONST -> check para CONDCHECK parc .
 
@@ -21328,10 +21053,119 @@ state 484
     coma            reduce using rule 90 (OPCONST -> check para CONDCHECK parc .)
 
 
-state 485
+state 484
 
     (91) CONDCHECK -> EXP mayor . EXP
     (187) EXP -> EXP mayor . EXP
+    (179) EXP -> . EXP mas EXP
+    (180) EXP -> . EXP menos EXP
+    (181) EXP -> . EXP multiplicacion EXP
+    (182) EXP -> . EXP division EXP
+    (183) EXP -> . EXP modulo EXP
+    (184) EXP -> . EXP elevado EXP
+    (185) EXP -> . EXP and EXP
+    (186) EXP -> . EXP or EXP
+    (187) EXP -> . EXP mayor EXP
+    (188) EXP -> . EXP menor EXP
+    (189) EXP -> . EXP mayor_igual EXP
+    (190) EXP -> . EXP menor_igual EXP
+    (191) EXP -> . EXP igual EXP
+    (192) EXP -> . EXP diferente1 EXP
+    (193) EXP -> . EXP diferente2 EXP
+    (194) EXP -> . EXP between EXP
+    (195) EXP -> . EXP is not null
+    (196) EXP -> . EXP is null
+    (197) EXP -> . EXP isnull
+    (198) EXP -> . EXP notnull
+    (199) EXP -> . EXP is true
+    (200) EXP -> . EXP is not true
+    (201) EXP -> . EXP is false
+    (202) EXP -> . EXP is not false
+    (203) EXP -> . EXP is unknown
+    (204) EXP -> . EXP is not unknown
+    (205) EXP -> . EXP as cadenaString
+    (206) EXP -> . EXP cadenaString
+    (207) EXP -> . EXP as id
+    (208) EXP -> . EXP id
+    (209) EXP -> . EXP as cadena
+    (210) EXP -> . EXP cadena
+    (211) EXP -> . mas EXP
+    (212) EXP -> . menos EXP
+    (213) EXP -> . not EXP
+    (214) EXP -> . EXP in para EXP parc
+    (215) EXP -> . EXP not in para EXP parc
+    (216) EXP -> . EXP not between EXP
+    (217) EXP -> . EXP between symetric EXP
+    (218) EXP -> . EXP not between symetric EXP
+    (219) EXP -> . EXP is distinct r_from EXP
+    (220) EXP -> . EXP is not distinct r_from EXP
+    (221) EXP -> . EXP like cadena
+    (222) EXP -> . EXP not like cadena
+    (223) EXP -> . SELECT
+    (224) EXP -> . para EXP parc
+    (225) EXP -> . CASE
+    (226) EXP -> . id para LEXP parc
+    (227) EXP -> . id para parc
+    (228) EXP -> . any para LEXP parc
+    (229) EXP -> . all para LEXP parc
+    (230) EXP -> . some para LEXP parc
+    (231) EXP -> . extract para FIELDS r_from timestamp cadena parc
+    (232) EXP -> . int
+    (233) EXP -> . decimales
+    (234) EXP -> . cadena
+    (235) EXP -> . cadenaString
+    (236) EXP -> . true
+    (237) EXP -> . false
+    (238) EXP -> . id
+    (239) EXP -> . multiplicacion
+    (240) EXP -> . null
+    (241) EXP -> . current_time
+    (242) EXP -> . current_date
+    (243) EXP -> . timestamp cadena
+    (244) EXP -> . interval cadena
+    (245) EXP -> . cadena as TIPO
+    (246) EXP -> . default
+    (247) EXP -> . idPunto
+    (100) SELECT -> . select distinct LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
+    (101) SELECT -> . select LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
+    (102) SELECT -> . select LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
+    (17) CASE -> . case LISTAWHEN ELSE end
+    (18) CASE -> . case LISTAWHEN end
+
+    mas             shift and go to state 41
+    menos           shift and go to state 42
+    not             shift and go to state 44
+    para            shift and go to state 51
+    id              shift and go to state 49
+    any             shift and go to state 54
+    all             shift and go to state 55
+    some            shift and go to state 56
+    extract         shift and go to state 57
+    int             shift and go to state 59
+    decimales       shift and go to state 60
+    cadena          shift and go to state 50
+    cadenaString    shift and go to state 48
+    true            shift and go to state 46
+    false           shift and go to state 47
+    multiplicacion  shift and go to state 43
+    null            shift and go to state 45
+    current_time    shift and go to state 61
+    current_date    shift and go to state 62
+    timestamp       shift and go to state 58
+    interval        shift and go to state 63
+    default         shift and go to state 64
+    idPunto         shift and go to state 65
+    select          shift and go to state 17
+    case            shift and go to state 24
+
+    EXP                            shift and go to state 523
+    SELECT                         shift and go to state 52
+    CASE                           shift and go to state 53
+
+state 485
+
+    (92) CONDCHECK -> EXP menor . EXP
+    (188) EXP -> EXP menor . EXP
     (179) EXP -> . EXP mas EXP
     (180) EXP -> . EXP menos EXP
     (181) EXP -> . EXP multiplicacion EXP
@@ -21439,8 +21273,8 @@ state 485
 
 state 486
 
-    (92) CONDCHECK -> EXP menor . EXP
-    (188) EXP -> EXP menor . EXP
+    (93) CONDCHECK -> EXP mayor_igual . EXP
+    (189) EXP -> EXP mayor_igual . EXP
     (179) EXP -> . EXP mas EXP
     (180) EXP -> . EXP menos EXP
     (181) EXP -> . EXP multiplicacion EXP
@@ -21548,8 +21382,8 @@ state 486
 
 state 487
 
-    (93) CONDCHECK -> EXP mayor_igual . EXP
-    (189) EXP -> EXP mayor_igual . EXP
+    (94) CONDCHECK -> EXP menor_igual . EXP
+    (190) EXP -> EXP menor_igual . EXP
     (179) EXP -> . EXP mas EXP
     (180) EXP -> . EXP menos EXP
     (181) EXP -> . EXP multiplicacion EXP
@@ -21657,8 +21491,8 @@ state 487
 
 state 488
 
-    (94) CONDCHECK -> EXP menor_igual . EXP
-    (190) EXP -> EXP menor_igual . EXP
+    (95) CONDCHECK -> EXP igual . EXP
+    (191) EXP -> EXP igual . EXP
     (179) EXP -> . EXP mas EXP
     (180) EXP -> . EXP menos EXP
     (181) EXP -> . EXP multiplicacion EXP
@@ -21766,8 +21600,8 @@ state 488
 
 state 489
 
-    (95) CONDCHECK -> EXP igual . EXP
-    (191) EXP -> EXP igual . EXP
+    (96) CONDCHECK -> EXP diferente1 . EXP
+    (192) EXP -> EXP diferente1 . EXP
     (179) EXP -> . EXP mas EXP
     (180) EXP -> . EXP menos EXP
     (181) EXP -> . EXP multiplicacion EXP
@@ -21875,8 +21709,8 @@ state 489
 
 state 490
 
-    (96) CONDCHECK -> EXP diferente1 . EXP
-    (192) EXP -> EXP diferente1 . EXP
+    (97) CONDCHECK -> EXP diferente2 . EXP
+    (193) EXP -> EXP diferente2 . EXP
     (179) EXP -> . EXP mas EXP
     (180) EXP -> . EXP menos EXP
     (181) EXP -> . EXP multiplicacion EXP
@@ -21984,121 +21818,12 @@ state 490
 
 state 491
 
-    (97) CONDCHECK -> EXP diferente2 . EXP
-    (193) EXP -> EXP diferente2 . EXP
-    (179) EXP -> . EXP mas EXP
-    (180) EXP -> . EXP menos EXP
-    (181) EXP -> . EXP multiplicacion EXP
-    (182) EXP -> . EXP division EXP
-    (183) EXP -> . EXP modulo EXP
-    (184) EXP -> . EXP elevado EXP
-    (185) EXP -> . EXP and EXP
-    (186) EXP -> . EXP or EXP
-    (187) EXP -> . EXP mayor EXP
-    (188) EXP -> . EXP menor EXP
-    (189) EXP -> . EXP mayor_igual EXP
-    (190) EXP -> . EXP menor_igual EXP
-    (191) EXP -> . EXP igual EXP
-    (192) EXP -> . EXP diferente1 EXP
-    (193) EXP -> . EXP diferente2 EXP
-    (194) EXP -> . EXP between EXP
-    (195) EXP -> . EXP is not null
-    (196) EXP -> . EXP is null
-    (197) EXP -> . EXP isnull
-    (198) EXP -> . EXP notnull
-    (199) EXP -> . EXP is true
-    (200) EXP -> . EXP is not true
-    (201) EXP -> . EXP is false
-    (202) EXP -> . EXP is not false
-    (203) EXP -> . EXP is unknown
-    (204) EXP -> . EXP is not unknown
-    (205) EXP -> . EXP as cadenaString
-    (206) EXP -> . EXP cadenaString
-    (207) EXP -> . EXP as id
-    (208) EXP -> . EXP id
-    (209) EXP -> . EXP as cadena
-    (210) EXP -> . EXP cadena
-    (211) EXP -> . mas EXP
-    (212) EXP -> . menos EXP
-    (213) EXP -> . not EXP
-    (214) EXP -> . EXP in para EXP parc
-    (215) EXP -> . EXP not in para EXP parc
-    (216) EXP -> . EXP not between EXP
-    (217) EXP -> . EXP between symetric EXP
-    (218) EXP -> . EXP not between symetric EXP
-    (219) EXP -> . EXP is distinct r_from EXP
-    (220) EXP -> . EXP is not distinct r_from EXP
-    (221) EXP -> . EXP like cadena
-    (222) EXP -> . EXP not like cadena
-    (223) EXP -> . SELECT
-    (224) EXP -> . para EXP parc
-    (225) EXP -> . CASE
-    (226) EXP -> . id para LEXP parc
-    (227) EXP -> . id para parc
-    (228) EXP -> . any para LEXP parc
-    (229) EXP -> . all para LEXP parc
-    (230) EXP -> . some para LEXP parc
-    (231) EXP -> . extract para FIELDS r_from timestamp cadena parc
-    (232) EXP -> . int
-    (233) EXP -> . decimales
-    (234) EXP -> . cadena
-    (235) EXP -> . cadenaString
-    (236) EXP -> . true
-    (237) EXP -> . false
-    (238) EXP -> . id
-    (239) EXP -> . multiplicacion
-    (240) EXP -> . null
-    (241) EXP -> . current_time
-    (242) EXP -> . current_date
-    (243) EXP -> . timestamp cadena
-    (244) EXP -> . interval cadena
-    (245) EXP -> . cadena as TIPO
-    (246) EXP -> . default
-    (247) EXP -> . idPunto
-    (100) SELECT -> . select distinct LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (101) SELECT -> . select LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (102) SELECT -> . select LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT
-    (17) CASE -> . case LISTAWHEN ELSE end
-    (18) CASE -> . case LISTAWHEN end
-
-    mas             shift and go to state 41
-    menos           shift and go to state 42
-    not             shift and go to state 44
-    para            shift and go to state 51
-    id              shift and go to state 49
-    any             shift and go to state 54
-    all             shift and go to state 55
-    some            shift and go to state 56
-    extract         shift and go to state 57
-    int             shift and go to state 59
-    decimales       shift and go to state 60
-    cadena          shift and go to state 50
-    cadenaString    shift and go to state 48
-    true            shift and go to state 46
-    false           shift and go to state 47
-    multiplicacion  shift and go to state 43
-    null            shift and go to state 45
-    current_time    shift and go to state 61
-    current_date    shift and go to state 62
-    timestamp       shift and go to state 58
-    interval        shift and go to state 63
-    default         shift and go to state 64
-    idPunto         shift and go to state 65
-    select          shift and go to state 17
-    case            shift and go to state 24
-
-    EXP                            shift and go to state 530
-    SELECT                         shift and go to state 52
-    CASE                           shift and go to state 53
-
-state 492
-
     (99) CREATETYPE -> create type id as enum para LEXP parc .
 
     ptcoma          reduce using rule 99 (CREATETYPE -> create type id as enum para LEXP parc .)
 
 
-state 493
+state 492
 
     (129) LCAMPOS -> LCAMPOS coma id igual EXP .
     (179) EXP -> EXP . mas EXP
@@ -22143,8 +21868,9 @@ state 493
     (221) EXP -> EXP . like cadena
     (222) EXP -> EXP . not like cadena
 
-    where           reduce using rule 129 (LCAMPOS -> LCAMPOS coma id igual EXP .)
     coma            reduce using rule 129 (LCAMPOS -> LCAMPOS coma id igual EXP .)
+    where           reduce using rule 129 (LCAMPOS -> LCAMPOS coma id igual EXP .)
+    ptcoma          reduce using rule 129 (LCAMPOS -> LCAMPOS coma id igual EXP .)
     mas             shift and go to state 91
     menos           shift and go to state 92
     multiplicacion  shift and go to state 93
@@ -22173,14 +21899,14 @@ state 493
     like            shift and go to state 116
 
 
-state 494
+state 493
 
     (41) OP -> alter column id set not . null
 
-    null            shift and go to state 531
+    null            shift and go to state 530
 
 
-state 495
+state 494
 
     (42) OP -> alter column id set null .
 
@@ -22188,7 +21914,7 @@ state 495
     ptcoma          reduce using rule 42 (OP -> alter column id set null .)
 
 
-state 496
+state 495
 
     (47) OP -> alter column id type TIPO .
 
@@ -22196,7 +21922,7 @@ state 496
     ptcoma          reduce using rule 47 (OP -> alter column id type TIPO .)
 
 
-state 497
+state 496
 
     (35) OP -> add check para CONDCHECK parc .
 
@@ -22204,7 +21930,7 @@ state 497
     ptcoma          reduce using rule 35 (OP -> add check para CONDCHECK parc .)
 
 
-state 498
+state 497
 
     (36) OP -> add constraint id check para . CONDCHECK parc
     (91) CONDCHECK -> . EXP mayor EXP
@@ -22315,12 +22041,12 @@ state 498
     select          shift and go to state 17
     case            shift and go to state 24
 
-    CONDCHECK                      shift and go to state 532
-    EXP                            shift and go to state 438
+    CONDCHECK                      shift and go to state 531
+    EXP                            shift and go to state 437
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 499
+state 498
 
     (37) OP -> add constraint id unique para . LEXP parc
     (134) LEXP -> . LEXP coma EXP
@@ -22426,19 +22152,19 @@ state 499
     select          shift and go to state 17
     case            shift and go to state 24
 
-    LEXP                           shift and go to state 533
+    LEXP                           shift and go to state 532
     EXP                            shift and go to state 40
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 500
+state 499
 
     (40) OP -> add constraint id foreign key . para LEXP parc references id para LEXP parc
 
-    para            shift and go to state 534
+    para            shift and go to state 533
 
 
-state 501
+state 500
 
     (38) OP -> add unique para LEXP parc .
 
@@ -22446,16 +22172,16 @@ state 501
     ptcoma          reduce using rule 38 (OP -> add unique para LEXP parc .)
 
 
-state 502
+state 501
 
     (39) OP -> add foreign key para LEXP . parc references id para LEXP parc
     (134) LEXP -> LEXP . coma EXP
 
-    parc            shift and go to state 535
+    parc            shift and go to state 534
     coma            shift and go to state 89
 
 
-state 503
+state 502
 
     (46) OP -> rename column id to id .
 
@@ -22463,7 +22189,7 @@ state 503
     ptcoma          reduce using rule 46 (OP -> rename column id to id .)
 
 
-state 504
+state 503
 
     (24) INSERT -> insert into id para LEXP parc values para . LEXP parc
     (134) LEXP -> . LEXP coma EXP
@@ -22569,12 +22295,12 @@ state 504
     select          shift and go to state 17
     case            shift and go to state 24
 
-    LEXP                           shift and go to state 536
+    LEXP                           shift and go to state 535
     EXP                            shift and go to state 40
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 505
+state 504
 
     (100) SELECT -> select distinct LEXP r_from LEXP WHERE GROUP HAVING COMBINING . ORDER LIMIT
     (123) ORDER -> . order by LEXP ORD
@@ -22582,7 +22308,7 @@ state 505
     (125) ORDER -> .
 
   ! shift/reduce conflict for order resolved as shift
-    order           shift and go to state 394
+    order           shift and go to state 393
     r_from          reduce using rule 125 (ORDER -> .)
     coma            reduce using rule 125 (ORDER -> .)
     where           reduce using rule 125 (ORDER -> .)
@@ -22637,9 +22363,9 @@ state 505
 
   ! order           [ reduce using rule 125 (ORDER -> .) ]
 
-    ORDER                          shift and go to state 537
+    ORDER                          shift and go to state 536
 
-state 506
+state 505
 
     (101) SELECT -> select LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER . LIMIT
     (103) LIMIT -> . limit int
@@ -22653,8 +22379,8 @@ state 506
 
   ! shift/reduce conflict for limit resolved as shift
   ! shift/reduce conflict for offset resolved as shift
-    limit           shift and go to state 457
-    offset          shift and go to state 458
+    limit           shift and go to state 456
+    offset          shift and go to state 457
     ptcoma          reduce using rule 110 (LIMIT -> .)
     r_from          reduce using rule 110 (LIMIT -> .)
     coma            reduce using rule 110 (LIMIT -> .)
@@ -22709,9 +22435,9 @@ state 506
   ! limit           [ reduce using rule 110 (LIMIT -> .) ]
   ! offset          [ reduce using rule 110 (LIMIT -> .) ]
 
-    LIMIT                          shift and go to state 538
+    LIMIT                          shift and go to state 537
 
-state 507
+state 506
 
     (103) LIMIT -> limit int .
     (106) LIMIT -> limit int . offset int
@@ -22768,12 +22494,12 @@ state 507
     references      reduce using rule 103 (LIMIT -> limit int .)
     asc             reduce using rule 103 (LIMIT -> limit int .)
     desc            reduce using rule 103 (LIMIT -> limit int .)
-    offset          shift and go to state 539
+    offset          shift and go to state 538
 
   ! offset          [ reduce using rule 103 (LIMIT -> limit int .) ]
 
 
-state 508
+state 507
 
     (104) LIMIT -> limit all .
     (108) LIMIT -> limit all . offset int
@@ -22830,12 +22556,12 @@ state 508
     references      reduce using rule 104 (LIMIT -> limit all .)
     asc             reduce using rule 104 (LIMIT -> limit all .)
     desc            reduce using rule 104 (LIMIT -> limit all .)
-    offset          shift and go to state 540
+    offset          shift and go to state 539
 
   ! offset          [ reduce using rule 104 (LIMIT -> limit all .) ]
 
 
-state 509
+state 508
 
     (105) LIMIT -> offset int .
     (107) LIMIT -> offset int . limit int
@@ -22893,12 +22619,12 @@ state 509
     references      reduce using rule 105 (LIMIT -> offset int .)
     asc             reduce using rule 105 (LIMIT -> offset int .)
     desc            reduce using rule 105 (LIMIT -> offset int .)
-    limit           shift and go to state 541
+    limit           shift and go to state 540
 
   ! limit           [ reduce using rule 105 (LIMIT -> offset int .) ]
 
 
-state 510
+state 509
 
     (123) ORDER -> order by LEXP . ORD
     (124) ORDER -> order by LEXP .
@@ -22959,16 +22685,16 @@ state 510
     primary         reduce using rule 124 (ORDER -> order by LEXP .)
     references      reduce using rule 124 (ORDER -> order by LEXP .)
     coma            shift and go to state 89
-    asc             shift and go to state 543
-    desc            shift and go to state 544
+    asc             shift and go to state 542
+    desc            shift and go to state 543
 
   ! coma            [ reduce using rule 124 (ORDER -> order by LEXP .) ]
   ! asc             [ reduce using rule 124 (ORDER -> order by LEXP .) ]
   ! desc            [ reduce using rule 124 (ORDER -> order by LEXP .) ]
 
-    ORD                            shift and go to state 542
+    ORD                            shift and go to state 541
 
-state 511
+state 510
 
     (224) EXP -> para EXP . parc
     (135) LEXP -> EXP .
@@ -23047,7 +22773,7 @@ state 511
   ! parc            [ reduce using rule 135 (LEXP -> EXP .) ]
 
 
-state 512
+state 511
 
     (137) TIPO -> decimal para int coma int parc .
 
@@ -23105,7 +22831,7 @@ state 512
     desc            reduce using rule 137 (TIPO -> decimal para int coma int parc .)
 
 
-state 513
+state 512
 
     (140) TIPO -> numeric para int coma int parc .
 
@@ -23163,35 +22889,35 @@ state 513
     desc            reduce using rule 140 (TIPO -> numeric para int coma int parc .)
 
 
-state 514
+state 513
 
     (150) TIPO -> timestamp para int parc without time . zone
+
+    zone            shift and go to state 544
+
+
+state 514
+
+    (151) TIPO -> timestamp para int parc with time . zone
 
     zone            shift and go to state 545
 
 
 state 515
 
-    (151) TIPO -> timestamp para int parc with time . zone
+    (152) TIPO -> time para int parc without time . zone
 
     zone            shift and go to state 546
 
 
 state 516
 
-    (152) TIPO -> time para int parc without time . zone
+    (153) TIPO -> time para int parc with time . zone
 
     zone            shift and go to state 547
 
 
 state 517
-
-    (153) TIPO -> time para int parc with time . zone
-
-    zone            shift and go to state 548
-
-
-state 518
 
     (78) OPCOLUMN -> constraint id unique .
 
@@ -23207,28 +22933,28 @@ state 518
     coma            reduce using rule 78 (OPCOLUMN -> constraint id unique .)
 
 
-state 519
+state 518
 
     (80) OPCOLUMN -> constraint id check . para CONDCHECK parc
 
-    para            shift and go to state 549
+    para            shift and go to state 548
+
+
+state 519
+
+    (81) OPCOLUMN -> check para CONDCHECK . parc
+
+    parc            shift and go to state 549
 
 
 state 520
 
-    (81) OPCOLUMN -> check para CONDCHECK . parc
+    (98) HERENCIA -> inherits para id . parc
 
     parc            shift and go to state 550
 
 
 state 521
-
-    (98) HERENCIA -> inherits para id . parc
-
-    parc            shift and go to state 551
-
-
-state 522
 
     (87) OPCONST -> primary key para LEXP parc .
 
@@ -23236,14 +22962,14 @@ state 522
     coma            reduce using rule 87 (OPCONST -> primary key para LEXP parc .)
 
 
-state 523
+state 522
 
     (88) OPCONST -> foreign key para LEXP parc . references id para LEXP parc
 
-    references      shift and go to state 552
+    references      shift and go to state 551
 
 
-state 524
+state 523
 
     (91) CONDCHECK -> EXP mayor EXP .
     (187) EXP -> EXP mayor EXP .
@@ -23345,7 +23071,7 @@ state 524
   ! like            [ shift and go to state 116 ]
 
 
-state 525
+state 524
 
     (92) CONDCHECK -> EXP menor EXP .
     (188) EXP -> EXP menor EXP .
@@ -23447,7 +23173,7 @@ state 525
   ! like            [ shift and go to state 116 ]
 
 
-state 526
+state 525
 
     (93) CONDCHECK -> EXP mayor_igual EXP .
     (189) EXP -> EXP mayor_igual EXP .
@@ -23549,7 +23275,7 @@ state 526
   ! like            [ shift and go to state 116 ]
 
 
-state 527
+state 526
 
     (94) CONDCHECK -> EXP menor_igual EXP .
     (190) EXP -> EXP menor_igual EXP .
@@ -23651,7 +23377,7 @@ state 527
   ! like            [ shift and go to state 116 ]
 
 
-state 528
+state 527
 
     (95) CONDCHECK -> EXP igual EXP .
     (191) EXP -> EXP igual EXP .
@@ -23753,7 +23479,7 @@ state 528
   ! like            [ shift and go to state 116 ]
 
 
-state 529
+state 528
 
     (96) CONDCHECK -> EXP diferente1 EXP .
     (192) EXP -> EXP diferente1 EXP .
@@ -23855,7 +23581,7 @@ state 529
   ! like            [ shift and go to state 116 ]
 
 
-state 530
+state 529
 
     (97) CONDCHECK -> EXP diferente2 EXP .
     (193) EXP -> EXP diferente2 EXP .
@@ -23957,7 +23683,7 @@ state 530
   ! like            [ shift and go to state 116 ]
 
 
-state 531
+state 530
 
     (41) OP -> alter column id set not null .
 
@@ -23965,23 +23691,23 @@ state 531
     ptcoma          reduce using rule 41 (OP -> alter column id set not null .)
 
 
-state 532
+state 531
 
     (36) OP -> add constraint id check para CONDCHECK . parc
 
-    parc            shift and go to state 553
+    parc            shift and go to state 552
 
 
-state 533
+state 532
 
     (37) OP -> add constraint id unique para LEXP . parc
     (134) LEXP -> LEXP . coma EXP
 
-    parc            shift and go to state 554
+    parc            shift and go to state 553
     coma            shift and go to state 89
 
 
-state 534
+state 533
 
     (40) OP -> add constraint id foreign key para . LEXP parc references id para LEXP parc
     (134) LEXP -> . LEXP coma EXP
@@ -24087,28 +23813,28 @@ state 534
     select          shift and go to state 17
     case            shift and go to state 24
 
-    LEXP                           shift and go to state 555
+    LEXP                           shift and go to state 554
     EXP                            shift and go to state 40
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 535
+state 534
 
     (39) OP -> add foreign key para LEXP parc . references id para LEXP parc
 
-    references      shift and go to state 556
+    references      shift and go to state 555
 
 
-state 536
+state 535
 
     (24) INSERT -> insert into id para LEXP parc values para LEXP . parc
     (134) LEXP -> LEXP . coma EXP
 
-    parc            shift and go to state 557
+    parc            shift and go to state 556
     coma            shift and go to state 89
 
 
-state 537
+state 536
 
     (100) SELECT -> select distinct LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER . LIMIT
     (103) LIMIT -> . limit int
@@ -24122,8 +23848,8 @@ state 537
 
   ! shift/reduce conflict for limit resolved as shift
   ! shift/reduce conflict for offset resolved as shift
-    limit           shift and go to state 457
-    offset          shift and go to state 458
+    limit           shift and go to state 456
+    offset          shift and go to state 457
     ptcoma          reduce using rule 110 (LIMIT -> .)
     r_from          reduce using rule 110 (LIMIT -> .)
     coma            reduce using rule 110 (LIMIT -> .)
@@ -24178,9 +23904,9 @@ state 537
   ! limit           [ reduce using rule 110 (LIMIT -> .) ]
   ! offset          [ reduce using rule 110 (LIMIT -> .) ]
 
-    LIMIT                          shift and go to state 558
+    LIMIT                          shift and go to state 557
 
-state 538
+state 537
 
     (101) SELECT -> select LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT .
 
@@ -24238,30 +23964,30 @@ state 538
     desc            reduce using rule 101 (SELECT -> select LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT .)
 
 
-state 539
+state 538
 
     (106) LIMIT -> limit int offset . int
+
+    int             shift and go to state 558
+
+
+state 539
+
+    (108) LIMIT -> limit all offset . int
 
     int             shift and go to state 559
 
 
 state 540
 
-    (108) LIMIT -> limit all offset . int
-
-    int             shift and go to state 560
-
-
-state 541
-
     (107) LIMIT -> offset int limit . int
     (109) LIMIT -> offset int limit . all
 
-    int             shift and go to state 561
-    all             shift and go to state 562
+    int             shift and go to state 560
+    all             shift and go to state 561
 
 
-state 542
+state 541
 
     (123) ORDER -> order by LEXP ORD .
 
@@ -24319,7 +24045,7 @@ state 542
     desc            reduce using rule 123 (ORDER -> order by LEXP ORD .)
 
 
-state 543
+state 542
 
     (126) ORD -> asc .
 
@@ -24377,7 +24103,7 @@ state 543
     desc            reduce using rule 126 (ORD -> asc .)
 
 
-state 544
+state 543
 
     (127) ORD -> desc .
 
@@ -24435,7 +24161,7 @@ state 544
     desc            reduce using rule 127 (ORD -> desc .)
 
 
-state 545
+state 544
 
     (150) TIPO -> timestamp para int parc without time zone .
 
@@ -24493,7 +24219,7 @@ state 545
     desc            reduce using rule 150 (TIPO -> timestamp para int parc without time zone .)
 
 
-state 546
+state 545
 
     (151) TIPO -> timestamp para int parc with time zone .
 
@@ -24551,7 +24277,7 @@ state 546
     desc            reduce using rule 151 (TIPO -> timestamp para int parc with time zone .)
 
 
-state 547
+state 546
 
     (152) TIPO -> time para int parc without time zone .
 
@@ -24609,7 +24335,7 @@ state 547
     desc            reduce using rule 152 (TIPO -> time para int parc without time zone .)
 
 
-state 548
+state 547
 
     (153) TIPO -> time para int parc with time zone .
 
@@ -24667,7 +24393,7 @@ state 548
     desc            reduce using rule 153 (TIPO -> time para int parc with time zone .)
 
 
-state 549
+state 548
 
     (80) OPCOLUMN -> constraint id check para . CONDCHECK parc
     (91) CONDCHECK -> . EXP mayor EXP
@@ -24778,12 +24504,12 @@ state 549
     select          shift and go to state 17
     case            shift and go to state 24
 
-    CONDCHECK                      shift and go to state 563
-    EXP                            shift and go to state 438
+    CONDCHECK                      shift and go to state 562
+    EXP                            shift and go to state 437
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 550
+state 549
 
     (81) OPCOLUMN -> check para CONDCHECK parc .
 
@@ -24799,21 +24525,21 @@ state 550
     coma            reduce using rule 81 (OPCOLUMN -> check para CONDCHECK parc .)
 
 
-state 551
+state 550
 
     (98) HERENCIA -> inherits para id parc .
 
     ptcoma          reduce using rule 98 (HERENCIA -> inherits para id parc .)
 
 
-state 552
+state 551
 
     (88) OPCONST -> foreign key para LEXP parc references . id para LEXP parc
 
-    id              shift and go to state 564
+    id              shift and go to state 563
 
 
-state 553
+state 552
 
     (36) OP -> add constraint id check para CONDCHECK parc .
 
@@ -24821,7 +24547,7 @@ state 553
     ptcoma          reduce using rule 36 (OP -> add constraint id check para CONDCHECK parc .)
 
 
-state 554
+state 553
 
     (37) OP -> add constraint id unique para LEXP parc .
 
@@ -24829,30 +24555,30 @@ state 554
     ptcoma          reduce using rule 37 (OP -> add constraint id unique para LEXP parc .)
 
 
-state 555
+state 554
 
     (40) OP -> add constraint id foreign key para LEXP . parc references id para LEXP parc
     (134) LEXP -> LEXP . coma EXP
 
-    parc            shift and go to state 565
+    parc            shift and go to state 564
     coma            shift and go to state 89
 
 
-state 556
+state 555
 
     (39) OP -> add foreign key para LEXP parc references . id para LEXP parc
 
-    id              shift and go to state 566
+    id              shift and go to state 565
 
 
-state 557
+state 556
 
     (24) INSERT -> insert into id para LEXP parc values para LEXP parc .
 
     ptcoma          reduce using rule 24 (INSERT -> insert into id para LEXP parc values para LEXP parc .)
 
 
-state 558
+state 557
 
     (100) SELECT -> select distinct LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT .
 
@@ -24910,7 +24636,7 @@ state 558
     desc            reduce using rule 100 (SELECT -> select distinct LEXP r_from LEXP WHERE GROUP HAVING COMBINING ORDER LIMIT .)
 
 
-state 559
+state 558
 
     (106) LIMIT -> limit int offset int .
 
@@ -24968,7 +24694,7 @@ state 559
     desc            reduce using rule 106 (LIMIT -> limit int offset int .)
 
 
-state 560
+state 559
 
     (108) LIMIT -> limit all offset int .
 
@@ -25026,7 +24752,7 @@ state 560
     desc            reduce using rule 108 (LIMIT -> limit all offset int .)
 
 
-state 561
+state 560
 
     (107) LIMIT -> offset int limit int .
 
@@ -25084,7 +24810,7 @@ state 561
     desc            reduce using rule 107 (LIMIT -> offset int limit int .)
 
 
-state 562
+state 561
 
     (109) LIMIT -> offset int limit all .
 
@@ -25142,35 +24868,35 @@ state 562
     desc            reduce using rule 109 (LIMIT -> offset int limit all .)
 
 
-state 563
+state 562
 
     (80) OPCOLUMN -> constraint id check para CONDCHECK . parc
 
-    parc            shift and go to state 567
+    parc            shift and go to state 566
+
+
+state 563
+
+    (88) OPCONST -> foreign key para LEXP parc references id . para LEXP parc
+
+    para            shift and go to state 567
 
 
 state 564
 
-    (88) OPCONST -> foreign key para LEXP parc references id . para LEXP parc
+    (40) OP -> add constraint id foreign key para LEXP parc . references id para LEXP parc
 
-    para            shift and go to state 568
+    references      shift and go to state 568
 
 
 state 565
 
-    (40) OP -> add constraint id foreign key para LEXP parc . references id para LEXP parc
+    (39) OP -> add foreign key para LEXP parc references id . para LEXP parc
 
-    references      shift and go to state 569
+    para            shift and go to state 569
 
 
 state 566
-
-    (39) OP -> add foreign key para LEXP parc references id . para LEXP parc
-
-    para            shift and go to state 570
-
-
-state 567
 
     (80) OPCOLUMN -> constraint id check para CONDCHECK parc .
 
@@ -25186,7 +24912,7 @@ state 567
     coma            reduce using rule 80 (OPCOLUMN -> constraint id check para CONDCHECK parc .)
 
 
-state 568
+state 567
 
     (88) OPCONST -> foreign key para LEXP parc references id para . LEXP parc
     (134) LEXP -> . LEXP coma EXP
@@ -25292,19 +25018,19 @@ state 568
     select          shift and go to state 17
     case            shift and go to state 24
 
-    LEXP                           shift and go to state 571
+    LEXP                           shift and go to state 570
     EXP                            shift and go to state 40
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 569
+state 568
 
     (40) OP -> add constraint id foreign key para LEXP parc references . id para LEXP parc
 
-    id              shift and go to state 572
+    id              shift and go to state 571
 
 
-state 570
+state 569
 
     (39) OP -> add foreign key para LEXP parc references id para . LEXP parc
     (134) LEXP -> . LEXP coma EXP
@@ -25410,37 +25136,37 @@ state 570
     select          shift and go to state 17
     case            shift and go to state 24
 
-    LEXP                           shift and go to state 573
+    LEXP                           shift and go to state 572
     EXP                            shift and go to state 40
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 571
+state 570
 
     (88) OPCONST -> foreign key para LEXP parc references id para LEXP . parc
     (134) LEXP -> LEXP . coma EXP
 
-    parc            shift and go to state 574
+    parc            shift and go to state 573
     coma            shift and go to state 89
+
+
+state 571
+
+    (40) OP -> add constraint id foreign key para LEXP parc references id . para LEXP parc
+
+    para            shift and go to state 574
 
 
 state 572
 
-    (40) OP -> add constraint id foreign key para LEXP parc references id . para LEXP parc
-
-    para            shift and go to state 575
-
-
-state 573
-
     (39) OP -> add foreign key para LEXP parc references id para LEXP . parc
     (134) LEXP -> LEXP . coma EXP
 
-    parc            shift and go to state 576
+    parc            shift and go to state 575
     coma            shift and go to state 89
 
 
-state 574
+state 573
 
     (88) OPCONST -> foreign key para LEXP parc references id para LEXP parc .
 
@@ -25448,7 +25174,7 @@ state 574
     coma            reduce using rule 88 (OPCONST -> foreign key para LEXP parc references id para LEXP parc .)
 
 
-state 575
+state 574
 
     (40) OP -> add constraint id foreign key para LEXP parc references id para . LEXP parc
     (134) LEXP -> . LEXP coma EXP
@@ -25554,12 +25280,12 @@ state 575
     select          shift and go to state 17
     case            shift and go to state 24
 
-    LEXP                           shift and go to state 577
+    LEXP                           shift and go to state 576
     EXP                            shift and go to state 40
     SELECT                         shift and go to state 52
     CASE                           shift and go to state 53
 
-state 576
+state 575
 
     (39) OP -> add foreign key para LEXP parc references id para LEXP parc .
 
@@ -25567,16 +25293,16 @@ state 576
     ptcoma          reduce using rule 39 (OP -> add foreign key para LEXP parc references id para LEXP parc .)
 
 
-state 577
+state 576
 
     (40) OP -> add constraint id foreign key para LEXP parc references id para LEXP . parc
     (134) LEXP -> LEXP . coma EXP
 
-    parc            shift and go to state 578
+    parc            shift and go to state 577
     coma            shift and go to state 89
 
 
-state 578
+state 577
 
     (40) OP -> add constraint id foreign key para LEXP parc references id para LEXP parc .
 
@@ -25709,39 +25435,65 @@ WARNING: shift/reduce conflict for in in state 336 resolved as shift
 WARNING: shift/reduce conflict for not in state 336 resolved as shift
 WARNING: shift/reduce conflict for like in state 336 resolved as shift
 WARNING: shift/reduce conflict for coma in state 337 resolved as shift
-WARNING: shift/reduce conflict for coma in state 386 resolved as shift
-WARNING: shift/reduce conflict for having in state 391 resolved as shift
-WARNING: shift/reduce conflict for union in state 392 resolved as shift
-WARNING: shift/reduce conflict for intersect in state 392 resolved as shift
-WARNING: shift/reduce conflict for except in state 392 resolved as shift
-WARNING: shift/reduce conflict for limit in state 393 resolved as shift
-WARNING: shift/reduce conflict for offset in state 393 resolved as shift
-WARNING: shift/reduce conflict for mas in state 395 resolved as shift
-WARNING: shift/reduce conflict for menos in state 395 resolved as shift
-WARNING: shift/reduce conflict for multiplicacion in state 395 resolved as shift
-WARNING: shift/reduce conflict for division in state 395 resolved as shift
-WARNING: shift/reduce conflict for modulo in state 395 resolved as shift
-WARNING: shift/reduce conflict for elevado in state 395 resolved as shift
-WARNING: shift/reduce conflict for and in state 395 resolved as shift
-WARNING: shift/reduce conflict for or in state 395 resolved as shift
-WARNING: shift/reduce conflict for mayor in state 395 resolved as shift
-WARNING: shift/reduce conflict for menor in state 395 resolved as shift
-WARNING: shift/reduce conflict for mayor_igual in state 395 resolved as shift
-WARNING: shift/reduce conflict for menor_igual in state 395 resolved as shift
-WARNING: shift/reduce conflict for igual in state 395 resolved as shift
-WARNING: shift/reduce conflict for diferente1 in state 395 resolved as shift
-WARNING: shift/reduce conflict for diferente2 in state 395 resolved as shift
-WARNING: shift/reduce conflict for between in state 395 resolved as shift
-WARNING: shift/reduce conflict for is in state 395 resolved as shift
-WARNING: shift/reduce conflict for isnull in state 395 resolved as shift
-WARNING: shift/reduce conflict for notnull in state 395 resolved as shift
-WARNING: shift/reduce conflict for as in state 395 resolved as shift
-WARNING: shift/reduce conflict for cadenaString in state 395 resolved as shift
-WARNING: shift/reduce conflict for id in state 395 resolved as shift
-WARNING: shift/reduce conflict for cadena in state 395 resolved as shift
-WARNING: shift/reduce conflict for in in state 395 resolved as shift
-WARNING: shift/reduce conflict for not in state 395 resolved as shift
-WARNING: shift/reduce conflict for like in state 395 resolved as shift
+WARNING: shift/reduce conflict for coma in state 385 resolved as shift
+WARNING: shift/reduce conflict for having in state 390 resolved as shift
+WARNING: shift/reduce conflict for union in state 391 resolved as shift
+WARNING: shift/reduce conflict for intersect in state 391 resolved as shift
+WARNING: shift/reduce conflict for except in state 391 resolved as shift
+WARNING: shift/reduce conflict for limit in state 392 resolved as shift
+WARNING: shift/reduce conflict for offset in state 392 resolved as shift
+WARNING: shift/reduce conflict for mas in state 394 resolved as shift
+WARNING: shift/reduce conflict for menos in state 394 resolved as shift
+WARNING: shift/reduce conflict for multiplicacion in state 394 resolved as shift
+WARNING: shift/reduce conflict for division in state 394 resolved as shift
+WARNING: shift/reduce conflict for modulo in state 394 resolved as shift
+WARNING: shift/reduce conflict for elevado in state 394 resolved as shift
+WARNING: shift/reduce conflict for and in state 394 resolved as shift
+WARNING: shift/reduce conflict for or in state 394 resolved as shift
+WARNING: shift/reduce conflict for mayor in state 394 resolved as shift
+WARNING: shift/reduce conflict for menor in state 394 resolved as shift
+WARNING: shift/reduce conflict for mayor_igual in state 394 resolved as shift
+WARNING: shift/reduce conflict for menor_igual in state 394 resolved as shift
+WARNING: shift/reduce conflict for igual in state 394 resolved as shift
+WARNING: shift/reduce conflict for diferente1 in state 394 resolved as shift
+WARNING: shift/reduce conflict for diferente2 in state 394 resolved as shift
+WARNING: shift/reduce conflict for between in state 394 resolved as shift
+WARNING: shift/reduce conflict for is in state 394 resolved as shift
+WARNING: shift/reduce conflict for isnull in state 394 resolved as shift
+WARNING: shift/reduce conflict for notnull in state 394 resolved as shift
+WARNING: shift/reduce conflict for as in state 394 resolved as shift
+WARNING: shift/reduce conflict for cadenaString in state 394 resolved as shift
+WARNING: shift/reduce conflict for id in state 394 resolved as shift
+WARNING: shift/reduce conflict for cadena in state 394 resolved as shift
+WARNING: shift/reduce conflict for in in state 394 resolved as shift
+WARNING: shift/reduce conflict for not in state 394 resolved as shift
+WARNING: shift/reduce conflict for like in state 394 resolved as shift
+WARNING: shift/reduce conflict for mas in state 396 resolved as shift
+WARNING: shift/reduce conflict for menos in state 396 resolved as shift
+WARNING: shift/reduce conflict for multiplicacion in state 396 resolved as shift
+WARNING: shift/reduce conflict for division in state 396 resolved as shift
+WARNING: shift/reduce conflict for modulo in state 396 resolved as shift
+WARNING: shift/reduce conflict for elevado in state 396 resolved as shift
+WARNING: shift/reduce conflict for and in state 396 resolved as shift
+WARNING: shift/reduce conflict for or in state 396 resolved as shift
+WARNING: shift/reduce conflict for mayor in state 396 resolved as shift
+WARNING: shift/reduce conflict for menor in state 396 resolved as shift
+WARNING: shift/reduce conflict for mayor_igual in state 396 resolved as shift
+WARNING: shift/reduce conflict for menor_igual in state 396 resolved as shift
+WARNING: shift/reduce conflict for igual in state 396 resolved as shift
+WARNING: shift/reduce conflict for diferente1 in state 396 resolved as shift
+WARNING: shift/reduce conflict for diferente2 in state 396 resolved as shift
+WARNING: shift/reduce conflict for between in state 396 resolved as shift
+WARNING: shift/reduce conflict for is in state 396 resolved as shift
+WARNING: shift/reduce conflict for isnull in state 396 resolved as shift
+WARNING: shift/reduce conflict for notnull in state 396 resolved as shift
+WARNING: shift/reduce conflict for as in state 396 resolved as shift
+WARNING: shift/reduce conflict for cadenaString in state 396 resolved as shift
+WARNING: shift/reduce conflict for id in state 396 resolved as shift
+WARNING: shift/reduce conflict for cadena in state 396 resolved as shift
+WARNING: shift/reduce conflict for in in state 396 resolved as shift
+WARNING: shift/reduce conflict for not in state 396 resolved as shift
+WARNING: shift/reduce conflict for like in state 396 resolved as shift
 WARNING: shift/reduce conflict for mas in state 397 resolved as shift
 WARNING: shift/reduce conflict for menos in state 397 resolved as shift
 WARNING: shift/reduce conflict for multiplicacion in state 397 resolved as shift
@@ -25768,73 +25520,47 @@ WARNING: shift/reduce conflict for cadena in state 397 resolved as shift
 WARNING: shift/reduce conflict for in in state 397 resolved as shift
 WARNING: shift/reduce conflict for not in state 397 resolved as shift
 WARNING: shift/reduce conflict for like in state 397 resolved as shift
-WARNING: shift/reduce conflict for mas in state 398 resolved as shift
-WARNING: shift/reduce conflict for menos in state 398 resolved as shift
-WARNING: shift/reduce conflict for multiplicacion in state 398 resolved as shift
-WARNING: shift/reduce conflict for division in state 398 resolved as shift
-WARNING: shift/reduce conflict for modulo in state 398 resolved as shift
-WARNING: shift/reduce conflict for elevado in state 398 resolved as shift
-WARNING: shift/reduce conflict for and in state 398 resolved as shift
-WARNING: shift/reduce conflict for or in state 398 resolved as shift
-WARNING: shift/reduce conflict for mayor in state 398 resolved as shift
-WARNING: shift/reduce conflict for menor in state 398 resolved as shift
-WARNING: shift/reduce conflict for mayor_igual in state 398 resolved as shift
-WARNING: shift/reduce conflict for menor_igual in state 398 resolved as shift
-WARNING: shift/reduce conflict for igual in state 398 resolved as shift
-WARNING: shift/reduce conflict for diferente1 in state 398 resolved as shift
-WARNING: shift/reduce conflict for diferente2 in state 398 resolved as shift
-WARNING: shift/reduce conflict for between in state 398 resolved as shift
-WARNING: shift/reduce conflict for is in state 398 resolved as shift
-WARNING: shift/reduce conflict for isnull in state 398 resolved as shift
-WARNING: shift/reduce conflict for notnull in state 398 resolved as shift
-WARNING: shift/reduce conflict for as in state 398 resolved as shift
-WARNING: shift/reduce conflict for cadenaString in state 398 resolved as shift
-WARNING: shift/reduce conflict for id in state 398 resolved as shift
-WARNING: shift/reduce conflict for cadena in state 398 resolved as shift
-WARNING: shift/reduce conflict for in in state 398 resolved as shift
-WARNING: shift/reduce conflict for not in state 398 resolved as shift
-WARNING: shift/reduce conflict for like in state 398 resolved as shift
-WARNING: shift/reduce conflict for cadena in state 403 resolved as shift
-WARNING: shift/reduce conflict for union in state 454 resolved as shift
-WARNING: shift/reduce conflict for intersect in state 454 resolved as shift
-WARNING: shift/reduce conflict for except in state 454 resolved as shift
-WARNING: shift/reduce conflict for order in state 455 resolved as shift
-WARNING: shift/reduce conflict for mas in state 460 resolved as shift
-WARNING: shift/reduce conflict for menos in state 460 resolved as shift
-WARNING: shift/reduce conflict for multiplicacion in state 460 resolved as shift
-WARNING: shift/reduce conflict for division in state 460 resolved as shift
-WARNING: shift/reduce conflict for modulo in state 460 resolved as shift
-WARNING: shift/reduce conflict for elevado in state 460 resolved as shift
-WARNING: shift/reduce conflict for and in state 460 resolved as shift
-WARNING: shift/reduce conflict for or in state 460 resolved as shift
-WARNING: shift/reduce conflict for mayor in state 460 resolved as shift
-WARNING: shift/reduce conflict for menor in state 460 resolved as shift
-WARNING: shift/reduce conflict for mayor_igual in state 460 resolved as shift
-WARNING: shift/reduce conflict for menor_igual in state 460 resolved as shift
-WARNING: shift/reduce conflict for igual in state 460 resolved as shift
-WARNING: shift/reduce conflict for diferente1 in state 460 resolved as shift
-WARNING: shift/reduce conflict for diferente2 in state 460 resolved as shift
-WARNING: shift/reduce conflict for between in state 460 resolved as shift
-WARNING: shift/reduce conflict for is in state 460 resolved as shift
-WARNING: shift/reduce conflict for isnull in state 460 resolved as shift
-WARNING: shift/reduce conflict for notnull in state 460 resolved as shift
-WARNING: shift/reduce conflict for as in state 460 resolved as shift
-WARNING: shift/reduce conflict for cadenaString in state 460 resolved as shift
-WARNING: shift/reduce conflict for id in state 460 resolved as shift
-WARNING: shift/reduce conflict for cadena in state 460 resolved as shift
-WARNING: shift/reduce conflict for in in state 460 resolved as shift
-WARNING: shift/reduce conflict for not in state 460 resolved as shift
-WARNING: shift/reduce conflict for like in state 460 resolved as shift
-WARNING: shift/reduce conflict for not in state 475 resolved as shift
-WARNING: shift/reduce conflict for order in state 505 resolved as shift
-WARNING: shift/reduce conflict for limit in state 506 resolved as shift
+WARNING: shift/reduce conflict for cadena in state 402 resolved as shift
+WARNING: shift/reduce conflict for union in state 453 resolved as shift
+WARNING: shift/reduce conflict for intersect in state 453 resolved as shift
+WARNING: shift/reduce conflict for except in state 453 resolved as shift
+WARNING: shift/reduce conflict for order in state 454 resolved as shift
+WARNING: shift/reduce conflict for mas in state 459 resolved as shift
+WARNING: shift/reduce conflict for menos in state 459 resolved as shift
+WARNING: shift/reduce conflict for multiplicacion in state 459 resolved as shift
+WARNING: shift/reduce conflict for division in state 459 resolved as shift
+WARNING: shift/reduce conflict for modulo in state 459 resolved as shift
+WARNING: shift/reduce conflict for elevado in state 459 resolved as shift
+WARNING: shift/reduce conflict for and in state 459 resolved as shift
+WARNING: shift/reduce conflict for or in state 459 resolved as shift
+WARNING: shift/reduce conflict for mayor in state 459 resolved as shift
+WARNING: shift/reduce conflict for menor in state 459 resolved as shift
+WARNING: shift/reduce conflict for mayor_igual in state 459 resolved as shift
+WARNING: shift/reduce conflict for menor_igual in state 459 resolved as shift
+WARNING: shift/reduce conflict for igual in state 459 resolved as shift
+WARNING: shift/reduce conflict for diferente1 in state 459 resolved as shift
+WARNING: shift/reduce conflict for diferente2 in state 459 resolved as shift
+WARNING: shift/reduce conflict for between in state 459 resolved as shift
+WARNING: shift/reduce conflict for is in state 459 resolved as shift
+WARNING: shift/reduce conflict for isnull in state 459 resolved as shift
+WARNING: shift/reduce conflict for notnull in state 459 resolved as shift
+WARNING: shift/reduce conflict for as in state 459 resolved as shift
+WARNING: shift/reduce conflict for cadenaString in state 459 resolved as shift
+WARNING: shift/reduce conflict for id in state 459 resolved as shift
+WARNING: shift/reduce conflict for cadena in state 459 resolved as shift
+WARNING: shift/reduce conflict for in in state 459 resolved as shift
+WARNING: shift/reduce conflict for not in state 459 resolved as shift
+WARNING: shift/reduce conflict for like in state 459 resolved as shift
+WARNING: shift/reduce conflict for not in state 474 resolved as shift
+WARNING: shift/reduce conflict for order in state 504 resolved as shift
+WARNING: shift/reduce conflict for limit in state 505 resolved as shift
+WARNING: shift/reduce conflict for offset in state 505 resolved as shift
 WARNING: shift/reduce conflict for offset in state 506 resolved as shift
 WARNING: shift/reduce conflict for offset in state 507 resolved as shift
-WARNING: shift/reduce conflict for offset in state 508 resolved as shift
-WARNING: shift/reduce conflict for limit in state 509 resolved as shift
-WARNING: shift/reduce conflict for coma in state 510 resolved as shift
-WARNING: shift/reduce conflict for asc in state 510 resolved as shift
-WARNING: shift/reduce conflict for desc in state 510 resolved as shift
-WARNING: shift/reduce conflict for parc in state 511 resolved as shift
-WARNING: shift/reduce conflict for limit in state 537 resolved as shift
-WARNING: shift/reduce conflict for offset in state 537 resolved as shift
+WARNING: shift/reduce conflict for limit in state 508 resolved as shift
+WARNING: shift/reduce conflict for coma in state 509 resolved as shift
+WARNING: shift/reduce conflict for asc in state 509 resolved as shift
+WARNING: shift/reduce conflict for desc in state 509 resolved as shift
+WARNING: shift/reduce conflict for parc in state 510 resolved as shift
+WARNING: shift/reduce conflict for limit in state 536 resolved as shift
+WARNING: shift/reduce conflict for offset in state 536 resolved as shift

@@ -44,7 +44,10 @@ insert into tbpuesto values(8,'Vendedor 3',3000.00,true);
 insert into tbpuesto values(9,'Jefe de Ventas',4000.00,true);
 insert into tbpuesto values(10,'Jefe de Ventas Regional',2500.00,true);
 
+delete from tbpuesto where salariobase = 5000.00;
+
 select * from tbpuesto;
+
 
 CREATE TYPE area AS ENUM ('CONTABILIDAD','ADMINISTRACION','VENTAS','TECNOLOGIA','FABRICA');
 

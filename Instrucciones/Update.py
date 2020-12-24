@@ -15,10 +15,11 @@ from tkinter import *
 from enum import Enum
 from reportes import *
 
-class Delete(Instruccion):
+class Update(Instruccion):
     encabezado=[]
-    def __init__(self,tabla,where):
+    def __init__(self,tabla,listaCampos,where):
         self.tabla = tabla
+        self.listaCampos = listaCampos
         self.where = where
 
     def ejecutar(self,ent:Entorno):
@@ -40,6 +41,15 @@ class Delete(Instruccion):
                     resexp = self.resolver(self.where, ent, result, tabla, i)
                     try:
                         if resexp.valor:
+                            dic={}
+                            'busco la columna y le asigno el nuevo valor'
+                            for i in range(0, len(self.listaCampos)):
+                               nombrecol = self.listaCampos[i].columna
+                               expresion = self.listaCampos[i].exp
+                               contenido=expresion.getval(ent).valor
+                               for nocol in range(0, len(columnas)):
+                                   if nombrecol==columnas[nocol].nombre:
+                                        dic.update({nocol:contenido})
                             'envio datos par update'
                             llavePrim = []
                             for column in tabla.valor:
@@ -47,11 +57,9 @@ class Delete(Instruccion):
                                 llavePrim = prim.valor
                                 break
                             
-                            #print("PK ----------",llavePrim)
-                            r = DBMS.delete(dbActual,self.tabla,llavePrim)
-                            #print("DELTEEEE ------------> ",r)
+                            r = DBMS.update(dbActual,self.tabla,dic,llavePrim)
                             if r == 0:
-                                variables.consola.insert(INSERT, 'Se ha eliminado un registro \n')
+                                variables.consola.insert(INSERT, 'Se ha actualizado un registro \n')
 
 
                     except:
@@ -59,8 +67,8 @@ class Delete(Instruccion):
                         variables.consola.insert(INSERT, 'Error el resultado del where no es booleano \n')
 
             else:
-                variables.consola.insert(INSERT,"La tabla '" + self.tabla + "' que desea eliminar no existe\n")
-                reporteerrores.append(Lerrores("Error Semántico","La tabla '" + self.tabla + "' que desea eliminar no existe","",""))
+                variables.consola.insert(INSERT,"La tabla '" + self.tabla + "' que desea actualizar no existe\n")
+                reporteerrores.append(Lerrores("Error Semántico","La tabla '" + self.tabla + "' que desea actualizar no existe","",""))
 
 
     def resolver(self, expresion, entorno, result, tabla, fila):

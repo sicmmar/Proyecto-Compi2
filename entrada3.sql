@@ -50,8 +50,8 @@ create table tblibrosalariohis
 ( idhistorico integer not null primary key
 ) INHERITS (tblibrosalario);
 
-/*SELECT idempleado,abs(comision),cbrt(comision),DIV(325,5)
-FROM tblibrosalario;*/
+SELECT idempleado,abs(comision),cbrt(comision),DIV(325,5)
+FROM tblibrosalario;
 
 SELECT factorial(17), 
 EXP(2.0),
