@@ -32,7 +32,7 @@ class Unaria(Expresion) :
             self.tipo='boolean'
             self.valor =  not valexp
 
-        print(self.valor)
+
         return self
 
 

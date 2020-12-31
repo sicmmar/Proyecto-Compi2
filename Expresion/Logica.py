@@ -16,8 +16,8 @@ class Logica(Binaria):
             if (self.exp1.tipo.tipo == 'identificador' or self.exp2.tipo.tipo == 'identificador'):
                 return self
 
-        valizq=self.exp1.getval(entorno);
-        valder=self.exp2.getval(entorno);
+        valizq=self.exp1.getval(entorno)
+        valder=self.exp2.getval(entorno)
         valizq=valizq.valor
         valder=valder.valor
 

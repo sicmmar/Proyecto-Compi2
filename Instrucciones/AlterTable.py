@@ -233,3 +233,12 @@ class DropColumns():
     def __init__(self,columnas):
         self.columnas = columnas
         self.tipoAlter = TipoAlter.DROPCOLUMN
+
+class Indice():
+    def init(self,unique,nombre,tabla,tipo,columnas):
+        self.unique=unique
+        self.nombre=nombre
+        self.tabla=tabla
+        self.tipo=tipo
+        self.columnas=columnas
+

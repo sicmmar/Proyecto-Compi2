@@ -12,6 +12,8 @@ from Expresion.FuncionesNativas import *
 from Expresion.variablesestaticas import variables
 from tkinter import *
 from reportes import *
+from Expresion.Id import  Identificador
+
 class Insert(Instruccion):
     def __init__(self, nombre,valores=[]):
         self.nombre=nombre
@@ -56,18 +58,36 @@ class Insert(Instruccion):
                     if(verificarcheck!=None):
                         check=ent.buscarSimbolo(verificarcheck)
                         #print("Condicion:",check.valor.exp1.getval(ent).valor,check.valor.simbolo,check.valor.exp2.getval(ent).valor)
-                        condicion1=Terminal(columna.tipo,check.valor.exp1.getval(ent).valor)
-                        condicion2=Terminal(columna.tipo,check.valor.exp2.getval(ent).valor)
+
+                        if isinstance(check.valor.exp1, Identificador):
+                            condicion1 = check.valor.exp1.getval(ent)
+                            if condicion1 == None:
+                                condicion1 = Terminal(columna.tipo, check.valor.exp1.nombre)
+                        else:
+                            condicion1 = Terminal(columna.tipo, check.valor.exp1.getval(ent).valor)
+
+                        if isinstance(check.valor.exp2, Identificador):
+                            condicion2 = check.valor.exp2.getval(ent)
+                            if condicion2 == None:
+                                condicion2 = Terminal(columna.tipo, check.valor.exp2.nombre)
+                        else:
+                            condicion2 = Terminal(columna.tipo, check.valor.exp2.getval(ent).valor)
                         operador=check.valor.simbolo
                         l=0
                         for columna in columnas:
                             #tipo=columna.tipo
+                            if isinstance(check.valor.exp1, Identificador):
+                                check.valor.exp1 = Terminal(check.valor.exp1.tipo, check.valor.exp1.nombre)
+
                             if(check.valor.exp1.getval(ent).valor==columna.nombre):
                                 condicion1=Terminal(columna.tipo,self.valores[l].getval(ent).valor)
                             l=l+1
                         
                         n=0
                         for columna in columnas:
+                            if isinstance(check.valor.exp2, Identificador):
+                                check.valor.exp2 = Terminal(check.valor.exp2.tipo, check.valor.exp2.nombre)
+
                             if(check.valor.exp2.getval(ent).valor==columna.nombre):
                                 
                                 condicion2=Terminal(columna.tipo,self.valores[n].getval(ent).valor)
@@ -76,7 +96,7 @@ class Insert(Instruccion):
                         correcto=False
                         if operador in ('>','<','>=','<=','='):
                             #print(condicion1.getval(ent).valor,operador,condicion2.getval(ent).valor)
-                            nuevaop = Relacional(condicion1,condicion2,operador);
+                            nuevaop = Relacional(condicion1,condicion2,operador)
                             if nuevaop.getval(ent).valor:
                                 correcto=True
                             else:
@@ -116,8 +136,8 @@ class Insert(Instruccion):
                         util=Tipo(None,None,-1,-1)
                         #tabla:Simbolo = ent.buscarSimbolo(completo)
         
-                        if isinstance (self.valores[i],FuncionesNativas):
-                            self.valores[i]=self.valores[i].getval(ent)
+
+                        self.valores[i]=self.valores[i].getval(ent)
 
                         if util.comparetipo(tipo,self.valores[i].tipo):
                             'todo correcto'
@@ -210,8 +230,23 @@ class InsertWhitColum(Instruccion):
                 if(verificarcheck!=None):
                     check=ent.buscarSimbolo(verificarcheck)
                     #print("Condicion:",check.valor.exp1.getval(ent).valor,check.valor.simbolo,check.valor.exp2.getval(ent).valor)
-                    condicion1=Terminal(columna.tipo,check.valor.exp1.getval(ent).valor)
-                    condicion2=Terminal(columna.tipo,check.valor.exp2.getval(ent).valor)
+
+                    if isinstance(check.valor.exp1,Identificador):
+                        condicion1=check.valor.exp1.getval(ent)
+                        if condicion1==None:
+
+                            condicion1=Terminal(columna.tipo, check.valor.exp1.nombre)
+                    else:
+                        condicion1 = Terminal(columna.tipo, check.valor.exp1.getval(ent).valor)
+
+                    if isinstance(check.valor.exp2, Identificador):
+                        condicion2 = check.valor.exp2.getval(ent)
+                        if condicion2 == None:
+                            condicion2 = Terminal(columna.tipo, check.valor.exp2.nombre)
+                    else:
+                        condicion2 = Terminal(columna.tipo, check.valor.exp2.getval(ent).valor)
+
+
                     operador=check.valor.simbolo
                     l=0
                     for columna in columnas:
@@ -271,9 +306,12 @@ class InsertWhitColum(Instruccion):
                     nombre=columna.nombre
                     tipo=columna.tipo
                     util=Tipo(None,None,-1,-1)
+                    if isinstance(self.namecolums[j],Identificador):
+                        self.namecolums[j]=Terminal(self.namecolums[j].tipo,self.namecolums[j].nombre)
+
                     if(nombre==self.namecolums[j].getval(ent).valor):
                         #print("iguales",nombre,":",self.namecolums[j].getval(ent).valor,"J",j,"t",t)
-                        
+
                         for colunique in columnaunique:
                             if nombre==colunique:
                                 #print("UNIQUE",colunique,"colactual",nombre,"valor",self.valores[j].getval(ent).valor,"---")
@@ -283,15 +321,15 @@ class InsertWhitColum(Instruccion):
                                     variables.consola.insert(INSERT,'Error Violacion de Constraint Unique en columna:'+colunique +' : '+str(self.valores[j].getval(ent).valor)+'\n')
                                     reporteerrores.append(Lerrores("Error Semantico", 'Error Violacion de Constraint Unique en columna:'+colunique +' : '+str(self.valores[j].getval(ent).valor),'',''))
                                     return
-                                    
+
                         if isinstance (self.valores[j],FuncionesNativas):
                             self.valores[j]=self.valores[j].getval(ent)
-                        
+
                         buscado=str('ENUM_'+ent.getDataBase()+'_'+tipo.tipo)
                         types:Simbolo= ent.buscarSimbolo(buscado)
-                    
-                        tipocorrecto = False 
-                    
+
+                        tipocorrecto = False
+
                         if types!=None:
                             tiposenum=types.valor
                             print("Comparando Enum")
@@ -306,18 +344,18 @@ class InsertWhitColum(Instruccion):
 
 
                         if not tipocorrecto:
-                            if util.comparetipo(tipo,self.valores[j].tipo):
+                            if util.comparetipo(tipo,self.valores[j].getval(ent).tipo):
                                 'todo correcto'
                             else:
                                 correcto=False
                                 variables.consola.insert(INSERT,'Error los tipos no coinciden con la definicion de la tabla\n')
                                 reporteerrores.append(Lerrores("Error Semantico",'Tipo de datos en columanas no son iguales','',''))
                                 return
-                        
-                        
+
+
                         terminales.append(self.valores[j].getval(ent).valor)
                         j=j+1
-                    else: 
+                    else:
                         #print("diferentes",nombre,":",self.namecolums[j].getval(ent).valor,"J",j,"t",t)
                         terminales.append('')
                 r=DBMS.insert(ent.getDataBase(),self.nombre,terminales)

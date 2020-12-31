@@ -19,8 +19,8 @@ class Aritmetica(Binaria):
             return self
 
 
-        valizq=self.exp1.getval(entorno);
-        valder=self.exp2.getval(entorno);
+        valizq=self.exp1.getval(entorno)
+        valder=self.exp2.getval(entorno)
         valizq=valizq.valor
         valder=valder.valor
 
@@ -34,17 +34,17 @@ class Aritmetica(Binaria):
                                      "Error los valores de los operandos deben ser numericos")
 
         if self.operador == '+':
-            self.valor = valizq+valder;
+            self.valor = valizq+valder
         elif self.operador == '-':
-            self.valor = valizq - valder;
+            self.valor = valizq - valder
         elif self.operador ==  '*':
-            self.valor = valizq * valder;
+            self.valor = valizq * valder
         elif self.operador == '/':
-            self.valor = valizq / valder;
+            self.valor = valizq / valder
         elif self.operador == '%':
-            self.valor = valizq % valder;
+            self.valor = valizq % valder
         elif self.operador == '^':
-            self.valor = valizq ** valder;
+            self.valor = valizq ** valder
 
         tipo= Tipo(self.valor,'decimal')
         self.tipo=tipo

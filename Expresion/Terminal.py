@@ -47,7 +47,7 @@ class Terminal(Expresion) :
                 self.tipo = Tipo('numeric', None, len(str(self.valor)), -1)
                 return self
         else:
-            if str(self.valor).count('-')==2 and self.valor.count(':')==2:
+            if str(self.valor).count('-')==2 and str(self.valor).count(':')==2:
                 if len(str(self.valor))>10:
                     self.tipo = Tipo('timestamp without time zone', None, -1, -1)
             elif str(self.valor).count('-')==2:

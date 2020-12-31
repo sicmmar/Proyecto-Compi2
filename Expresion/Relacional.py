@@ -22,25 +22,28 @@ class Relacional(Binaria):
             if (self.exp1.tipo.tipo == 'identificador' or self.exp2.tipo.tipo == 'identificador'):
                 return self
 
-        valizq=self.exp1.getval(entorno);
-        valder=self.exp2.getval(entorno);
+        valizq=self.exp1.getval(entorno)
+        valder=self.exp2.getval(entorno)
         valizq=valizq.valor
         valder=valder.valor
 
         try:
             if self.operador == '>':
-                self.valor = valizq > valder;
+                self.valor = valizq > valder
             elif self.operador == '<':
-                self.valor = valizq < valder;
+                self.valor = valizq < valder
             elif self.operador == '>=':
-                self.valor = valizq >= valder;
+                self.valor = valizq >= valder
             elif self.operador == '<=':
-                self.valor = valizq <= valder;
+                self.valor = valizq <= valder
             elif self.operador == '<>':
-                self.valor = valizq != valder;
+                self.valor = valizq != valder
             elif self.operador == '=':
-                self.valor = valizq == valder;
-
+                self.valor = valizq == valder
+            elif self.operador=='like':
+                self.valor=self.like(valizq,valder)
+            elif self.operador=='ilike':
+                 self.valor=self.ilike(valizq,valder)
             self.tipo = 'boolean'
             return self
         except :
@@ -50,4 +53,15 @@ class Relacional(Binaria):
             variables.consola.insert(INSERT,
                                      'Los tipos que se estan comparando no coinciden\n')
             return
+
+    def like(self,valizq,valder):
+        valorder=valder.replace('%','')
+        if valorder in valizq:
+            return True
+        return False
+
+    def ilike(self, valizq, valder):
+        valizq=valizq.lower()
+        valder=valder.lower()
+        return self.like(valizq,valder)
 

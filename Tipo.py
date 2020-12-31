@@ -42,6 +42,8 @@ class Tipo():
 
     def comparetipo(self,tipocolumn,tipovalor):
         'comparo los tipos de la columna con el del valor'
+        tipovalor.tipo=tipovalor.tipo.lower()
+        tipocolumn.tipo=tipocolumn.tipo.lower()
         if tipocolumn.tipo=='int':
             tipocolumn.tipo='integer'
 

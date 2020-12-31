@@ -11,6 +11,7 @@ from Expresion.FuncionesNativas import FuncionesNativas
 from Expresion.Aritmetica import Aritmetica
 from tkinter import *
 from reportes import *
+from Expresion.Id import  Identificador
 import copy
 
 
@@ -18,7 +19,9 @@ class Select(Instruccion):
     'This is an abstract class'
     encabezado = []
     nombreres = ''
-    aliast=[]
+    todo=[]
+    tipos=[]
+    aliast = []
 
 
     def __init__(self, distinct=None, exps=None, froms=None, where=None, group=None, having=None, combinging=None,order=None, limit=None):
@@ -33,48 +36,53 @@ class Select(Instruccion):
         self.combinig = combinging
 
     def ejecutar(self, ent: Entorno,imp=1):
-        try:
+
+        #try:
             tablas = []
             result = []
             self.encabezado = []
-            aliast=[]
-
-            'Metodo Abstracto para ejecutar la instruccion'
+            self.aliast=[]
 
             if self.distinct is None and self.froms is None and self.where is None and self.group is None and self.having is None and self.order is None and self.combinig is None:
-                resultados = [];
-                for exp in self.exps:
-                    if exp != None:
+                resultados = []
+                newenc=[]
+                for i in range(0,len(self.exps)):
+                    exp=self.exps[i]
+                    if isinstance(self.exps[i], FuncionesNativas):
+                        newenc.append(self.exps[i].identificador+str(i))
+                    elif isinstance(self.exps[i], Alias):
+                        newenc.append(self.exps[i].nombre)
+                        exp = self.exps[i].expresion
+                    elif isinstance(self.exps[i],Identificador):
+                        newenc.append(self.exps[i].nombre)
+                    else:
+                        newenc.append('Exp' + str(len(newenc)))
 
-                        res = exp.getval(ent)
+                    result.append(exp.getval(ent).valor)
 
-                        resultados.append(res.valor)
-                    variables.consola.insert(INSERT,str(res.valor))
-                    variables.consola.insert(INSERT, '\n')
-                return resultados
+                result=[result]
+                self.encabezado=newenc[:]
+
             elif self.froms != None and self.exps != None:
 
                 for exp in self.froms:
-
-                        if isinstance(exp,Terminal):
-                            aliast.append('')
+                        if isinstance(exp,Identificador):
+                            self.aliast.append('')
                             tipo = exp.tipo
                             tablas=self.gettablas(tipo,exp,ent,tablas)
                         elif isinstance(exp,Alias):
-                            aliast.append(exp.nombre)
+                            self.aliast.append(exp.nombre)
                             expre=exp.expresion
-                            tipo=exp.tipo
+                            tipo=expre.tipo
                             tablas=self.gettablas(tipo,expre,ent,tablas)
 
                 if len(tablas) > 1:
                     'Obteniendo encabezados de las tablas'
-
                     for tabla in tablas:
                         cols = tabla.valor
                         for columna in cols:
                             nombre = columna.nombre
                             self.encabezado.append(nombre + "." +  tabla.nombre.replace('_' + ent.getDataBase(), ''))
-
 
                     'producto cartesiano'
                     real = tablas[0].nombre.replace('_' + ent.getDataBase(), '')
@@ -82,13 +90,15 @@ class Select(Instruccion):
                     self.nombreres = real
                     for i in range(0, len(tablas) - 1):
                         real2 = tablas[i + 1].nombre.replace('_' + ent.getDataBase(), '')
-                        self.nombreres += "_" +  tabla.nombre.replace('_' + ent.getDataBase(), '')
+                        self.nombreres += "_" +  real2
                         tabla2 = DBMS.extractTable(ent.getDataBase(), real2)
                         result = self.producto(result, tabla2)
+
                 else:
                     'llenar resultado desde backend'
                     real = tablas[0].nombre.replace('_' + ent.getDataBase(), '')
                     result = DBMS.extractTable(ent.getDataBase(), real)
+
 
                 'encabezados 1 tabla'
                 if (len(self.encabezado) == 0):
@@ -97,32 +107,10 @@ class Select(Instruccion):
                         for columna in cols:
                             nombre = columna.nombre
                             self.encabezado.append(nombre)
-                #lleno arreglo de alias
-                for exp in self.exps:
-                    self.aliast.append('')
 
-                for x in range(0,len(self.exps)):
-                    if isinstance(self.exps[x],Alias):
-                        self.aliast[i]=self.exps[i].nombre
-
-                # filtros
-                if self.where != None:
-                    result = self.optwhere(ent,result,tablas)
-                # combining(union,intersect,except)
-                if self.combinig != None:
-                    datos2 = self.combinig.select.ejecutar(ent, 0)
-                    enc2 = datos2[0]
-                    res2 = datos2[1]
-                    result = self.m_combining(self.combinig, self.encabezado, result, enc2, res2)
-                    aber = result
-                # limitar resultados
-                if self.limit != None:
-                    a = self.limit
-                    result = self.m_limit(result, a.limit, a.off)
-
-                # acceder a columnas
+                # add  columnas
                 if len(self.exps) == 1:
-                    if self.exps[0].tipo.tipo == 'identificador':
+                    if  not isinstance(self.exps[0],Identificador):
                         newenc = []
                         'obtengo  solo columnas pedidas'
                         for i in range(0, len(self.encabezado)):
@@ -134,44 +122,143 @@ class Select(Instruccion):
                                     result[x] = [valcol]
                                     if (len(newenc) == 0):
                                         newenc.append(self.encabezado[i])
-                        self.encabezado = newenc
-
-                    else:
-                        ''
+                        self.encabezado = (self.encabezado+newenc)
 
                 else:
                     newenc = []
                     newres = []
                     for i in range(0, len(self.exps)):
-                        if isinstance(self.exps[i], Terminal):
-                            if self.exps[i].tipo.tipo == 'identificador':
-                                for j in range(0, len(self.encabezado)):
-                                    nombrediv = self.encabezado[j].split('.')
-                                    nombrecol = nombrediv[0]
-                                    if self.exps[i].getval(ent).valor == nombrecol:
-                                        newenc.append(self.encabezado[j])
-                                        for x in range(0, len(result)):
-                                            valcol = result[x][j]
-                                            if len(newres) != len(result):
-                                                newres.append([valcol])
-                                            else:
-                                                newres[x].append(valcol)
+
+                        if isinstance(self.exps[i], Terminal) or isinstance(self.exps[i],Identificador):
+                           'aqui no agrego las que ya existen'
+
                         else:
+                            exp = self.exps[i]
+                            'aqui agrego las expresiones que se agregaran para filtrar'
                             if isinstance(self.exps[i],FuncionesNativas):
                                 newenc.append(self.exps[i].identificador)
+                            elif isinstance(self.exps[i], Alias):
+                                newenc.append(self.exps[i].nombre)
+                                exp=self.exps[i].expresion
+                            elif isinstance(self.exps[i], Identificador):
+                                newenc.append(self.exps[i].nombre)
                             else:
-                                newenc.append('Exp'+len(newenc))
+                                newenc.append('Exp'+str(len(newenc)))
 
                             for fila in range(0,len(result)):
-                                exp=self.exps[i]
                                 res=self.resolver(exp,ent,result,tablas,fila)
+                                if fila==0:
+                                    self.tipos.append([newenc[len(newenc)-1],res.tipo])
                                 if len(newres) != len(result):
                                     newres.append([res.valor])
                                 else:
                                     newres[fila].append(res.valor)
 
-                    result = newres
-                    self.encabezado = newenc
+                    for i in range(0,len(result)):
+                        if newres!=[]:
+                            result[i]=result[i]+newres[i]
+
+                    self.encabezado = (self.encabezado+ newenc)
+
+                # filtros
+                if self.where != None:
+                    result = self.optwhere(ent,result,tablas)
+
+                #DEVUELVO SOLO COLUMNAS PEDIDAS
+                newenc = []
+                newres = []
+
+                for i in range(0, len(self.exps)):
+                    if isinstance(self.exps[i],Identificador):
+                        for j in range(0, len(self.encabezado)):
+                            nombrediv = self.encabezado[j].split('.')
+                            nombrecol = nombrediv[0]
+                            if self.exps[i].nombre == nombrecol:
+                                newenc.append(self.encabezado[j])
+                                for x in range(0, len(result)):
+                                    valcol = result[x][j]
+                                    if len(newres) != len(result):
+                                        newres.append([valcol])
+                                    else:
+                                        newres[x].append(valcol)
+                    elif isinstance(self.exps[i], Terminal):
+                        if self.exps[i].tipo.tipo == 'acceso':
+                            expresion=self.exps[i]
+                            campos = expresion.getval(ent).valor.split('.')
+                            if campos[1] == '*':
+                                tablares=self.getasterisco(campos[0], tablas, result, ent,newres,newenc)
+                                newenc=tablares[0]
+                                newres=tablares[1]
+                            #busco el campo pedido si no es *
+                            for j in range(0, len(self.encabezado)):
+                                nombrediv = self.encabezado[j].split('.')
+                                nombrecol = nombrediv[0]
+
+                                nombretabla = nombrediv[1]
+                                nombrecol = nombretabla + '.' + nombrecol
+                                if expresion.getval(ent).valor == nombrecol:
+                                    newenc.append(self.encabezado[j])
+                                    for x in range(0, len(result)):
+                                        dato = result[x][j]
+                                        if len(newres) != len(result):
+                                            newres.append([dato])
+                                        else:
+                                            newres[x].append(dato)
+
+                                for k in range(0, len(self.aliast)):
+                                    nombreacc = self.aliast[k] + '.' + nombrediv[0]
+                                    if expresion.getval(ent).valor == nombreacc and nombrediv[1] == tablas[k].nombre.replace('_' + ent.getDataBase(), ''):
+                                        newenc.append(self.encabezado[j])
+                                        for x in range(0, len(result)):
+                                            dato = result[x][j]
+                                            if len(newres) != len(result):
+                                                newres.append([dato])
+                                            else:
+                                                newres[x].append(dato)
+                        elif len(self.exps)==1 and self.exps[0].valor=='*':
+                            newres=result[:]
+                            newenc=self.encabezado[:]
+                            break
+
+                    else:
+                        exp = self.exps[i]
+                        if isinstance(self.exps[i],FuncionesNativas):
+                            newenc.append(self.exps[i].identificador+str(i))
+                        elif isinstance(self.exps[i], Alias):
+                            newenc.append(self.exps[i].nombre)
+                            exp = self.exps[i].expresion
+                        else:
+                            newenc.append('Exp'+len(newenc))
+
+                        for fila in range(0,len(result)):
+                            res=self.resolver(exp,ent,result,tablas,fila)
+                            '''if isinstance(res,str):
+                                if len(newres) != len(result):
+                                    newres.append([''])
+                                else:
+                                    newres[fila].append('')
+                                continue'''
+                            if len(newres) != len(result) :
+                                newres.append([res.valor])
+                            else:
+
+                                newres[fila].append(res.valor)
+
+                result = newres[:]
+                self.encabezado = newenc[:]
+
+
+                # combining(union,intersect,except)
+                if self.combinig != None:
+                    datos2 = self.combinig.select.ejecutar(ent, 0)
+                    enc2 = datos2[0]
+                    res2 = datos2[1]
+                    result = self.m_combining(self.combinig, self.encabezado, result, enc2, res2)
+                    aber = result
+                # limitar resultados
+                if self.limit != None:
+                    a = self.limit
+                    result = self.m_limit(result, a.limit, a.off)
 
                 #distinct
                 if self.distinct!=None:
@@ -188,35 +275,68 @@ class Select(Instruccion):
                             newres.append(fila)
                     result=newres
 
-                if imp == 1:
-                    self.mostarresult(result, self.encabezado, self.nombreres)
+                #imprimir resultado solo si no se llamo de un subquery,union,intersect,except
+
+            if imp == 1:
+                self.mostarresult(result, self.encabezado, self.nombreres)
 
             return [self.encabezado, result]
 
-        except  Exception as inst:
-            print(inst)
-            return
+        #except  Exception as inst:
+            #print(inst)
+            #return
+
+    def getasterisco(self,nombtabla,tablas,result,ent,newres,newenc):
+        real=''
+        postabla=-1
+        if newres==[]:
+            for i in range(0,len(self.aliast)):
+                if nombtabla==self.aliast[i]:
+                    real = tablas[i].nombre.replace('_' + ent.getDataBase(), '')
+                if nombtabla == tablas[i].nombre.replace('_' + ent.getDataBase(), ''):
+                    real=nombtabla
+            if real!= '':
+                for i in range(0,len(self.encabezado)):
+                    splitted = self.encabezado[i].split('.')
+                    campo=splitted[0]
+                    tabla=''
+                    if len(splitted)>0:
+                        tabla=splitted[1]
+
+                    if tabla==real:
+                        newenc.append(self.encabezado[i])
+                        for x in range(0, len(result)):
+                            dato = result[x][i]
+                            if len(newres) != len(result):
+                                newres.append([dato])
+                            else:
+                                newres[x].append(dato)
+
+        else:
+            '''            for x in range(0, len(result)):
+                dato = result[x][j]
+                if len(newres) != len(result):
+                    newres.append([dato])
+                else:
+                    newres[x].append(dato)'''
+
+
+        return [newenc,newres]
 
 
     def gettablas(self,tipo,exp,ent,tablas):
-        if tipo.tipo == 'identificador':
-            nombre = exp.getval(ent).valor
-            self.nombreres = nombre
-            tabla = ent.buscarSimbolo(nombre + "_" + ent.getDataBase())
-            if tabla != None:
-                tablas.append(tabla)
-            else:
-                reporteerrores.append(Lerrores("Error Semantico",
-                                               "ERROR >> En la instrucción Select, la tabla: " + nombre + " NO EXISTE",
-                                               0, 0))
-                variables.consola.insert(INSERT,
-                                         "ERROR >> En la instrucción Select, la tabla: " + nombre + " NO EXISTE\n")
+        nombre = exp.nombre
+        self.nombreres = nombre
+        tabla = ent.buscarSimbolo(nombre + "_" + ent.getDataBase())
+        if tabla != None:
+            tablas.append(tabla)
         else:
-            reporteerrores.append(
-                Lerrores("Error Semantico", "ERROR >> En la instrucción Select, ingreso un nombre de tabla incorrecto",
-                         0, 0))
+            reporteerrores.append(Lerrores("Error Semantico",
+                                            "ERROR >> En la instrucción Select, la tabla: " + nombre + " NO EXISTE",
+                                            0, 0))
             variables.consola.insert(INSERT,
-                                     "ERROR >> En la instrucción Select, ingreso un nombre de tabla incorrecto\n")
+                                        "ERROR >> En la instrucción Select, la tabla: " + nombre + " NO EXISTE\n")
+
         return tablas
 
     def mostarresult(self, result,enc, nomresult):
@@ -250,6 +370,7 @@ class Select(Instruccion):
             try:
                 if resexp.valor:
                     newres.append(result[i])
+
             except:
                 reporteerrores.append(Lerrores("Error Semantico",
                                                'Error el resultado del where no es booleano',
@@ -261,7 +382,7 @@ class Select(Instruccion):
 
     def resolver(self,expresion,entorno,result,tablas,fila):
         #para expresion binaria
-        if not isinstance(expresion,Terminal) and not isinstance(expresion,Unaria) and not isinstance(expresion,FuncionesNativas):
+        if not isinstance(expresion,Terminal) and not isinstance(expresion,Unaria) and not isinstance(expresion,FuncionesNativas) and not isinstance(expresion,Identificador):
             'resuelvo logicas,aritmeticas y relacionales'
             exp1=expresion.exp1
             exp2=expresion.exp2
@@ -285,12 +406,16 @@ class Select(Instruccion):
 
         else:
             'aqui resuelvo los terminales y funciones'
-            if isinstance(expresion,Terminal):
-                if expresion.tipo.tipo=='identificador':
+            if isinstance(expresion,Identificador):
+                ''
+                term=expresion.getval(entorno)
+                if term!= None:
+                    return term
+                else:
                     for i in range(0, len(self.encabezado)):
                         nombrediv = self.encabezado[i].split('.')
                         nombrecol = nombrediv[0]
-                        if expresion.getval(entorno).valor == nombrecol:
+                        if expresion.nombre == nombrecol:
                             dato=result[fila][i]
                             tipo = None
                             if len(nombrediv) > 1:
@@ -299,22 +424,9 @@ class Select(Instruccion):
                                 tipo = self.gettipo(entorno, tablas, nombrediv[0])
                             term=Terminal(tipo,dato)
                             return term
-                elif expresion.tipo.tipo=='acceso':
-                    for i in range(0, len(self.encabezado)):
-                        nombrediv = self.encabezado[i].split('.')
-                        nombrecol = nombrediv[0]
-                        nombretabla=nombrediv[1]
-                        nombrecol=nombretabla+'.'+nombrecol
-                        if expresion.getval(entorno).valor == nombrecol:
-                            dato=result[fila][i]
-                            tipo = None
-                            if len(nombrediv) > 1:
-                                tipo = self.gettipo(entorno, tablas, nombrediv[0], nombrediv[1])
-                            else:
-                                tipo = self.gettipo(entorno, tablas, nombrediv[0])
-                            term=Terminal(tipo,dato)
-                            return term.getval(entorno)
-
+            elif isinstance(expresion,Terminal):
+                if expresion.tipo.tipo=='acceso':
+                    return self.getacceso(entorno,expresion,result,fila,tablas)
                 else:
                     return expresion
 
@@ -324,8 +436,8 @@ class Select(Instruccion):
                     tempexp.append(exp)
 
                 for j in range(0, len(expresion.expresiones)):
-                    if expresion.expresiones[j].tipo.tipo == 'identificador':
-                        val = expresion.expresiones[j].getval(entorno).valor
+                    if isinstance(expresion.expresiones[j],Identificador):
+                        val = expresion.expresiones[j].nombre
                         for i in range(0, len(self.encabezado)):
                             nombrediv = self.encabezado[i].split('.')
                             nombrecol = nombrediv[0]
@@ -340,6 +452,38 @@ class Select(Instruccion):
                     func=FuncionesNativas(expresion.identificador, tempexp)
                 return func.getval(entorno)
 
+    def getacceso(self,entorno,expresion,result,fila,tablas):
+        for i in range(0, len(self.encabezado)):
+            nombrediv = self.encabezado[i].split('.')
+
+            nombrecol = nombrediv[0]
+            nombretabla = nombrediv[1]
+            nombrecol = nombretabla + '.' + nombrecol
+            if expresion.getval(entorno).valor == nombrecol:
+                dato = result[fila][i]
+                tipo = None
+                if len(nombrediv) > 1:
+                    tipo = self.gettipo(entorno, tablas, nombrediv[0], nombrediv[1])
+                else:
+                    tipo = self.gettipo(entorno, tablas, nombrediv[0])
+                term = Terminal(tipo, dato)
+                return term
+
+            for x in range(0,len(self.aliast)):
+                nombreacc = self.aliast[x] + '.' + nombrediv[0]
+                if expresion.getval(entorno).valor == nombreacc and nombrediv[1]== tablas[x].nombre.replace('_' + entorno.getDataBase(), ''):
+                    dato = result[fila][i]
+                    tipo = None
+                    if len(nombrediv) > 1:
+                        tipo = self.gettipo(entorno, tablas, nombrediv[0], nombrediv[1])
+                    else:
+                        tipo = self.gettipo(entorno, tablas, nombrediv[0])
+                    term = Terminal(tipo, dato)
+                    return term
+
+        return None
+
+
 
     def gettipo(self,entorno,tablas,col,ntabla=''):
         tipo = None
@@ -353,15 +497,22 @@ class Select(Instruccion):
                     if (ntabla==real or ntabla=='') and tipo==None:
                         tipo = columna.tipo
                 i = i + 1
+            for val in self.tipos:
+                if val[0]== col:
+                    return val[1]
+
+
         return tipo
 
 
-    '''def group(self):
+
+
+    def group(self):
         'Ejecucucion del group'
     def having(self):
         'Ejecucucion del having'
     def order(self):
-        'Ejecucucion del order'''
+        'Ejecucucion del order'
     def m_limit(self,result,limit,off):
         if str(limit).lower=='all':
             limit=len(result)
