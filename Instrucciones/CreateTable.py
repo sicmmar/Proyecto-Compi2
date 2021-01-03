@@ -106,12 +106,13 @@ class CreateTable(Instruccion):
                                             arrPk = consPK.valor
                                             if len(arrPk) == 1:
                                                 if tablaReferencia.valor[arrPk[0]].tipo.tipo == nuevaColumna.tipo.tipo:
+                                                    nombre:str = str("FK_" + dbActual + "_" + self.id + "_" + atrColumna.valor)
                                                     hayForanea = True
                                                     hayAtr = True
                                                     nuevoSym.tipo = TipoSimbolo.CONSTRAINT_FOREIGN 
                                                     # FK_database_tabla_tablaReferencia
-                                                    nuevoSym.nombre = str("FK_" + dbActual + "_" + self.id + "_" + atrColumna.valor)
-                                                    nuevaColumna.atributos.update({'foreign':str("FK_" + dbActual + "_" + self.id + "_" + atrColumna.valor)})
+                                                    nuevoSym.nombre = nombre
+                                                    nuevaColumna.atributos.update({'foreign':nombre})
                                                     break
                                     
                                     if not hayForanea:
@@ -150,7 +151,7 @@ class CreateTable(Instruccion):
                             variables.consola.insert(INSERT,str("La tabla \'" + self.id + "\' ya contiene llave foranea declarada\n"))
                             reporteerrores.append(Lerrores("Error Semántico","La tabla \'" + self.id + "\' ya contiene llave foranea declarada","",""))
                         else:
-                            foraneaAdd:Foranea == tt
+                            foraneaAdd:Foranea = tt
                             rr = DBMS.extractTable(dbActual,foraneaAdd.tabla)
                     elif tt.contenido.tipo == AtributosColumna.UNICO:
                         listUnicas = tt.contenido.unicos
@@ -180,8 +181,9 @@ class CreateTable(Instruccion):
                 nuevaTabla.baseDatos = dbActual
                 r = ent.nuevoSimbolo(nuevaTabla)
                 if r == "ok":
-                    for x in listaAtrCol:
-                        ent.nuevoSimbolo(x)
+                    xx:Simbolo
+                    for xx in listaAtrCol:
+                        ent.nuevoSimbolo(xx)
                     
                     alreadyPrimary = False
                     for x in range(inicioHerencia,len(listaColumnas),1):

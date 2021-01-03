@@ -55,6 +55,10 @@ class Simbolo:
                 for col in range(1,len(columnas),1):
                     cadena += "<TR><TD>" + columnas[col].valor + "</TD></TR>\n"
 
+            elif self.tipo == TipoSimbolo.INDEX:
+                cadena += "<TR><TD>" + self.valor['id'] + "</TD><TD>INDEX</TD><TD>" + self.baseDatos + "</TD><TD>"
+                cadena += self.tabla + "</TD><TD>" + self.valor['columna'] + "</TD></TR>"
+
 
         return cadena
         
