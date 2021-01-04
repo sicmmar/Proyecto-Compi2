@@ -18,21 +18,20 @@ class Index(Instruccion):
         self.hash = False
 
     def ejecutar(self,ent:Entorno):
-        self.traducir(ent)
         dbActual = ent.getDataBase()
         if dbActual != None:
             tablaIndex:Simbolo = ent.buscarSimbolo(self.tabla + "_" + dbActual)
             if tablaIndex != None:
                 #IDX_database_tabla
                 idIdex:str = "IDX_" + dbActual + "_" + self.tabla
-                nuevoSym:Simbolo = Simbolo(TipoSimbolo.INDEX)
-                nuevoSym.tabla = self.tabla
-                nuevoSym.baseDatos = dbActual
                 for nombreCol in self.columnas:
                     i = 0
                     fin = len(tablaIndex.valor)
                     while i < fin:
                         if nombreCol.valor == tablaIndex.valor[i].nombre:
+                            nuevoSym:Simbolo = Simbolo(TipoSimbolo.INDEX)
+                            nuevoSym.tabla = self.tabla
+                            nuevoSym.baseDatos = dbActual
                             idIdex += "_" + nombreCol.valor + "_" + self.iden
                             nuevoSym.nombre = idIdex
                             nuevoSym.valor = {}

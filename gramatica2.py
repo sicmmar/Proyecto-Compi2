@@ -569,6 +569,7 @@ def p_CREATEINDEX2(t):
     listaBNF.append("CREATEINDEX ::= create index " + str(t[3]) + " on " + str(t[5]) + " para " + str(t[7]) + " ORDEN parc")
     i = Index(str(t[3]),str(t[5]),[Terminal("identificador",str(t[7]))])
     i.orden = t[8]
+    t[0] = i
 
 def p_CREATEINDEX4(t):
     '''CREATEINDEX      : create  index id on id para id  id ORDEN parc '''
