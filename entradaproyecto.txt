@@ -191,6 +191,7 @@ CREATE TABLE tbCalificacion (idcalifica integer not null primary key,
 							 punteo integer not null);
 
 CREATE UNIQUE INDEX idx_califica ON tbCalificacion (idcalifica);
+CREATE INDEX idx2 on tbCalificacion (item desc)
 						 
 INSERT INTO tbProducto values(1,'Laptop Lenovo',now(),1);
 INSERT INTO tbProducto values(2,'Bateria para Laptop Lenovo T420',now(),1);
@@ -218,3 +219,114 @@ $$ LANGUAGE plpgsql;
 insert into tbCalificacion values(1,'Create Table and Insert',ValidaRegistros('tbProducto',2));
 																			  
 select * from tbCalificacion;
+
+------------------------------------------------------------------------------------------------------
+CREATE DATABASE DBFase2;
+
+USE DBFase2;
+
+CREATE FUNCTION myFuncion(texto text) RETURNS text AS $$
+BEGIN
+	RETURN texto;
+END;
+$$ LANGUAGE plpgsql;
+
+select myFuncion('INICIO CALIFICACION FASE 2');
+
+CREATE TABLE tbProducto (idproducto integer not null primary key,
+  						 producto varchar(150) not null,
+  						 fechacreacion date not null,
+						 estado integer);
+
+CREATE UNIQUE INDEX idx_producto ON tbProducto (idproducto);
+
+CREATE TABLE tbCalificacion (idcalifica integer not null primary key,
+							 item varchar(100) not null,
+							 punteo integer not null);
+
+CREATE UNIQUE INDEX idx_califica ON tbCalificacion (idcalifica);
+						 
+INSERT INTO tbProducto values(1,'Laptop Lenovo',now(),1);
+INSERT INTO tbProducto values(2,'Bateria para Laptop Lenovo T420',now(),1);
+INSERT INTO tbProducto values(3,'Teclado Inalambrico',now(),1);
+INSERT INTO tbProducto values(4,'Mouse Inalambrico',now(),1);
+INSERT INTO tbProducto values(5,'WIFI USB',now(),1);
+
+CREATE FUNCTION ValidaRegistros(tabla varchar(50),cantidad integer) RETURNS int AS $$
+DECLARE resultado INTEGER; 
+		retorna   INTEGER;
+BEGIN
+	if tabla = 'tbProducto' then
+	    resultado := (SELECT COUNT(*) FROM tbProducto);
+    	if cantidad = resultado then
+			retorna = 1;
+		else 
+			retorna = 0;
+		end if;
+	end if;
+RETURN retorna;
+END;
+$$ LANGUAGE plpgsql;
+
+
+--insert into tbCalificacion values(1,'Create Table and Insert',ValidaRegistros('tbProducto',2));
+																			  
+select * from tbCalificacion;
+
+CREATE INDEX test1_id_index ON test1 (id);
+CREATE INDEX name ON nuevo USING HASH (nose);
+CREATE INDEX test2_mm_idx ON test2 (major, minor);
+CREATE INDEX test2_n_low ON test2 (nuevo NULLS FIRST);
+CREATE INDEX test3_desc_index ON test3 (id DESC NULLS LAST);
+CREATE UNIQUE INDEX indice ON employees (columna1,columna2);
+CREATE INDEX test1_lower_col1_idx ON test1 (lower(col1));
+CREATE INDEX access_log_client_ip_ix ON access_log (client_ip)
+     WHERE NOT (client_ip > inet '192.168.100.0' AND
+     client_ip < inet '192.168.100.255');
+CREATE INDEX mytable_cat_1 ON mytable (data) WHERE category = 1;
+CREATE INDEX mytable_cat_2 ON mytable (data) WHERE category = 2;
+CREATE INDEX mytable_cat_3 ON mytable (data) WHERE category = 3;
+CREATE INDEX indice ON tabla (columna1 varchar_ops ASC NULLS FIRST);
+
+
+user_id integer;
+quantity numeric(5);
+url varchar(2);
+myrow tablename%ROWTYPE;
+myfield tablename.columnname%TYPE;
+
+
+
+quantity integer DEFAULT 32;
+url varchar := 'hola mundo';
+user_id CONSTANT integer := 10;
+
+
+if condition_1 then
+url varchar := 'hola mundo';
+elsif condition_2 then
+url varchar := 'hola mundo';
+
+elsif condition_2 then
+url varchar := 'hola mundo';
+
+else
+ url varchar := 'hola mundo';
+end if;
+
+
+CREATE PROCEDURE triple(INOUT x int) 
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    x := x * 3;
+END;
+$$;
+
+DO $$
+DECLARE myvar int := 5;
+BEGIN
+  CALL triple(myvar);
+  RAISE notice 'myvar = %', myvar ;
+END;
+$$;

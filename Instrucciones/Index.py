@@ -14,8 +14,11 @@ class Index(Instruccion):
         self.tabla = tabla
         self.columnas = columnas
         self.unique = False
+        self.orden = None
+        self.hash = False
 
     def ejecutar(self,ent:Entorno):
+        self.traducir(ent)
         dbActual = ent.getDataBase()
         if dbActual != None:
             tablaIndex:Simbolo = ent.buscarSimbolo(self.tabla + "_" + dbActual)
@@ -36,9 +39,31 @@ class Index(Instruccion):
                             nuevoSym.valor.update({'id':self.iden,'columna':nombreCol.valor})
                             if self.unique:
                                 nuevoSym.valor.update({'unique':True})
+                            if self.hash:
+                                nuevoSym.valor.update({'hash':True})
+                            if self.orden != None:
+                                nuevoSym.valor.update({'orden':self.orden})
                             tablaIndex.valor[i].atributos.update({'index':idIdex})
                             ent.nuevoSimbolo(nuevoSym)
                             variables.consola.insert(INSERT,"Se agregó nuevo index '" + self.iden + "' a la columna '" + nombreCol.valor + "'\n")
                             break
                         
                         i = i + 1
+        
+    def traducir(self,ent:Entorno):
+        cad:str = "ci.ejecutarsql('create "
+        if self.unique:
+            cad += "unique "
+        cad += "index " + self.iden + " on " + self.tabla
+        if self.hash:
+            cad += " using hash"
+        cad += " (" + str(self.columnas[0].valor)
+        if self.orden != None:
+            cad += " " + self.orden
+        for x in range(1, len(self.columnas),1):
+            cad += "," + str(self.columnas[x].valor)
+
+        cad += ");')"
+
+        self.codigo3d = cad
+        return self

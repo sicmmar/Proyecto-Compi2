@@ -35,3 +35,12 @@ class Asignacion(Instruccion):
                                            'Error,El valor que se desea asignar no coincide con el tipo de la variable '+self.nombre,
                                            0, 0))
             variables.consola.insert(INSERT, 'Error,El valor que se desea asignar no coincide con el tipo sde la variable '+self.nombre+'\n')
+
+
+    def traducir(self,entorno):
+        'traduzco asignacion'
+        expval=self.valor.traducir(entorno)
+        cad = expval.codigo3d
+        cad += self.nombre + '=' + str(expval.temp) + '\n'
+        self.codigo3d=cad
+        return self
