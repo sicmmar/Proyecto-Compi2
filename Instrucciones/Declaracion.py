@@ -2,8 +2,9 @@
 from Instrucciones.Instruccion import Instruccion
 
 from Entorno.Simbolo import Simbolo
+
+
 from Expresion.FuncionesNativas import *
-#from Entorno.Entorno import Entorno
 
 class Declaracion(Instruccion):
     def __init__(self, id=None,constant=False,tipo=None,valor=None,nullable=True):
@@ -14,9 +15,9 @@ class Declaracion(Instruccion):
         self.valor=valor
         self.nullable=nullable
 
-    def ejecutar(self, ent):
+    def ejecutar(self, ent:Entorno):
         'ejecutar declaracion'
-        simbolo=Simbolo(self.tipo,self.id,self.valor,-1)
+        simbolo=Simbolo(self.tipo,self.id,self.valor.getval(ent).valor,-1)
         simbolo.atributos = {'constant': self.constant, 'nullable': self.nullable}
         s=ent.nuevoSimbolo(simbolo)
 
@@ -26,7 +27,7 @@ class Declaracion(Instruccion):
         elif self.valor!=None:
             exp=self.valor.traducir(entorno)
             cad=exp.codigo3d
-            cad=self.id+'='+str(exp.temp)+'\n'
+            cad+=self.id+'='+str(exp.temp)+'\n'
 
         self.codigo3d=cad
         return self

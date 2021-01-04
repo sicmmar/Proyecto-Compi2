@@ -23,11 +23,32 @@ CREATE TABLE tbrol (
 	rol varchar(15)
 );
 
-
-
 CREATE TABLE tbrolxusuario (
     idrol integer NOT NULL ,
 	idusuario integer NOT NULL 
+);
+
+create table tblibrosalario
+( idempleado integer not null,
+  aniocalculo integer not null CONSTRAINT aniosalario CHECK (aniocalculo > 0),
+  mescalculo  integer not null CONSTRAINT mescalculo CHECK (mescalculo < 12),
+  salariobase  money not null,
+  comision     decimal,
+  primary key(idempleado, comision)
+ );
+
+create table tblibrosalariohis
+( idhistorico integer not null primary key
+) INHERITS (tblibrosalario);
+
+
+CREATE TYPE area AS ENUM ('CONTABILIDAD','ADMINISTRACION','VENTAS','TECNOLOGIA','FABRICA');
+
+CREATE TABLE tbempleadopuesto
+(
+	idempleado integer not null,
+	idpuesto   integer not null,
+	departamento area
 );
 
  alter table tbrolxusuario
