@@ -1,10 +1,9 @@
-
+import Instrucciones
 from Instrucciones.Instruccion import Instruccion
 
 from Entorno.Simbolo import Simbolo
+from Entorno.Entorno import Entorno
 
-
-from Expresion.FuncionesNativas import *
 
 class Declaracion(Instruccion):
     def __init__(self, id=None,constant=False,tipo=None,valor=None,nullable=True):
@@ -17,7 +16,16 @@ class Declaracion(Instruccion):
 
     def ejecutar(self, ent:Entorno):
         'ejecutar declaracion'
-        simbolo=Simbolo(self.tipo,self.id,self.valor.getval(ent).valor,-1)
+        if self.valor!=None:
+            if isinstance(self.valor,Instrucciones.Select.Select):
+                val=self.valor.ejecutar(ent,0)
+                val=val=val[1][0]
+                simbolo=Simbolo(self.tipo,self.id,val[0],-1)
+            else:
+                simbolo = Simbolo(self.tipo, self.id, self.valor.getval(ent).valor, -1)
+
+        else:
+            simbolo = Simbolo(self.tipo, self.id, None, -1)
         simbolo.atributos = {'constant': self.constant, 'nullable': self.nullable}
         s=ent.nuevoSimbolo(simbolo)
 
@@ -31,3 +39,8 @@ class Declaracion(Instruccion):
 
         self.codigo3d=cad
         return self
+
+
+
+
+

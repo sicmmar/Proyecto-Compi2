@@ -1,7 +1,11 @@
 from Instrucciones.Asignacion import Asignacion
+from Instrucciones.Bloque import Bloque
 from Instrucciones.Declaracion import Declaracion
+from Instrucciones.Funcion import *
 from Instrucciones.Ifclass import Ifclass
 from Instrucciones.Raise import Raise
+from Instrucciones.Return import Return
+
 reservadas = {
     'show': 'show',
     'database': 'databases',
@@ -280,17 +284,12 @@ import ply.lex as lex
 
 lexer = lex.lex()
 
-from Expresion.Aritmetica import Aritmetica
-from Expresion.Relacional import Relacional
+
 from Expresion.Extract import Extract
-from Tipo import Tipo
-from Expresion.Terminal import Terminal
-from Expresion.Logica import Logica
-from Expresion.Unaria import Unaria
-from Instrucciones.CreateTable import *
-from Instrucciones.Select import *
+
+from Instrucciones.Select import Select,Limit,Alias,Combi
 from Instrucciones.CreateDB import *
-from Expresion.FuncionesNativas import FuncionesNativas
+
 from Instrucciones.Insert import *
 from Instrucciones.Drop import *
 from Instrucciones.Delete import Delete
@@ -455,7 +454,7 @@ def p_instruccion19(t):
 
 def p_instruccion20(t):
     'instruccion      : FUNCIONES'
-
+    t[0]=t[1]
 def p_instruccion21(t):
     'instruccion      : CALLPROCEDURE ptcoma'
 
@@ -465,28 +464,30 @@ def p_instruccion21(t):
 def p_RETURN(t):
     '''RETURN : return EXP
     '''
-
-
+    t[0]=Return(t[2])
 
 
 def p_FUNCIONES(t):
     'FUNCIONES : create function id para LPARAM parc RETURNP LENGUAJE LCONTENIDOP'
+    t[0]=Funcion(t[3],t[5],t[9],t[7])
 
 def p_FUNCIONES0(t):
     'FUNCIONES : create function id para parc RETURNP LENGUAJE LCONTENIDOP'
+    t[0] = Funcion(t[3], None, t[8], t[6])
 
 def p_FUNCIONES1(t):
     'FUNCIONES : create function id para LPARAM parc RETURNP LCONTENIDOP LENGUAJE'
-
+    t[0] = Funcion(t[3], t[5], t[8], t[7])
 
 def p_FUNCIONES2(t):
     'FUNCIONES : create function id para  parc RETURNP LCONTENIDOP LENGUAJE'
-
+    t[0] = Funcion(t[3], None, t[7], t[6])
 
 
 def p_RETURNP(t):
     '''RETURNP : returns  TIPO
     '''
+    t[0]=t[2]
 
 
 def p_CALLPROCEDURE(t):
@@ -521,46 +522,50 @@ def p_PROCEDIMIENTOS2(t):
 def p_LCONTENIDOP(t):
     '''LCONTENIDOP : LCONTENIDOP CONTENIDOP
     '''
-
+    t[1].append(t[2])
+    t[0]=t[1]
 
 def p_LCONTENIDOP1(t):
     '''LCONTENIDOP : CONTENIDOP
     '''
+    t[0] = t[1]
 
 
 def p_CONTENIDOP(t):
     '''CONTENIDOP : as dolarn LISTACONTENIDO dolarn
     '''
-
+    t[0]=t[3]
 
 def p_CONTENIDOP1(t):
     '''CONTENIDOP : do dolarn LISTACONTENIDO dolarn
     '''
-
+    t[0]=t[3]
 
 def p_CONTENIDOP2(t):
     '''CONTENIDOP :  LISTACONTENIDO
     '''
+    t[0]=t[1]
 
 
 def p_LPARA(t):
-    '''LPARAM : LPARAM coma inout id TIPO
-    '''
-
+    'LPARAM : LPARAM coma inout id TIPO'
+    t[0]=t[1].append(Parametro(t[4],t[3],t[5]))
+    t[0]=t[1]
 
 def p_LPARA2(t):
-    '''LPARAM : LPARAM coma  id TIPO
-    '''
-
+    'LPARAM : LPARAM coma  id TIPO'
+    t[0]=t[1].append(Parametro(t[3],None,t[4]))
+    t[0]=t[1]
 
 def p_LPARA1(t):
     '''LPARAM :  inout id TIPO
     '''
-
+    t[0]=[Parametro(t[2],t[1],t[3])]
 
 def p_LPARA4(t):
     '''LPARAM :  id TIPO
     '''
+    t[0]=[Parametro(t[1],None,t[2])]
 
 
 def p_LENGUAJE(t):
@@ -576,9 +581,7 @@ def p_LENGUAJE2(t):
 def p_BEGINEND(t):
     '''BEGINEND :  begin LISTACONTENIDO end
     '''
-
-
-
+    t[0]=Bloque(t[2])
 
 
 
@@ -649,10 +652,14 @@ def p_ORDEN3(t):
 
 def p_LDEC1(t):
     'LDEC :  LDEC DECLARACIONES'
+    t[1].append(t[2])
+
+    t[0]=Bloque(t[1])
+
 
 def p_LDEC2(t):
     'LDEC : DECLARACIONES'
-
+    t[0]=[t[1]]
 
 def p_Declaraciones(t):
     ''' DECLARACIONES : id TIPO not null ASIG ptcoma
@@ -802,7 +809,7 @@ def p_CONTENIDO5(t):
 
 def p_CONTENIDO6(t):
     'CONTENIDO : declare LDEC  '
-    t[0] = t[1]
+    t[0] = t[2]
 
 def p_CONTENIDO7(t):
     'CONTENIDO : RETURN ptcoma  '
@@ -1034,6 +1041,7 @@ def p_op7(t):
 
 def p_alc(t):
     '''OP : alter column id type TIPO'''
+    listaBNF.append("ALC ::= alter column " + str(t[3]) + " type TIPO")
     listaBNF.append("OP ::= alter column " + str(t[3]) + " type TIPO")
     t[0] = AlterType(str(t[3]), t[5])
 

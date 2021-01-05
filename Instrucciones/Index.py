@@ -66,3 +66,12 @@ class Index(Instruccion):
 
         self.codigo3d = cad
         return self
+
+class DropIndex(Instruccion):
+    def __init__(self,id):
+        self.iden = id
+    
+    def ejecutar(self, ent:Entorno):
+        dbActual = ent.getDataBase()
+        if dbActual != None:
+            

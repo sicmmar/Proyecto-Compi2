@@ -1,13 +1,5 @@
 from Expresion.Binaria import Binaria
-from Expresion.Aritmetica import Aritmetica
-from Expresion.Unaria import Unaria
-from Expresion.Aritmetica import Aritmetica
-from Expresion.Logica import Logica
-from Expresion.FuncionesNativas import  FuncionesNativas
-from Entorno import Entorno
-from Tipo import Tipo
-from Expresion.Id import Identificador
-from tkinter import *
+
 from Expresion.variablesestaticas import *
 from reportes import *
 
@@ -18,12 +10,13 @@ class Relacional(Binaria):
 
 
     def getval(self,entorno):
-        if isinstance(self.exp1,Identificador) and isinstance(self.exp2,Identificador):
-            return self
 
 
         valizq=self.exp1.getval(entorno)
         valder=self.exp2.getval(entorno)
+        if valizq==None or valder==None:
+            return self
+
         valizq=valizq.valor
         valder=valder.valor
 

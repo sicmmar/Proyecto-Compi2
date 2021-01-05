@@ -1,4 +1,4 @@
-from Entorno.Simbolo import Simbolo
+
 from graphviz import Digraph
 
 class Entorno:
@@ -7,6 +7,9 @@ class Entorno:
         self.database = "" 
         self.tablaSimbolo = {}
         self.consola = []
+        self.temp=0
+        self.label=0
+        self.codigo=''
 
     def nuevoSimbolo(self, symbol):
         x = self.tablaSimbolo.get(symbol.nombre)
@@ -116,3 +119,11 @@ class Entorno:
             ent.tablaSimbolo = {}
 
             ent = ent.anterior
+
+    def newtemp(self):
+        self.temp+=1
+        return 't'+str(self.temp)
+
+    def newlabel(self):
+        self.label += 1
+        return '.L' + str(self.label)

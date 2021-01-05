@@ -75,8 +75,9 @@ class Update(Instruccion):
                             llavePrim = []
                             for column in tabla.valor:
                                 prim: Simbolo = ent.buscarSimbolo(column.atributos.get('primary'))
-                                llavePrim = prim.valor
-                                break
+                                if prim != None:
+                                    llavePrim = prim.valor
+                                    break
 
                     except:
                         reporteerrores.append(Lerrores("Error Semantico",'Error el resultado del where no es booleano',0, 0))

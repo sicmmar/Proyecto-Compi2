@@ -13,11 +13,11 @@ class Logica(Binaria):
 
 
     def getval(self, entorno):
-        if isinstance(self.exp1, Identificador) and isinstance(self.exp2, Identificador):
-            return self
 
         valizq=self.exp1.getval(entorno)
         valder=self.exp2.getval(entorno)
+        if valizq == None or valder == None:
+            return self
         valizq=valizq.valor
         valder=valder.valor
 

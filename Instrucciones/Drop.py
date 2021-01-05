@@ -25,10 +25,6 @@ class DropTable(Instruccion):
                 variables.consola.insert(INSERT,"ERROR >> En la instrucción Drop Table "+self.id+", La tabla a eliminar NO EXISTE\n")
                 reporteerrores.append(Lerrores("Error Semántico","En la instrucción Drop Table "+self.id+", La tabla a eliminar NO EXISTE","",""))
     
-    def traducir(self, ent:Entorno):
-        self.codigo3d = 'ci.ejecutarsql("drop table ' + self.id + ';")'
-        return self
-
 class DropAll(Instruccion):
     def __init__(self):
         print("---------------")
@@ -37,7 +33,3 @@ class DropAll(Instruccion):
         DBMS.dropAll()
         ent.eliminarTodo()
         return "Instrucción Drop All ejecutado con exito"
-
-    def traducir(self,ent:Entorno):
-        self.codigo3d = 'ci.ejecutarsql("drop all ();")'
-        return self

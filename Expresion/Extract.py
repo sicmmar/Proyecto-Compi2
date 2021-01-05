@@ -36,3 +36,8 @@ class Extract(Expresion):
         elif self.field == 'second':
             tipo = Tipo('integer', None, -1, -1)
             return Terminal(tipo,splitedhora[2])
+
+
+    def traducir(self,entorno):
+        self.temp=self.getval(entorno).valor
+        return self

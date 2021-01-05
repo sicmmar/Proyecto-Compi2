@@ -1,5 +1,6 @@
 from Expresion.Expresion import Expresion
 from Expresion.Terminal import Terminal
+from Expresion.Id import Identificador
 from Entorno import Entorno
 
 class Unaria(Expresion) :
@@ -13,11 +14,11 @@ class Unaria(Expresion) :
         self.operador = operador
 
     def getval(self,entorno):
-        if isinstance(self.exp1,Terminal):
-            if (self.exp1.tipo.tipo == 'identificador'):
-                return self
 
         valexp=self.exp1.getval(entorno)
+        if valexp == None:
+            return self
+
         valexp=valexp.valor
         if isinstance(valexp, Terminal):
             valexp = valexp.getval(entorno)
@@ -36,3 +37,12 @@ class Unaria(Expresion) :
         return self
 
 
+    def traducir(self,entorno):
+        self.temp = entorno.newtemp()
+        nt=self.temp
+        exp1=self.exp1.traducir(entorno)
+        cad = exp1.codigo3d
+        cad += nt + '='  + self.operador + ' ' + str(exp1.temp) + '\n'
+        self.codigo3d=cad
+
+        return self

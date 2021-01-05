@@ -16,12 +16,10 @@ class Aritmetica(Binaria):
 
     def getval(self,entorno):
 
-        if isinstance(self.exp1,Identificador) and isinstance(self.exp2,Identificador):
-            return self
-
-
         valizq=self.exp1.getval(entorno)
         valder=self.exp2.getval(entorno)
+        if valizq == None or valder == None:
+            return self
         valizq=valizq.valor
         valder=valder.valor
 
@@ -67,4 +65,9 @@ class Aritmetica(Binaria):
             cad += nt + '=' + str(exp1.temp) + ' ' + self.operador + ' ' + str(exp2.temp) + '\n'
             self.codigo3d=cad
 
+
+
         return self
+
+
+

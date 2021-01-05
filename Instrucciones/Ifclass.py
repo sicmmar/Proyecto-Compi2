@@ -1,8 +1,6 @@
 
 from Instrucciones.Instruccion import Instruccion
-
-
-from Expresion.FuncionesNativas import *
+from Entorno.Entorno import Entorno
 
 class Ifclass(Instruccion):
     def __init__(self,exp,cif,elsif=None,celse=None):
@@ -13,7 +11,28 @@ class Ifclass(Instruccion):
 
 
     def ejecutar(self, ent):
-            'sdfsadf'
+            'ejecucion del if'
+
+            rescond=self.exp.getval(ent).valor
+            if rescond==True:
+                for instr in self.cif:
+                    newent = Entorno(ent)
+                    instr.ejecutar(newent)
+                return
+
+            if self.elsif!=None:
+                for elsif in self.elsif:
+                    if elsif.exp.getval(ent).valor:
+                        newent = Entorno(ent)
+                        for instr in elsif.cif:
+                            newent = Entorno(ent)
+                            instr.ejecutar(newent)
+                        return
+            if self.celse!=None:
+                for inst in self.celse:
+                    newent = Entorno(ent)
+                    inst.ejecutar(newent)
+
 
     def traducir(self,entorno):
         if self.elsif==None and self.celse==None:

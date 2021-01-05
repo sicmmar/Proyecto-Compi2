@@ -1,5 +1,6 @@
 import arbol.AST as a
 import gramatica2 as g
+
 import os
 from tkinter import *
 from reportes import *
@@ -72,7 +73,6 @@ def traducir():
             salida+=instr.traducir(Principal).codigo3d
 
     print(salida)
-
 
 
 def reporte_lex_sin():
