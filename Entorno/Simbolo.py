@@ -10,6 +10,7 @@ class Simbolo:
         self.atributos = {}
         self.baseDatos = ""
         self.tabla = ""
+        self.indexId = ""
 
     def toString(self):
         cadena: str = ""

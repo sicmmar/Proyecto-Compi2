@@ -31,6 +31,7 @@ class Index(Instruccion):
                         if nombreCol.valor == tablaIndex.valor[i].nombre:
                             nuevoSym:Simbolo = Simbolo(TipoSimbolo.INDEX)
                             nuevoSym.tabla = self.tabla
+                            nuevoSym.indexId = self.iden
                             nuevoSym.baseDatos = dbActual
                             idIdex += "_" + nombreCol.valor + "_" + self.iden
                             nuevoSym.nombre = idIdex
@@ -50,7 +51,7 @@ class Index(Instruccion):
                         i = i + 1
         
     def traducir(self,ent:Entorno):
-        cad:str = "ci.ejecutarsql('create "
+        cad:str = "ci.ejecutarsql(\"create "
         if self.unique:
             cad += "unique "
         cad += "index " + self.iden + " on " + self.tabla
@@ -62,7 +63,7 @@ class Index(Instruccion):
         for x in range(1, len(self.columnas),1):
             cad += "," + str(self.columnas[x].valor)
 
-        cad += ");')"
+        cad += ");\")\n"
 
         self.codigo3d = cad
         return self
@@ -74,4 +75,10 @@ class DropIndex(Instruccion):
     def ejecutar(self, ent:Entorno):
         dbActual = ent.getDataBase()
         if dbActual != None:
-            
+            res = ent.eliminarIndex(self.iden)
+            if res:
+                variables.consola.insert(INSERT,"El índice '" + self.iden + "' se ha eliminado. \n")
+    
+    def traducir(self, ent:Entorno):
+        self.codigo3d = 'ci.ejecutarsql("drop index ' + self.iden + ';")\n'
+        return self

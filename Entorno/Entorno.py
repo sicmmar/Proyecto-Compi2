@@ -89,6 +89,22 @@ class Entorno:
             ent = ent.anterior
         
         return None
+    
+    def eliminarIndex(self,nombreIndex):
+        eliminado:bool = False
+        ent = self
+
+        while ent != None:
+            x = 0
+            for x in ent.tablaSimbolo.copy():
+                ix:str = ent.tablaSimbolo[x].indexId
+                if ix == nombreIndex:
+                    ent.tablaSimbolo.pop(x)
+                    eliminado = True
+
+            ent = ent.anterior
+        
+        return eliminado
 
     def renombrarDatabase(self,viejaDB,nuevaDB):
         ent = self

@@ -609,9 +609,8 @@ def p_CREATEINDEX1(t):
 
 def p_CREATEINDEX2(t):
     '''CREATEINDEX      : create index id on id  para id ORDEN parc '''
-    listaBNF.append(
-        "CREATEINDEX ::= create index " + str(t[3]) + " on " + str(t[5]) + " para " + str(t[7]) + " ORDEN parc")
-    i = Index(str(t[3]), str(t[5]), [Terminal("identificador", str(t[7]))])
+    listaBNF.append("CREATEINDEX ::= create index " + str(t[3]) + " on " + str(t[5]) + " para " + str(t[7]) + " ORDEN parc")
+    i = Index(str(t[3]), str(t[5]), [Identificador('identificador',str(t[7]))])
     i.orden = t[8]
     t[0] = i
 
@@ -915,12 +914,16 @@ def p_DROPALL(t):
 
 def p_DROP(t):
     '''DROP : drop table id
+             | drop index id
              | drop databases if exist id
              | drop databases id '''
     if len(t) == 4:
         if (t[2].lower() == 'table'):
             listaBNF.append("DROP ::= drop table " + str(t[3]))
             t[0] = DropTable(t[3])
+        elif (t[2].lower() == 'index'):
+            listaBNF.append("DROP ::= drop index " + str(t[3]))
+            t[0] = DropIndex(str(t[3]))
 
         else:
             listaBNF.append("DROP ::= drop databases " + str(t[3]))

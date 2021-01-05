@@ -348,9 +348,22 @@ CREATE TABLE tbCalificacion (idcalifica integer not null primary key,
 							 item varchar(100) not null,
 							 punteo integer not null);
 
+create table tbempleado 
+( idempleado integer not null UNIQUE PRIMARY KEY,
+  primernombre varchar(50) not null,
+ segundonombre varchar(50),
+ primerapellido varchar(50) not null,
+ segundoapellido varchar(50),
+ fechadenacimiento DATE CONSTRAINT birth_data CHECK (fechadenacimiento > '1900-01-01'),
+ fechacontratacion DATE CHECK (fechacontratacion > fechadenacimiento),
+ idestado integer
+);
+
 CREATE UNIQUE INDEX idx_califica ON tbCalificacion (idcalifica);
 CREATE INDEX idx2 on tbCalificacion (item desc nulls last);
 create INDEX idxHash on tbCalificacion USING HASH (punteo,idcalifica);
+
+drop INDEX idx_califica;
 
 --------------------------------------------------------------------------------------------------------
 
