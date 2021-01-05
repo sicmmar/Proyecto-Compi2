@@ -905,14 +905,14 @@ insert into tbfuncionesmath values(1,0,0);
 insert into tbfuncionesmath values(2,0,0);
 insert into tbfuncionesmath values(3,0,0);
 insert into tbfuncionesmath values(4,0,0);
-/*
+
 update tbfuncionesmath set seno = SIN(1),coseno = COS(0) where idfuncion = 1;
 update tbfuncionesmat set seno = SIND(1),coseno = TAN(0) where idfuncion = 1;
 --Error 42P01
 update tbfuncionesmath set seno = SIND(1),coseno = TAN(0) where idfuncion = 1;
 update tbfuncionesmath set seno = TAND(0),coseno = COSD(0) where idfuncion = 2;
 
-delete from tbfuncionesmath where idfuncion = 1;*/
+delete from tbfuncionesmath where idfuncion = 1;
 
 select * from tbfuncionesmath;
 
