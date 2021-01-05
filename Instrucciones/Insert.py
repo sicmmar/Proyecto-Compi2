@@ -131,7 +131,7 @@ class Insert(Instruccion):
 
                             
                     if not tipocorrecto:
-
+                        print("comparando tipos")
                        
                         util=Tipo(None,None,-1,-1)
                         #tabla:Simbolo = ent.buscarSimbolo(completo)
@@ -151,7 +151,7 @@ class Insert(Instruccion):
                     i=i+1
                 terminales = []
                 for val in self.valores:
-                    terminales.append(val.valor)
+                    terminales.append(val.getval(ent).valor)
 
                 r=DBMS.insert(ent.getDataBase(),self.nombre,terminales)
                 if(r==4):
@@ -197,6 +197,20 @@ class Insert(Instruccion):
                                 return True
 
             return False
+
+    def traducir(self, ent:Entorno):
+        self.codigo3d= 'ci.ejecutarsql( insert into '+ self.nombre +' values('
+
+        for i in range(0,len(self.valores),1):
+             if(i==0):
+                 self.codigo3d += self.valores[i].stringsql
+             else:
+                 self.codigo3d += ', ' + self.valores[i].stringsql
+        
+        self.codigo3d += ')'
+
+        self.codigo3d += ";)\n"
+        return self
 
 
 class InsertWhitColum(Instruccion):
@@ -353,7 +367,7 @@ class InsertWhitColum(Instruccion):
                                 return
 
 
-                        terminales.append(self.valores[j].valor)
+                        terminales.append(self.valores[j].getval(ent).valor)
                         j=j+1
                     else:
                         #print("diferentes",nombre,":",self.namecolums[j].getval(ent).valor,"J",j,"t",t)
@@ -419,3 +433,25 @@ class InsertWhitColum(Instruccion):
                         #else:
                             #print("diferete",dato,unique)
             return False
+    
+
+    def traducir(self, ent:Entorno):
+        self.codigo3d= 'ci.ejecutarsql( insert into '+ self.nombre +' ('
+        i=0
+        for i in range(0,len(self.namecolums),1):
+             if(i==0):
+                 self.codigo3d += self.namecolums[i].valor
+             else:
+                 self.codigo3d += ', ' + self.namecolums[i].valor
+        
+        self.codigo3d += ') values ('
+       
+        i=0
+        for i in range(0,len(self.valores),1):
+            if(i==0):
+                self.codigo3d += self.valores[i].stringsql
+            else:
+                self.codigo3d += ', ' + self.valores[i].stringsql
+
+        self.codigo3d += ";)\n"
+        return self
