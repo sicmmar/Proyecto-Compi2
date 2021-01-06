@@ -106,6 +106,20 @@ class Entorno:
         
         return eliminado
 
+    def buscarIndex(self,nombreIndex):
+        ent = self
+
+        while ent != None:
+            x = 0
+            for x in ent.tablaSimbolo.copy():
+                ix:str = ent.tablaSimbolo[x].indexId
+                if ix == nombreIndex:
+                    return ent.tablaSimbolo[x]
+
+            ent = ent.anterior
+        
+        return None
+
     def renombrarDatabase(self,viejaDB,nuevaDB):
         ent = self
 
@@ -140,6 +154,9 @@ class Entorno:
         self.temp+=1
         return 't'+str(self.temp)
 
-    def newlabel(self):
-        self.label += 1
-        return '.L' + str(self.label)
+    def newlabel(self,nombre=''):
+        if nombre=='':
+            self.label += 1
+            return '.L' + str(self.label)
+        else:
+            return '.L'+str(nombre)

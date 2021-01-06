@@ -12,3 +12,13 @@ class Bloque(Instruccion):
                 val= inst.ejecutar(ent)
                 if val!=None:
                     return val
+
+    def traducir(self,ent):
+        'tradyccuion del bloque'
+        cad=''
+        for inst in self.instrucciones:
+            cad+= inst.traducir(ent).codigo3d
+
+        self.codigo3d = cad
+        return self
+

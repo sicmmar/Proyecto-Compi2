@@ -1,8 +1,10 @@
 from Instrucciones.Asignacion import Asignacion
 from Instrucciones.Bloque import Bloque
 from Instrucciones.Declaracion import Declaracion
+from Instrucciones.Execute import Execute
 from Instrucciones.Funcion import *
 from Instrucciones.Ifclass import Ifclass
+from Instrucciones.Procedure import Procedure
 from Instrucciones.Raise import Raise
 from Instrucciones.Return import Return
 
@@ -450,14 +452,14 @@ def p_instruccion18(t):
 
 def p_instruccion19(t):
     '''instruccion      : PROCEDIMIENTOS '''
-
+    t[0]=t[1]
 
 def p_instruccion20(t):
     'instruccion      : FUNCIONES'
     t[0]=t[1]
 def p_instruccion21(t):
     'instruccion      : CALLPROCEDURE ptcoma'
-
+    t[0]=t[1]
 
 # INICIAMOS A RECONOCER LA FASE 2 -----------------------------------------------------------------
 
@@ -493,30 +495,32 @@ def p_RETURNP(t):
 def p_CALLPROCEDURE(t):
     '''CALLPROCEDURE : execute id para LEXP parc
     '''
+    t[0] = Execute(t[2],t[4])
 
-
-def p_CALLPROCEDURE(t):
+def p_CALLPROCEDURE1(t):
     '''CALLPROCEDURE : execute id para  parc
     '''
-
+    t[0]=Execute(t[2],None)
 
 def p_PROCEDIMIENTOS0(t):
     '''PROCEDIMIENTOS : create procedure id para LPARAM parc LENGUAJE  LCONTENIDOP
     '''
+    t[0]=Procedure(t[3],t[5],t[8])
 
 def p_PROCEDIMIENTOS(t):
     '''PROCEDIMIENTOS : create procedure id para  parc LENGUAJE  LCONTENIDOP
     '''
+    t[0] = Procedure(t[3], None, t[7])
 
 def p_PROCEDIMIENTOS1(t):
     '''PROCEDIMIENTOS : create procedure id para LPARAM parc LCONTENIDOP LENGUAJE
     '''
-
+    t[0] = Procedure(t[3], t[5], t[7])
 
 def p_PROCEDIMIENTOS2(t):
     '''PROCEDIMIENTOS : create procedure id para parc LCONTENIDOP LENGUAJE
     '''
-
+    t[0] = Procedure(t[3], None, t[6])
 
 
 def p_LCONTENIDOP(t):
@@ -541,10 +545,6 @@ def p_CONTENIDOP1(t):
     '''
     t[0]=t[3]
 
-def p_CONTENIDOP2(t):
-    '''CONTENIDOP :  LISTACONTENIDO
-    '''
-    t[0]=t[1]
 
 
 def p_LPARA(t):
@@ -571,11 +571,15 @@ def p_LPARA4(t):
 def p_LENGUAJE(t):
     '''LENGUAJE : language plpgsql
     '''
+    listaBNF.append("LENGUAJE ::= language plpgsql")
+    t[0] = "language plpgsql"
 
 
 def p_LENGUAJE2(t):
     '''LENGUAJE : language plpgsql ptcoma
     '''
+    listaBNF.append("LENGUAJE ::= language plpgsql ptcoma")
+    t[0] = "language plpgsql;"
 
 
 def p_BEGINEND(t):
@@ -609,8 +613,9 @@ def p_CREATEINDEX1(t):
 
 def p_CREATEINDEX2(t):
     '''CREATEINDEX      : create index id on id  para id ORDEN parc '''
-    listaBNF.append("CREATEINDEX ::= create index " + str(t[3]) + " on " + str(t[5]) + " para " + str(t[7]) + " ORDEN parc")
-    i = Index(str(t[3]), str(t[5]), [Identificador('identificador',str(t[7]))])
+    listaBNF.append(
+        "CREATEINDEX ::= create index " + str(t[3]) + " on " + str(t[5]) + " para " + str(t[7]) + " ORDEN parc")
+    i = Index(str(t[3]), str(t[5]), [Identificador("identificador", str(t[7]))])
     i.orden = t[8]
     t[0] = i
 
@@ -950,6 +955,26 @@ def p_ALTER(t):
     elif len(t) == 5:
         listaBNF.append("ALTER ::= alter table " + str(t[3]) + " LOP")
         t[0] = AlterTable(str(t[3]), t[4])
+
+def p_ALTERIDX(t):
+    'ALTER : alter index id alter id'
+    listaBNF.append("ALTER ::= alter index " + str(t[3]) + " alter " + str(t[5]))
+    t[0] = AlterIndex(str(t[3]),False,False,str(t[5]))
+
+def p_ALTERIDX1(t):
+    'ALTER : alter index if exist id alter id'
+    listaBNF.append("ALTER ::= alter index if exists " + str(t[5]) + " alter " + str(t[7]))
+    t[0] = AlterIndex(str(t[5]),True,False,str(t[7]))
+
+def p_ALTERIDX2(t):
+    'ALTER : alter index id alter column id'
+    listaBNF.append("ALTER ::= alter index " + str(t[3]) + " alter column " + str(t[6]))
+    t[0] = AlterIndex(str(t[3]),False,True,str(t[6]))
+
+def p_ALTERIDX3(t):
+    'ALTER : alter index if exist id alter column id'
+    listaBNF.append("ALTER ::= alter index if exists " + str(t[5]) + " alter column " + str(t[8]))
+    t[0] = AlterIndex(str(t[5]),True,True,str(t[8]))
 
 
 def p_LOP(t):
@@ -1732,14 +1757,21 @@ def p_EXP2(t):
 def p_EXPalias(t):
     '''EXP :  EXP as cadenaString %prec lsel
                | EXP cadenaString %prec lsel
-               | EXP as id %prec lsel
-               | EXP id  %prec lsel
                | EXP as cadena %prec lsel
                | EXP cadena %prec lsel'''
     if len(t) == 3:
-        t[0] = Alias(t[1], t[2])
+        t[0] = Alias(t[1], t[2],'\''+t[2]+'\'')
     elif len(t) == 4:
-        t[0] = Alias(t[1], t[3])
+        t[0] = Alias(t[1], t[3],'as \''+t[3]+'\'')
+
+def p_EXPalias1(t):
+    '''EXP :  EXP as id %prec lsel
+               | EXP id  %prec lsel
+    '''
+    if len(t) == 3:
+        t[0] = Alias(t[1], t[2],t[2])
+    elif len(t) == 4:
+        t[0] = Alias(t[1], t[3],'as '+t[3])
 
 
 def p_EXP1(t):

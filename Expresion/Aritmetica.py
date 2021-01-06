@@ -13,6 +13,9 @@ class Aritmetica(Binaria):
     def __init__(self, exp1, exp2, operador):
         'Se usan los valores de las clases padres'
         Binaria.__init__(self,exp1,exp2,operador)
+        self.stringsql+= str(exp1.stringsql) +' '
+        self.stringsql+= self.operador +' '
+        self.stringsql+= str(exp2.stringsql)+' '
 
     def getval(self,entorno):
 
@@ -20,8 +23,8 @@ class Aritmetica(Binaria):
         valder=self.exp2.getval(entorno)
         if valizq == None or valder == None:
             return self
-        valizq=valizq.valor
-        valder=valder.valor
+        valizq=float(valizq.valor)
+        valder=float(valder.valor)
 
 
 

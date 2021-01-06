@@ -54,7 +54,7 @@ class Insert(Instruccion):
                                 variables.consola.insert(INSERT,'Error Violacion de Constraint Unique en columna:'+colunique +' : '+str(self.valores[i].getval(ent).valor)+'\n')
                                 reporteerrores.append(Lerrores("Error Semantico", 'Error Violacion de Constraint Unique en columna:'+colunique +' : '+str(self.valores[i].getval(ent).valor),'',''))
                                 return
-                                
+
                     if(verificarcheck!=None):
                         check=ent.buscarSimbolo(verificarcheck)
                         #print("Condicion:",check.valor.exp1.getval(ent).valor,check.valor.simbolo,check.valor.exp2.getval(ent).valor)
@@ -82,17 +82,17 @@ class Insert(Instruccion):
                             if(check.valor.exp1.getval(ent).valor==columna.nombre):
                                 condicion1=Terminal(columna.tipo,self.valores[l].getval(ent).valor)
                             l=l+1
-                        
+
                         n=0
                         for columna in columnas:
                             if isinstance(check.valor.exp2, Identificador):
                                 check.valor.exp2 = Terminal(check.valor.exp2.tipo, check.valor.exp2.nombre)
 
                             if(check.valor.exp2.getval(ent).valor==columna.nombre):
-                                
+
                                 condicion2=Terminal(columna.tipo,self.valores[n].getval(ent).valor)
                             n=n+1
-                        
+
                         correcto=False
                         if operador in ('>','<','>=','<=','='):
                             #print(condicion1.getval(ent).valor,operador,condicion2.getval(ent).valor)
@@ -112,12 +112,12 @@ class Insert(Instruccion):
                                 variables.consola.insert(INSERT,'Error Registro no cumple con condicion check\n')
                                 reporteerrores.append(Lerrores("Error Semantico", 'Error Registro no cumple con condicion check','',''))
                                 return
-                    
+
                     buscado=str('ENUM_'+ent.getDataBase()+'_'+tipo.tipo)
                     types:Simbolo= ent.buscarSimbolo(buscado)
-                    
-                    tipocorrecto = False 
-                    
+
+                    tipocorrecto = False
+
                     if types!=None:
                         tiposenum=types.valor
                         print("Comparando Enum")
@@ -129,29 +129,29 @@ class Insert(Instruccion):
                             reporteerrores.append(Lerrores("Error Semantico",str('Error Tipo enum no correcto en valor: '+self.valores[i].getval(ent).valor),'',''))
                             return
 
-                            
+
                     if not tipocorrecto:
-                        print("comparando tipos")
-                       
+
+
                         util=Tipo(None,None,-1,-1)
                         #tabla:Simbolo = ent.buscarSimbolo(completo)
-        
+
 
                         self.valores[i]=self.valores[i].getval(ent)
 
                         if util.comparetipo(tipo,self.valores[i].tipo):
                             'todo correcto'
-                            
+
                         else:
                             correcto=False
                             variables.consola.insert(INSERT,'Error los tipos no coinciden con la definicion de la tabla\n')
                             reporteerrores.append(Lerrores("Error Semantico",'Tipo de datos en columanas no son iguales','',''))
                             return
-                           
+
                     i=i+1
                 terminales = []
                 for val in self.valores:
-                    terminales.append(val.getval(ent).valor)
+                    terminales.append(val.valor)
 
                 r=DBMS.insert(ent.getDataBase(),self.nombre,terminales)
                 if(r==4):
@@ -159,21 +159,21 @@ class Insert(Instruccion):
                     reporteerrores.append(Lerrores("Error Semantico",'Violacion de Constraint primary Key','',''))
                     return
                 variables.consola.insert(INSERT,'Registros Ingresados EXITOSAMENTE\n')
-                           
-                return    
-             
+
+                return
+
     def validarunique(self,entorno,tabla,namecolums,unique):
         encontrado=0
         nocol=-1
-        
+
         if tabla != None:
-      
+
             columnas=tabla.valor
             i=0
             param=[]
             for columna in columnas:
                 nombre = columna.nombre
-            
+
                 if namecolums == nombre:
                     encontrado+=1
                     tipo=columna.tipo
@@ -182,36 +182,35 @@ class Insert(Instruccion):
                     nomtabla=nomtabla.replace('_'+entorno.getDataBase(),'')
                     continue
                 i=i+1
-            
+
             if encontrado==1 and nocol>-1:
                 datos=DBMS.extractTable(entorno.getDataBase(),nomtabla)
                 if datos!= None:
                     self.nombreres = nomtabla
                     for i in range(0,len(datos)):
 
-                        dato=datos[i][nocol]  
-                        param.append(dato)       
+                        dato=datos[i][nocol]
+                        param.append(dato)
                         for val in param:
                             #print("LIsta-->",val,'------',unique,"-----------")
-                            if(val==unique and val!='' ):  
+                            if(val==unique and val!='' ):
                                 return True
 
             return False
 
-    def traducir(self, ent:Entorno):
-        self.codigo3d= 'ci.ejecutarsql( insert into '+ self.nombre +' values('
+    def traducir(self, ent: Entorno):
+        self.codigo3d = 'ci.ejecutarsql( insert into ' + self.nombre + ' values('
 
-        for i in range(0,len(self.valores),1):
-             if(i==0):
-                 self.codigo3d += self.valores[i].stringsql
-             else:
-                 self.codigo3d += ', ' + self.valores[i].stringsql
-        
+        for i in range(0, len(self.valores), 1):
+            if (i == 0):
+                self.codigo3d += self.valores[i].stringsql
+            else:
+                self.codigo3d += ', ' + self.valores[i].stringsql
+
         self.codigo3d += ')'
 
         self.codigo3d += ";)\n"
         return self
-
 
 class InsertWhitColum(Instruccion):
     def __init__(self, nombre,namecolums=[],valores=[]):
@@ -228,17 +227,17 @@ class InsertWhitColum(Instruccion):
             contador=0
             columnaunique=[]
             for columna in columnas:
-              
+
                 verificarnull=tabla.valor[i].atributos.get('not null')
                 verificarprimary=tabla.valor[i].atributos.get('primary')
                 verificarunique=tabla.valor[i].atributos.get('unique')
                 verificarcheck=tabla.valor[i].atributos.get('check')
-                
+
                 condicion1:Expresion
                 condicion2:Expresion
                 if verificarunique!=None:
                     columnaunique.append(columna.nombre)
-                
+
 
 
                 if(verificarcheck!=None):
@@ -272,7 +271,7 @@ class InsertWhitColum(Instruccion):
                                     condicion1=Terminal(columna.tipo,self.valores[k].getval(ent).valor)
                                 k=k+1
                         l=l+1
-                    
+
                     n=0
                     for columna in columnas:
                         if(check.valor.exp2.getval(ent)==columna.nombre):
@@ -282,7 +281,7 @@ class InsertWhitColum(Instruccion):
                                     condicion2=Terminal(columna.tipo,self.valores[k].getval(ent).valor)
                                 k=k+1
                         n=n+1
-                    
+
                     correcto=False
                     if operador in ('>','<','>=','<=','='):
                         #print(condicion1.getval(ent).valor,operador,condicion2.getval(ent).valor)
@@ -301,15 +300,15 @@ class InsertWhitColum(Instruccion):
                         else:
                             variables.consola.insert(INSERT,'Error Registro no cumple con condicion check\n')
                             reporteerrores.append(Lerrores("Error Semantico", 'Registro no cumple con condicion check','',''))
-                            return 
-                  
+                            return
+
 
 
 
                 if(verificarnull !=None or verificarprimary!=None or verificarunique!=None):
                     contador=contador+1
                 i=i+1
-                
+
                 #print("contador",contador)
             if( (len(self.valores) >= contador) and (len(self.valores) == len(self.namecolums)) and (len(self.namecolums)<=len(columnas))):
                 j=0
@@ -367,7 +366,7 @@ class InsertWhitColum(Instruccion):
                                 return
 
 
-                        terminales.append(self.valores[j].getval(ent).valor)
+                        terminales.append(self.valores[j].valor)
                         j=j+1
                     else:
                         #print("diferentes",nombre,":",self.namecolums[j].getval(ent).valor,"J",j,"t",t)
@@ -379,32 +378,32 @@ class InsertWhitColum(Instruccion):
                     return
 
                 variables.consola.insert(INSERT,'Registros Ingresados EXITOSAMENTE\n')
-                return 
-                
-                
+                return
+
+
             else:
                 variables.consola.insert(INSERT,'Error Numero Parametros en tabla '+self.nombre+' Incorrectos\n')
                 reporteerrores.append(Lerrores('Erro semantico','Numero Parametros en tabla '+self.nombre+' Incorrectos','',''))
                 return
-                
+
         else:
             variables.consola.insert(INSERT,'Error Tabla '+self.nombre+' No Existe en la BD actual\n')
             reporteerrores.append(Lerrores('Error Semantico','Numero Parametros en tabla '+self.nombre+' Incorrectos','',''))
             return
-           
+
 
     def validarunique(self,entorno,tabla,namecolums,unique):
         encontrado=0
         nocol=-1
-        
+
         if tabla != None:
-      
+
             columnas=tabla.valor
             i=0
             param=[]
             for columna in columnas:
                 nombre = columna.nombre
-            
+
                 if namecolums == nombre:
                     encontrado+=1
                     tipo=columna.tipo
@@ -413,42 +412,41 @@ class InsertWhitColum(Instruccion):
                     nomtabla=nomtabla.replace('_'+entorno.getDataBase(),'')
                     continue
                 i=i+1
-            
+
             if encontrado==1 and nocol>-1:
                 datos=DBMS.extractTable(entorno.getDataBase(),nomtabla)
                 if datos!= None:
                     self.nombreres = nomtabla
                     for i in range(0,len(datos)):
 
-                        dato=datos[i][nocol]  
-                        param.append(dato)       
+                        dato=datos[i][nocol]
+                        param.append(dato)
                         for val in param:
                             #print("LIsta-->",val,'------',unique,"-----------")
-                            if(val==unique and val!='' ):  
+                            if(val==unique and val!='' ):
                                 return True
 
-                        
+
                         #if dato==unique:
                             #print("iguales",dato,unique)
                         #else:
                             #print("diferete",dato,unique)
             return False
-    
 
-    def traducir(self, ent:Entorno):
-        self.codigo3d= 'ci.ejecutarsql( insert into '+ self.nombre +' ('
-        i=0
-        for i in range(0,len(self.namecolums),1):
-             if(i==0):
-                 self.codigo3d += self.namecolums[i].valor
-             else:
-                 self.codigo3d += ', ' + self.namecolums[i].valor
-        
+    def traducir(self, ent: Entorno):
+        self.codigo3d = 'ci.ejecutarsql( insert into ' + self.nombre + ' ('
+        i = 0
+        for i in range(0, len(self.namecolums), 1):
+            if (i == 0):
+                self.codigo3d += self.namecolums[i].valor
+            else:
+                self.codigo3d += ', ' + self.namecolums[i].valor
+
         self.codigo3d += ') values ('
-       
-        i=0
-        for i in range(0,len(self.valores),1):
-            if(i==0):
+
+        i = 0
+        for i in range(0, len(self.valores), 1):
+            if (i == 0):
                 self.codigo3d += self.valores[i].stringsql
             else:
                 self.codigo3d += ', ' + self.valores[i].stringsql

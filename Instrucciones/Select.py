@@ -275,7 +275,82 @@ class Select(Instruccion):
             #print(inst)
             #return
     def traducir(self,Entorno):
-        ''
+        self.codigo3d= 'ci.ejecutarsql(\'select '
+        
+        if self.distinct !=None:
+            self.codigo3d += ' distinct '
+        
+        if self.exps != None:
+            for i in range(0,len(self.exps)):
+                    if i==0:
+
+                        exp=self.exps[i]
+                        if isinstance(self.exps[i], FuncionesNativas):
+                            self.codigo3d+=self.exps[i].stringsql
+                        elif isinstance(self.exps[i], Alias):
+                            self.codigo3d+=self.exps[i].stringsql
+                            exp = self.exps[i].expresion
+                        elif isinstance(self.exps[i],Identificador):
+                            self.codigo3d+= (self.exps[i].nombre)
+                        else:
+                            self.codigo3d+= (self.exps[i].stringsql)
+                    else:
+                        exp=self.exps[i]
+                        if isinstance(self.exps[i], FuncionesNativas):
+                            self.codigo3d+= ', ' +self.exps[i].stringsql
+                        elif isinstance(self.exps[i], Alias):
+                            self.codigo3d+= ', '+ self.exps[i].stringsql
+                            exp = self.exps[i].expresion
+                        elif isinstance(self.exps[i],Identificador):
+                            self.codigo3d+= ', ' +self.exps[i].nombre
+                        else:
+                            self.codigo3d+= ', '+self.exps[i].stringsql
+
+        
+        if self.froms !=None:
+            self.codigo3d += ' from '
+            i=0
+            for exp in self.froms:
+                if i==0:
+
+                    if isinstance(exp,Identificador)  or isinstance(exp,Terminal):
+                        self.codigo3d += exp.stringsql 
+                    elif isinstance(exp,Alias):
+                        self.codigo3d +=exp.stringsql
+                else:
+                    if isinstance(exp,Identificador)  or isinstance(exp,Terminal):
+                        self.codigo3d += ', '+exp.stringsql 
+                    elif isinstance(exp,Alias):
+                        self.codigo3d +=', '+ exp.stringsql
+                i=i+1
+        
+        if self.where != None:
+            self.codigo3d += ' Where '
+            #v=self.where.getval(ent)
+            self.codigo3d += self.where.stringsql
+
+        
+        if self.group != None:
+            self.codigo3d += ' Group by '
+            i=0
+            for exp in self.group:
+                if i==0:
+                    self.codigo3d += exp.stringsql 
+                else:
+                    self.codigo3d +=', '+ exp.stringsql
+                i=i+1
+
+        if self.having != None:
+            self.codigo3d += ' Order by '
+        if self.order != None:
+            ''
+        if self.limit != None:
+            ''
+        if self.combinig != None:
+            ''
+
+        self.codigo3d += ' ;\')\n'
+        return self
 
 
     def getasterisco(self,nombtabla,tablas,result,ent,newres,newenc):
@@ -507,12 +582,12 @@ class Select(Instruccion):
 
 
 
-    def group(self):
-        'Ejecucucion del group'
-    def having(self):
-        'Ejecucucion del having'
-    def order(self):
-        'Ejecucucion del order'
+    #def group(self):
+        #'Ejecucucion del group'
+    #def having(self):
+        #'Ejecucucion del having'
+    #def order(self):
+        #'Ejecucucion del order'
     def m_limit(self,result,limit,off):
         if str(limit).lower=='all':
             limit=len(result)
@@ -581,9 +656,12 @@ class Limit():
         self.off=off
 
 class Alias():
-    def __init__(self,expresion,nombre):
+    def __init__(self,expresion,nombre,ali):
         self.expresion=expresion
         self.nombre=nombre
+        self.ali =ali
+        self.stringsql = self.expresion.stringsql + ' ' +self.ali
+    
 
 class Combi():
     def __init__(self,combi,select,all=''):

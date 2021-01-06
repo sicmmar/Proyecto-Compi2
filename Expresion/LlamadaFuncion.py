@@ -42,4 +42,3 @@ class LLamadaFuncion(Expresion):
 
     def traducir(self,entorno):
         'traduzco funcion'
-

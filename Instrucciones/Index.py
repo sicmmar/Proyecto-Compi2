@@ -33,7 +33,7 @@ class Index(Instruccion):
                             nuevoSym.tabla = self.tabla
                             nuevoSym.indexId = self.iden
                             nuevoSym.baseDatos = dbActual
-                            idIdex += "_" + nombreCol.valor + "_" + self.iden
+                            idIdex += "_" + self.iden + "_" + nombreCol.valor
                             nuevoSym.nombre = idIdex
                             nuevoSym.valor = {}
                             nuevoSym.valor.update({'id':self.iden,'columna':nombreCol.valor})
@@ -49,6 +49,9 @@ class Index(Instruccion):
                             break
                         
                         i = i + 1
+            else:
+                variables.consola.insert(INSERT,"La tabla '" + self.tabla + "' a la que se le desea agregar el índice '" + self.iden +"' no existe.\n")
+                reporteerrores.append(Lerrores("Semántico","La tabla '" + self.tabla + "' a la que se le desea agregar el índice '" + self.iden +"' no existe","",""))
         
     def traducir(self,ent:Entorno):
         cad:str = "ci.ejecutarsql(\"create "
@@ -67,6 +70,36 @@ class Index(Instruccion):
 
         self.codigo3d = cad
         return self
+
+class AlterIndex(Instruccion):
+    def __init__(self,id,ifExist:bool,palabraColumn:bool,colIdx):
+        self.iden = id
+        self.ifExist = ifExist
+        self.colIdx = colIdx
+        self.palabraColumn = palabraColumn
+    
+    def ejecutar(self, ent:Entorno):
+        dbActual = ent.getDataBase()
+        if dbActual != None:
+            sym = ent.buscarIndex(self.iden)
+            if sym != None:
+                sym.valor.update({'columna':self.colIdx})
+                variables.consola.insert(INSERT,"El index '" + self.iden + "' ahora pertenece a la columna '" + self.colIdx + "'\n")
+            else: 
+                variables.consola.insert(INSERT,"El index '" + self.iden + "' no existe \n")
+                reporteerrores.append(Lerrores("Semántico","El index '" + self.iden + "' no existe","",""))
+    
+    def traducir(self,ent:Entorno):
+        self.codigo3d = 'ci.codigosql("alter index '
+        if self.ifExist:
+            self.codigo3d += 'if exists '
+        self.codigo3d += self.iden + ' alter '
+        if self.palabraColumn:
+            self.codigo3d += 'column '
+        self.codigo3d += self.colIdx + ';")\n'
+
+        return self
+
 
 class DropIndex(Instruccion):
     def __init__(self,id):

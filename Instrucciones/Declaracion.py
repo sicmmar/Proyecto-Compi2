@@ -22,6 +22,8 @@ class Declaracion(Instruccion):
                 val=val=val[1][0]
                 simbolo=Simbolo(self.tipo,self.id,val[0],-1)
             else:
+                if self.valor.tipo.tipo=='stack':
+                    self.valor.valor=self.valor.valor.replace('\'','')
                 simbolo = Simbolo(self.tipo, self.id, self.valor.getval(ent).valor, -1)
 
         else:

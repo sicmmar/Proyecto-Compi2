@@ -192,6 +192,8 @@ CREATE TABLE tbCalificacion (idcalifica integer not null primary key,
 
 CREATE UNIQUE INDEX idx_califica ON tbCalificacion (idcalifica);
 CREATE INDEX idx2 on tbCalificacion (item desc nulls last);
+
+alter INDEX if exists idx_califica alter column punteo;
 						 
 INSERT INTO tbProducto values(1,'Laptop Lenovo',now(),1);
 INSERT INTO tbProducto values(2,'Bateria para Laptop Lenovo T420',now(),1);
@@ -962,3 +964,31 @@ insert into tbcalifica values (15,'Funciones Matematicas',3.0,5);
 insert into tbcalifica values (16,'Funciones Trigonometricas',3.0,5);
 insert into tbcalifica values (17,'Funciones String',3.0,5);
 insert into tbcalifica values (18,'Binarios',1.0,5);
+
+--------------------------------------------------------------------------------------------------------
+
+CREATE DATABASE DBFase2;
+USE DBFase2;
+
+create table tbbodega (idbodega integer not null primary key,
+					   bodega varchar(100) not null,
+					   estado integer);
+								  
+CREATE INDEX indi ON tbbodega (bodega);
+
+create procedure sp_validainsert()
+language plpgsql
+as $$
+begin
+	insert into tbbodega values(1,'BODEGA CENTRAL',1);
+	insert into tbbodega (idbodega,bodega) values(2,'BODEGA ZONA 12');
+	insert into tbbodega (idbodega,bodega,estado) values(3,'BODEGA ZONA 11',1);
+	insert into tbbodega (idbodega,bodega,estado) values(4,'BODEGA ZONA 1',1);
+	insert into tbbodega (idbodega,bodega,estado) values(5,'BODEGA ZONA 10',1);
+end; $$
+
+
+		 
+EXECUTE sp_validainsert();
+
+select * from tbbodega;
