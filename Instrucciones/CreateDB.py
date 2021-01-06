@@ -69,7 +69,7 @@ class CreateDb(Instruccion):
                 return
 
     def traducir(self, ent):
-        cad = 'ci.ejecutarsql('
+        cad = 'ci.ejecutarsql(\"'
         if self.orreplace == 'or replace' and self.ifnotexist == 'if not exists':
             cad += 'create or replace database if not exists ' + self.id
 
@@ -82,7 +82,7 @@ class CreateDb(Instruccion):
         else:
             cad += 'create database ' + self.id
 
-        cad += ' ' + self.ownermode + ';) \n'
+        cad += ' ' + self.ownermode + ';\") \n'
         self.codigo3d = cad
 
         print(self.codigo3d)
@@ -110,13 +110,13 @@ class DropDb(Instruccion):
             return
 
     def traducir(self, ent):
-        cad = 'ci.ejecutarsql('
+        cad = 'ci.ejecutarsql(\"'
         if self.ifexist == 'if exists':
             cad += 'drop database if exists ' + self.id
         else:
             cad += 'drop database ' + self.id
 
-        cad += ' ' + ';) \n'
+        cad += ' ' + ';\") \n'
         self.codigo3d = cad
 
         print(self.codigo3d)
@@ -139,7 +139,7 @@ class ShowDb(Instruccion):
         return
 
     def traducir(self, ent):
-        cad = 'ci.ejecutarsql( show databases; )\n'
+        cad = 'ci.ejecutarsql(\" show databases; \")\n'
         self.codigo3d = cad
         print(self.codigo3d)
         return self
@@ -177,7 +177,7 @@ class AlterDb(Instruccion):
             return
 
     def traducir(self, ent):
-        cad = 'ci.ejecutarsql( ' + self.cadena + '; )\n'
+        cad = 'ci.ejecutarsql(\" ' + self.cadena + ';\" )\n'
         self.codigo3d = cad
         print(self.codigo3d)
         return self
@@ -203,7 +203,7 @@ class Use(Instruccion):
             return "ERROR >> En la instrucción Use " + self.id + ", La base de datos a utilizar NO EXISTE"
 
     def traducir(self, ent):
-        cad = 'ci.ejecutarsql( use ' + self.id + '; )\n'
+        cad = 'ci.ejecutarsql(\" use ' + self.id + ';\" )\n'
         self.codigo3d = cad
         print(self.codigo3d)
         return self

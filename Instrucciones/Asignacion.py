@@ -27,15 +27,15 @@ class Asignacion(Instruccion):
             val=self.valor.ejecutar(ent,0)
             val=val[1][0]
             self.valor=Terminal(sim.tipo,val[0])
-
-        if util.comparetipo(sim.tipo,self.valor.tipo):
+        if isinstance(self.valor,Terminal):
             sim.valor=self.valor.getval(ent).valor
-            ent.editarSimbolo(self.nombre, sim.valor)
+            ent.editarSimbolo(self.nombre, sim)
+
         else:
-            reporteerrores.append(Lerrores("Error Semantico",
-                                           'Error,El valor que se desea asignar no coincide con el tipo de la variable '+self.nombre,
-                                           0, 0))
-            variables.consola.insert(INSERT, 'Error,El valor que se desea asignar no coincide con el tipo sde la variable '+self.nombre+'\n')
+            self.valor=self.valor.getval(ent)
+            sim.valor=self.valor.getval(ent).valor
+            ent.editarSimbolo(self.nombre, sim)
+
 
 
     def traducir(self,entorno):

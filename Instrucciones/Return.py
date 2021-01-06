@@ -10,7 +10,7 @@ class Return(Instruccion):
         return self.exp.getval(ent)
 
     def traducir(self, ent):
+        'ejecutar return'
+        self.codigo3d='stack[0]= '+self.exp.traducir(ent).temp +'\n'
         self.stringsql = 'return ' + self.exp.stringsql
-        self.codigo3d = self.stringsql
-
         return self

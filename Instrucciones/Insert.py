@@ -199,7 +199,7 @@ class Insert(Instruccion):
             return False
 
     def traducir(self, ent: Entorno):
-        self.codigo3d = 'ci.ejecutarsql( insert into ' + self.nombre + ' values('
+        self.codigo3d = 'ci.ejecutarsql(\" insert into ' + self.nombre + ' values('
 
         for i in range(0, len(self.valores), 1):
             if (i == 0):
@@ -209,7 +209,7 @@ class Insert(Instruccion):
 
         self.codigo3d += ')'
 
-        self.codigo3d += ";)\n"
+        self.codigo3d += ";\")\n"
         return self
 
 class InsertWhitColum(Instruccion):
@@ -315,70 +315,78 @@ class InsertWhitColum(Instruccion):
                 t=0
                 correcto=True
                 terminales = []
+
                 for columna in columnas:
-                    nombre=columna.nombre
-                    tipo=columna.tipo
-                    util=Tipo(None,None,-1,-1)
-                    if isinstance(self.namecolums[j],Identificador):
-                        self.namecolums[j]=Terminal(self.namecolums[j].tipo,self.namecolums[j].nombre)
+                    if j < len(self.namecolums):
+                        nombre=columna.nombre
+                        tipo=columna.tipo
+                        util=Tipo(None,None,-1,-1)
+                        if isinstance(self.namecolums[j],Identificador):
+                            v=self.namecolums[j].getval(ent)
+                            if v==None:
+                                self.namecolums[j] = Terminal(self.namecolums[j].tipo, self.namecolums[j].nombre)
+                            else:
+                                self.namecolums[j]=v
 
-                    if(nombre==self.namecolums[j].getval(ent).valor):
-                        #print("iguales",nombre,":",self.namecolums[j].getval(ent).valor,"J",j,"t",t)
+                        if(nombre==self.namecolums[j].valor):
+                            #print("iguales",nombre,":",self.namecolums[j].getval(ent).valor,"J",j,"t",t)
 
-                        for colunique in columnaunique:
-                            if nombre==colunique:
-                                #print("UNIQUE",colunique,"colactual",nombre,"valor",self.valores[j].getval(ent).valor,"---")
-                                v=self.validarunique(ent,tabla,colunique,self.valores[j].getval(ent).valor)
-                                #print("-----",v)
-                                if v:
-                                    variables.consola.insert(INSERT,'Error Violacion de Constraint Unique en columna:'+colunique +' : '+str(self.valores[j].getval(ent).valor)+'\n')
-                                    reporteerrores.append(Lerrores("Error Semantico", 'Error Violacion de Constraint Unique en columna:'+colunique +' : '+str(self.valores[j].getval(ent).valor),'',''))
+                            for colunique in columnaunique:
+                                if nombre==colunique:
+                                    #print("UNIQUE",colunique,"colactual",nombre,"valor",self.valores[j].getval(ent).valor,"---")
+                                    v=self.validarunique(ent,tabla,colunique,self.valores[j].getval(ent).valor)
+                                    #print("-----",v)
+                                    if v:
+                                        variables.consola.insert(INSERT,'Error Violacion de Constraint Unique en columna:'+colunique +' : '+str(self.valores[j].getval(ent).valor)+'\n')
+                                        reporteerrores.append(Lerrores("Error Semantico", 'Error Violacion de Constraint Unique en columna:'+colunique +' : '+str(self.valores[j].getval(ent).valor),'',''))
+                                        return
+
+
+                            buscado=str('ENUM_'+ent.getDataBase()+'_'+tipo.tipo)
+                            types:Simbolo= ent.buscarSimbolo(buscado)
+
+                            tipocorrecto = False
+
+                            if types!=None:
+                                tiposenum=types.valor
+                                print("Comparando Enum")
+                                for valenum in tiposenum:
+                                    if str(valenum.getval(ent).valor).lower() == str(self.valores[j].getval(ent).valor).lower():
+                                        tipocorrecto=True
+                                if not tipocorrecto:
+                                    variables.consola.insert(INSERT,str('Error Tipo enum no correcto en valor: '+self.valores[j].getval(ent).valor)+'\n')
+                                    reporteerrores.append(Lerrores("Error Semantico",str('Tipo enum no correcto en valor: '+self.valores[j].getval(ent).valor),'',''))
                                     return
 
-                        if isinstance (self.valores[j],FuncionesNativas):
-                            self.valores[j]=self.valores[j].getval(ent)
 
-                        buscado=str('ENUM_'+ent.getDataBase()+'_'+tipo.tipo)
-                        types:Simbolo= ent.buscarSimbolo(buscado)
 
-                        tipocorrecto = False
-
-                        if types!=None:
-                            tiposenum=types.valor
-                            print("Comparando Enum")
-                            for valenum in tiposenum:
-                                if str(valenum.getval(ent).valor).lower() == str(self.valores[j].getval(ent).valor).lower():
-                                    tipocorrecto=True
                             if not tipocorrecto:
-                                variables.consola.insert(INSERT,str('Error Tipo enum no correcto en valor: '+self.valores[j].getval(ent).valor)+'\n')
-                                reporteerrores.append(Lerrores("Error Semantico",str('Tipo enum no correcto en valor: '+self.valores[j].getval(ent).valor),'',''))
-                                return
+                                if util.comparetipo(tipo,self.valores[j].getval(ent).tipo):
+                                    'todo correcto'
+                                else:
+                                    correcto=False
+                                    variables.consola.insert(INSERT,'Error los tipos no coinciden con la definicion de la tabla\n')
+                                    reporteerrores.append(Lerrores("Error Semantico",'Tipo de datos en columanas no son iguales','',''))
+                                    return
 
 
-
-                        if not tipocorrecto:
-                            if util.comparetipo(tipo,self.valores[j].getval(ent).tipo):
-                                'todo correcto'
-                            else:
-                                correcto=False
-                                variables.consola.insert(INSERT,'Error los tipos no coinciden con la definicion de la tabla\n')
-                                reporteerrores.append(Lerrores("Error Semantico",'Tipo de datos en columanas no son iguales','',''))
-                                return
-
-
-                        terminales.append(self.valores[j].valor)
-                        j=j+1
+                            terminales.append(self.valores[j].valor)
+                            j=j+1
+                        else:
+                            #print("diferentes",nombre,":",self.namecolums[j].getval(ent).valor,"J",j,"t",t)
+                            terminales.append('')
                     else:
-                        #print("diferentes",nombre,":",self.namecolums[j].getval(ent).valor,"J",j,"t",t)
                         terminales.append('')
                 r=DBMS.insert(ent.getDataBase(),self.nombre,terminales)
                 if(r==4):
                     variables.consola.insert(INSERT,'Error violacion de Constraint Primary key\n')
                     reporteerrores.append(Lerrores("Error Semantico",'Violacion de Constraint primary Key','',''))
                     return
+                elif r==0:
+                    variables.consola.insert(INSERT, 'Registros Ingresados EXITOSAMENTE\n')
 
-                variables.consola.insert(INSERT,'Registros Ingresados EXITOSAMENTE\n')
-                return
+
+
 
 
             else:
@@ -434,7 +442,7 @@ class InsertWhitColum(Instruccion):
             return False
 
     def traducir(self, ent: Entorno):
-        self.codigo3d = 'ci.ejecutarsql( insert into ' + self.nombre + ' ('
+        self.codigo3d = 'ci.ejecutarsql(\" insert into ' + self.nombre + ' ('
         i = 0
         for i in range(0, len(self.namecolums), 1):
             if (i == 0):
@@ -451,5 +459,5 @@ class InsertWhitColum(Instruccion):
             else:
                 self.codigo3d += ', ' + self.valores[i].stringsql
 
-        self.codigo3d += ";)\n"
+        self.codigo3d += ");\")\n"
         return self

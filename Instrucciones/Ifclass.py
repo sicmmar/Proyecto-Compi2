@@ -17,7 +17,9 @@ class Ifclass(Instruccion):
             if rescond==True:
                 for instr in self.cif:
                     newent = Entorno(ent)
-                    instr.ejecutar(newent)
+                    val=instr.ejecutar(newent)
+                    if val!=None:
+                        return val
                 return
 
             if self.elsif!=None:
@@ -26,12 +28,16 @@ class Ifclass(Instruccion):
                         newent = Entorno(ent)
                         for instr in elsif.cif:
                             newent = Entorno(ent)
-                            instr.ejecutar(newent)
+                            val = instr.ejecutar(newent)
+                            if val != None:
+                                return val
                         return
             if self.celse!=None:
                 for inst in self.celse:
                     newent = Entorno(ent)
-                    inst.ejecutar(newent)
+                    val = inst.ejecutar(newent)
+                    if val != None:
+                        return val
 
 
     def traducir(self,entorno):

@@ -81,14 +81,13 @@ def traducir():
             s=instr.traducir(Principal)
             if s!=None:
                 salida2+=s.codigo3d
+    salida2 = salida2.replace('goto temp', generarsaltos())
     filas=salida2.split('\n')
     salida2=''
     for fila in filas:
         salida2+='\t'+fila +'\n'
 
     salida=salida+salida2
-    for i in range(0,salida.count('goto temp')):
-        salida=salida.replace('goto temp','goto '+str(variables.stack[i]),1)
 
     print(salida)
     f = open('prueba.py', 'w')
@@ -96,6 +95,13 @@ def traducir():
     f.close()
 
 
+def generarsaltos():
+    cad=''
+    for label in variables.stack:
+        cad+='if temp =='+label+':\n'
+        label=label.replace('\'','')
+        cad+="\tgoto "+label+"\n"
+    return cad
 
 
 def reporte_lex_sin():
@@ -120,7 +126,7 @@ def mostrarimagenre():
 
 def setContenido(cont: str):
     global contenidoSym
-    contenidoSym += cont
+    contenidoSym = cont
 
 
 def arbol_ast():
@@ -203,12 +209,4 @@ reps_menu.add_command(label="Errores Lexicos y Sintacticos", command=mostrarimag
 reps_menu.add_command(label="Tabla de Simbolos", command=verSimbolos)
 reps_menu.add_command(label="AST", command=arbol_ast)
 reps_menu.add_command(label="Gramatica", command=gramatica)
-class Interfaz:
-    def desplegarinterfaz(self):
-        variables.ventana.mainloop()
-
-inter=Interfaz()
-inter.desplegarinterfaz()
-
-
-
+variables.ventana.mainloop()

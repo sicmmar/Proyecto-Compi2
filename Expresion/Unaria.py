@@ -12,6 +12,8 @@ class Unaria(Expresion) :
         Expresion.__init__(self)
         self.exp1 = exp1
         self.operador = operador
+        self.stringsql+= self.operador +' '
+        self.stringsql+= str(exp1.stringsql) +' '
 
     def getval(self,entorno):
 

@@ -15,7 +15,7 @@ class Logica(Binaria):
         self.exp1=exp1
 
         self.stringsql +=exp1.stringsql+ ' '
-        self.stringsql+= operador +' ' 
+        self.stringsql+= operador +' '
         self.stringsql += exp2.stringsql
 
 
@@ -56,3 +56,4 @@ class Logica(Binaria):
         self.codigo3d=cad
 
         return self
+

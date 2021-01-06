@@ -1,11 +1,22 @@
 import gramatica2 as g
-
+from storageManager import jsonMode
+from Expresion.variablesestaticas import variables
+from tkinter import *
 
 class CodigoIntermedio():
     def __init__(self,entorno):
         self.entorno=entorno
+        jsonMode.dropAll()
 
+        variables.consola.delete("1.0", "end")
+        variables.consola.configure(state='normal')
 
-    def ejecutarsql(self,stringinstr):
+    def ejecutarsql(self, stringinstr):
         'ejecucion del bloque'
-        g.parse(stringinstr)
+        instr=g.parse(stringinstr)
+        for inst in instr:
+            return inst.ejecutar(self.entorno)
+
+
+
+

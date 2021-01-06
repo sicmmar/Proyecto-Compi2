@@ -25,7 +25,7 @@ class Procedure(Instruccion):
 
         for i in range(0,lenparams):
             val='stack['+str(i)+']'
-            term=Terminal(Tipo('staesqck',None,-1,-1),val)
+            term=Terminal(Tipo('stack',None,-1,-1),val)
             d=Declaracion(self.params[i].nombre,False,self.params[i].tipo,term)
             c3d=d.traducir(ent).codigo3d
             cad+=c3d
@@ -36,6 +36,7 @@ class Procedure(Instruccion):
                 if inst !=None:
                     c3d= inst.traducir(ent).codigo3d
                     cad+=c3d
+        cad+='temp=stack['+str(lenparams)+']\n'
         cad+='stack=[]\n'
         cad+='goto temp\n'
         cad+='label ' +nl+'\n'

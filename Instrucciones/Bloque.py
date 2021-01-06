@@ -17,6 +17,7 @@ class Bloque(Instruccion):
         'tradyccuion del bloque'
         cad=''
         for inst in self.instrucciones:
+
             cad+= inst.traducir(ent).codigo3d
 
         self.codigo3d = cad

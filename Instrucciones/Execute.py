@@ -20,13 +20,11 @@ class Execute(Instruccion):
         for i in range(0,lenp):
             if not isinstance(self.params[i],Select):
                 cad+='stack.append('+str(self.params[i].traducir(ent).temp)+')\n'
-
-
+        nl = ent.newlabel()
+        cad += 'stack.append(\'' + nl + '\')\n'
+        variables.stack.append('\''+nl+'\'')
         cad+='goto .Lp_'+self.nombre+'\n'
-        nl=ent.newlabel()
         cad+='label '+nl+'\n'
-        cad+='stack.append(\''+nl+'\')\n'
-        variables.stack.append(nl)
         self.codigo3d=cad
         return self
 

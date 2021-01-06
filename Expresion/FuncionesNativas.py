@@ -1,7 +1,5 @@
-
 from Expresion.LlamadaFuncion import LLamadaFuncion
 from Expresion.Terminal import *
-
 
 import hashlib
 import base64
@@ -21,47 +19,50 @@ class FuncionesNativas(Expresion):
         self.expresiones = expresiones
         self.stringsql = self.identificador + '('
         i = 0
+        if self.expresiones != None:
 
-        for i in range(0, len(self.expresiones), 1):
-            if (i == 0):
-                self.stringsql += self.expresiones[i].stringsql
-            else:
-                self.stringsql += ', ' + self.expresiones[i].stringsql
-            i = i + 1
-        self.stringsql += ')'
+            for i in range(0, len(self.expresiones), 1):
+                if str(self.identificador).lower() == 'convert':
+                    self.stringsql += '\'' + self.expresiones[i].stringsql + '\' as ' + self.expresiones[i].tipo.tipo
+                else:
+                    if (i == 0):
+                        self.stringsql += self.expresiones[i].stringsql
+                    else:
+                        self.stringsql += ', ' + self.expresiones[i].stringsql
+                i = i + 1
+            self.stringsql += ')'
 
         # print("en funci==========",self.identificador,self.expresiones[0])
 
     def getval(self, entorno):
         # print("++++++++++++++++++")
-        sizeparametro = len(self.expresiones)
-        funcion = self.identificador.lower()
-        i = 0
-        for param in self.expresiones:
-            if (i == 0):
-                self.stringsql += str(param.getval(entorno).valor)
-            else:
-                self.stringsql += ', ' + str(param.getval(entorno).valor)
-            i = i + 1
-        self.stringsql += ')'
-
-        for param in self.expresiones:
-            if isinstance(param, Terminal):
-                if param.tipo.tipo == 'identificador':
-                    return self
+        if self.expresiones != None:
+            sizeparametro = len(self.expresiones)
+            funcion = self.identificador.lower()
+            i = 0
+            for param in self.expresiones:
+                if str(self.identificador).lower() == 'convert':
+                    self.stringsql += self.expresiones[i].stringsql + ' as ' + self.expresiones[i].getTipo(entorno)
+                else:
+                    if (i == 0):
+                        self.stringsql += str(param.getval(entorno).valor)
+                    else:
+                        self.stringsql += ', ' + str(param.getval(entorno).valor)
+                i = i + 1
+            self.stringsql += ')'
 
         # print("aqqqqqqqqqqqqq")
         try:
             # print("retornamos el id")
             if (funcion == "abs" or funcion == "cbrt" or funcion == "ceil" or funcion == "ceiling" or
                     funcion == "degrees" or funcion == "exp" or funcion == "factorial" or funcion == "floor" or
-                    funcion == "ln" or funcion == "log" or funcion == "radians" or funcion == "sing" or
+                    funcion == "ln" or funcion == "log" or funcion == "radians" or funcion == "sign" or
                     funcion == "trunc" or funcion == "acos" or funcion == "acosd" or funcion == "asin" or
                     funcion == "asind" or funcion == "atan" or funcion == "atand" or funcion == "cos" or
                     funcion == "cosd" or funcion == "cot" or funcion == "cotd" or funcion == "sin" or
                     funcion == "sind" or funcion == "tan" or funcion == "tand" or funcion == "sinh" or
                     funcion == "cosh" or funcion == "tanh" or funcion == "asinh" or funcion == "acosh" or
-                    funcion == "atanh"
+                    funcion == "atanh" or funcion == 'sqrt'
             ):
                 valexpresion = self.expresiones[0].getval(entorno).valor
                 return self.FunctionWithOneParameter(funcion, sizeparametro, valexpresion)
@@ -108,10 +109,10 @@ class FuncionesNativas(Expresion):
             val3expresion = self.expresiones[2].getval(entorno).valor
             return self.FunctionWithTreeParameter(funcion, sizeparametro, val1expresion, val2expresion, val3expresion)
         else:
-            llam=LLamadaFuncion(self.identificador,self.expresiones)
+            llam = LLamadaFuncion(self.identificador, self.expresiones)
             return llam.getval(entorno)
-            #reporteerrores.append(Lerrores("Error Semantico", "La funcion" + funcion + "no existe", 0, 0))
-            #return "Error: La función: " + funcion + " no existe"
+            # reporteerrores.append(Lerrores("Error Semantico", "La funcion" + funcion + "no existe", 0, 0))
+            # return "Error: La función: " + funcion + " no existe"
 
     def FunctionWithOneParameter(self, funcion, parametros, exp):
         result = None
@@ -157,7 +158,7 @@ class FuncionesNativas(Expresion):
             elif (funcion == "radians"):
                 return Terminal(Tipo('decimal', math.radians(exp), self.l(math.radians(exp)), -1), math.radians(exp))
 
-            elif (funcion == "sing"):
+            elif (funcion == "sign"):
                 if (exp > 0):
                     return Terminal(Tipo('integer', 1, self.l(1), -1), 1)
 
@@ -414,13 +415,12 @@ class FuncionesNativas(Expresion):
         else:
             return len(str(valor))
 
-    def traducir(self,entorno):
+    def traducir(self, entorno):
         try:
             self.temp = self.getval(entorno).valor
             return self
         except:
             'pos nose pero por si truena'
-
 
 
 class Date_Part(FuncionesNativas):
