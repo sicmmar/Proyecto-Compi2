@@ -1,5 +1,6 @@
 from Instrucciones.Asignacion import Asignacion
 from Instrucciones.Bloque import Bloque
+from Instrucciones.Case import *
 from Instrucciones.Declaracion import Declaracion
 from Instrucciones.Execute import Execute
 from Instrucciones.Funcion import *
@@ -138,7 +139,6 @@ reservadas = {
     'inout': 'inout',
     'info': 'info',
     'debug': 'debug',
-    'log': 'log',
     'warning': 'warning',
     'exception': 'exception',
     'format': 'format',
@@ -398,7 +398,7 @@ def p_instruccion8(t):
 
 
 def p_instruccion9(t):
-    '''instruccion      : CASE'''
+    '''instruccion      : CASE ptcoma'''
     listaBNF.append("INSTRUCCION ::= CASE")
     t[0] = t[1]
 
@@ -483,12 +483,14 @@ def p_FUNCIONES1(t):
 
 def p_FUNCIONES2(t):
     'FUNCIONES : create function id para  parc RETURNP LCONTENIDOP LENGUAJE'
+    listaBNF.append('FUNCIONES ::= create function '+t[3]+' para parc RETURNP LCONTENIDOP LENGUAJE')
     t[0] = Funcion(t[3], None, t[7], t[6])
 
 
 def p_RETURNP(t):
     '''RETURNP : returns  TIPO
     '''
+    listaBNF.append("RETURNP ::= returns TIPO")
     t[0]=t[2]
 
 
@@ -656,14 +658,15 @@ def p_ORDEN3(t):
 
 def p_LDEC1(t):
     'LDEC :  LDEC DECLARACIONES'
-    t[1].append(t[2])
-
-    t[0]=Bloque(t[1])
+    l=[]
+    l.append(t[1])
+    l.append(t[2])
+    t[0]=Bloque(l)
 
 
 def p_LDEC2(t):
     'LDEC : DECLARACIONES'
-    t[0]=[t[1]]
+    t[0]=t[1]
 
 def p_Declaraciones(t):
     ''' DECLARACIONES : id TIPO not null ASIG ptcoma
@@ -757,22 +760,22 @@ def p_ELSEF(t):
 
 
 def p_CASE(t):
-    'CASE : case LEXP  LISTAWHEN ELSEF  end case'
-
+    'CASE : case EXP  LISTAWHEN ELSEF  end case'
+    t[0] = Case(t[2], t[3],t[4])
 
 def p_CASE1(t):
-    'CASE : case LEXP  LISTAWHEN   end case'
-
+    'CASE : case EXP  LISTAWHEN   end case'
+    t[0]=Case(t[2],t[3])
 
 def p_CASE2(t):
-    ''' CASE : case  LISTAWHEN ELSE end
+    ''' CASE : case  LISTAWHEN ELSEF end case
     '''
 
 
 def p_CASE3(t):
-    ''' CASE :  case LISTAWHEN end
+    ''' CASE :  case LISTAWHEN end case
     '''
-
+    #case()
 
 def p_LISTACONTENIDO(t):
     'LISTACONTENIDO : LISTACONTENIDO CONTENIDO'
@@ -864,7 +867,6 @@ def p_RAISE4(t):
 def p_LEVEL(t):
     '''LEVEL : info
         | debug
-        | log
         | notice
         | warning
         | exception'''
@@ -879,24 +881,26 @@ def p_FORMAT(t):
 def p_LISTAWHEN(t):
     ''' LISTAWHEN : LISTAWHEN WHEN
     '''
-
+    t[1].append(t[2])
+    t[0]=t[1]
 
 def p_LISTAWHEN1(t):
     ''' LISTAWHEN :  WHEN
     '''
-
+    t[0]=[t[1]]
 
 def p_WHEN(t):
-    ''' WHEN : when LEXP then LISTACONTENIDO'''
+    ''' WHEN : when EXP then LISTACONTENIDO'''
+    t[0]=when(t[2],t[4])
 
-
-def p_WHEN1(t):
-    ''' WHEN : when LEXP then LEXP'''
+#def p_WHEN1(t):
+#    ''' WHEN : when EXP then LEXP'''
 
 
 def p_ELSE(t):
     '''ELSE : else LEXP'''
     listaBNF.append("ELSE ::= else LEXP")
+    t[0]=t[2]
 
 
 def p_INSERT(t):
@@ -1811,7 +1815,7 @@ def p_EXPV2(t):
     tipo = Tipo('varchar', t[4], -1, -1)
     tipo.getTipo()
     ter = Terminal(tipo, t[4])
-    rel = Relacional(t[1], ter, 'like')
+    rel = Relacional(t[1], ter, 'not like')
     t[0] = Unaria(rel, 'not')
 
 
@@ -1826,10 +1830,10 @@ def p_EXPJ(t):
         t[0] = t[1]
 
 
-def p_EXPJ1(t):
-    '''EXP : CASE'''
-    listaBNF.append("EXP ::= CASE")
-    t[0] = t[1]
+#def p_EXPJ1(t):
+#   '''EXP : CASE'''
+#    listaBNF.append("EXP ::= CASE")
+#   t[0] = t[1]
 
 
 def p_EXP_FuncNativas(t):
@@ -1841,15 +1845,19 @@ def p_EXP_FuncNativas(t):
 def p_EXP_FuncNativas2(t):
     '''EXP : id para parc '''
     listaBNF.append("EXP ::= " + str(t[1]).lower() + " para parc")
-    tipo = None
+    tipo = Tipo('indefinido',None,-1,-1)
     if t[1].lower() == 'now':
         tipo = Tipo('timestamp without time zone', t[1], len(t[1]), -1)
+        t[0] = Terminal(tipo, t[1].lower())
     elif t[1].lower() == 'random':
         tipo = Tipo('double', t[1], len(t[1]), -1)
+        t[0] = Terminal(tipo, t[1].lower())
     elif t[1].lower() == 'pi':
         tipo = Tipo('double', t[1], len(t[1]), -1)
+        t[0] = Terminal(tipo, t[1].lower())
+    else:
+        t[0]=LLamadaFuncion(t[1],None)
 
-    t[0] = Terminal(tipo, t[1].lower())
 
 
 def p_EXP(t):

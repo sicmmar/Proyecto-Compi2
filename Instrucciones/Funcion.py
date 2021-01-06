@@ -20,7 +20,7 @@ class Funcion(Instruccion):
                 if param.modo != None:
                     self.codigo3d += 'inout '
                 self.codigo3d += param.nombre + ' ' + param.tipo.tipo
-        self.codigo3d += ') return ' + self.tipo.tipo
+        self.codigo3d += ') returns ' + self.tipo.tipo
         print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
         print(self.codigo3d)
         print(self.tipo.valor)
