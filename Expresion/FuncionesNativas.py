@@ -418,7 +418,7 @@ class FuncionesNativas(Expresion):
                 i = i + 1
             self.stringsql += ')'
         try:
-            self.temp = self.getval(entorno).valor
+            self.temp = self.getval(entorno,0).valor
             return self
         except:
             self.temp=self.stringsql

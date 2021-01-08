@@ -1,3 +1,4 @@
+--entrada 3
 CREATE DATABASE DBFase2;
 
 USE DBFase2;
@@ -155,11 +156,11 @@ end; $$
 EXECUTE sp_insertaproducto(9,'Bocina Inalambrica','2021-01-06');
 EXECUTE sp_insertaproducto(10,'Audifonos con Microfono USB','2021-01-06');
 EXECUTE sp_insertaproducto(11,'Bocina Inalambrica','2021-01-06');
-EXECUTE sp_insertaproducto(12,'Monitor de 17"','2021-01-06');
+EXECUTE sp_insertaproducto(12,'Monitor de 17','2021-01-06');
 
 DROP FUNCTION if exists myFuncion;
 
---select myFuncion('Valida drop function');
+select myFuncion('Valida drop function');
 /*Debe dar error ya no existe la funcion*/
 
 CREATE FUNCTION fn_Mensaje(texto text) RETURNS text AS $$
@@ -168,12 +169,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-select myFuncion('Crea funcion Nueva de Mensaje');
+select fn_Mensaje('Crea funcion Nueva de Mensaje');
 
 EXECUTE sp_insertaproducto(13,'Bocina Inalambrica Sony','2021-01-06');
 EXECUTE sp_insertaproducto(14,'Audifonos con Microfono USB Lenovo','2021-01-06');
-EXECUTE sp_insertaproducto(15,'Monitor de 21"','2021-01-06');
-EXECUTE sp_insertaproducto(16,'Monitor de 17" Lenovo','2021-01-06');
+EXECUTE sp_insertaproducto(15,'Monitor de 21','2021-01-06');
+EXECUTE sp_insertaproducto(16,'Monitor de 17 Lenovo','2021-01-06');
 
 
 create table tbinventario (
@@ -201,6 +202,10 @@ BEGIN
 	RETURN idb;
 END;
 $$ LANGUAGE plpgsql;
+
+SELECT fn_retornaproducto('Laptop Lenovo');
+
+select fn_retornabodega('BODEGA ZONA 12');
 
 
 create FUNCTION sp_insertainventario (ide integer,Vproducto varchar(100),Vbodega varchar(100),cantidad integer,descripcion varchar(200)) RETURNS integer AS $$

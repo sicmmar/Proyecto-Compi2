@@ -38,7 +38,7 @@ class Select(Instruccion):
 
     def ejecutar(self, ent: Entorno, imp=1):
 
-        #try:
+        try:
             tablas = []
             result = []
             self.encabezado = []
@@ -269,9 +269,9 @@ class Select(Instruccion):
 
             return [self.encabezado, result]
 
-        #except  Exception as inst:
-            #print(inst)
-            #return
+        except  Exception as inst:
+            print(inst)
+            return
 
     def traducir(self, entorno):
         self.codigo3d = 'ci.ejecutarsql("select '
@@ -683,7 +683,7 @@ class Alias():
         self.expresion = expresion
         self.nombre = nombre
         self.ali = ali
-
+        self.stringsql=expresion.traducir(Entorno).stringsql+' '+ali+' '
 
 
 class Combi():

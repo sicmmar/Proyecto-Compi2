@@ -20,6 +20,7 @@ class Funcion(Instruccion):
         if s!='ok':
             variables.consola.insert(INSERT,'La funcion '+self.nombre+' no se pudo crear porque ya existe\n')
 
+
     def traducir(self,ent):
         'traduccion func'
         nl = ent.newlabel()

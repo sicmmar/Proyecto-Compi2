@@ -1,0 +1,2700 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    coma
+    dolarn
+    false
+    function
+    ptcoma
+    return
+    returns
+    true
+
+Grammar
+
+Rule 0     S' -> init
+Rule 1     init -> LISTACONTENIDO
+Rule 2     LISTACONTENIDO -> LISTACONTENIDO CONTENIDO
+Rule 3     LISTACONTENIDO -> CONTENIDO
+Rule 4     CONTENIDO -> ETIQUETA
+Rule 5     CONTENIDO -> SALTO
+Rule 6     CONTENIDO -> IMPORTACIONES
+Rule 7     CONTENIDO -> METODOS
+Rule 8     CONTENIDO -> ASIGNACION
+Rule 9     CONTENIDO -> CONDICIONIF
+Rule 10    CONTENIDO -> PRINTF
+Rule 11    PRINTF -> print para EXP parc
+Rule 12    CONDICIONIF -> if OPERACION dospuntos SALTO
+Rule 13    CONDICIONIF -> if EXP dospuntos SALTO
+Rule 14    ASIGNACION -> id igual OPERACION
+Rule 15    ASIGNACION -> id igual EXP
+Rule 16    ASIGNACION -> id igual METODOS
+Rule 17    ASIGNACION -> VECTOR igual OPERACION
+Rule 18    METODOS -> id id para parc dospuntos
+Rule 19    METODOS -> idPunto para EXP parc
+Rule 20    METODOS -> id para EXP parc
+Rule 21    METODOS -> id para parc
+Rule 22    IMPORTACIONES -> r_from idPunto import id
+Rule 23    IMPORTACIONES -> import idPunto as id
+Rule 24    IMPORTACIONES -> import idPunto id
+Rule 25    IMPORTACIONES -> r_from id import id
+Rule 26    IMPORTACIONES -> import id as id
+Rule 27    IMPORTACIONES -> import id id
+Rule 28    IMPORTACIONES -> r_from idPunto import multiplicacion
+Rule 29    IMPORTACIONES -> r_from id import multiplicacion
+Rule 30    IMPORTACIONES -> r_from gotos import with_goto
+Rule 31    IMPORTACIONES -> arroba with_goto
+Rule 32    SALTO -> gotos punto id
+Rule 33    ETIQUETA -> label punto id
+Rule 34    VECTOR -> id corchetea EXP corchetec
+Rule 35    VECTOR -> id corchetea corchetec
+Rule 36    OPERACION -> EXP mas EXP
+Rule 37    OPERACION -> EXP menos EXP
+Rule 38    OPERACION -> EXP multiplicacion EXP
+Rule 39    OPERACION -> EXP division EXP
+Rule 40    OPERACION -> EXP modulo EXP
+Rule 41    OPERACION -> EXP elevado EXP
+Rule 42    OPERACION -> EXP and EXP
+Rule 43    OPERACION -> EXP or EXP
+Rule 44    OPERACION -> EXP mayor EXP
+Rule 45    OPERACION -> EXP menor EXP
+Rule 46    OPERACION -> id igual_igual EXP
+Rule 47    OPERACION -> EXP mayor_igual EXP
+Rule 48    OPERACION -> EXP menor_igual EXP
+Rule 49    OPERACION -> EXP diferente1 EXP
+Rule 50    OPERACION -> EXP diferente2 EXP
+Rule 51    OPERACION -> corchetea EXP corchetec
+Rule 52    OPERACION -> corchetea corchetec
+Rule 53    OPERACION -> VECTOR
+Rule 54    EXP -> mas EXP
+Rule 55    EXP -> menos EXP
+Rule 56    EXP -> not EXP
+Rule 57    EXP -> int
+Rule 58    EXP -> decimales
+Rule 59    EXP -> cadena
+Rule 60    EXP -> cadenaString
+Rule 61    EXP -> id
+Rule 62    EXP -> null
+Rule 63    EXP -> idPunto
+
+Terminals, with rules where they appear
+
+and                  : 42
+arroba               : 31
+as                   : 23 26
+cadena               : 59
+cadenaString         : 60
+coma                 : 
+corchetea            : 34 35 51 52
+corchetec            : 34 35 51 52
+decimales            : 58
+diferente1           : 49
+diferente2           : 50
+division             : 39
+dolarn               : 
+dospuntos            : 12 13 18
+elevado              : 41
+error                : 
+false                : 
+function             : 
+gotos                : 30 32
+id                   : 14 15 16 18 18 20 21 22 23 24 25 25 26 26 27 27 29 32 33 34 35 46 61
+idPunto              : 19 22 23 24 28 63
+if                   : 12 13
+igual                : 14 15 16 17
+igual_igual          : 46
+import               : 22 23 24 25 26 27 28 29 30
+int                  : 57
+label                : 33
+mas                  : 36 54
+mayor                : 44
+mayor_igual          : 47
+menor                : 45
+menor_igual          : 48
+menos                : 37 55
+modulo               : 40
+multiplicacion       : 28 29 38
+not                  : 56
+null                 : 62
+or                   : 43
+para                 : 11 18 19 20 21
+parc                 : 11 18 19 20 21
+print                : 11
+ptcoma               : 
+punto                : 32 33
+r_from               : 22 25 28 29 30
+return               : 
+returns              : 
+true                 : 
+with_goto            : 30 31
+
+Nonterminals, with rules where they appear
+
+ASIGNACION           : 8
+CONDICIONIF          : 9
+CONTENIDO            : 2 3
+ETIQUETA             : 4
+EXP                  : 11 13 15 19 20 34 36 36 37 37 38 38 39 39 40 40 41 41 42 42 43 43 44 44 45 45 46 47 47 48 48 49 49 50 50 51 54 55 56
+IMPORTACIONES        : 6
+LISTACONTENIDO       : 1 2
+METODOS              : 7 16
+OPERACION            : 12 14 17
+PRINTF               : 10
+SALTO                : 5 12 13
+VECTOR               : 17 53
+init                 : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . init
+    (1) init -> . LISTACONTENIDO
+    (2) LISTACONTENIDO -> . LISTACONTENIDO CONTENIDO
+    (3) LISTACONTENIDO -> . CONTENIDO
+    (4) CONTENIDO -> . ETIQUETA
+    (5) CONTENIDO -> . SALTO
+    (6) CONTENIDO -> . IMPORTACIONES
+    (7) CONTENIDO -> . METODOS
+    (8) CONTENIDO -> . ASIGNACION
+    (9) CONTENIDO -> . CONDICIONIF
+    (10) CONTENIDO -> . PRINTF
+    (33) ETIQUETA -> . label punto id
+    (32) SALTO -> . gotos punto id
+    (22) IMPORTACIONES -> . r_from idPunto import id
+    (23) IMPORTACIONES -> . import idPunto as id
+    (24) IMPORTACIONES -> . import idPunto id
+    (25) IMPORTACIONES -> . r_from id import id
+    (26) IMPORTACIONES -> . import id as id
+    (27) IMPORTACIONES -> . import id id
+    (28) IMPORTACIONES -> . r_from idPunto import multiplicacion
+    (29) IMPORTACIONES -> . r_from id import multiplicacion
+    (30) IMPORTACIONES -> . r_from gotos import with_goto
+    (31) IMPORTACIONES -> . arroba with_goto
+    (18) METODOS -> . id id para parc dospuntos
+    (19) METODOS -> . idPunto para EXP parc
+    (20) METODOS -> . id para EXP parc
+    (21) METODOS -> . id para parc
+    (14) ASIGNACION -> . id igual OPERACION
+    (15) ASIGNACION -> . id igual EXP
+    (16) ASIGNACION -> . id igual METODOS
+    (17) ASIGNACION -> . VECTOR igual OPERACION
+    (12) CONDICIONIF -> . if OPERACION dospuntos SALTO
+    (13) CONDICIONIF -> . if EXP dospuntos SALTO
+    (11) PRINTF -> . print para EXP parc
+    (34) VECTOR -> . id corchetea EXP corchetec
+    (35) VECTOR -> . id corchetea corchetec
+
+    label           shift and go to state 11
+    gotos           shift and go to state 13
+    r_from          shift and go to state 14
+    import          shift and go to state 16
+    arroba          shift and go to state 17
+    id              shift and go to state 12
+    idPunto         shift and go to state 15
+    if              shift and go to state 19
+    print           shift and go to state 20
+
+    init                           shift and go to state 1
+    LISTACONTENIDO                 shift and go to state 2
+    CONTENIDO                      shift and go to state 3
+    ETIQUETA                       shift and go to state 4
+    SALTO                          shift and go to state 5
+    IMPORTACIONES                  shift and go to state 6
+    METODOS                        shift and go to state 7
+    ASIGNACION                     shift and go to state 8
+    CONDICIONIF                    shift and go to state 9
+    PRINTF                         shift and go to state 10
+    VECTOR                         shift and go to state 18
+
+state 1
+
+    (0) S' -> init .
+
+
+
+state 2
+
+    (1) init -> LISTACONTENIDO .
+    (2) LISTACONTENIDO -> LISTACONTENIDO . CONTENIDO
+    (4) CONTENIDO -> . ETIQUETA
+    (5) CONTENIDO -> . SALTO
+    (6) CONTENIDO -> . IMPORTACIONES
+    (7) CONTENIDO -> . METODOS
+    (8) CONTENIDO -> . ASIGNACION
+    (9) CONTENIDO -> . CONDICIONIF
+    (10) CONTENIDO -> . PRINTF
+    (33) ETIQUETA -> . label punto id
+    (32) SALTO -> . gotos punto id
+    (22) IMPORTACIONES -> . r_from idPunto import id
+    (23) IMPORTACIONES -> . import idPunto as id
+    (24) IMPORTACIONES -> . import idPunto id
+    (25) IMPORTACIONES -> . r_from id import id
+    (26) IMPORTACIONES -> . import id as id
+    (27) IMPORTACIONES -> . import id id
+    (28) IMPORTACIONES -> . r_from idPunto import multiplicacion
+    (29) IMPORTACIONES -> . r_from id import multiplicacion
+    (30) IMPORTACIONES -> . r_from gotos import with_goto
+    (31) IMPORTACIONES -> . arroba with_goto
+    (18) METODOS -> . id id para parc dospuntos
+    (19) METODOS -> . idPunto para EXP parc
+    (20) METODOS -> . id para EXP parc
+    (21) METODOS -> . id para parc
+    (14) ASIGNACION -> . id igual OPERACION
+    (15) ASIGNACION -> . id igual EXP
+    (16) ASIGNACION -> . id igual METODOS
+    (17) ASIGNACION -> . VECTOR igual OPERACION
+    (12) CONDICIONIF -> . if OPERACION dospuntos SALTO
+    (13) CONDICIONIF -> . if EXP dospuntos SALTO
+    (11) PRINTF -> . print para EXP parc
+    (34) VECTOR -> . id corchetea EXP corchetec
+    (35) VECTOR -> . id corchetea corchetec
+
+    $end            reduce using rule 1 (init -> LISTACONTENIDO .)
+    label           shift and go to state 11
+    gotos           shift and go to state 13
+    r_from          shift and go to state 14
+    import          shift and go to state 16
+    arroba          shift and go to state 17
+    id              shift and go to state 12
+    idPunto         shift and go to state 15
+    if              shift and go to state 19
+    print           shift and go to state 20
+
+    CONTENIDO                      shift and go to state 21
+    ETIQUETA                       shift and go to state 4
+    SALTO                          shift and go to state 5
+    IMPORTACIONES                  shift and go to state 6
+    METODOS                        shift and go to state 7
+    ASIGNACION                     shift and go to state 8
+    CONDICIONIF                    shift and go to state 9
+    PRINTF                         shift and go to state 10
+    VECTOR                         shift and go to state 18
+
+state 3
+
+    (3) LISTACONTENIDO -> CONTENIDO .
+
+    label           reduce using rule 3 (LISTACONTENIDO -> CONTENIDO .)
+    gotos           reduce using rule 3 (LISTACONTENIDO -> CONTENIDO .)
+    r_from          reduce using rule 3 (LISTACONTENIDO -> CONTENIDO .)
+    import          reduce using rule 3 (LISTACONTENIDO -> CONTENIDO .)
+    arroba          reduce using rule 3 (LISTACONTENIDO -> CONTENIDO .)
+    id              reduce using rule 3 (LISTACONTENIDO -> CONTENIDO .)
+    idPunto         reduce using rule 3 (LISTACONTENIDO -> CONTENIDO .)
+    if              reduce using rule 3 (LISTACONTENIDO -> CONTENIDO .)
+    print           reduce using rule 3 (LISTACONTENIDO -> CONTENIDO .)
+    $end            reduce using rule 3 (LISTACONTENIDO -> CONTENIDO .)
+
+
+state 4
+
+    (4) CONTENIDO -> ETIQUETA .
+
+    label           reduce using rule 4 (CONTENIDO -> ETIQUETA .)
+    gotos           reduce using rule 4 (CONTENIDO -> ETIQUETA .)
+    r_from          reduce using rule 4 (CONTENIDO -> ETIQUETA .)
+    import          reduce using rule 4 (CONTENIDO -> ETIQUETA .)
+    arroba          reduce using rule 4 (CONTENIDO -> ETIQUETA .)
+    id              reduce using rule 4 (CONTENIDO -> ETIQUETA .)
+    idPunto         reduce using rule 4 (CONTENIDO -> ETIQUETA .)
+    if              reduce using rule 4 (CONTENIDO -> ETIQUETA .)
+    print           reduce using rule 4 (CONTENIDO -> ETIQUETA .)
+    $end            reduce using rule 4 (CONTENIDO -> ETIQUETA .)
+
+
+state 5
+
+    (5) CONTENIDO -> SALTO .
+
+    label           reduce using rule 5 (CONTENIDO -> SALTO .)
+    gotos           reduce using rule 5 (CONTENIDO -> SALTO .)
+    r_from          reduce using rule 5 (CONTENIDO -> SALTO .)
+    import          reduce using rule 5 (CONTENIDO -> SALTO .)
+    arroba          reduce using rule 5 (CONTENIDO -> SALTO .)
+    id              reduce using rule 5 (CONTENIDO -> SALTO .)
+    idPunto         reduce using rule 5 (CONTENIDO -> SALTO .)
+    if              reduce using rule 5 (CONTENIDO -> SALTO .)
+    print           reduce using rule 5 (CONTENIDO -> SALTO .)
+    $end            reduce using rule 5 (CONTENIDO -> SALTO .)
+
+
+state 6
+
+    (6) CONTENIDO -> IMPORTACIONES .
+
+    label           reduce using rule 6 (CONTENIDO -> IMPORTACIONES .)
+    gotos           reduce using rule 6 (CONTENIDO -> IMPORTACIONES .)
+    r_from          reduce using rule 6 (CONTENIDO -> IMPORTACIONES .)
+    import          reduce using rule 6 (CONTENIDO -> IMPORTACIONES .)
+    arroba          reduce using rule 6 (CONTENIDO -> IMPORTACIONES .)
+    id              reduce using rule 6 (CONTENIDO -> IMPORTACIONES .)
+    idPunto         reduce using rule 6 (CONTENIDO -> IMPORTACIONES .)
+    if              reduce using rule 6 (CONTENIDO -> IMPORTACIONES .)
+    print           reduce using rule 6 (CONTENIDO -> IMPORTACIONES .)
+    $end            reduce using rule 6 (CONTENIDO -> IMPORTACIONES .)
+
+
+state 7
+
+    (7) CONTENIDO -> METODOS .
+
+    label           reduce using rule 7 (CONTENIDO -> METODOS .)
+    gotos           reduce using rule 7 (CONTENIDO -> METODOS .)
+    r_from          reduce using rule 7 (CONTENIDO -> METODOS .)
+    import          reduce using rule 7 (CONTENIDO -> METODOS .)
+    arroba          reduce using rule 7 (CONTENIDO -> METODOS .)
+    id              reduce using rule 7 (CONTENIDO -> METODOS .)
+    idPunto         reduce using rule 7 (CONTENIDO -> METODOS .)
+    if              reduce using rule 7 (CONTENIDO -> METODOS .)
+    print           reduce using rule 7 (CONTENIDO -> METODOS .)
+    $end            reduce using rule 7 (CONTENIDO -> METODOS .)
+
+
+state 8
+
+    (8) CONTENIDO -> ASIGNACION .
+
+    label           reduce using rule 8 (CONTENIDO -> ASIGNACION .)
+    gotos           reduce using rule 8 (CONTENIDO -> ASIGNACION .)
+    r_from          reduce using rule 8 (CONTENIDO -> ASIGNACION .)
+    import          reduce using rule 8 (CONTENIDO -> ASIGNACION .)
+    arroba          reduce using rule 8 (CONTENIDO -> ASIGNACION .)
+    id              reduce using rule 8 (CONTENIDO -> ASIGNACION .)
+    idPunto         reduce using rule 8 (CONTENIDO -> ASIGNACION .)
+    if              reduce using rule 8 (CONTENIDO -> ASIGNACION .)
+    print           reduce using rule 8 (CONTENIDO -> ASIGNACION .)
+    $end            reduce using rule 8 (CONTENIDO -> ASIGNACION .)
+
+
+state 9
+
+    (9) CONTENIDO -> CONDICIONIF .
+
+    label           reduce using rule 9 (CONTENIDO -> CONDICIONIF .)
+    gotos           reduce using rule 9 (CONTENIDO -> CONDICIONIF .)
+    r_from          reduce using rule 9 (CONTENIDO -> CONDICIONIF .)
+    import          reduce using rule 9 (CONTENIDO -> CONDICIONIF .)
+    arroba          reduce using rule 9 (CONTENIDO -> CONDICIONIF .)
+    id              reduce using rule 9 (CONTENIDO -> CONDICIONIF .)
+    idPunto         reduce using rule 9 (CONTENIDO -> CONDICIONIF .)
+    if              reduce using rule 9 (CONTENIDO -> CONDICIONIF .)
+    print           reduce using rule 9 (CONTENIDO -> CONDICIONIF .)
+    $end            reduce using rule 9 (CONTENIDO -> CONDICIONIF .)
+
+
+state 10
+
+    (10) CONTENIDO -> PRINTF .
+
+    label           reduce using rule 10 (CONTENIDO -> PRINTF .)
+    gotos           reduce using rule 10 (CONTENIDO -> PRINTF .)
+    r_from          reduce using rule 10 (CONTENIDO -> PRINTF .)
+    import          reduce using rule 10 (CONTENIDO -> PRINTF .)
+    arroba          reduce using rule 10 (CONTENIDO -> PRINTF .)
+    id              reduce using rule 10 (CONTENIDO -> PRINTF .)
+    idPunto         reduce using rule 10 (CONTENIDO -> PRINTF .)
+    if              reduce using rule 10 (CONTENIDO -> PRINTF .)
+    print           reduce using rule 10 (CONTENIDO -> PRINTF .)
+    $end            reduce using rule 10 (CONTENIDO -> PRINTF .)
+
+
+state 11
+
+    (33) ETIQUETA -> label . punto id
+
+    punto           shift and go to state 22
+
+
+state 12
+
+    (18) METODOS -> id . id para parc dospuntos
+    (20) METODOS -> id . para EXP parc
+    (21) METODOS -> id . para parc
+    (14) ASIGNACION -> id . igual OPERACION
+    (15) ASIGNACION -> id . igual EXP
+    (16) ASIGNACION -> id . igual METODOS
+    (34) VECTOR -> id . corchetea EXP corchetec
+    (35) VECTOR -> id . corchetea corchetec
+
+    id              shift and go to state 23
+    para            shift and go to state 24
+    igual           shift and go to state 25
+    corchetea       shift and go to state 26
+
+
+state 13
+
+    (32) SALTO -> gotos . punto id
+
+    punto           shift and go to state 27
+
+
+state 14
+
+    (22) IMPORTACIONES -> r_from . idPunto import id
+    (25) IMPORTACIONES -> r_from . id import id
+    (28) IMPORTACIONES -> r_from . idPunto import multiplicacion
+    (29) IMPORTACIONES -> r_from . id import multiplicacion
+    (30) IMPORTACIONES -> r_from . gotos import with_goto
+
+    idPunto         shift and go to state 28
+    id              shift and go to state 29
+    gotos           shift and go to state 30
+
+
+state 15
+
+    (19) METODOS -> idPunto . para EXP parc
+
+    para            shift and go to state 31
+
+
+state 16
+
+    (23) IMPORTACIONES -> import . idPunto as id
+    (24) IMPORTACIONES -> import . idPunto id
+    (26) IMPORTACIONES -> import . id as id
+    (27) IMPORTACIONES -> import . id id
+
+    idPunto         shift and go to state 32
+    id              shift and go to state 33
+
+
+state 17
+
+    (31) IMPORTACIONES -> arroba . with_goto
+
+    with_goto       shift and go to state 34
+
+
+state 18
+
+    (17) ASIGNACION -> VECTOR . igual OPERACION
+
+    igual           shift and go to state 35
+
+
+state 19
+
+    (12) CONDICIONIF -> if . OPERACION dospuntos SALTO
+    (13) CONDICIONIF -> if . EXP dospuntos SALTO
+    (36) OPERACION -> . EXP mas EXP
+    (37) OPERACION -> . EXP menos EXP
+    (38) OPERACION -> . EXP multiplicacion EXP
+    (39) OPERACION -> . EXP division EXP
+    (40) OPERACION -> . EXP modulo EXP
+    (41) OPERACION -> . EXP elevado EXP
+    (42) OPERACION -> . EXP and EXP
+    (43) OPERACION -> . EXP or EXP
+    (44) OPERACION -> . EXP mayor EXP
+    (45) OPERACION -> . EXP menor EXP
+    (46) OPERACION -> . id igual_igual EXP
+    (47) OPERACION -> . EXP mayor_igual EXP
+    (48) OPERACION -> . EXP menor_igual EXP
+    (49) OPERACION -> . EXP diferente1 EXP
+    (50) OPERACION -> . EXP diferente2 EXP
+    (51) OPERACION -> . corchetea EXP corchetec
+    (52) OPERACION -> . corchetea corchetec
+    (53) OPERACION -> . VECTOR
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+    (34) VECTOR -> . id corchetea EXP corchetec
+    (35) VECTOR -> . id corchetea corchetec
+
+    id              shift and go to state 40
+    corchetea       shift and go to state 41
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    OPERACION                      shift and go to state 36
+    EXP                            shift and go to state 37
+    VECTOR                         shift and go to state 42
+
+state 20
+
+    (11) PRINTF -> print . para EXP parc
+
+    para            shift and go to state 50
+
+
+state 21
+
+    (2) LISTACONTENIDO -> LISTACONTENIDO CONTENIDO .
+
+    label           reduce using rule 2 (LISTACONTENIDO -> LISTACONTENIDO CONTENIDO .)
+    gotos           reduce using rule 2 (LISTACONTENIDO -> LISTACONTENIDO CONTENIDO .)
+    r_from          reduce using rule 2 (LISTACONTENIDO -> LISTACONTENIDO CONTENIDO .)
+    import          reduce using rule 2 (LISTACONTENIDO -> LISTACONTENIDO CONTENIDO .)
+    arroba          reduce using rule 2 (LISTACONTENIDO -> LISTACONTENIDO CONTENIDO .)
+    id              reduce using rule 2 (LISTACONTENIDO -> LISTACONTENIDO CONTENIDO .)
+    idPunto         reduce using rule 2 (LISTACONTENIDO -> LISTACONTENIDO CONTENIDO .)
+    if              reduce using rule 2 (LISTACONTENIDO -> LISTACONTENIDO CONTENIDO .)
+    print           reduce using rule 2 (LISTACONTENIDO -> LISTACONTENIDO CONTENIDO .)
+    $end            reduce using rule 2 (LISTACONTENIDO -> LISTACONTENIDO CONTENIDO .)
+
+
+state 22
+
+    (33) ETIQUETA -> label punto . id
+
+    id              shift and go to state 51
+
+
+state 23
+
+    (18) METODOS -> id id . para parc dospuntos
+
+    para            shift and go to state 52
+
+
+state 24
+
+    (20) METODOS -> id para . EXP parc
+    (21) METODOS -> id para . parc
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    parc            shift and go to state 55
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 54
+
+state 25
+
+    (14) ASIGNACION -> id igual . OPERACION
+    (15) ASIGNACION -> id igual . EXP
+    (16) ASIGNACION -> id igual . METODOS
+    (36) OPERACION -> . EXP mas EXP
+    (37) OPERACION -> . EXP menos EXP
+    (38) OPERACION -> . EXP multiplicacion EXP
+    (39) OPERACION -> . EXP division EXP
+    (40) OPERACION -> . EXP modulo EXP
+    (41) OPERACION -> . EXP elevado EXP
+    (42) OPERACION -> . EXP and EXP
+    (43) OPERACION -> . EXP or EXP
+    (44) OPERACION -> . EXP mayor EXP
+    (45) OPERACION -> . EXP menor EXP
+    (46) OPERACION -> . id igual_igual EXP
+    (47) OPERACION -> . EXP mayor_igual EXP
+    (48) OPERACION -> . EXP menor_igual EXP
+    (49) OPERACION -> . EXP diferente1 EXP
+    (50) OPERACION -> . EXP diferente2 EXP
+    (51) OPERACION -> . corchetea EXP corchetec
+    (52) OPERACION -> . corchetea corchetec
+    (53) OPERACION -> . VECTOR
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+    (18) METODOS -> . id id para parc dospuntos
+    (19) METODOS -> . idPunto para EXP parc
+    (20) METODOS -> . id para EXP parc
+    (21) METODOS -> . id para parc
+    (34) VECTOR -> . id corchetea EXP corchetec
+    (35) VECTOR -> . id corchetea corchetec
+
+    id              shift and go to state 56
+    corchetea       shift and go to state 41
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    null            shift and go to state 48
+    idPunto         shift and go to state 60
+
+    OPERACION                      shift and go to state 57
+    EXP                            shift and go to state 58
+    METODOS                        shift and go to state 59
+    VECTOR                         shift and go to state 42
+
+state 26
+
+    (34) VECTOR -> id corchetea . EXP corchetec
+    (35) VECTOR -> id corchetea . corchetec
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    corchetec       shift and go to state 62
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 61
+
+state 27
+
+    (32) SALTO -> gotos punto . id
+
+    id              shift and go to state 63
+
+
+state 28
+
+    (22) IMPORTACIONES -> r_from idPunto . import id
+    (28) IMPORTACIONES -> r_from idPunto . import multiplicacion
+
+    import          shift and go to state 64
+
+
+state 29
+
+    (25) IMPORTACIONES -> r_from id . import id
+    (29) IMPORTACIONES -> r_from id . import multiplicacion
+
+    import          shift and go to state 65
+
+
+state 30
+
+    (30) IMPORTACIONES -> r_from gotos . import with_goto
+
+    import          shift and go to state 66
+
+
+state 31
+
+    (19) METODOS -> idPunto para . EXP parc
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 67
+
+state 32
+
+    (23) IMPORTACIONES -> import idPunto . as id
+    (24) IMPORTACIONES -> import idPunto . id
+
+    as              shift and go to state 68
+    id              shift and go to state 69
+
+
+state 33
+
+    (26) IMPORTACIONES -> import id . as id
+    (27) IMPORTACIONES -> import id . id
+
+    as              shift and go to state 71
+    id              shift and go to state 70
+
+
+state 34
+
+    (31) IMPORTACIONES -> arroba with_goto .
+
+    label           reduce using rule 31 (IMPORTACIONES -> arroba with_goto .)
+    gotos           reduce using rule 31 (IMPORTACIONES -> arroba with_goto .)
+    r_from          reduce using rule 31 (IMPORTACIONES -> arroba with_goto .)
+    import          reduce using rule 31 (IMPORTACIONES -> arroba with_goto .)
+    arroba          reduce using rule 31 (IMPORTACIONES -> arroba with_goto .)
+    id              reduce using rule 31 (IMPORTACIONES -> arroba with_goto .)
+    idPunto         reduce using rule 31 (IMPORTACIONES -> arroba with_goto .)
+    if              reduce using rule 31 (IMPORTACIONES -> arroba with_goto .)
+    print           reduce using rule 31 (IMPORTACIONES -> arroba with_goto .)
+    $end            reduce using rule 31 (IMPORTACIONES -> arroba with_goto .)
+
+
+state 35
+
+    (17) ASIGNACION -> VECTOR igual . OPERACION
+    (36) OPERACION -> . EXP mas EXP
+    (37) OPERACION -> . EXP menos EXP
+    (38) OPERACION -> . EXP multiplicacion EXP
+    (39) OPERACION -> . EXP division EXP
+    (40) OPERACION -> . EXP modulo EXP
+    (41) OPERACION -> . EXP elevado EXP
+    (42) OPERACION -> . EXP and EXP
+    (43) OPERACION -> . EXP or EXP
+    (44) OPERACION -> . EXP mayor EXP
+    (45) OPERACION -> . EXP menor EXP
+    (46) OPERACION -> . id igual_igual EXP
+    (47) OPERACION -> . EXP mayor_igual EXP
+    (48) OPERACION -> . EXP menor_igual EXP
+    (49) OPERACION -> . EXP diferente1 EXP
+    (50) OPERACION -> . EXP diferente2 EXP
+    (51) OPERACION -> . corchetea EXP corchetec
+    (52) OPERACION -> . corchetea corchetec
+    (53) OPERACION -> . VECTOR
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+    (34) VECTOR -> . id corchetea EXP corchetec
+    (35) VECTOR -> . id corchetea corchetec
+
+    id              shift and go to state 40
+    corchetea       shift and go to state 41
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    VECTOR                         shift and go to state 42
+    OPERACION                      shift and go to state 72
+    EXP                            shift and go to state 73
+
+state 36
+
+    (12) CONDICIONIF -> if OPERACION . dospuntos SALTO
+
+    dospuntos       shift and go to state 74
+
+
+state 37
+
+    (13) CONDICIONIF -> if EXP . dospuntos SALTO
+    (36) OPERACION -> EXP . mas EXP
+    (37) OPERACION -> EXP . menos EXP
+    (38) OPERACION -> EXP . multiplicacion EXP
+    (39) OPERACION -> EXP . division EXP
+    (40) OPERACION -> EXP . modulo EXP
+    (41) OPERACION -> EXP . elevado EXP
+    (42) OPERACION -> EXP . and EXP
+    (43) OPERACION -> EXP . or EXP
+    (44) OPERACION -> EXP . mayor EXP
+    (45) OPERACION -> EXP . menor EXP
+    (47) OPERACION -> EXP . mayor_igual EXP
+    (48) OPERACION -> EXP . menor_igual EXP
+    (49) OPERACION -> EXP . diferente1 EXP
+    (50) OPERACION -> EXP . diferente2 EXP
+
+    dospuntos       shift and go to state 75
+    mas             shift and go to state 76
+    menos           shift and go to state 77
+    multiplicacion  shift and go to state 78
+    division        shift and go to state 79
+    modulo          shift and go to state 80
+    elevado         shift and go to state 81
+    and             shift and go to state 82
+    or              shift and go to state 83
+    mayor           shift and go to state 84
+    menor           shift and go to state 85
+    mayor_igual     shift and go to state 86
+    menor_igual     shift and go to state 87
+    diferente1      shift and go to state 88
+    diferente2      shift and go to state 89
+
+
+state 38
+
+    (54) EXP -> mas . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 90
+
+state 39
+
+    (55) EXP -> menos . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 91
+
+state 40
+
+    (46) OPERACION -> id . igual_igual EXP
+    (61) EXP -> id .
+    (34) VECTOR -> id . corchetea EXP corchetec
+    (35) VECTOR -> id . corchetea corchetec
+
+    igual_igual     shift and go to state 92
+    dospuntos       reduce using rule 61 (EXP -> id .)
+    mas             reduce using rule 61 (EXP -> id .)
+    menos           reduce using rule 61 (EXP -> id .)
+    multiplicacion  reduce using rule 61 (EXP -> id .)
+    division        reduce using rule 61 (EXP -> id .)
+    modulo          reduce using rule 61 (EXP -> id .)
+    elevado         reduce using rule 61 (EXP -> id .)
+    and             reduce using rule 61 (EXP -> id .)
+    or              reduce using rule 61 (EXP -> id .)
+    mayor           reduce using rule 61 (EXP -> id .)
+    menor           reduce using rule 61 (EXP -> id .)
+    mayor_igual     reduce using rule 61 (EXP -> id .)
+    menor_igual     reduce using rule 61 (EXP -> id .)
+    diferente1      reduce using rule 61 (EXP -> id .)
+    diferente2      reduce using rule 61 (EXP -> id .)
+    corchetea       shift and go to state 26
+
+
+state 41
+
+    (51) OPERACION -> corchetea . EXP corchetec
+    (52) OPERACION -> corchetea . corchetec
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    corchetec       shift and go to state 94
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 93
+
+state 42
+
+    (53) OPERACION -> VECTOR .
+
+    dospuntos       reduce using rule 53 (OPERACION -> VECTOR .)
+    label           reduce using rule 53 (OPERACION -> VECTOR .)
+    gotos           reduce using rule 53 (OPERACION -> VECTOR .)
+    r_from          reduce using rule 53 (OPERACION -> VECTOR .)
+    import          reduce using rule 53 (OPERACION -> VECTOR .)
+    arroba          reduce using rule 53 (OPERACION -> VECTOR .)
+    id              reduce using rule 53 (OPERACION -> VECTOR .)
+    idPunto         reduce using rule 53 (OPERACION -> VECTOR .)
+    if              reduce using rule 53 (OPERACION -> VECTOR .)
+    print           reduce using rule 53 (OPERACION -> VECTOR .)
+    $end            reduce using rule 53 (OPERACION -> VECTOR .)
+
+
+state 43
+
+    (56) EXP -> not . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 95
+
+state 44
+
+    (57) EXP -> int .
+
+    dospuntos       reduce using rule 57 (EXP -> int .)
+    mas             reduce using rule 57 (EXP -> int .)
+    menos           reduce using rule 57 (EXP -> int .)
+    multiplicacion  reduce using rule 57 (EXP -> int .)
+    division        reduce using rule 57 (EXP -> int .)
+    modulo          reduce using rule 57 (EXP -> int .)
+    elevado         reduce using rule 57 (EXP -> int .)
+    and             reduce using rule 57 (EXP -> int .)
+    or              reduce using rule 57 (EXP -> int .)
+    mayor           reduce using rule 57 (EXP -> int .)
+    menor           reduce using rule 57 (EXP -> int .)
+    mayor_igual     reduce using rule 57 (EXP -> int .)
+    menor_igual     reduce using rule 57 (EXP -> int .)
+    diferente1      reduce using rule 57 (EXP -> int .)
+    diferente2      reduce using rule 57 (EXP -> int .)
+    parc            reduce using rule 57 (EXP -> int .)
+    label           reduce using rule 57 (EXP -> int .)
+    gotos           reduce using rule 57 (EXP -> int .)
+    r_from          reduce using rule 57 (EXP -> int .)
+    import          reduce using rule 57 (EXP -> int .)
+    arroba          reduce using rule 57 (EXP -> int .)
+    id              reduce using rule 57 (EXP -> int .)
+    idPunto         reduce using rule 57 (EXP -> int .)
+    if              reduce using rule 57 (EXP -> int .)
+    print           reduce using rule 57 (EXP -> int .)
+    $end            reduce using rule 57 (EXP -> int .)
+    corchetec       reduce using rule 57 (EXP -> int .)
+
+
+state 45
+
+    (58) EXP -> decimales .
+
+    dospuntos       reduce using rule 58 (EXP -> decimales .)
+    mas             reduce using rule 58 (EXP -> decimales .)
+    menos           reduce using rule 58 (EXP -> decimales .)
+    multiplicacion  reduce using rule 58 (EXP -> decimales .)
+    division        reduce using rule 58 (EXP -> decimales .)
+    modulo          reduce using rule 58 (EXP -> decimales .)
+    elevado         reduce using rule 58 (EXP -> decimales .)
+    and             reduce using rule 58 (EXP -> decimales .)
+    or              reduce using rule 58 (EXP -> decimales .)
+    mayor           reduce using rule 58 (EXP -> decimales .)
+    menor           reduce using rule 58 (EXP -> decimales .)
+    mayor_igual     reduce using rule 58 (EXP -> decimales .)
+    menor_igual     reduce using rule 58 (EXP -> decimales .)
+    diferente1      reduce using rule 58 (EXP -> decimales .)
+    diferente2      reduce using rule 58 (EXP -> decimales .)
+    parc            reduce using rule 58 (EXP -> decimales .)
+    label           reduce using rule 58 (EXP -> decimales .)
+    gotos           reduce using rule 58 (EXP -> decimales .)
+    r_from          reduce using rule 58 (EXP -> decimales .)
+    import          reduce using rule 58 (EXP -> decimales .)
+    arroba          reduce using rule 58 (EXP -> decimales .)
+    id              reduce using rule 58 (EXP -> decimales .)
+    idPunto         reduce using rule 58 (EXP -> decimales .)
+    if              reduce using rule 58 (EXP -> decimales .)
+    print           reduce using rule 58 (EXP -> decimales .)
+    $end            reduce using rule 58 (EXP -> decimales .)
+    corchetec       reduce using rule 58 (EXP -> decimales .)
+
+
+state 46
+
+    (59) EXP -> cadena .
+
+    dospuntos       reduce using rule 59 (EXP -> cadena .)
+    mas             reduce using rule 59 (EXP -> cadena .)
+    menos           reduce using rule 59 (EXP -> cadena .)
+    multiplicacion  reduce using rule 59 (EXP -> cadena .)
+    division        reduce using rule 59 (EXP -> cadena .)
+    modulo          reduce using rule 59 (EXP -> cadena .)
+    elevado         reduce using rule 59 (EXP -> cadena .)
+    and             reduce using rule 59 (EXP -> cadena .)
+    or              reduce using rule 59 (EXP -> cadena .)
+    mayor           reduce using rule 59 (EXP -> cadena .)
+    menor           reduce using rule 59 (EXP -> cadena .)
+    mayor_igual     reduce using rule 59 (EXP -> cadena .)
+    menor_igual     reduce using rule 59 (EXP -> cadena .)
+    diferente1      reduce using rule 59 (EXP -> cadena .)
+    diferente2      reduce using rule 59 (EXP -> cadena .)
+    parc            reduce using rule 59 (EXP -> cadena .)
+    label           reduce using rule 59 (EXP -> cadena .)
+    gotos           reduce using rule 59 (EXP -> cadena .)
+    r_from          reduce using rule 59 (EXP -> cadena .)
+    import          reduce using rule 59 (EXP -> cadena .)
+    arroba          reduce using rule 59 (EXP -> cadena .)
+    id              reduce using rule 59 (EXP -> cadena .)
+    idPunto         reduce using rule 59 (EXP -> cadena .)
+    if              reduce using rule 59 (EXP -> cadena .)
+    print           reduce using rule 59 (EXP -> cadena .)
+    $end            reduce using rule 59 (EXP -> cadena .)
+    corchetec       reduce using rule 59 (EXP -> cadena .)
+
+
+state 47
+
+    (60) EXP -> cadenaString .
+
+    dospuntos       reduce using rule 60 (EXP -> cadenaString .)
+    mas             reduce using rule 60 (EXP -> cadenaString .)
+    menos           reduce using rule 60 (EXP -> cadenaString .)
+    multiplicacion  reduce using rule 60 (EXP -> cadenaString .)
+    division        reduce using rule 60 (EXP -> cadenaString .)
+    modulo          reduce using rule 60 (EXP -> cadenaString .)
+    elevado         reduce using rule 60 (EXP -> cadenaString .)
+    and             reduce using rule 60 (EXP -> cadenaString .)
+    or              reduce using rule 60 (EXP -> cadenaString .)
+    mayor           reduce using rule 60 (EXP -> cadenaString .)
+    menor           reduce using rule 60 (EXP -> cadenaString .)
+    mayor_igual     reduce using rule 60 (EXP -> cadenaString .)
+    menor_igual     reduce using rule 60 (EXP -> cadenaString .)
+    diferente1      reduce using rule 60 (EXP -> cadenaString .)
+    diferente2      reduce using rule 60 (EXP -> cadenaString .)
+    parc            reduce using rule 60 (EXP -> cadenaString .)
+    label           reduce using rule 60 (EXP -> cadenaString .)
+    gotos           reduce using rule 60 (EXP -> cadenaString .)
+    r_from          reduce using rule 60 (EXP -> cadenaString .)
+    import          reduce using rule 60 (EXP -> cadenaString .)
+    arroba          reduce using rule 60 (EXP -> cadenaString .)
+    id              reduce using rule 60 (EXP -> cadenaString .)
+    idPunto         reduce using rule 60 (EXP -> cadenaString .)
+    if              reduce using rule 60 (EXP -> cadenaString .)
+    print           reduce using rule 60 (EXP -> cadenaString .)
+    $end            reduce using rule 60 (EXP -> cadenaString .)
+    corchetec       reduce using rule 60 (EXP -> cadenaString .)
+
+
+state 48
+
+    (62) EXP -> null .
+
+    dospuntos       reduce using rule 62 (EXP -> null .)
+    mas             reduce using rule 62 (EXP -> null .)
+    menos           reduce using rule 62 (EXP -> null .)
+    multiplicacion  reduce using rule 62 (EXP -> null .)
+    division        reduce using rule 62 (EXP -> null .)
+    modulo          reduce using rule 62 (EXP -> null .)
+    elevado         reduce using rule 62 (EXP -> null .)
+    and             reduce using rule 62 (EXP -> null .)
+    or              reduce using rule 62 (EXP -> null .)
+    mayor           reduce using rule 62 (EXP -> null .)
+    menor           reduce using rule 62 (EXP -> null .)
+    mayor_igual     reduce using rule 62 (EXP -> null .)
+    menor_igual     reduce using rule 62 (EXP -> null .)
+    diferente1      reduce using rule 62 (EXP -> null .)
+    diferente2      reduce using rule 62 (EXP -> null .)
+    parc            reduce using rule 62 (EXP -> null .)
+    label           reduce using rule 62 (EXP -> null .)
+    gotos           reduce using rule 62 (EXP -> null .)
+    r_from          reduce using rule 62 (EXP -> null .)
+    import          reduce using rule 62 (EXP -> null .)
+    arroba          reduce using rule 62 (EXP -> null .)
+    id              reduce using rule 62 (EXP -> null .)
+    idPunto         reduce using rule 62 (EXP -> null .)
+    if              reduce using rule 62 (EXP -> null .)
+    print           reduce using rule 62 (EXP -> null .)
+    $end            reduce using rule 62 (EXP -> null .)
+    corchetec       reduce using rule 62 (EXP -> null .)
+
+
+state 49
+
+    (63) EXP -> idPunto .
+
+    dospuntos       reduce using rule 63 (EXP -> idPunto .)
+    mas             reduce using rule 63 (EXP -> idPunto .)
+    menos           reduce using rule 63 (EXP -> idPunto .)
+    multiplicacion  reduce using rule 63 (EXP -> idPunto .)
+    division        reduce using rule 63 (EXP -> idPunto .)
+    modulo          reduce using rule 63 (EXP -> idPunto .)
+    elevado         reduce using rule 63 (EXP -> idPunto .)
+    and             reduce using rule 63 (EXP -> idPunto .)
+    or              reduce using rule 63 (EXP -> idPunto .)
+    mayor           reduce using rule 63 (EXP -> idPunto .)
+    menor           reduce using rule 63 (EXP -> idPunto .)
+    mayor_igual     reduce using rule 63 (EXP -> idPunto .)
+    menor_igual     reduce using rule 63 (EXP -> idPunto .)
+    diferente1      reduce using rule 63 (EXP -> idPunto .)
+    diferente2      reduce using rule 63 (EXP -> idPunto .)
+    parc            reduce using rule 63 (EXP -> idPunto .)
+    corchetec       reduce using rule 63 (EXP -> idPunto .)
+    label           reduce using rule 63 (EXP -> idPunto .)
+    gotos           reduce using rule 63 (EXP -> idPunto .)
+    r_from          reduce using rule 63 (EXP -> idPunto .)
+    import          reduce using rule 63 (EXP -> idPunto .)
+    arroba          reduce using rule 63 (EXP -> idPunto .)
+    id              reduce using rule 63 (EXP -> idPunto .)
+    idPunto         reduce using rule 63 (EXP -> idPunto .)
+    if              reduce using rule 63 (EXP -> idPunto .)
+    print           reduce using rule 63 (EXP -> idPunto .)
+    $end            reduce using rule 63 (EXP -> idPunto .)
+
+
+state 50
+
+    (11) PRINTF -> print para . EXP parc
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 96
+
+state 51
+
+    (33) ETIQUETA -> label punto id .
+
+    label           reduce using rule 33 (ETIQUETA -> label punto id .)
+    gotos           reduce using rule 33 (ETIQUETA -> label punto id .)
+    r_from          reduce using rule 33 (ETIQUETA -> label punto id .)
+    import          reduce using rule 33 (ETIQUETA -> label punto id .)
+    arroba          reduce using rule 33 (ETIQUETA -> label punto id .)
+    id              reduce using rule 33 (ETIQUETA -> label punto id .)
+    idPunto         reduce using rule 33 (ETIQUETA -> label punto id .)
+    if              reduce using rule 33 (ETIQUETA -> label punto id .)
+    print           reduce using rule 33 (ETIQUETA -> label punto id .)
+    $end            reduce using rule 33 (ETIQUETA -> label punto id .)
+
+
+state 52
+
+    (18) METODOS -> id id para . parc dospuntos
+
+    parc            shift and go to state 97
+
+
+state 53
+
+    (61) EXP -> id .
+
+    parc            reduce using rule 61 (EXP -> id .)
+    corchetec       reduce using rule 61 (EXP -> id .)
+    dospuntos       reduce using rule 61 (EXP -> id .)
+    mas             reduce using rule 61 (EXP -> id .)
+    menos           reduce using rule 61 (EXP -> id .)
+    multiplicacion  reduce using rule 61 (EXP -> id .)
+    division        reduce using rule 61 (EXP -> id .)
+    modulo          reduce using rule 61 (EXP -> id .)
+    elevado         reduce using rule 61 (EXP -> id .)
+    and             reduce using rule 61 (EXP -> id .)
+    or              reduce using rule 61 (EXP -> id .)
+    mayor           reduce using rule 61 (EXP -> id .)
+    menor           reduce using rule 61 (EXP -> id .)
+    mayor_igual     reduce using rule 61 (EXP -> id .)
+    menor_igual     reduce using rule 61 (EXP -> id .)
+    diferente1      reduce using rule 61 (EXP -> id .)
+    diferente2      reduce using rule 61 (EXP -> id .)
+    label           reduce using rule 61 (EXP -> id .)
+    gotos           reduce using rule 61 (EXP -> id .)
+    r_from          reduce using rule 61 (EXP -> id .)
+    import          reduce using rule 61 (EXP -> id .)
+    arroba          reduce using rule 61 (EXP -> id .)
+    id              reduce using rule 61 (EXP -> id .)
+    idPunto         reduce using rule 61 (EXP -> id .)
+    if              reduce using rule 61 (EXP -> id .)
+    print           reduce using rule 61 (EXP -> id .)
+    $end            reduce using rule 61 (EXP -> id .)
+
+
+state 54
+
+    (20) METODOS -> id para EXP . parc
+
+    parc            shift and go to state 98
+
+
+state 55
+
+    (21) METODOS -> id para parc .
+
+    label           reduce using rule 21 (METODOS -> id para parc .)
+    gotos           reduce using rule 21 (METODOS -> id para parc .)
+    r_from          reduce using rule 21 (METODOS -> id para parc .)
+    import          reduce using rule 21 (METODOS -> id para parc .)
+    arroba          reduce using rule 21 (METODOS -> id para parc .)
+    id              reduce using rule 21 (METODOS -> id para parc .)
+    idPunto         reduce using rule 21 (METODOS -> id para parc .)
+    if              reduce using rule 21 (METODOS -> id para parc .)
+    print           reduce using rule 21 (METODOS -> id para parc .)
+    $end            reduce using rule 21 (METODOS -> id para parc .)
+
+
+state 56
+
+    (46) OPERACION -> id . igual_igual EXP
+    (61) EXP -> id .
+    (18) METODOS -> id . id para parc dospuntos
+    (20) METODOS -> id . para EXP parc
+    (21) METODOS -> id . para parc
+    (34) VECTOR -> id . corchetea EXP corchetec
+    (35) VECTOR -> id . corchetea corchetec
+
+  ! shift/reduce conflict for id resolved as shift
+    igual_igual     shift and go to state 92
+    mas             reduce using rule 61 (EXP -> id .)
+    menos           reduce using rule 61 (EXP -> id .)
+    multiplicacion  reduce using rule 61 (EXP -> id .)
+    division        reduce using rule 61 (EXP -> id .)
+    modulo          reduce using rule 61 (EXP -> id .)
+    elevado         reduce using rule 61 (EXP -> id .)
+    and             reduce using rule 61 (EXP -> id .)
+    or              reduce using rule 61 (EXP -> id .)
+    mayor           reduce using rule 61 (EXP -> id .)
+    menor           reduce using rule 61 (EXP -> id .)
+    mayor_igual     reduce using rule 61 (EXP -> id .)
+    menor_igual     reduce using rule 61 (EXP -> id .)
+    diferente1      reduce using rule 61 (EXP -> id .)
+    diferente2      reduce using rule 61 (EXP -> id .)
+    label           reduce using rule 61 (EXP -> id .)
+    gotos           reduce using rule 61 (EXP -> id .)
+    r_from          reduce using rule 61 (EXP -> id .)
+    import          reduce using rule 61 (EXP -> id .)
+    arroba          reduce using rule 61 (EXP -> id .)
+    idPunto         reduce using rule 61 (EXP -> id .)
+    if              reduce using rule 61 (EXP -> id .)
+    print           reduce using rule 61 (EXP -> id .)
+    $end            reduce using rule 61 (EXP -> id .)
+    id              shift and go to state 23
+    para            shift and go to state 24
+    corchetea       shift and go to state 26
+
+  ! id              [ reduce using rule 61 (EXP -> id .) ]
+
+
+state 57
+
+    (14) ASIGNACION -> id igual OPERACION .
+
+    label           reduce using rule 14 (ASIGNACION -> id igual OPERACION .)
+    gotos           reduce using rule 14 (ASIGNACION -> id igual OPERACION .)
+    r_from          reduce using rule 14 (ASIGNACION -> id igual OPERACION .)
+    import          reduce using rule 14 (ASIGNACION -> id igual OPERACION .)
+    arroba          reduce using rule 14 (ASIGNACION -> id igual OPERACION .)
+    id              reduce using rule 14 (ASIGNACION -> id igual OPERACION .)
+    idPunto         reduce using rule 14 (ASIGNACION -> id igual OPERACION .)
+    if              reduce using rule 14 (ASIGNACION -> id igual OPERACION .)
+    print           reduce using rule 14 (ASIGNACION -> id igual OPERACION .)
+    $end            reduce using rule 14 (ASIGNACION -> id igual OPERACION .)
+
+
+state 58
+
+    (15) ASIGNACION -> id igual EXP .
+    (36) OPERACION -> EXP . mas EXP
+    (37) OPERACION -> EXP . menos EXP
+    (38) OPERACION -> EXP . multiplicacion EXP
+    (39) OPERACION -> EXP . division EXP
+    (40) OPERACION -> EXP . modulo EXP
+    (41) OPERACION -> EXP . elevado EXP
+    (42) OPERACION -> EXP . and EXP
+    (43) OPERACION -> EXP . or EXP
+    (44) OPERACION -> EXP . mayor EXP
+    (45) OPERACION -> EXP . menor EXP
+    (47) OPERACION -> EXP . mayor_igual EXP
+    (48) OPERACION -> EXP . menor_igual EXP
+    (49) OPERACION -> EXP . diferente1 EXP
+    (50) OPERACION -> EXP . diferente2 EXP
+
+    label           reduce using rule 15 (ASIGNACION -> id igual EXP .)
+    gotos           reduce using rule 15 (ASIGNACION -> id igual EXP .)
+    r_from          reduce using rule 15 (ASIGNACION -> id igual EXP .)
+    import          reduce using rule 15 (ASIGNACION -> id igual EXP .)
+    arroba          reduce using rule 15 (ASIGNACION -> id igual EXP .)
+    id              reduce using rule 15 (ASIGNACION -> id igual EXP .)
+    idPunto         reduce using rule 15 (ASIGNACION -> id igual EXP .)
+    if              reduce using rule 15 (ASIGNACION -> id igual EXP .)
+    print           reduce using rule 15 (ASIGNACION -> id igual EXP .)
+    $end            reduce using rule 15 (ASIGNACION -> id igual EXP .)
+    mas             shift and go to state 76
+    menos           shift and go to state 77
+    multiplicacion  shift and go to state 78
+    division        shift and go to state 79
+    modulo          shift and go to state 80
+    elevado         shift and go to state 81
+    and             shift and go to state 82
+    or              shift and go to state 83
+    mayor           shift and go to state 84
+    menor           shift and go to state 85
+    mayor_igual     shift and go to state 86
+    menor_igual     shift and go to state 87
+    diferente1      shift and go to state 88
+    diferente2      shift and go to state 89
+
+
+state 59
+
+    (16) ASIGNACION -> id igual METODOS .
+
+    label           reduce using rule 16 (ASIGNACION -> id igual METODOS .)
+    gotos           reduce using rule 16 (ASIGNACION -> id igual METODOS .)
+    r_from          reduce using rule 16 (ASIGNACION -> id igual METODOS .)
+    import          reduce using rule 16 (ASIGNACION -> id igual METODOS .)
+    arroba          reduce using rule 16 (ASIGNACION -> id igual METODOS .)
+    id              reduce using rule 16 (ASIGNACION -> id igual METODOS .)
+    idPunto         reduce using rule 16 (ASIGNACION -> id igual METODOS .)
+    if              reduce using rule 16 (ASIGNACION -> id igual METODOS .)
+    print           reduce using rule 16 (ASIGNACION -> id igual METODOS .)
+    $end            reduce using rule 16 (ASIGNACION -> id igual METODOS .)
+
+
+state 60
+
+    (63) EXP -> idPunto .
+    (19) METODOS -> idPunto . para EXP parc
+
+    mas             reduce using rule 63 (EXP -> idPunto .)
+    menos           reduce using rule 63 (EXP -> idPunto .)
+    multiplicacion  reduce using rule 63 (EXP -> idPunto .)
+    division        reduce using rule 63 (EXP -> idPunto .)
+    modulo          reduce using rule 63 (EXP -> idPunto .)
+    elevado         reduce using rule 63 (EXP -> idPunto .)
+    and             reduce using rule 63 (EXP -> idPunto .)
+    or              reduce using rule 63 (EXP -> idPunto .)
+    mayor           reduce using rule 63 (EXP -> idPunto .)
+    menor           reduce using rule 63 (EXP -> idPunto .)
+    mayor_igual     reduce using rule 63 (EXP -> idPunto .)
+    menor_igual     reduce using rule 63 (EXP -> idPunto .)
+    diferente1      reduce using rule 63 (EXP -> idPunto .)
+    diferente2      reduce using rule 63 (EXP -> idPunto .)
+    label           reduce using rule 63 (EXP -> idPunto .)
+    gotos           reduce using rule 63 (EXP -> idPunto .)
+    r_from          reduce using rule 63 (EXP -> idPunto .)
+    import          reduce using rule 63 (EXP -> idPunto .)
+    arroba          reduce using rule 63 (EXP -> idPunto .)
+    id              reduce using rule 63 (EXP -> idPunto .)
+    idPunto         reduce using rule 63 (EXP -> idPunto .)
+    if              reduce using rule 63 (EXP -> idPunto .)
+    print           reduce using rule 63 (EXP -> idPunto .)
+    $end            reduce using rule 63 (EXP -> idPunto .)
+    para            shift and go to state 31
+
+
+state 61
+
+    (34) VECTOR -> id corchetea EXP . corchetec
+
+    corchetec       shift and go to state 99
+
+
+state 62
+
+    (35) VECTOR -> id corchetea corchetec .
+
+    igual           reduce using rule 35 (VECTOR -> id corchetea corchetec .)
+    dospuntos       reduce using rule 35 (VECTOR -> id corchetea corchetec .)
+    label           reduce using rule 35 (VECTOR -> id corchetea corchetec .)
+    gotos           reduce using rule 35 (VECTOR -> id corchetea corchetec .)
+    r_from          reduce using rule 35 (VECTOR -> id corchetea corchetec .)
+    import          reduce using rule 35 (VECTOR -> id corchetea corchetec .)
+    arroba          reduce using rule 35 (VECTOR -> id corchetea corchetec .)
+    id              reduce using rule 35 (VECTOR -> id corchetea corchetec .)
+    idPunto         reduce using rule 35 (VECTOR -> id corchetea corchetec .)
+    if              reduce using rule 35 (VECTOR -> id corchetea corchetec .)
+    print           reduce using rule 35 (VECTOR -> id corchetea corchetec .)
+    $end            reduce using rule 35 (VECTOR -> id corchetea corchetec .)
+
+
+state 63
+
+    (32) SALTO -> gotos punto id .
+
+    label           reduce using rule 32 (SALTO -> gotos punto id .)
+    gotos           reduce using rule 32 (SALTO -> gotos punto id .)
+    r_from          reduce using rule 32 (SALTO -> gotos punto id .)
+    import          reduce using rule 32 (SALTO -> gotos punto id .)
+    arroba          reduce using rule 32 (SALTO -> gotos punto id .)
+    id              reduce using rule 32 (SALTO -> gotos punto id .)
+    idPunto         reduce using rule 32 (SALTO -> gotos punto id .)
+    if              reduce using rule 32 (SALTO -> gotos punto id .)
+    print           reduce using rule 32 (SALTO -> gotos punto id .)
+    $end            reduce using rule 32 (SALTO -> gotos punto id .)
+
+
+state 64
+
+    (22) IMPORTACIONES -> r_from idPunto import . id
+    (28) IMPORTACIONES -> r_from idPunto import . multiplicacion
+
+    id              shift and go to state 100
+    multiplicacion  shift and go to state 101
+
+
+state 65
+
+    (25) IMPORTACIONES -> r_from id import . id
+    (29) IMPORTACIONES -> r_from id import . multiplicacion
+
+    id              shift and go to state 102
+    multiplicacion  shift and go to state 103
+
+
+state 66
+
+    (30) IMPORTACIONES -> r_from gotos import . with_goto
+
+    with_goto       shift and go to state 104
+
+
+state 67
+
+    (19) METODOS -> idPunto para EXP . parc
+
+    parc            shift and go to state 105
+
+
+state 68
+
+    (23) IMPORTACIONES -> import idPunto as . id
+
+    id              shift and go to state 106
+
+
+state 69
+
+    (24) IMPORTACIONES -> import idPunto id .
+
+    label           reduce using rule 24 (IMPORTACIONES -> import idPunto id .)
+    gotos           reduce using rule 24 (IMPORTACIONES -> import idPunto id .)
+    r_from          reduce using rule 24 (IMPORTACIONES -> import idPunto id .)
+    import          reduce using rule 24 (IMPORTACIONES -> import idPunto id .)
+    arroba          reduce using rule 24 (IMPORTACIONES -> import idPunto id .)
+    id              reduce using rule 24 (IMPORTACIONES -> import idPunto id .)
+    idPunto         reduce using rule 24 (IMPORTACIONES -> import idPunto id .)
+    if              reduce using rule 24 (IMPORTACIONES -> import idPunto id .)
+    print           reduce using rule 24 (IMPORTACIONES -> import idPunto id .)
+    $end            reduce using rule 24 (IMPORTACIONES -> import idPunto id .)
+
+
+state 70
+
+    (27) IMPORTACIONES -> import id id .
+
+    label           reduce using rule 27 (IMPORTACIONES -> import id id .)
+    gotos           reduce using rule 27 (IMPORTACIONES -> import id id .)
+    r_from          reduce using rule 27 (IMPORTACIONES -> import id id .)
+    import          reduce using rule 27 (IMPORTACIONES -> import id id .)
+    arroba          reduce using rule 27 (IMPORTACIONES -> import id id .)
+    id              reduce using rule 27 (IMPORTACIONES -> import id id .)
+    idPunto         reduce using rule 27 (IMPORTACIONES -> import id id .)
+    if              reduce using rule 27 (IMPORTACIONES -> import id id .)
+    print           reduce using rule 27 (IMPORTACIONES -> import id id .)
+    $end            reduce using rule 27 (IMPORTACIONES -> import id id .)
+
+
+state 71
+
+    (26) IMPORTACIONES -> import id as . id
+
+    id              shift and go to state 107
+
+
+state 72
+
+    (17) ASIGNACION -> VECTOR igual OPERACION .
+
+    label           reduce using rule 17 (ASIGNACION -> VECTOR igual OPERACION .)
+    gotos           reduce using rule 17 (ASIGNACION -> VECTOR igual OPERACION .)
+    r_from          reduce using rule 17 (ASIGNACION -> VECTOR igual OPERACION .)
+    import          reduce using rule 17 (ASIGNACION -> VECTOR igual OPERACION .)
+    arroba          reduce using rule 17 (ASIGNACION -> VECTOR igual OPERACION .)
+    id              reduce using rule 17 (ASIGNACION -> VECTOR igual OPERACION .)
+    idPunto         reduce using rule 17 (ASIGNACION -> VECTOR igual OPERACION .)
+    if              reduce using rule 17 (ASIGNACION -> VECTOR igual OPERACION .)
+    print           reduce using rule 17 (ASIGNACION -> VECTOR igual OPERACION .)
+    $end            reduce using rule 17 (ASIGNACION -> VECTOR igual OPERACION .)
+
+
+state 73
+
+    (36) OPERACION -> EXP . mas EXP
+    (37) OPERACION -> EXP . menos EXP
+    (38) OPERACION -> EXP . multiplicacion EXP
+    (39) OPERACION -> EXP . division EXP
+    (40) OPERACION -> EXP . modulo EXP
+    (41) OPERACION -> EXP . elevado EXP
+    (42) OPERACION -> EXP . and EXP
+    (43) OPERACION -> EXP . or EXP
+    (44) OPERACION -> EXP . mayor EXP
+    (45) OPERACION -> EXP . menor EXP
+    (47) OPERACION -> EXP . mayor_igual EXP
+    (48) OPERACION -> EXP . menor_igual EXP
+    (49) OPERACION -> EXP . diferente1 EXP
+    (50) OPERACION -> EXP . diferente2 EXP
+
+    mas             shift and go to state 76
+    menos           shift and go to state 77
+    multiplicacion  shift and go to state 78
+    division        shift and go to state 79
+    modulo          shift and go to state 80
+    elevado         shift and go to state 81
+    and             shift and go to state 82
+    or              shift and go to state 83
+    mayor           shift and go to state 84
+    menor           shift and go to state 85
+    mayor_igual     shift and go to state 86
+    menor_igual     shift and go to state 87
+    diferente1      shift and go to state 88
+    diferente2      shift and go to state 89
+
+
+state 74
+
+    (12) CONDICIONIF -> if OPERACION dospuntos . SALTO
+    (32) SALTO -> . gotos punto id
+
+    gotos           shift and go to state 13
+
+    SALTO                          shift and go to state 108
+
+state 75
+
+    (13) CONDICIONIF -> if EXP dospuntos . SALTO
+    (32) SALTO -> . gotos punto id
+
+    gotos           shift and go to state 13
+
+    SALTO                          shift and go to state 109
+
+state 76
+
+    (36) OPERACION -> EXP mas . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 110
+
+state 77
+
+    (37) OPERACION -> EXP menos . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 111
+
+state 78
+
+    (38) OPERACION -> EXP multiplicacion . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 112
+
+state 79
+
+    (39) OPERACION -> EXP division . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 113
+
+state 80
+
+    (40) OPERACION -> EXP modulo . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 114
+
+state 81
+
+    (41) OPERACION -> EXP elevado . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 115
+
+state 82
+
+    (42) OPERACION -> EXP and . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 116
+
+state 83
+
+    (43) OPERACION -> EXP or . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 117
+
+state 84
+
+    (44) OPERACION -> EXP mayor . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 118
+
+state 85
+
+    (45) OPERACION -> EXP menor . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 119
+
+state 86
+
+    (47) OPERACION -> EXP mayor_igual . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 120
+
+state 87
+
+    (48) OPERACION -> EXP menor_igual . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 121
+
+state 88
+
+    (49) OPERACION -> EXP diferente1 . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 122
+
+state 89
+
+    (50) OPERACION -> EXP diferente2 . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 123
+
+state 90
+
+    (54) EXP -> mas EXP .
+
+    dospuntos       reduce using rule 54 (EXP -> mas EXP .)
+    mas             reduce using rule 54 (EXP -> mas EXP .)
+    menos           reduce using rule 54 (EXP -> mas EXP .)
+    multiplicacion  reduce using rule 54 (EXP -> mas EXP .)
+    division        reduce using rule 54 (EXP -> mas EXP .)
+    modulo          reduce using rule 54 (EXP -> mas EXP .)
+    elevado         reduce using rule 54 (EXP -> mas EXP .)
+    and             reduce using rule 54 (EXP -> mas EXP .)
+    or              reduce using rule 54 (EXP -> mas EXP .)
+    mayor           reduce using rule 54 (EXP -> mas EXP .)
+    menor           reduce using rule 54 (EXP -> mas EXP .)
+    mayor_igual     reduce using rule 54 (EXP -> mas EXP .)
+    menor_igual     reduce using rule 54 (EXP -> mas EXP .)
+    diferente1      reduce using rule 54 (EXP -> mas EXP .)
+    diferente2      reduce using rule 54 (EXP -> mas EXP .)
+    parc            reduce using rule 54 (EXP -> mas EXP .)
+    label           reduce using rule 54 (EXP -> mas EXP .)
+    gotos           reduce using rule 54 (EXP -> mas EXP .)
+    r_from          reduce using rule 54 (EXP -> mas EXP .)
+    import          reduce using rule 54 (EXP -> mas EXP .)
+    arroba          reduce using rule 54 (EXP -> mas EXP .)
+    id              reduce using rule 54 (EXP -> mas EXP .)
+    idPunto         reduce using rule 54 (EXP -> mas EXP .)
+    if              reduce using rule 54 (EXP -> mas EXP .)
+    print           reduce using rule 54 (EXP -> mas EXP .)
+    $end            reduce using rule 54 (EXP -> mas EXP .)
+    corchetec       reduce using rule 54 (EXP -> mas EXP .)
+
+
+state 91
+
+    (55) EXP -> menos EXP .
+
+    dospuntos       reduce using rule 55 (EXP -> menos EXP .)
+    mas             reduce using rule 55 (EXP -> menos EXP .)
+    menos           reduce using rule 55 (EXP -> menos EXP .)
+    multiplicacion  reduce using rule 55 (EXP -> menos EXP .)
+    division        reduce using rule 55 (EXP -> menos EXP .)
+    modulo          reduce using rule 55 (EXP -> menos EXP .)
+    elevado         reduce using rule 55 (EXP -> menos EXP .)
+    and             reduce using rule 55 (EXP -> menos EXP .)
+    or              reduce using rule 55 (EXP -> menos EXP .)
+    mayor           reduce using rule 55 (EXP -> menos EXP .)
+    menor           reduce using rule 55 (EXP -> menos EXP .)
+    mayor_igual     reduce using rule 55 (EXP -> menos EXP .)
+    menor_igual     reduce using rule 55 (EXP -> menos EXP .)
+    diferente1      reduce using rule 55 (EXP -> menos EXP .)
+    diferente2      reduce using rule 55 (EXP -> menos EXP .)
+    parc            reduce using rule 55 (EXP -> menos EXP .)
+    label           reduce using rule 55 (EXP -> menos EXP .)
+    gotos           reduce using rule 55 (EXP -> menos EXP .)
+    r_from          reduce using rule 55 (EXP -> menos EXP .)
+    import          reduce using rule 55 (EXP -> menos EXP .)
+    arroba          reduce using rule 55 (EXP -> menos EXP .)
+    id              reduce using rule 55 (EXP -> menos EXP .)
+    idPunto         reduce using rule 55 (EXP -> menos EXP .)
+    if              reduce using rule 55 (EXP -> menos EXP .)
+    print           reduce using rule 55 (EXP -> menos EXP .)
+    $end            reduce using rule 55 (EXP -> menos EXP .)
+    corchetec       reduce using rule 55 (EXP -> menos EXP .)
+
+
+state 92
+
+    (46) OPERACION -> id igual_igual . EXP
+    (54) EXP -> . mas EXP
+    (55) EXP -> . menos EXP
+    (56) EXP -> . not EXP
+    (57) EXP -> . int
+    (58) EXP -> . decimales
+    (59) EXP -> . cadena
+    (60) EXP -> . cadenaString
+    (61) EXP -> . id
+    (62) EXP -> . null
+    (63) EXP -> . idPunto
+
+    mas             shift and go to state 38
+    menos           shift and go to state 39
+    not             shift and go to state 43
+    int             shift and go to state 44
+    decimales       shift and go to state 45
+    cadena          shift and go to state 46
+    cadenaString    shift and go to state 47
+    id              shift and go to state 53
+    null            shift and go to state 48
+    idPunto         shift and go to state 49
+
+    EXP                            shift and go to state 124
+
+state 93
+
+    (51) OPERACION -> corchetea EXP . corchetec
+
+    corchetec       shift and go to state 125
+
+
+state 94
+
+    (52) OPERACION -> corchetea corchetec .
+
+    dospuntos       reduce using rule 52 (OPERACION -> corchetea corchetec .)
+    label           reduce using rule 52 (OPERACION -> corchetea corchetec .)
+    gotos           reduce using rule 52 (OPERACION -> corchetea corchetec .)
+    r_from          reduce using rule 52 (OPERACION -> corchetea corchetec .)
+    import          reduce using rule 52 (OPERACION -> corchetea corchetec .)
+    arroba          reduce using rule 52 (OPERACION -> corchetea corchetec .)
+    id              reduce using rule 52 (OPERACION -> corchetea corchetec .)
+    idPunto         reduce using rule 52 (OPERACION -> corchetea corchetec .)
+    if              reduce using rule 52 (OPERACION -> corchetea corchetec .)
+    print           reduce using rule 52 (OPERACION -> corchetea corchetec .)
+    $end            reduce using rule 52 (OPERACION -> corchetea corchetec .)
+
+
+state 95
+
+    (56) EXP -> not EXP .
+
+    dospuntos       reduce using rule 56 (EXP -> not EXP .)
+    mas             reduce using rule 56 (EXP -> not EXP .)
+    menos           reduce using rule 56 (EXP -> not EXP .)
+    multiplicacion  reduce using rule 56 (EXP -> not EXP .)
+    division        reduce using rule 56 (EXP -> not EXP .)
+    modulo          reduce using rule 56 (EXP -> not EXP .)
+    elevado         reduce using rule 56 (EXP -> not EXP .)
+    and             reduce using rule 56 (EXP -> not EXP .)
+    or              reduce using rule 56 (EXP -> not EXP .)
+    mayor           reduce using rule 56 (EXP -> not EXP .)
+    menor           reduce using rule 56 (EXP -> not EXP .)
+    mayor_igual     reduce using rule 56 (EXP -> not EXP .)
+    menor_igual     reduce using rule 56 (EXP -> not EXP .)
+    diferente1      reduce using rule 56 (EXP -> not EXP .)
+    diferente2      reduce using rule 56 (EXP -> not EXP .)
+    parc            reduce using rule 56 (EXP -> not EXP .)
+    label           reduce using rule 56 (EXP -> not EXP .)
+    gotos           reduce using rule 56 (EXP -> not EXP .)
+    r_from          reduce using rule 56 (EXP -> not EXP .)
+    import          reduce using rule 56 (EXP -> not EXP .)
+    arroba          reduce using rule 56 (EXP -> not EXP .)
+    id              reduce using rule 56 (EXP -> not EXP .)
+    idPunto         reduce using rule 56 (EXP -> not EXP .)
+    if              reduce using rule 56 (EXP -> not EXP .)
+    print           reduce using rule 56 (EXP -> not EXP .)
+    $end            reduce using rule 56 (EXP -> not EXP .)
+    corchetec       reduce using rule 56 (EXP -> not EXP .)
+
+
+state 96
+
+    (11) PRINTF -> print para EXP . parc
+
+    parc            shift and go to state 126
+
+
+state 97
+
+    (18) METODOS -> id id para parc . dospuntos
+
+    dospuntos       shift and go to state 127
+
+
+state 98
+
+    (20) METODOS -> id para EXP parc .
+
+    label           reduce using rule 20 (METODOS -> id para EXP parc .)
+    gotos           reduce using rule 20 (METODOS -> id para EXP parc .)
+    r_from          reduce using rule 20 (METODOS -> id para EXP parc .)
+    import          reduce using rule 20 (METODOS -> id para EXP parc .)
+    arroba          reduce using rule 20 (METODOS -> id para EXP parc .)
+    id              reduce using rule 20 (METODOS -> id para EXP parc .)
+    idPunto         reduce using rule 20 (METODOS -> id para EXP parc .)
+    if              reduce using rule 20 (METODOS -> id para EXP parc .)
+    print           reduce using rule 20 (METODOS -> id para EXP parc .)
+    $end            reduce using rule 20 (METODOS -> id para EXP parc .)
+
+
+state 99
+
+    (34) VECTOR -> id corchetea EXP corchetec .
+
+    igual           reduce using rule 34 (VECTOR -> id corchetea EXP corchetec .)
+    dospuntos       reduce using rule 34 (VECTOR -> id corchetea EXP corchetec .)
+    label           reduce using rule 34 (VECTOR -> id corchetea EXP corchetec .)
+    gotos           reduce using rule 34 (VECTOR -> id corchetea EXP corchetec .)
+    r_from          reduce using rule 34 (VECTOR -> id corchetea EXP corchetec .)
+    import          reduce using rule 34 (VECTOR -> id corchetea EXP corchetec .)
+    arroba          reduce using rule 34 (VECTOR -> id corchetea EXP corchetec .)
+    id              reduce using rule 34 (VECTOR -> id corchetea EXP corchetec .)
+    idPunto         reduce using rule 34 (VECTOR -> id corchetea EXP corchetec .)
+    if              reduce using rule 34 (VECTOR -> id corchetea EXP corchetec .)
+    print           reduce using rule 34 (VECTOR -> id corchetea EXP corchetec .)
+    $end            reduce using rule 34 (VECTOR -> id corchetea EXP corchetec .)
+
+
+state 100
+
+    (22) IMPORTACIONES -> r_from idPunto import id .
+
+    label           reduce using rule 22 (IMPORTACIONES -> r_from idPunto import id .)
+    gotos           reduce using rule 22 (IMPORTACIONES -> r_from idPunto import id .)
+    r_from          reduce using rule 22 (IMPORTACIONES -> r_from idPunto import id .)
+    import          reduce using rule 22 (IMPORTACIONES -> r_from idPunto import id .)
+    arroba          reduce using rule 22 (IMPORTACIONES -> r_from idPunto import id .)
+    id              reduce using rule 22 (IMPORTACIONES -> r_from idPunto import id .)
+    idPunto         reduce using rule 22 (IMPORTACIONES -> r_from idPunto import id .)
+    if              reduce using rule 22 (IMPORTACIONES -> r_from idPunto import id .)
+    print           reduce using rule 22 (IMPORTACIONES -> r_from idPunto import id .)
+    $end            reduce using rule 22 (IMPORTACIONES -> r_from idPunto import id .)
+
+
+state 101
+
+    (28) IMPORTACIONES -> r_from idPunto import multiplicacion .
+
+    label           reduce using rule 28 (IMPORTACIONES -> r_from idPunto import multiplicacion .)
+    gotos           reduce using rule 28 (IMPORTACIONES -> r_from idPunto import multiplicacion .)
+    r_from          reduce using rule 28 (IMPORTACIONES -> r_from idPunto import multiplicacion .)
+    import          reduce using rule 28 (IMPORTACIONES -> r_from idPunto import multiplicacion .)
+    arroba          reduce using rule 28 (IMPORTACIONES -> r_from idPunto import multiplicacion .)
+    id              reduce using rule 28 (IMPORTACIONES -> r_from idPunto import multiplicacion .)
+    idPunto         reduce using rule 28 (IMPORTACIONES -> r_from idPunto import multiplicacion .)
+    if              reduce using rule 28 (IMPORTACIONES -> r_from idPunto import multiplicacion .)
+    print           reduce using rule 28 (IMPORTACIONES -> r_from idPunto import multiplicacion .)
+    $end            reduce using rule 28 (IMPORTACIONES -> r_from idPunto import multiplicacion .)
+
+
+state 102
+
+    (25) IMPORTACIONES -> r_from id import id .
+
+    label           reduce using rule 25 (IMPORTACIONES -> r_from id import id .)
+    gotos           reduce using rule 25 (IMPORTACIONES -> r_from id import id .)
+    r_from          reduce using rule 25 (IMPORTACIONES -> r_from id import id .)
+    import          reduce using rule 25 (IMPORTACIONES -> r_from id import id .)
+    arroba          reduce using rule 25 (IMPORTACIONES -> r_from id import id .)
+    id              reduce using rule 25 (IMPORTACIONES -> r_from id import id .)
+    idPunto         reduce using rule 25 (IMPORTACIONES -> r_from id import id .)
+    if              reduce using rule 25 (IMPORTACIONES -> r_from id import id .)
+    print           reduce using rule 25 (IMPORTACIONES -> r_from id import id .)
+    $end            reduce using rule 25 (IMPORTACIONES -> r_from id import id .)
+
+
+state 103
+
+    (29) IMPORTACIONES -> r_from id import multiplicacion .
+
+    label           reduce using rule 29 (IMPORTACIONES -> r_from id import multiplicacion .)
+    gotos           reduce using rule 29 (IMPORTACIONES -> r_from id import multiplicacion .)
+    r_from          reduce using rule 29 (IMPORTACIONES -> r_from id import multiplicacion .)
+    import          reduce using rule 29 (IMPORTACIONES -> r_from id import multiplicacion .)
+    arroba          reduce using rule 29 (IMPORTACIONES -> r_from id import multiplicacion .)
+    id              reduce using rule 29 (IMPORTACIONES -> r_from id import multiplicacion .)
+    idPunto         reduce using rule 29 (IMPORTACIONES -> r_from id import multiplicacion .)
+    if              reduce using rule 29 (IMPORTACIONES -> r_from id import multiplicacion .)
+    print           reduce using rule 29 (IMPORTACIONES -> r_from id import multiplicacion .)
+    $end            reduce using rule 29 (IMPORTACIONES -> r_from id import multiplicacion .)
+
+
+state 104
+
+    (30) IMPORTACIONES -> r_from gotos import with_goto .
+
+    label           reduce using rule 30 (IMPORTACIONES -> r_from gotos import with_goto .)
+    gotos           reduce using rule 30 (IMPORTACIONES -> r_from gotos import with_goto .)
+    r_from          reduce using rule 30 (IMPORTACIONES -> r_from gotos import with_goto .)
+    import          reduce using rule 30 (IMPORTACIONES -> r_from gotos import with_goto .)
+    arroba          reduce using rule 30 (IMPORTACIONES -> r_from gotos import with_goto .)
+    id              reduce using rule 30 (IMPORTACIONES -> r_from gotos import with_goto .)
+    idPunto         reduce using rule 30 (IMPORTACIONES -> r_from gotos import with_goto .)
+    if              reduce using rule 30 (IMPORTACIONES -> r_from gotos import with_goto .)
+    print           reduce using rule 30 (IMPORTACIONES -> r_from gotos import with_goto .)
+    $end            reduce using rule 30 (IMPORTACIONES -> r_from gotos import with_goto .)
+
+
+state 105
+
+    (19) METODOS -> idPunto para EXP parc .
+
+    label           reduce using rule 19 (METODOS -> idPunto para EXP parc .)
+    gotos           reduce using rule 19 (METODOS -> idPunto para EXP parc .)
+    r_from          reduce using rule 19 (METODOS -> idPunto para EXP parc .)
+    import          reduce using rule 19 (METODOS -> idPunto para EXP parc .)
+    arroba          reduce using rule 19 (METODOS -> idPunto para EXP parc .)
+    id              reduce using rule 19 (METODOS -> idPunto para EXP parc .)
+    idPunto         reduce using rule 19 (METODOS -> idPunto para EXP parc .)
+    if              reduce using rule 19 (METODOS -> idPunto para EXP parc .)
+    print           reduce using rule 19 (METODOS -> idPunto para EXP parc .)
+    $end            reduce using rule 19 (METODOS -> idPunto para EXP parc .)
+
+
+state 106
+
+    (23) IMPORTACIONES -> import idPunto as id .
+
+    label           reduce using rule 23 (IMPORTACIONES -> import idPunto as id .)
+    gotos           reduce using rule 23 (IMPORTACIONES -> import idPunto as id .)
+    r_from          reduce using rule 23 (IMPORTACIONES -> import idPunto as id .)
+    import          reduce using rule 23 (IMPORTACIONES -> import idPunto as id .)
+    arroba          reduce using rule 23 (IMPORTACIONES -> import idPunto as id .)
+    id              reduce using rule 23 (IMPORTACIONES -> import idPunto as id .)
+    idPunto         reduce using rule 23 (IMPORTACIONES -> import idPunto as id .)
+    if              reduce using rule 23 (IMPORTACIONES -> import idPunto as id .)
+    print           reduce using rule 23 (IMPORTACIONES -> import idPunto as id .)
+    $end            reduce using rule 23 (IMPORTACIONES -> import idPunto as id .)
+
+
+state 107
+
+    (26) IMPORTACIONES -> import id as id .
+
+    label           reduce using rule 26 (IMPORTACIONES -> import id as id .)
+    gotos           reduce using rule 26 (IMPORTACIONES -> import id as id .)
+    r_from          reduce using rule 26 (IMPORTACIONES -> import id as id .)
+    import          reduce using rule 26 (IMPORTACIONES -> import id as id .)
+    arroba          reduce using rule 26 (IMPORTACIONES -> import id as id .)
+    id              reduce using rule 26 (IMPORTACIONES -> import id as id .)
+    idPunto         reduce using rule 26 (IMPORTACIONES -> import id as id .)
+    if              reduce using rule 26 (IMPORTACIONES -> import id as id .)
+    print           reduce using rule 26 (IMPORTACIONES -> import id as id .)
+    $end            reduce using rule 26 (IMPORTACIONES -> import id as id .)
+
+
+state 108
+
+    (12) CONDICIONIF -> if OPERACION dospuntos SALTO .
+
+    label           reduce using rule 12 (CONDICIONIF -> if OPERACION dospuntos SALTO .)
+    gotos           reduce using rule 12 (CONDICIONIF -> if OPERACION dospuntos SALTO .)
+    r_from          reduce using rule 12 (CONDICIONIF -> if OPERACION dospuntos SALTO .)
+    import          reduce using rule 12 (CONDICIONIF -> if OPERACION dospuntos SALTO .)
+    arroba          reduce using rule 12 (CONDICIONIF -> if OPERACION dospuntos SALTO .)
+    id              reduce using rule 12 (CONDICIONIF -> if OPERACION dospuntos SALTO .)
+    idPunto         reduce using rule 12 (CONDICIONIF -> if OPERACION dospuntos SALTO .)
+    if              reduce using rule 12 (CONDICIONIF -> if OPERACION dospuntos SALTO .)
+    print           reduce using rule 12 (CONDICIONIF -> if OPERACION dospuntos SALTO .)
+    $end            reduce using rule 12 (CONDICIONIF -> if OPERACION dospuntos SALTO .)
+
+
+state 109
+
+    (13) CONDICIONIF -> if EXP dospuntos SALTO .
+
+    label           reduce using rule 13 (CONDICIONIF -> if EXP dospuntos SALTO .)
+    gotos           reduce using rule 13 (CONDICIONIF -> if EXP dospuntos SALTO .)
+    r_from          reduce using rule 13 (CONDICIONIF -> if EXP dospuntos SALTO .)
+    import          reduce using rule 13 (CONDICIONIF -> if EXP dospuntos SALTO .)
+    arroba          reduce using rule 13 (CONDICIONIF -> if EXP dospuntos SALTO .)
+    id              reduce using rule 13 (CONDICIONIF -> if EXP dospuntos SALTO .)
+    idPunto         reduce using rule 13 (CONDICIONIF -> if EXP dospuntos SALTO .)
+    if              reduce using rule 13 (CONDICIONIF -> if EXP dospuntos SALTO .)
+    print           reduce using rule 13 (CONDICIONIF -> if EXP dospuntos SALTO .)
+    $end            reduce using rule 13 (CONDICIONIF -> if EXP dospuntos SALTO .)
+
+
+state 110
+
+    (36) OPERACION -> EXP mas EXP .
+
+    dospuntos       reduce using rule 36 (OPERACION -> EXP mas EXP .)
+    label           reduce using rule 36 (OPERACION -> EXP mas EXP .)
+    gotos           reduce using rule 36 (OPERACION -> EXP mas EXP .)
+    r_from          reduce using rule 36 (OPERACION -> EXP mas EXP .)
+    import          reduce using rule 36 (OPERACION -> EXP mas EXP .)
+    arroba          reduce using rule 36 (OPERACION -> EXP mas EXP .)
+    id              reduce using rule 36 (OPERACION -> EXP mas EXP .)
+    idPunto         reduce using rule 36 (OPERACION -> EXP mas EXP .)
+    if              reduce using rule 36 (OPERACION -> EXP mas EXP .)
+    print           reduce using rule 36 (OPERACION -> EXP mas EXP .)
+    $end            reduce using rule 36 (OPERACION -> EXP mas EXP .)
+
+
+state 111
+
+    (37) OPERACION -> EXP menos EXP .
+
+    dospuntos       reduce using rule 37 (OPERACION -> EXP menos EXP .)
+    label           reduce using rule 37 (OPERACION -> EXP menos EXP .)
+    gotos           reduce using rule 37 (OPERACION -> EXP menos EXP .)
+    r_from          reduce using rule 37 (OPERACION -> EXP menos EXP .)
+    import          reduce using rule 37 (OPERACION -> EXP menos EXP .)
+    arroba          reduce using rule 37 (OPERACION -> EXP menos EXP .)
+    id              reduce using rule 37 (OPERACION -> EXP menos EXP .)
+    idPunto         reduce using rule 37 (OPERACION -> EXP menos EXP .)
+    if              reduce using rule 37 (OPERACION -> EXP menos EXP .)
+    print           reduce using rule 37 (OPERACION -> EXP menos EXP .)
+    $end            reduce using rule 37 (OPERACION -> EXP menos EXP .)
+
+
+state 112
+
+    (38) OPERACION -> EXP multiplicacion EXP .
+
+    dospuntos       reduce using rule 38 (OPERACION -> EXP multiplicacion EXP .)
+    label           reduce using rule 38 (OPERACION -> EXP multiplicacion EXP .)
+    gotos           reduce using rule 38 (OPERACION -> EXP multiplicacion EXP .)
+    r_from          reduce using rule 38 (OPERACION -> EXP multiplicacion EXP .)
+    import          reduce using rule 38 (OPERACION -> EXP multiplicacion EXP .)
+    arroba          reduce using rule 38 (OPERACION -> EXP multiplicacion EXP .)
+    id              reduce using rule 38 (OPERACION -> EXP multiplicacion EXP .)
+    idPunto         reduce using rule 38 (OPERACION -> EXP multiplicacion EXP .)
+    if              reduce using rule 38 (OPERACION -> EXP multiplicacion EXP .)
+    print           reduce using rule 38 (OPERACION -> EXP multiplicacion EXP .)
+    $end            reduce using rule 38 (OPERACION -> EXP multiplicacion EXP .)
+
+
+state 113
+
+    (39) OPERACION -> EXP division EXP .
+
+    dospuntos       reduce using rule 39 (OPERACION -> EXP division EXP .)
+    label           reduce using rule 39 (OPERACION -> EXP division EXP .)
+    gotos           reduce using rule 39 (OPERACION -> EXP division EXP .)
+    r_from          reduce using rule 39 (OPERACION -> EXP division EXP .)
+    import          reduce using rule 39 (OPERACION -> EXP division EXP .)
+    arroba          reduce using rule 39 (OPERACION -> EXP division EXP .)
+    id              reduce using rule 39 (OPERACION -> EXP division EXP .)
+    idPunto         reduce using rule 39 (OPERACION -> EXP division EXP .)
+    if              reduce using rule 39 (OPERACION -> EXP division EXP .)
+    print           reduce using rule 39 (OPERACION -> EXP division EXP .)
+    $end            reduce using rule 39 (OPERACION -> EXP division EXP .)
+
+
+state 114
+
+    (40) OPERACION -> EXP modulo EXP .
+
+    dospuntos       reduce using rule 40 (OPERACION -> EXP modulo EXP .)
+    label           reduce using rule 40 (OPERACION -> EXP modulo EXP .)
+    gotos           reduce using rule 40 (OPERACION -> EXP modulo EXP .)
+    r_from          reduce using rule 40 (OPERACION -> EXP modulo EXP .)
+    import          reduce using rule 40 (OPERACION -> EXP modulo EXP .)
+    arroba          reduce using rule 40 (OPERACION -> EXP modulo EXP .)
+    id              reduce using rule 40 (OPERACION -> EXP modulo EXP .)
+    idPunto         reduce using rule 40 (OPERACION -> EXP modulo EXP .)
+    if              reduce using rule 40 (OPERACION -> EXP modulo EXP .)
+    print           reduce using rule 40 (OPERACION -> EXP modulo EXP .)
+    $end            reduce using rule 40 (OPERACION -> EXP modulo EXP .)
+
+
+state 115
+
+    (41) OPERACION -> EXP elevado EXP .
+
+    dospuntos       reduce using rule 41 (OPERACION -> EXP elevado EXP .)
+    label           reduce using rule 41 (OPERACION -> EXP elevado EXP .)
+    gotos           reduce using rule 41 (OPERACION -> EXP elevado EXP .)
+    r_from          reduce using rule 41 (OPERACION -> EXP elevado EXP .)
+    import          reduce using rule 41 (OPERACION -> EXP elevado EXP .)
+    arroba          reduce using rule 41 (OPERACION -> EXP elevado EXP .)
+    id              reduce using rule 41 (OPERACION -> EXP elevado EXP .)
+    idPunto         reduce using rule 41 (OPERACION -> EXP elevado EXP .)
+    if              reduce using rule 41 (OPERACION -> EXP elevado EXP .)
+    print           reduce using rule 41 (OPERACION -> EXP elevado EXP .)
+    $end            reduce using rule 41 (OPERACION -> EXP elevado EXP .)
+
+
+state 116
+
+    (42) OPERACION -> EXP and EXP .
+
+    dospuntos       reduce using rule 42 (OPERACION -> EXP and EXP .)
+    label           reduce using rule 42 (OPERACION -> EXP and EXP .)
+    gotos           reduce using rule 42 (OPERACION -> EXP and EXP .)
+    r_from          reduce using rule 42 (OPERACION -> EXP and EXP .)
+    import          reduce using rule 42 (OPERACION -> EXP and EXP .)
+    arroba          reduce using rule 42 (OPERACION -> EXP and EXP .)
+    id              reduce using rule 42 (OPERACION -> EXP and EXP .)
+    idPunto         reduce using rule 42 (OPERACION -> EXP and EXP .)
+    if              reduce using rule 42 (OPERACION -> EXP and EXP .)
+    print           reduce using rule 42 (OPERACION -> EXP and EXP .)
+    $end            reduce using rule 42 (OPERACION -> EXP and EXP .)
+
+
+state 117
+
+    (43) OPERACION -> EXP or EXP .
+
+    dospuntos       reduce using rule 43 (OPERACION -> EXP or EXP .)
+    label           reduce using rule 43 (OPERACION -> EXP or EXP .)
+    gotos           reduce using rule 43 (OPERACION -> EXP or EXP .)
+    r_from          reduce using rule 43 (OPERACION -> EXP or EXP .)
+    import          reduce using rule 43 (OPERACION -> EXP or EXP .)
+    arroba          reduce using rule 43 (OPERACION -> EXP or EXP .)
+    id              reduce using rule 43 (OPERACION -> EXP or EXP .)
+    idPunto         reduce using rule 43 (OPERACION -> EXP or EXP .)
+    if              reduce using rule 43 (OPERACION -> EXP or EXP .)
+    print           reduce using rule 43 (OPERACION -> EXP or EXP .)
+    $end            reduce using rule 43 (OPERACION -> EXP or EXP .)
+
+
+state 118
+
+    (44) OPERACION -> EXP mayor EXP .
+
+    dospuntos       reduce using rule 44 (OPERACION -> EXP mayor EXP .)
+    label           reduce using rule 44 (OPERACION -> EXP mayor EXP .)
+    gotos           reduce using rule 44 (OPERACION -> EXP mayor EXP .)
+    r_from          reduce using rule 44 (OPERACION -> EXP mayor EXP .)
+    import          reduce using rule 44 (OPERACION -> EXP mayor EXP .)
+    arroba          reduce using rule 44 (OPERACION -> EXP mayor EXP .)
+    id              reduce using rule 44 (OPERACION -> EXP mayor EXP .)
+    idPunto         reduce using rule 44 (OPERACION -> EXP mayor EXP .)
+    if              reduce using rule 44 (OPERACION -> EXP mayor EXP .)
+    print           reduce using rule 44 (OPERACION -> EXP mayor EXP .)
+    $end            reduce using rule 44 (OPERACION -> EXP mayor EXP .)
+
+
+state 119
+
+    (45) OPERACION -> EXP menor EXP .
+
+    dospuntos       reduce using rule 45 (OPERACION -> EXP menor EXP .)
+    label           reduce using rule 45 (OPERACION -> EXP menor EXP .)
+    gotos           reduce using rule 45 (OPERACION -> EXP menor EXP .)
+    r_from          reduce using rule 45 (OPERACION -> EXP menor EXP .)
+    import          reduce using rule 45 (OPERACION -> EXP menor EXP .)
+    arroba          reduce using rule 45 (OPERACION -> EXP menor EXP .)
+    id              reduce using rule 45 (OPERACION -> EXP menor EXP .)
+    idPunto         reduce using rule 45 (OPERACION -> EXP menor EXP .)
+    if              reduce using rule 45 (OPERACION -> EXP menor EXP .)
+    print           reduce using rule 45 (OPERACION -> EXP menor EXP .)
+    $end            reduce using rule 45 (OPERACION -> EXP menor EXP .)
+
+
+state 120
+
+    (47) OPERACION -> EXP mayor_igual EXP .
+
+    dospuntos       reduce using rule 47 (OPERACION -> EXP mayor_igual EXP .)
+    label           reduce using rule 47 (OPERACION -> EXP mayor_igual EXP .)
+    gotos           reduce using rule 47 (OPERACION -> EXP mayor_igual EXP .)
+    r_from          reduce using rule 47 (OPERACION -> EXP mayor_igual EXP .)
+    import          reduce using rule 47 (OPERACION -> EXP mayor_igual EXP .)
+    arroba          reduce using rule 47 (OPERACION -> EXP mayor_igual EXP .)
+    id              reduce using rule 47 (OPERACION -> EXP mayor_igual EXP .)
+    idPunto         reduce using rule 47 (OPERACION -> EXP mayor_igual EXP .)
+    if              reduce using rule 47 (OPERACION -> EXP mayor_igual EXP .)
+    print           reduce using rule 47 (OPERACION -> EXP mayor_igual EXP .)
+    $end            reduce using rule 47 (OPERACION -> EXP mayor_igual EXP .)
+
+
+state 121
+
+    (48) OPERACION -> EXP menor_igual EXP .
+
+    dospuntos       reduce using rule 48 (OPERACION -> EXP menor_igual EXP .)
+    label           reduce using rule 48 (OPERACION -> EXP menor_igual EXP .)
+    gotos           reduce using rule 48 (OPERACION -> EXP menor_igual EXP .)
+    r_from          reduce using rule 48 (OPERACION -> EXP menor_igual EXP .)
+    import          reduce using rule 48 (OPERACION -> EXP menor_igual EXP .)
+    arroba          reduce using rule 48 (OPERACION -> EXP menor_igual EXP .)
+    id              reduce using rule 48 (OPERACION -> EXP menor_igual EXP .)
+    idPunto         reduce using rule 48 (OPERACION -> EXP menor_igual EXP .)
+    if              reduce using rule 48 (OPERACION -> EXP menor_igual EXP .)
+    print           reduce using rule 48 (OPERACION -> EXP menor_igual EXP .)
+    $end            reduce using rule 48 (OPERACION -> EXP menor_igual EXP .)
+
+
+state 122
+
+    (49) OPERACION -> EXP diferente1 EXP .
+
+    dospuntos       reduce using rule 49 (OPERACION -> EXP diferente1 EXP .)
+    label           reduce using rule 49 (OPERACION -> EXP diferente1 EXP .)
+    gotos           reduce using rule 49 (OPERACION -> EXP diferente1 EXP .)
+    r_from          reduce using rule 49 (OPERACION -> EXP diferente1 EXP .)
+    import          reduce using rule 49 (OPERACION -> EXP diferente1 EXP .)
+    arroba          reduce using rule 49 (OPERACION -> EXP diferente1 EXP .)
+    id              reduce using rule 49 (OPERACION -> EXP diferente1 EXP .)
+    idPunto         reduce using rule 49 (OPERACION -> EXP diferente1 EXP .)
+    if              reduce using rule 49 (OPERACION -> EXP diferente1 EXP .)
+    print           reduce using rule 49 (OPERACION -> EXP diferente1 EXP .)
+    $end            reduce using rule 49 (OPERACION -> EXP diferente1 EXP .)
+
+
+state 123
+
+    (50) OPERACION -> EXP diferente2 EXP .
+
+    dospuntos       reduce using rule 50 (OPERACION -> EXP diferente2 EXP .)
+    label           reduce using rule 50 (OPERACION -> EXP diferente2 EXP .)
+    gotos           reduce using rule 50 (OPERACION -> EXP diferente2 EXP .)
+    r_from          reduce using rule 50 (OPERACION -> EXP diferente2 EXP .)
+    import          reduce using rule 50 (OPERACION -> EXP diferente2 EXP .)
+    arroba          reduce using rule 50 (OPERACION -> EXP diferente2 EXP .)
+    id              reduce using rule 50 (OPERACION -> EXP diferente2 EXP .)
+    idPunto         reduce using rule 50 (OPERACION -> EXP diferente2 EXP .)
+    if              reduce using rule 50 (OPERACION -> EXP diferente2 EXP .)
+    print           reduce using rule 50 (OPERACION -> EXP diferente2 EXP .)
+    $end            reduce using rule 50 (OPERACION -> EXP diferente2 EXP .)
+
+
+state 124
+
+    (46) OPERACION -> id igual_igual EXP .
+
+    dospuntos       reduce using rule 46 (OPERACION -> id igual_igual EXP .)
+    label           reduce using rule 46 (OPERACION -> id igual_igual EXP .)
+    gotos           reduce using rule 46 (OPERACION -> id igual_igual EXP .)
+    r_from          reduce using rule 46 (OPERACION -> id igual_igual EXP .)
+    import          reduce using rule 46 (OPERACION -> id igual_igual EXP .)
+    arroba          reduce using rule 46 (OPERACION -> id igual_igual EXP .)
+    id              reduce using rule 46 (OPERACION -> id igual_igual EXP .)
+    idPunto         reduce using rule 46 (OPERACION -> id igual_igual EXP .)
+    if              reduce using rule 46 (OPERACION -> id igual_igual EXP .)
+    print           reduce using rule 46 (OPERACION -> id igual_igual EXP .)
+    $end            reduce using rule 46 (OPERACION -> id igual_igual EXP .)
+
+
+state 125
+
+    (51) OPERACION -> corchetea EXP corchetec .
+
+    dospuntos       reduce using rule 51 (OPERACION -> corchetea EXP corchetec .)
+    label           reduce using rule 51 (OPERACION -> corchetea EXP corchetec .)
+    gotos           reduce using rule 51 (OPERACION -> corchetea EXP corchetec .)
+    r_from          reduce using rule 51 (OPERACION -> corchetea EXP corchetec .)
+    import          reduce using rule 51 (OPERACION -> corchetea EXP corchetec .)
+    arroba          reduce using rule 51 (OPERACION -> corchetea EXP corchetec .)
+    id              reduce using rule 51 (OPERACION -> corchetea EXP corchetec .)
+    idPunto         reduce using rule 51 (OPERACION -> corchetea EXP corchetec .)
+    if              reduce using rule 51 (OPERACION -> corchetea EXP corchetec .)
+    print           reduce using rule 51 (OPERACION -> corchetea EXP corchetec .)
+    $end            reduce using rule 51 (OPERACION -> corchetea EXP corchetec .)
+
+
+state 126
+
+    (11) PRINTF -> print para EXP parc .
+
+    label           reduce using rule 11 (PRINTF -> print para EXP parc .)
+    gotos           reduce using rule 11 (PRINTF -> print para EXP parc .)
+    r_from          reduce using rule 11 (PRINTF -> print para EXP parc .)
+    import          reduce using rule 11 (PRINTF -> print para EXP parc .)
+    arroba          reduce using rule 11 (PRINTF -> print para EXP parc .)
+    id              reduce using rule 11 (PRINTF -> print para EXP parc .)
+    idPunto         reduce using rule 11 (PRINTF -> print para EXP parc .)
+    if              reduce using rule 11 (PRINTF -> print para EXP parc .)
+    print           reduce using rule 11 (PRINTF -> print para EXP parc .)
+    $end            reduce using rule 11 (PRINTF -> print para EXP parc .)
+
+
+state 127
+
+    (18) METODOS -> id id para parc dospuntos .
+
+    label           reduce using rule 18 (METODOS -> id id para parc dospuntos .)
+    gotos           reduce using rule 18 (METODOS -> id id para parc dospuntos .)
+    r_from          reduce using rule 18 (METODOS -> id id para parc dospuntos .)
+    import          reduce using rule 18 (METODOS -> id id para parc dospuntos .)
+    arroba          reduce using rule 18 (METODOS -> id id para parc dospuntos .)
+    id              reduce using rule 18 (METODOS -> id id para parc dospuntos .)
+    idPunto         reduce using rule 18 (METODOS -> id id para parc dospuntos .)
+    if              reduce using rule 18 (METODOS -> id id para parc dospuntos .)
+    print           reduce using rule 18 (METODOS -> id id para parc dospuntos .)
+    $end            reduce using rule 18 (METODOS -> id id para parc dospuntos .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for id in state 56 resolved as shift
