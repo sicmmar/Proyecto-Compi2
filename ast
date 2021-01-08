@@ -3,276 +3,1628 @@ digraph {
 	graph [label="Árbol Sintáctico Abstracto (AST)"]
 	node [color=navyblue fillcolor=darkolivegreen fontcolor=white style=filled]
 	edge [arrowsize=0.7]
-	1 [label=ci]
-	2 [label="Entorno()"]
-	3 [label=temp]
-	4 [label=temp]
-	5 [label=temp]
-	6 [label=temp]
-	7 [label=temp]
-	8 [label=temp]
-	9 [label=temp]
-	10 [label=temp]
-	11 [label=temp]
-	12 [label=""]
-	13 [label=retorna]
+	1 [label="create DATABASE"]
+	2 [label=DBFase2]
+	1 -> 2
+	3 [label=INSTRUCCION]
+	3 -> 1
+	4 [label=USE]
+	5 [label=DBFase2]
+	4 -> 5
+	3 -> 4
+	6 [label=text]
+	7 [label=PARAMETRO]
+	8 [label=texto]
+	8 -> 6
+	7 -> 8
+	9 [label=text]
+	10 [label=returns]
+	10 -> 9
+	11 [label=texto]
+	12 [label=return]
+	12 -> 11
+	13 [label=CONTENIDO]
 	13 -> 12
-	14 [label=""]
-	15 [label="="]
-	15 -> 13
+	14 [label=begin]
+	14 -> 13
+	15 [label=CONTENIDO]
 	15 -> 14
-	16 [label=t4]
+	16 [label=AS]
 	16 -> 15
-	17 [label=tabla]
-	18 [label="="]
-	18 -> 16
-	18 -> 17
-	19 [label=cantidad]
-	20 [label=0]
-	21 [label=label]
-	21 -> 20
-	22 [label=L10]
+	17 [label=CONTENIDO]
+	17 -> 16
+	18 [label="language plpgsql"]
+	19 [label=funcion]
+	20 [label="id:myFuncion"]
+	19 -> 20
+	19 -> 7
+	19 -> 10
+	19 -> 17
+	19 -> 18
+	3 -> 19
+	21 [label="INICIO CALIFICACION FASE 2"]
+	22 [label=myFuncion]
 	22 -> 21
-	23 [label=label]
+	23 [label=select]
 	23 -> 22
-	24 [label=L7]
-	24 -> 23
-	25 [label=t12]
-	25 -> 24
-	26 [label=tabla]
-	27 [label="="]
-	27 -> 25
-	27 -> 26
-	28 [label=cantidad]
-	29 [label=0]
-	30 [label=label]
-	30 -> 29
-	31 [label=L18]
-	31 -> 30
-	32 [label=label]
-	32 -> 31
-	33 [label=L15]
-	33 -> 32
-	34 [label=t20]
+	3 -> 23
+	24 [label=integer]
+	25 [label="not null"]
+	26 [label=ATRCOLUMNA]
+	26 -> 25
+	27 [label="primary key"]
+	26 -> 27
+	28 [label=columna]
+	29 [label=idproducto]
+	28 -> 29
+	28 -> 24
+	28 -> 26
+	30 [label=CONTENIDO]
+	30 -> 28
+	31 [label=varchar]
+	32 [label=150]
+	31 -> 32
+	33 [label="not null"]
+	34 [label=ATRCOLUMNA]
 	34 -> 33
-	35 [label=tabla]
-	36 [label="="]
-	36 -> 34
-	36 -> 35
-	37 [label=cantidad]
-	38 [label=0]
-	39 [label=label]
+	35 [label=columna]
+	36 [label=producto]
+	35 -> 36
+	35 -> 31
+	35 -> 34
+	30 -> 35
+	37 [label=date]
+	38 [label="not null"]
+	39 [label=ATRCOLUMNA]
 	39 -> 38
-	40 [label=L26]
+	40 [label=columna]
+	41 [label=fechacreacion]
+	40 -> 41
+	40 -> 37
 	40 -> 39
-	41 [label=label]
-	41 -> 40
-	42 [label=L23]
-	42 -> 41
-	43 [label=temp]
-	44 [label=temp]
-	45 [label=temp]
-	46 [label=temp]
-	47 [label=temp]
-	48 [label=temp]
-	49 [label=temp]
-	50 [label=temp]
-	51 [label=temp]
-	52 [label=""]
-	53 [label=SENO]
+	30 -> 40
+	42 [label=integer]
+	43 [label=columna]
+	44 [label=estado]
+	43 -> 44
+	43 -> 42
+	30 -> 43
+	45 [label="create table"]
+	46 [label=tbProducto]
+	45 -> 46
+	45 -> 30
+	3 -> 45
+	47 [label=idproducto]
+	48 [label="create unique index"]
+	49 [label=idx_producto]
+	48 -> 49
+	50 [label=tbProducto]
+	48 -> 50
+	48 -> 47
+	3 -> 48
+	51 [label=integer]
+	52 [label="not null"]
+	53 [label=ATRCOLUMNA]
 	53 -> 52
-	54 [label=""]
-	55 [label="="]
+	54 [label="primary key"]
+	53 -> 54
+	55 [label=columna]
+	56 [label=idcalifica]
+	55 -> 56
+	55 -> 51
 	55 -> 53
-	55 -> 54
-	56 [label=VALOR]
-	56 -> 55
-	57 [label=""]
-	58 [label="="]
-	58 -> 56
-	58 -> 57
-	59 [label=ABSOLUTO]
-	59 -> 58
-	60 [label=SENO]
-	61 [label=hora]
-	62 [label="*"]
-	62 -> 60
+	57 [label=CONTENIDO]
+	57 -> 55
+	58 [label=varchar]
+	59 [label=100]
+	58 -> 59
+	60 [label="not null"]
+	61 [label=ATRCOLUMNA]
+	61 -> 60
+	62 [label=columna]
+	63 [label=item]
+	62 -> 63
+	62 -> 58
 	62 -> 61
-	63 [label=TRUNC]
-	63 -> 62
-	64 [label=t47]
-	64 -> 63
-	65 [label=VALOR]
-	66 [label=FASE2]
-	67 [label=1]
-	68 [label=4]
-	69 [label=SUBSTRING]
-	69 -> 66
-	69 -> 67
-	69 -> 68
-	70 [label=LENGTH]
-	70 -> 69
-	71 [label="+"]
-	71 -> 65
-	71 -> 70
-	72 [label="="]
-	72 -> 64
+	57 -> 62
+	64 [label=integer]
+	65 [label="not null"]
+	66 [label=ATRCOLUMNA]
+	66 -> 65
+	67 [label=columna]
+	68 [label=punteo]
+	67 -> 68
+	67 -> 64
+	67 -> 66
+	57 -> 67
+	69 [label="create table"]
+	70 [label=tbCalificacion]
+	69 -> 70
+	69 -> 57
+	3 -> 69
+	71 [label=idcalifica]
+	72 [label="create unique index"]
+	73 [label=idx_califica]
+	72 -> 73
+	74 [label=tbCalificacion]
+	72 -> 74
 	72 -> 71
-	73 [label=VALOR]
-	73 -> 72
-	74 [label=t47]
-	75 [label="="]
-	75 -> 73
-	75 -> 74
-	76 [label=ABSOLUTO]
-	76 -> 75
-	77 [label=1]
-	78 [label="-"]
-	78 -> 77
-	79 [label=SINH]
-	79 -> 78
-	80 [label=ABS]
-	80 -> 79
-	81 [label="="]
-	81 -> 76
-	81 -> 80
-	82 [label=t49]
-	82 -> 81
-	83 [label=ABSOLUTO]
-	84 [label=225]
-	85 [label=SQRT]
-	85 -> 84
-	86 [label="*"]
-	86 -> 83
-	86 -> 85
-	87 [label="="]
-	87 -> 82
-	87 -> 86
-	88 [label=ABSOLUTO]
-	88 -> 87
-	89 [label=t49]
-	90 [label="="]
-	90 -> 88
-	90 -> 89
-	91 [label=t51]
-	91 -> 90
-	92 [label=VALOR]
-	93 [label=ABSOLUTO]
-	94 [label="+"]
-	94 -> 92
-	94 -> 93
-	95 [label="="]
-	95 -> 91
-	95 -> 94
-	96 [label=t50]
-	96 -> 95
-	97 [label=t51]
-	98 [label=0.5]
-	99 [label=acosd]
-	99 -> 98
-	100 [label="/"]
-	100 -> 97
-	100 -> 99
-	101 [label="="]
-	101 -> 96
-	101 -> 100
-	102 [label=VALOR]
-	102 -> 101
-	103 [label=t50]
-	104 [label="="]
-	104 -> 102
-	104 -> 103
-	105 [label=t53]
-	105 -> 104
-	106 [label=VALOR]
-	107 [label="="]
-	107 -> 105
-	107 -> 106
-	108 [label=10]
-	109 [label=label]
-	109 -> 108
-	110 [label=L54]
-	110 -> 109
-	111 [label=temp]
-	112 [label=temp]
-	113 [label=temp]
-	114 [label=temp]
-	115 [label=temp]
-	116 [label=temp]
-	117 [label=temp]
-	118 [label=temp]
-	119 [label=temp]
-	120 [label=temp]
-	121 [label=temp]
-	122 [label=temp]
-	123 [label=temp]
-	124 [label=temp]
-	125 [label=temp]
-	126 [label=temp]
-	127 [label=temp]
-	128 [label=temp]
-	129 [label=temp]
-	130 [label=temp]
-	131 [label=temp]
-	132 [label=temp]
-	133 [label=temp]
-	134 [label=temp]
-	135 [label=temp]
-	136 [label=temp]
-	137 [label=temp]
-	138 [label=temp]
-	139 [label=temp]
-	140 [label=temp]
-	141 [label=temp]
-	142 [label=temp]
-	143 [label=temp]
-	144 [label=temp]
-	145 [label=temp]
-	146 [label=temp]
-	147 [label=temp]
-	148 [label=temp]
-	149 [label=temp]
-	150 [label=temp]
-	151 [label=temp]
-	152 [label=temp]
-	153 [label=temp]
-	154 [label=temp]
-	155 [label=temp]
-	156 [label=temp]
-	157 [label=temp]
-	158 [label=temp]
-	159 [label=temp]
-	160 [label=temp]
-	161 [label=temp]
-	162 [label=temp]
-	163 [label=temp]
-	164 [label=temp]
-	165 [label=temp]
-	166 [label=temp]
-	167 [label=temp]
-	168 [label=temp]
-	169 [label=temp]
-	170 [label=temp]
-	171 [label=temp]
-	172 [label=temp]
-	173 [label=temp]
-	174 [label=""]
-	175 [label=idbodega]
-	175 -> 174
-	176 [label=""]
+	3 -> 72
+	75 [label=1]
+	76 [label="Laptop Lenovo"]
+	77 [label="now()"]
+	78 [label=1]
+	79 [label=insert]
+	80 [label=into]
+	79 -> 80
+	81 [label=tbProducto]
+	80 -> 81
+	82 [label=values]
+	79 -> 82
+	82 -> 75
+	82 -> 76
+	82 -> 77
+	82 -> 78
+	3 -> 79
+	83 [label=2]
+	84 [label="Bateria para Laptop Lenovo T420"]
+	85 [label="now()"]
+	86 [label=1]
+	87 [label=insert]
+	88 [label=into]
+	87 -> 88
+	89 [label=tbProducto]
+	88 -> 89
+	90 [label=values]
+	87 -> 90
+	90 -> 83
+	90 -> 84
+	90 -> 85
+	90 -> 86
+	3 -> 87
+	91 [label=3]
+	92 [label="Teclado Inalambrico"]
+	93 [label="now()"]
+	94 [label=1]
+	95 [label=insert]
+	96 [label=into]
+	95 -> 96
+	97 [label=tbProducto]
+	96 -> 97
+	98 [label=values]
+	95 -> 98
+	98 -> 91
+	98 -> 92
+	98 -> 93
+	98 -> 94
+	3 -> 95
+	99 [label=4]
+	100 [label="Mouse Inalambrico"]
+	101 [label="now()"]
+	102 [label=1]
+	103 [label=insert]
+	104 [label=into]
+	103 -> 104
+	105 [label=tbProducto]
+	104 -> 105
+	106 [label=values]
+	103 -> 106
+	106 -> 99
+	106 -> 100
+	106 -> 101
+	106 -> 102
+	3 -> 103
+	107 [label=5]
+	108 [label="WIFI USB"]
+	109 [label="now()"]
+	110 [label=1]
+	111 [label=insert]
+	112 [label=into]
+	111 -> 112
+	113 [label=tbProducto]
+	112 -> 113
+	114 [label=values]
+	111 -> 114
+	114 -> 107
+	114 -> 108
+	114 -> 109
+	114 -> 110
+	3 -> 111
+	115 [label=6]
+	116 [label="Laptop HP"]
+	117 [label="now()"]
+	118 [label=1]
+	119 [label=insert]
+	120 [label=into]
+	119 -> 120
+	121 [label=tbProducto]
+	120 -> 121
+	122 [label=values]
+	119 -> 122
+	122 -> 115
+	122 -> 116
+	122 -> 117
+	122 -> 118
+	3 -> 119
+	123 [label=7]
+	124 [label="Teclado Flexible USB"]
+	125 [label="now()"]
+	126 [label=1]
+	127 [label=insert]
+	128 [label=into]
+	127 -> 128
+	129 [label=tbProducto]
+	128 -> 129
+	130 [label=values]
+	127 -> 130
+	130 -> 123
+	130 -> 124
+	130 -> 125
+	130 -> 126
+	3 -> 127
+	131 [label=8]
+	132 [label="Laptop Samsung"]
+	133 [label="2021-01-02"]
+	134 [label=1]
+	135 [label=insert]
+	136 [label=into]
+	135 -> 136
+	137 [label=tbProducto]
+	136 -> 137
+	138 [label=values]
+	135 -> 138
+	138 -> 131
+	138 -> 132
+	138 -> 133
+	138 -> 134
+	3 -> 135
+	139 [label="Crea Funcion"]
+	140 [label=myFuncion]
+	140 -> 139
+	141 [label=select]
+	141 -> 140
+	3 -> 141
+	142 [label=varchar]
+	143 [label=50]
+	142 -> 143
+	144 [label=PARAMETRO]
+	145 [label=tabla]
+	145 -> 142
+	144 -> 145
+	146 [label=integer]
+	147 [label=cantidad]
+	147 -> 146
+	144 -> 147
+	148 [label=integer]
+	149 [label=returns]
+	149 -> 148
+	150 [label=INTEGER]
+	151 [label=ASIG]
+	152 [label=resultado]
+	151 -> 152
+	151 -> 150
+	153 [label=DECLARACION]
+	153 -> 151
+	154 [label=INTEGER]
+	155 [label=ASIG]
+	156 [label=retorna]
+	155 -> 156
+	155 -> 154
+	153 -> 155
+	157 [label=CONTENIDO]
+	157 -> 153
+	158 [label=tabla]
+	159 [label=tbProducto]
+	160 [label="="]
+	160 -> 158
+	160 -> 159
+	161 [label="*"]
+	162 [label=COUNT]
+	162 -> 161
+	163 [label=tbProducto]
+	164 [label=select]
+	164 -> 162
+	165 [label=from]
+	164 -> 165
+	165 -> 163
+	166 [label=":="]
+	167 [label=resultado]
+	166 -> 167
+	166 -> 164
+	168 [label=CONTENIDO]
+	168 -> 166
+	169 [label=cantidad]
+	170 [label=resultado]
+	171 [label="="]
+	171 -> 169
+	171 -> 170
+	172 [label=1]
+	173 [label="="]
+	174 [label=retorna]
+	173 -> 174
+	173 -> 172
+	175 [label=CONTENIDO]
+	175 -> 173
+	176 [label=0]
 	177 [label="="]
-	177 -> 175
+	178 [label=retorna]
+	177 -> 178
 	177 -> 176
-	178 [label=idev]
-	178 -> 177
-	179 [label=idev]
-	180 [label=temp]
-	181 [label=temp]
-	182 [label=temp]
-	183 [label=temp]
-	184 [label=temp]
-	185 [label=temp]
-	186 [label=temp]
-	187 [label=temp]
-	188 [label=temp]
+	179 [label=CONTENIDO]
+	179 -> 177
+	180 [label=else]
+	180 -> 179
+	181 [label=if]
+	181 -> 171
+	182 [label=then]
+	181 -> 182
+	182 -> 175
+	181 -> 180
+	168 -> 181
+	183 [label=if]
+	183 -> 160
+	184 [label=then]
+	183 -> 184
+	184 -> 168
+	185 [label=CONTENIDO]
+	185 -> 183
+	186 [label=tabla]
+	187 [label=tbProductoUp]
+	188 [label="="]
+	188 -> 186
+	188 -> 187
+	189 [label="*"]
+	190 [label=COUNT]
+	190 -> 189
+	191 [label=tbProducto]
+	192 [label=estado]
+	193 [label=2]
+	194 [label="="]
+	194 -> 192
+	194 -> 193
+	195 [label=where]
+	195 -> 194
+	196 [label=select]
+	196 -> 190
+	197 [label=from]
+	196 -> 197
+	197 -> 191
+	196 -> 195
+	198 [label=":="]
+	199 [label=resultado]
+	198 -> 199
+	198 -> 196
+	200 [label=CONTENIDO]
+	200 -> 198
+	201 [label=cantidad]
+	202 [label=resultado]
+	203 [label="="]
+	203 -> 201
+	203 -> 202
+	204 [label=1]
+	205 [label="="]
+	206 [label=retorna]
+	205 -> 206
+	205 -> 204
+	207 [label=CONTENIDO]
+	207 -> 205
+	208 [label=0]
+	209 [label="="]
+	210 [label=retorna]
+	209 -> 210
+	209 -> 208
+	211 [label=CONTENIDO]
+	211 -> 209
+	212 [label=else]
+	212 -> 211
+	213 [label=if]
+	213 -> 203
+	214 [label=then]
+	213 -> 214
+	214 -> 207
+	213 -> 212
+	200 -> 213
+	215 [label=if]
+	215 -> 188
+	216 [label=then]
+	215 -> 216
+	216 -> 200
+	185 -> 215
+	217 [label=tabla]
+	218 [label=tbbodega]
+	219 [label="="]
+	219 -> 217
+	219 -> 218
+	220 [label="*"]
+	221 [label=COUNT]
+	221 -> 220
+	222 [label=tbbodega]
+	223 [label=select]
+	223 -> 221
+	224 [label=from]
+	223 -> 224
+	224 -> 222
+	225 [label=":="]
+	226 [label=resultado]
+	225 -> 226
+	225 -> 223
+	227 [label=CONTENIDO]
+	227 -> 225
+	228 [label=cantidad]
+	229 [label=resultado]
+	230 [label="="]
+	230 -> 228
+	230 -> 229
+	231 [label=1]
+	232 [label="="]
+	233 [label=retorna]
+	232 -> 233
+	232 -> 231
+	234 [label=CONTENIDO]
+	234 -> 232
+	235 [label=0]
+	236 [label="="]
+	237 [label=retorna]
+	236 -> 237
+	236 -> 235
+	238 [label=CONTENIDO]
+	238 -> 236
+	239 [label=else]
+	239 -> 238
+	240 [label=if]
+	240 -> 230
+	241 [label=then]
+	240 -> 241
+	241 -> 234
+	240 -> 239
+	227 -> 240
+	242 [label=if]
+	242 -> 219
+	243 [label=then]
+	242 -> 243
+	243 -> 227
+	185 -> 242
+	244 [label=retorna]
+	245 [label=return]
+	245 -> 244
+	185 -> 245
+	246 [label=begin]
+	246 -> 185
+	157 -> 246
+	247 [label=AS]
+	247 -> 157
+	248 [label=CONTENIDO]
+	248 -> 247
+	249 [label="language plpgsql"]
+	250 [label=funcion]
+	251 [label="id:ValidaRegistros"]
+	250 -> 251
+	250 -> 144
+	250 -> 149
+	250 -> 248
+	250 -> 249
+	3 -> 250
+	252 [label=1]
+	253 [label="Create Table and Insert"]
+	254 [label=tbProducto]
+	255 [label=8]
+	256 [label=ValidaRegistros]
+	256 -> 254
+	256 -> 255
+	257 [label=insert]
+	258 [label=into]
+	257 -> 258
+	259 [label=tbCalificacion]
+	258 -> 259
+	260 [label=values]
+	257 -> 260
+	260 -> 252
+	260 -> 253
+	260 -> 256
+	3 -> 257
+	261 [label=2]
+	262 [label=CAMPO]
+	263 [label="="]
+	262 -> 263
+	264 [label=estado]
+	263 -> 264
+	263 -> 261
+	265 [label=estado]
+	266 [label=1]
+	267 [label="="]
+	267 -> 265
+	267 -> 266
+	268 [label=update]
+	269 [label=tbProducto]
+	268 -> 269
+	268 -> 262
+	270 [label=where]
+	268 -> 270
+	270 -> 267
+	3 -> 268
+	271 [label=2]
+	272 [label=Update]
+	273 [label=tbProductoUp]
+	274 [label=8]
+	275 [label=ValidaRegistros]
+	275 -> 273
+	275 -> 274
+	276 [label=insert]
+	277 [label=into]
+	276 -> 277
+	278 [label=tbCalificacion]
+	277 -> 278
+	279 [label=values]
+	276 -> 279
+	279 -> 271
+	279 -> 272
+	279 -> 275
+	3 -> 276
+	280 [label=integer]
+	281 [label=returns]
+	281 -> 280
+	282 [label=integer]
+	283 [label=ASIG]
+	284 [label=hora]
+	283 -> 284
+	283 -> 282
+	285 [label=DECLARACION]
+	285 -> 283
+	286 [label=CONTENIDO]
+	286 -> 285
+	287 [label=10]
+	288 [label=2]
+	289 [label=DECIMAL]
+	289 -> 287
+	289 -> 288
+	290 [label=ASIG]
+	291 [label=SENO]
+	290 -> 291
+	290 -> 289
+	292 [label=DECLARACION]
+	292 -> 290
+	286 -> 292
+	293 [label=INTEGER]
+	294 [label=ASIG]
+	295 [label=VALOR]
+	294 -> 295
+	294 -> 293
+	296 [label=DECLARACION]
+	296 -> 294
+	286 -> 296
+	297 [label=10]
+	298 [label=2]
+	299 [label=DECIMAL]
+	299 -> 297
+	299 -> 298
+	300 [label=ASIG]
+	301 [label=ABSOLUTO]
+	300 -> 301
+	300 -> 299
+	302 [label=DECLARACION]
+	302 -> 300
+	286 -> 302
+	303 [label=HOUR]
+	304 [label=EXTRACT]
+	304 -> 303
+	305 [label=TIMESTAMP]
+	304 -> 305
+	306 [label="2001-02-16 20:38:40"]
+	304 -> 306
+	307 [label=select]
+	307 -> 304
+	308 [label=":="]
+	309 [label=hora]
+	308 -> 309
+	308 -> 307
+	310 [label=CONTENIDO]
+	310 -> 308
+	311 [label=1]
+	312 [label=SIN]
+	312 -> 311
+	313 [label=select]
+	313 -> 312
+	314 [label=":="]
+	315 [label=SENO]
+	314 -> 315
+	314 -> 313
+	310 -> 314
+	316 [label=SENO]
+	317 [label=hora]
+	318 [label="*"]
+	318 -> 316
+	318 -> 317
+	319 [label=TRUNC]
+	319 -> 318
+	320 [label=":="]
+	321 [label=VALOR]
+	320 -> 321
+	320 -> 319
+	310 -> 320
+	322 [label=VALOR]
+	323 [label=FASE2]
+	324 [label=1]
+	325 [label=4]
+	326 [label=SUBSTRING]
+	326 -> 323
+	326 -> 324
+	326 -> 325
+	327 [label=LENGTH]
+	327 -> 326
+	328 [label="+"]
+	328 -> 322
+	328 -> 327
+	329 [label=":="]
+	330 [label=VALOR]
+	329 -> 330
+	329 -> 328
+	310 -> 329
+	331 [label=1]
+	332 [label="-"]
+	332 -> 331
+	333 [label=SINH]
+	333 -> 332
+	334 [label=ABS]
+	334 -> 333
+	335 [label=":="]
+	336 [label=ABSOLUTO]
+	335 -> 336
+	335 -> 334
+	310 -> 335
+	337 [label=ABSOLUTO]
+	338 [label=225]
+	339 [label=SQRT]
+	339 -> 338
+	340 [label="*"]
+	340 -> 337
+	340 -> 339
+	341 [label=":="]
+	342 [label=ABSOLUTO]
+	341 -> 342
+	341 -> 340
+	310 -> 341
+	343 [label=VALOR]
+	344 [label=ABSOLUTO]
+	345 [label="+"]
+	345 -> 343
+	345 -> 344
+	346 [label=0.5]
+	347 [label=acosd]
+	347 -> 346
+	348 [label="/"]
+	348 -> 345
+	348 -> 347
+	349 [label=":="]
+	350 [label=VALOR]
+	349 -> 350
+	349 -> 348
+	310 -> 349
+	351 [label=VALOR]
+	352 [label=1]
+	353 [label="&#62;"]
+	353 -> 351
+	353 -> 352
+	354 [label=20]
+	355 [label="="]
+	356 [label=VALOR]
+	355 -> 356
+	355 -> 354
+	357 [label=CONTENIDO]
+	357 -> 355
+	358 [label=10]
+	359 [label="="]
+	360 [label=VALOR]
+	359 -> 360
+	359 -> 358
+	361 [label=CONTENIDO]
+	361 -> 359
+	362 [label=else]
+	362 -> 361
+	363 [label=if]
+	363 -> 353
+	364 [label=then]
+	363 -> 364
+	364 -> 357
+	363 -> 362
+	310 -> 363
+	365 [label=VALOR]
+	366 [label=return]
+	366 -> 365
+	310 -> 366
+	367 [label=begin]
+	367 -> 310
+	286 -> 367
+	368 [label=AS]
+	368 -> 286
+	369 [label=CONTENIDO]
+	369 -> 368
+	370 [label="language plpgsql"]
+	371 [label=funcion]
+	372 [label="id:CALCULOS"]
+	371 -> 372
+	371 -> 281
+	371 -> 369
+	371 -> 370
+	3 -> 371
+	373 [label=3]
+	374 [label=" Valida Funciones"]
+	375 [label="CALCULOS()"]
+	376 [label=insert]
+	377 [label=into]
+	376 -> 377
+	378 [label=tbCalificacion]
+	377 -> 378
+	379 [label=values]
+	376 -> 379
+	379 -> 373
+	379 -> 374
+	379 -> 375
+	3 -> 376
+	380 [label=integer]
+	381 [label="not null"]
+	382 [label=ATRCOLUMNA]
+	382 -> 381
+	383 [label="primary key"]
+	382 -> 383
+	384 [label=columna]
+	385 [label=idbodega]
+	384 -> 385
+	384 -> 380
+	384 -> 382
+	386 [label=CONTENIDO]
+	386 -> 384
+	387 [label=varchar]
+	388 [label=100]
+	387 -> 388
+	389 [label="not null"]
+	390 [label=ATRCOLUMNA]
+	390 -> 389
+	391 [label=columna]
+	392 [label=bodega]
+	391 -> 392
+	391 -> 387
+	391 -> 390
+	386 -> 391
+	393 [label=integer]
+	394 [label=columna]
+	395 [label=estado]
+	394 -> 395
+	394 -> 393
+	386 -> 394
+	396 [label="create table"]
+	397 [label=tbbodega]
+	396 -> 397
+	396 -> 386
+	3 -> 396
+	398 [label=bodega]
+	399 [label="create index"]
+	400 [label=nombreIndex]
+	399 -> 400
+	401 [label=tbbodega]
+	399 -> 401
+	399 -> 398
+	3 -> 399
+	402 [label="language plpgsql"]
+	403 [label=1]
+	404 [label="BODEGA CENTRAL"]
+	405 [label=1]
+	406 [label=insert]
+	407 [label=into]
+	406 -> 407
+	408 [label=tbbodega]
+	407 -> 408
+	409 [label=values]
+	406 -> 409
+	409 -> 403
+	409 -> 404
+	409 -> 405
+	410 [label=CONTENIDO]
+	410 -> 406
+	411 [label=idbodega]
+	412 [label=bodega]
+	413 [label=2]
+	414 [label="BODEGA ZONA 12"]
+	415 [label=insert]
+	416 [label=into]
+	415 -> 416
+	417 [label=tbbodega]
+	416 -> 417
+	415 -> 411
+	415 -> 412
+	418 [label=values]
+	415 -> 418
+	418 -> 413
+	418 -> 414
+	410 -> 415
+	419 [label=idbodega]
+	420 [label=bodega]
+	421 [label=estado]
+	422 [label=3]
+	423 [label="BODEGA ZONA 11"]
+	424 [label=1]
+	425 [label=insert]
+	426 [label=into]
+	425 -> 426
+	427 [label=tbbodega]
+	426 -> 427
+	425 -> 419
+	425 -> 420
+	425 -> 421
+	428 [label=values]
+	425 -> 428
+	428 -> 422
+	428 -> 423
+	428 -> 424
+	410 -> 425
+	429 [label=idbodega]
+	430 [label=bodega]
+	431 [label=estado]
+	432 [label=4]
+	433 [label="BODEGA ZONA 1"]
+	434 [label=1]
+	435 [label=insert]
+	436 [label=into]
+	435 -> 436
+	437 [label=tbbodega]
+	436 -> 437
+	435 -> 429
+	435 -> 430
+	435 -> 431
+	438 [label=values]
+	435 -> 438
+	438 -> 432
+	438 -> 433
+	438 -> 434
+	410 -> 435
+	439 [label=idbodega]
+	440 [label=bodega]
+	441 [label=estado]
+	442 [label=5]
+	443 [label="BODEGA ZONA 10"]
+	444 [label=1]
+	445 [label=insert]
+	446 [label=into]
+	445 -> 446
+	447 [label=tbbodega]
+	446 -> 447
+	445 -> 439
+	445 -> 440
+	445 -> 441
+	448 [label=values]
+	445 -> 448
+	448 -> 442
+	448 -> 443
+	448 -> 444
+	410 -> 445
+	449 [label=begin]
+	449 -> 410
+	450 [label=CONTENIDO]
+	450 -> 449
+	451 [label=as]
+	451 -> 450
+	452 [label=CONTENIDO]
+	452 -> 451
+	453 [label="create procedure"]
+	454 [label=sp_validainsert]
+	453 -> 454
+	453 -> 402
+	453 -> 452
+	3 -> 453
+	455 [label=execute]
+	456 [label=sp_validainsert]
+	455 -> 456
+	3 -> 455
+	457 [label=4]
+	458 [label="Valida Store Procedure"]
+	459 [label=tbbodega]
+	460 [label=5]
+	461 [label=ValidaRegistros]
+	461 -> 459
+	461 -> 460
+	462 [label=insert]
+	463 [label=into]
+	462 -> 463
+	464 [label=tbCalificacion]
+	463 -> 464
+	465 [label=values]
+	462 -> 465
+	465 -> 457
+	465 -> 458
+	465 -> 461
+	3 -> 462
+	466 [label=bodega]
+	467 [label=estado]
+	468 [label="create index"]
+	469 [label=idx_bodega]
+	468 -> 469
+	470 [label=tbbodega]
+	468 -> 470
+	468 -> 466
+	468 -> 467
+	3 -> 468
+	471 [label=drop]
+	472 [label=INDEX]
+	471 -> 472
+	473 [label=idx_bodega]
+	472 -> 473
+	3 -> 471
+	474 [label=bodega]
+	475 [label=estado]
+	476 [label="create index"]
+	477 [label=idx_bodega]
+	476 -> 477
+	478 [label=tbbodega]
+	476 -> 478
+	476 -> 474
+	476 -> 475
+	3 -> 476
+	479 [label="language plpgsql"]
+	480 [label="bodega zona 9"]
+	481 [label=CAMPO]
+	482 [label="="]
+	481 -> 482
+	483 [label=bodega]
+	482 -> 483
+	482 -> 480
+	484 [label=idbodega]
+	485 [label=4]
+	486 [label="="]
+	486 -> 484
+	486 -> 485
+	487 [label=update]
+	488 [label=tbbodega]
+	487 -> 488
+	487 -> 481
+	489 [label=where]
+	487 -> 489
+	489 -> 486
+	490 [label=CONTENIDO]
+	490 -> 487
+	491 [label=begin]
+	491 -> 490
+	492 [label=CONTENIDO]
+	492 -> 491
+	493 [label=as]
+	493 -> 492
+	494 [label=CONTENIDO]
+	494 -> 493
+	495 [label="create procedure"]
+	496 [label=sp_validaupdate]
+	495 -> 496
+	495 -> 479
+	495 -> 494
+	3 -> 495
+	497 [label=execute]
+	498 [label=sp_validaupdate]
+	497 -> 498
+	3 -> 497
+	499 [label=idbodega]
+	500 [label=4]
+	501 [label="="]
+	501 -> 499
+	501 -> 500
+	502 [label=where]
+	502 -> 501
+	503 [label=delete]
+	504 [label="from "]
+	503 -> 504
+	504 -> tbbodega
+	503 -> 502
+	3 -> 503
+	505 [label=5]
+	506 [label="Valida Delete"]
+	507 [label=tbbodega]
+	508 [label=4]
+	509 [label=ValidaRegistros]
+	509 -> 507
+	509 -> 508
+	510 [label=insert]
+	511 [label=into]
+	510 -> 511
+	512 [label=tbCalificacion]
+	511 -> 512
+	513 [label=values]
+	510 -> 513
+	513 -> 505
+	513 -> 506
+	513 -> 509
+	3 -> 510
+	514 [label="*"]
+	515 [label=tbbodega]
+	516 [label=select]
+	516 -> 514
+	517 [label=from]
+	516 -> 517
+	517 -> 515
+	3 -> 516
+	518 [label=estado]
+	519 [label="create index"]
+	520 [label=idx_bodega]
+	519 -> 520
+	521 [label=tbbodega]
+	519 -> 521
+	519 -> 518
+	3 -> 519
+	522 [label=integer]
+	523 [label=PARAMETRO]
+	524 [label=llave]
+	524 -> 522
+	523 -> 524
+	525 [label=varchar]
+	526 [label=100]
+	525 -> 526
+	527 [label=producto]
+	527 -> 525
+	523 -> 527
+	528 [label=date]
+	529 [label=fecha]
+	529 -> 528
+	523 -> 529
+	530 [label="language plpgsql"]
+	531 [label=llave]
+	532 [label=producto]
+	533 [label=fecha]
+	534 [label=1]
+	535 [label=insert]
+	536 [label=into]
+	535 -> 536
+	537 [label=tbProducto]
+	536 -> 537
+	538 [label=values]
+	535 -> 538
+	538 -> 531
+	538 -> 532
+	538 -> 533
+	538 -> 534
+	539 [label=CONTENIDO]
+	539 -> 535
+	540 [label=begin]
+	540 -> 539
+	541 [label=CONTENIDO]
+	541 -> 540
+	542 [label=as]
+	542 -> 541
+	543 [label=CONTENIDO]
+	543 -> 542
+	544 [label="create procedure"]
+	545 [label=sp_insertaproducto]
+	544 -> 545
+	544 -> 523
+	544 -> 530
+	544 -> 543
+	3 -> 544
+	546 [label=9]
+	547 [label="Bocina Inalambrica"]
+	548 [label="2021-01-06"]
+	549 [label=execute]
+	550 [label=sp_insertaproducto]
+	549 -> 550
+	549 -> 546
+	549 -> 547
+	549 -> 548
+	3 -> 549
+	551 [label=10]
+	552 [label="Audifonos con Microfono USB"]
+	553 [label="2021-01-06"]
+	554 [label=execute]
+	555 [label=sp_insertaproducto]
+	554 -> 555
+	554 -> 551
+	554 -> 552
+	554 -> 553
+	3 -> 554
+	556 [label=11]
+	557 [label="Bocina Inalambrica"]
+	558 [label="2021-01-06"]
+	559 [label=execute]
+	560 [label=sp_insertaproducto]
+	559 -> 560
+	559 -> 556
+	559 -> 557
+	559 -> 558
+	3 -> 559
+	561 [label=12]
+	562 [label="Monitor de 17"]
+	563 [label="2021-01-06"]
+	564 [label=execute]
+	565 [label=sp_insertaproducto]
+	564 -> 565
+	564 -> 561
+	564 -> 562
+	564 -> 563
+	3 -> 564
+	566 [label="drop function if exist"]
+	567 [label=myFuncion]
+	566 -> 567
+	3 -> 566
+	568 [label="Valida drop function"]
+	569 [label=myFuncion]
+	569 -> 568
+	570 [label=select]
+	570 -> 569
+	3 -> 570
+	571 [label=text]
+	572 [label=PARAMETRO]
+	573 [label=texto]
+	573 -> 571
+	572 -> 573
+	574 [label=text]
+	575 [label=returns]
+	575 -> 574
+	576 [label=texto]
+	577 [label=return]
+	577 -> 576
+	578 [label=CONTENIDO]
+	578 -> 577
+	579 [label=begin]
+	579 -> 578
+	580 [label=CONTENIDO]
+	580 -> 579
+	581 [label=AS]
+	581 -> 580
+	582 [label=CONTENIDO]
+	582 -> 581
+	583 [label="language plpgsql"]
+	584 [label=funcion]
+	585 [label="id:fn_Mensaje"]
+	584 -> 585
+	584 -> 572
+	584 -> 575
+	584 -> 582
+	584 -> 583
+	3 -> 584
+	586 [label="Crea funcion Nueva de Mensaje"]
+	587 [label=fn_Mensaje]
+	587 -> 586
+	588 [label=select]
+	588 -> 587
+	3 -> 588
+	589 [label=13]
+	590 [label="Bocina Inalambrica Sony"]
+	591 [label="2021-01-06"]
+	592 [label=execute]
+	593 [label=sp_insertaproducto]
+	592 -> 593
+	592 -> 589
+	592 -> 590
+	592 -> 591
+	3 -> 592
+	594 [label=14]
+	595 [label="Audifonos con Microfono USB Lenovo"]
+	596 [label="2021-01-06"]
+	597 [label=execute]
+	598 [label=sp_insertaproducto]
+	597 -> 598
+	597 -> 594
+	597 -> 595
+	597 -> 596
+	3 -> 597
+	599 [label=15]
+	600 [label="Monitor de 21"]
+	601 [label="2021-01-06"]
+	602 [label=execute]
+	603 [label=sp_insertaproducto]
+	602 -> 603
+	602 -> 599
+	602 -> 600
+	602 -> 601
+	3 -> 602
+	604 [label=16]
+	605 [label="Monitor de 17 Lenovo"]
+	606 [label="2021-01-06"]
+	607 [label=execute]
+	608 [label=sp_insertaproducto]
+	607 -> 608
+	607 -> 604
+	607 -> 605
+	607 -> 606
+	3 -> 607
+	609 [label=integer]
+	610 [label="not null"]
+	611 [label=ATRCOLUMNA]
+	611 -> 610
+	612 [label="primary key"]
+	611 -> 612
+	613 [label=columna]
+	614 [label=idinventario]
+	613 -> 614
+	613 -> 609
+	613 -> 611
+	615 [label=CONTENIDO]
+	615 -> 613
+	616 [label=integer]
+	617 [label="not null"]
+	618 [label=ATRCOLUMNA]
+	618 -> 617
+	619 [label=columna]
+	620 [label=idproducto]
+	619 -> 620
+	619 -> 616
+	619 -> 618
+	615 -> 619
+	621 [label=integer]
+	622 [label="not null"]
+	623 [label=ATRCOLUMNA]
+	623 -> 622
+	624 [label=columna]
+	625 [label=idbodega]
+	624 -> 625
+	624 -> 621
+	624 -> 623
+	615 -> 624
+	626 [label=integer]
+	627 [label="not null"]
+	628 [label=ATRCOLUMNA]
+	628 -> 627
+	629 [label=columna]
+	630 [label=cantidad]
+	629 -> 630
+	629 -> 626
+	629 -> 628
+	615 -> 629
+	631 [label=date]
+	632 [label="not null"]
+	633 [label=ATRCOLUMNA]
+	633 -> 632
+	634 [label=columna]
+	635 [label=fechacarga]
+	634 -> 635
+	634 -> 631
+	634 -> 633
+	615 -> 634
+	636 [label=text]
+	637 [label=columna]
+	638 [label=descripcion]
+	637 -> 638
+	637 -> 636
+	615 -> 637
+	639 [label="create table"]
+	640 [label=tbinventario]
+	639 -> 640
+	639 -> 615
+	3 -> 639
+	641 [label=varchar]
+	642 [label=100]
+	641 -> 642
+	643 [label=PARAMETRO]
+	644 [label=Vproducto]
+	644 -> 641
+	643 -> 644
+	645 [label=integer]
+	646 [label=returns]
+	646 -> 645
+	647 [label=integer]
+	648 [label=ASIG]
+	649 [label=idp]
+	648 -> 649
+	648 -> 647
+	650 [label=DECLARACION]
+	650 -> 648
+	651 [label=CONTENIDO]
+	651 -> 650
+	652 [label=idproducto]
+	653 [label=tbProducto]
+	654 [label=producto]
+	655 [label=Vproducto]
+	656 [label="="]
+	656 -> 654
+	656 -> 655
+	657 [label=where]
+	657 -> 656
+	658 [label=select]
+	658 -> 652
+	659 [label=from]
+	658 -> 659
+	659 -> 653
+	658 -> 657
+	660 [label=":="]
+	661 [label=idp]
+	660 -> 661
+	660 -> 658
+	662 [label=CONTENIDO]
+	662 -> 660
+	663 [label=idp]
+	664 [label=return]
+	664 -> 663
+	662 -> 664
+	665 [label=begin]
+	665 -> 662
+	651 -> 665
+	666 [label=AS]
+	666 -> 651
+	667 [label=CONTENIDO]
+	667 -> 666
+	668 [label="language plpgsql"]
+	669 [label=funcion]
+	670 [label="id:fn_retornaproducto"]
+	669 -> 670
+	669 -> 643
+	669 -> 646
+	669 -> 667
+	669 -> 668
+	3 -> 669
+	671 [label=varchar]
+	672 [label=100]
+	671 -> 672
+	673 [label=PARAMETRO]
+	674 [label=Vbodega]
+	674 -> 671
+	673 -> 674
+	675 [label=integer]
+	676 [label=returns]
+	676 -> 675
+	677 [label=integer]
+	678 [label=ASIG]
+	679 [label=idb]
+	678 -> 679
+	678 -> 677
+	680 [label=DECLARACION]
+	680 -> 678
+	681 [label=CONTENIDO]
+	681 -> 680
+	682 [label=idbodega]
+	683 [label=tbbodega]
+	684 [label=bodega]
+	685 [label=Vbodega]
+	686 [label="="]
+	686 -> 684
+	686 -> 685
+	687 [label=where]
+	687 -> 686
+	688 [label=select]
+	688 -> 682
+	689 [label=from]
+	688 -> 689
+	689 -> 683
+	688 -> 687
+	690 [label=":="]
+	691 [label=idb]
+	690 -> 691
+	690 -> 688
+	692 [label=CONTENIDO]
+	692 -> 690
+	693 [label=idb]
+	694 [label=return]
+	694 -> 693
+	692 -> 694
+	695 [label=begin]
+	695 -> 692
+	681 -> 695
+	696 [label=AS]
+	696 -> 681
+	697 [label=CONTENIDO]
+	697 -> 696
+	698 [label="language plpgsql"]
+	699 [label=funcion]
+	700 [label="id:fn_retornabodega"]
+	699 -> 700
+	699 -> 673
+	699 -> 676
+	699 -> 697
+	699 -> 698
+	3 -> 699
+	701 [label="Laptop Lenovo"]
+	702 [label=fn_retornaproducto]
+	702 -> 701
+	703 [label=select]
+	703 -> 702
+	3 -> 703
+	704 [label="BODEGA ZONA 12"]
+	705 [label=fn_retornabodega]
+	705 -> 704
+	706 [label=select]
+	706 -> 705
+	3 -> 706
+	707 [label=integer]
+	708 [label=PARAMETRO]
+	709 [label=ide]
+	709 -> 707
+	708 -> 709
+	710 [label=varchar]
+	711 [label=100]
+	710 -> 711
+	712 [label=Vproducto]
+	712 -> 710
+	708 -> 712
+	713 [label=varchar]
+	714 [label=100]
+	713 -> 714
+	715 [label=Vbodega]
+	715 -> 713
+	708 -> 715
+	716 [label=integer]
+	717 [label=cantidad]
+	717 -> 716
+	708 -> 717
+	718 [label=varchar]
+	719 [label=200]
+	718 -> 719
+	720 [label=descripcion]
+	720 -> 718
+	708 -> 720
+	721 [label=integer]
+	722 [label=returns]
+	722 -> 721
+	723 [label=integer]
+	724 [label=ASIG]
+	725 [label=idproducto]
+	724 -> 725
+	724 -> 723
+	726 [label=DECLARACION]
+	726 -> 724
+	727 [label=CONTENIDO]
+	727 -> 726
+	728 [label=integer]
+	729 [label=ASIG]
+	730 [label=idbodega]
+	729 -> 730
+	729 -> 728
+	731 [label=DECLARACION]
+	731 -> 729
+	727 -> 731
+	732 [label=integer]
+	733 [label=ASIG]
+	734 [label=idev]
+	733 -> 734
+	733 -> 732
+	735 [label=DECLARACION]
+	735 -> 733
+	727 -> 735
+	736 [label="*"]
+	737 [label=count]
+	737 -> 736
+	738 [label=tbinventario]
+	739 [label=idinventario]
+	740 [label=ide]
+	741 [label="="]
+	741 -> 739
+	741 -> 740
+	742 [label=where]
+	742 -> 741
+	743 [label=select]
+	743 -> 737
+	744 [label=from]
+	743 -> 744
+	744 -> 738
+	743 -> 742
+	745 [label=":="]
+	746 [label=idev]
+	745 -> 746
+	745 -> 743
+	747 [label=CONTENIDO]
+	747 -> 745
+	748 [label=idev]
+	749 [label=0]
+	750 [label="="]
+	750 -> 748
+	750 -> 749
+	751 [label=Vproducto]
+	752 [label=fn_retornaproducto]
+	752 -> 751
+	753 [label=select]
+	753 -> 752
+	754 [label=":="]
+	755 [label=idproducto]
+	754 -> 755
+	754 -> 753
+	756 [label=CONTENIDO]
+	756 -> 754
+	757 [label=Vbodega]
+	758 [label=fn_retornabodega]
+	758 -> 757
+	759 [label=select]
+	759 -> 758
+	760 [label=":="]
+	761 [label=idbodega]
+	760 -> 761
+	760 -> 759
+	756 -> 760
+	762 [label=ide]
+	763 [label=idproducto]
+	764 [label=idbodega]
+	765 [label=cantidad]
+	766 [label=now]
+	767 [label=descripcion]
+	768 [label=insert]
+	769 [label=into]
+	768 -> 769
+	770 [label=tbinventario]
+	769 -> 770
+	771 [label=values]
+	768 -> 771
+	771 -> 762
+	771 -> 763
+	771 -> 764
+	771 -> 765
+	771 -> 766
+	771 -> 767
+	756 -> 768
+	772 [label=if]
+	772 -> 750
+	773 [label=then]
+	772 -> 773
+	773 -> 756
+	747 -> 772
+	774 [label=ide]
+	775 [label=return]
+	775 -> 774
+	747 -> 775
+	776 [label=begin]
+	776 -> 747
+	727 -> 776
+	777 [label=AS]
+	777 -> 727
+	778 [label=CONTENIDO]
+	778 -> 777
+	779 [label="language plpgsql"]
+	780 [label=funcion]
+	781 [label="id:sp_insertainventario"]
+	780 -> 781
+	780 -> 708
+	780 -> 722
+	780 -> 778
+	780 -> 779
+	3 -> 780
+	782 [label=1]
+	783 [label="Laptop Lenovo"]
+	784 [label="BODEGA CENTRAL"]
+	785 [label=200]
+	786 [label="Laptop Lenovo T420 i7 8GB"]
+	787 [label=sp_insertainventario]
+	787 -> 782
+	787 -> 783
+	787 -> 784
+	787 -> 785
+	787 -> 786
+	788 [label=select]
+	788 -> 787
+	3 -> 788
+	789 [label=2]
+	790 [label="Teclado Inalambrico"]
+	791 [label="BODEGA CENTRAL"]
+	792 [label=100]
+	793 [label="Teclado Inalambrico Lenovo"]
+	794 [label=sp_insertainventario]
+	794 -> 789
+	794 -> 790
+	794 -> 791
+	794 -> 792
+	794 -> 793
+	795 [label=select]
+	795 -> 794
+	3 -> 795
+	796 [label=3]
+	797 [label="Mouse Inalambrico"]
+	798 [label="BODEGA ZONA 12"]
+	799 [label=50]
+	800 [label=""]
+	801 [label=sp_insertainventario]
+	801 -> 796
+	801 -> 797
+	801 -> 798
+	801 -> 799
+	801 -> 800
+	802 [label=select]
+	802 -> 801
+	3 -> 802
+	803 [label=4]
+	804 [label="Laptop HP"]
+	805 [label="bodega zona 9"]
+	806 [label=20]
+	807 [label="Laptop HP i5 4GB RAM"]
+	808 [label=sp_insertainventario]
+	808 -> 803
+	808 -> 804
+	808 -> 805
+	808 -> 806
+	808 -> 807
+	809 [label=select]
+	809 -> 808
+	3 -> 809
+	810 [label="drop procedure"]
+	811 [label=sp_insertainventario]
+	810 -> 811
+	3 -> 810
+	812 [label=INIT]
+	812 -> 3
 }

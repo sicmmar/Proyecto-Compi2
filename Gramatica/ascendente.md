@@ -1,14 +1,48 @@
-> # Gramática Descendente
+> # Gramática para Analizador Ascendente
 
-- [Precedencia de Operadores](#para-definir-la-producción-de-expresiones-aritméticas-lógicas-relacionales-se-utilizó-la-siguiente-precedencia-de-operadores)
+- [Expresiones Regulares](#expresiones-regulares)
+- [Tokens](#tokens)
+- [Reglas Sintácticas](#reglas-sintacticas)
+- [Precencia](#precedencia-de-operadores)
 
+
+## Expresiones regulares
+```
+int ::= digito+
+decimales ::= digito+ "." digito+ (["e"] ["+"|"-""] digito+)?
+id ::= [a-zA-Z_][a-zA-Z_0-9]*
+cadena ::= """ "."*? """
+cadenaString ::= "".*?""
+```
+
+## Tokens
+```
+mas ::= "+"
+menos ::= "-"
+elevado ::= "^"
+multiplicacion ::= "*"
+division ::= "/"
+modulo ::= "%"
+menor ::= "<"
+mayor ::= ">"
+igual ::= "="
+menor_igual ::= "<="
+mayor_igual ::= ">="
+diferente1 ::= "<>"
+diferente2 ::= "!=""
+para ::= "("
+parc ::= ")"
+ptcoma ::= ";"
+coma ::= ","
+punto ::= "."
+```
+
+## Reglas Sintácticas
 ```
 INIT ::= INSTRUCCIONES
 
-INSTRUCCIONES ::= INSTRUCCION INSTRUCCIONES'
-
-INSTRUCCIONES' ::= INSTRUCCION INSTRUCCIONES'
-            | Ɛ
+INSTRUCCIONES ::= INSTRUCCIONES INSTRUCCION
+            | INSTRUCCION
 
 INSTRUCCION ::= SELECT ptcoma
             | CREATETABLE
@@ -56,13 +90,16 @@ PROCEDIMIENTOS ::= create procedure id para LPARAM parc LENGUAJE  LCONTENIDOP
                 | create procedure id para LPARAM parc LCONTENIDOP LENGUAJE
                 | create procedure id para parc LCONTENIDOP LENGUAJE
 
-LCONTENIDOP ::= CONTENIDOP LCONTENIDOP'
-
-LCONTENIDOP ::= CONTENIDOP LCONTENIDOP'
-                | Ɛ
+LCONTENIDOP ::= LCONTENIDOP CONTENIDOP
+                | CONTENIDOP
 
 CONTENIDOP ::= as dolarn LISTACONTENIDO dolarn
             | do dolarn LISTACONTENIDO dolarn
+
+LPARAM ::= LPARAM coma inout id TIPO
+        | LPARAM coma  id TIPO
+        | inout id TIPO
+        | id TIPO
 
 LENGUAJE ::= language plpgsql
             | language plpgsql ptcoma
@@ -85,10 +122,8 @@ ORDEN ::= asc
         | desc nulls first
         | asc nulls last
 
-LDEC ::= DECLARACIONES LDEC'
-
-LDEC' ::= DECLARACIONES LDEC'
-        | Ɛ
+LDEC ::= LDEC DECLARACIONES
+        | DECLARACIONES
 
 DECLARACIONES ::= id TIPO not null ASIG ptcoma
             | id TIPO ASIG ptcoma
@@ -108,20 +143,18 @@ CONDICIONIF ::= if EXP then LISTACONTENIDO ELSEF  end if
                 | if EXP then LISTACONTENIDO end if
                 | if EXP then LISTACONTENIDO LELIF ELSEF end if
 
-LELIF ::= elsif EXP then LISTACONTENIDO LELIF'
+LELIF ::= LELIF elsif EXP then LISTACONTENIDO
+        | elsif EXP then LISTACONTENIDO
 
-LELIF' ::= elsif EXP then LISTACONTENIDO LELIF'
-        | Ɛ
+ELSEF ::= else LISTACONTENIDO
 
 CASE : case EXP  LISTAWHEN ELSEF  end case
     | case EXP  LISTAWHEN   end case
     | case  LISTAWHEN ELSEF end case
     | case LISTAWHEN end case
 
-LISTACONTENIDO ::= CONTENIDO LISTACONTENIDO'
-
-LISTACONTENIDO' ::= CONTENIDO LISTACONTENIDO'
-                | Ɛ
+LISTACONTENIDO ::= LISTACONTENIDO CONTENIDO
+                | CONTENIDO
 
 CONTENIDO : ASIGNACION ptcoma
         | CONDICIONIF ptcoma
@@ -150,12 +183,11 @@ LEVEL ::= info
         
 FORMAT ::= format para EXP  coma LEXP parc
 
-LISTAWHEN ::= WHEN LISTAWHEN'
+LISTAWHEN ::= LISTAWHEN WHEN
+            | WHEN
 
-LISTAWHEN' ::= WHEN LISTAWHEN'
-            | Ɛ
-
-WHEN : when LEXP then LEXP
+WHEN ::= when EXP then LISTACONTENIDO
+        | when EXP then LEXP'''
 
 ELSE ::= else LEXP
 
@@ -208,31 +240,31 @@ OPCCDB ::= PROPIETARIO
         | PROPIETARIO MODO
 
 RD ::= or replace databases
-        | databases
+    | databases
 
 PROPIETARIO ::= owner igual id
+            | owner igual cadena
+            | owner igual cadenaString
             | owner id
+            | owner cadena
+            | owner cadenaString
 
-MODO ::= mode igual int
-        | mode int
+MODO ::= mode  igual int
+	    | mode int
 
 CREATETABLE ::= create table id para LDEF parc ptcoma
             | create table id para LDEF parc HERENCIA ptcoma
-
-LDEF ::= COLDEF LDEF'
-
-LDEF' ::= coma COLDEF LDEF'
-        | Ɛ
+            
+LDEF ::= LDEF coma COLDEF
+        | COLDEF
 
 COLDEF ::= OPCONST
         | constraint id OPCONST
         | id TIPO
         | id TIPO LOPCOLUMN
 
-LOPCOLUMN ::= OPCOLUMN LOPCOLUMN'
-
-LOPCOLUMN' ::= OPCOLUMN LOPCOLUMN'
-            | Ɛ
+LOPCOLUMN ::= LOPCOLUMN OPCOLUMN
+            | OPCOLUMN
 
 OPCOLUMN ::= constraint id unique
             | unique
@@ -276,7 +308,7 @@ LIMIT ::= limit int
 
 WHERE ::= where EXP 
         | where EXIST
-	| Ɛ
+	    | Ɛ
 
 COMBINING ::=  union EXP
             | union all EXP
@@ -288,7 +320,7 @@ GROUP ::=  group by LEXP
         | Ɛ
 
 HAVING ::= having EXP
-	| Ɛ
+	    | Ɛ
 
 ORDER ::= order by LEXP ORD
         | order by LEXP
@@ -299,20 +331,16 @@ ORD ::= asc
 
 UPDATE ::= update id set LCAMPOS WHERE
 
-LCAMPOS ::= id igual EXP LCAMPOS'
-
-LCAMPOS' ::= id igual EXP LCAMPOS'
-            | Ɛ
+LCAMPOS ::= LCAMPOS coma id igual EXP
+        | id igual EXP
 
 DELETE ::= delete from id WHERE
 
 EXIST ::= exist para SELECT parc
         | not exist para SELECT parc
 
-LEXP ::= EXP LEXP'
-
-LEXP' ::= coma EXP LEXP'
-        | Ɛ
+LEXP ::= LEXP coma EXP
+        | EXP
 
 TIPO ::= smallint
         | integer
@@ -354,7 +382,7 @@ FIELDS ::=  year
         | second
 ```
 
-### Para definir la producción de Expresiones (aritméticas, lógicas, relacionales) se utilizó la siguiente precedencia de operadores
+### Precencia de operadores
 
 |Asociatividad|Símbolo|Descripción|
 |:----------:|:-------------:|:---------:|
