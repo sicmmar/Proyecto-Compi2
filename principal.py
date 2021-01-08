@@ -21,8 +21,6 @@ variables.ventana.config(bd=12)  # tamaño del borde en píxeles
 global tablaSym
 tablaSym = Digraph("TablaSym", node_attr={'shape': 'record'})
 
-contenidoSym: str = ""
-
 global ErroresS
 ErroresS = Digraph("reporte", node_attr={'shape': 'record'})
 ErroresS.attr(style='rounded', color='#4b8dc5')
@@ -78,9 +76,14 @@ def traducir():
     salida2=''
     for instr in instrucciones:
         if instr != None:
-            s=instr.traducir(Principal)
-            if s!=None:
-                salida2+=s.codigo3d
+
+            #try:
+                s = instr.traducir(Principal)
+                if s != None:
+                    salida2 += s.codigo3d
+            #except  Exception as inst:
+             #   print(inst)
+
     salida2 = salida2.replace('goto temp', generarsaltos())
     filas=salida2.split('\n')
     salida2=''
@@ -92,6 +95,7 @@ def traducir():
     print(salida)
     f = open('prueba.py', 'w')
     f.write(salida)
+    f.write('\tci.getSym()\n')
     f.close()
 
 
@@ -125,8 +129,9 @@ def mostrarimagenre():
 
 
 def setContenido(cont: str):
-    global contenidoSym
-    contenidoSym = cont
+    f = open('tsAux', 'w')
+    f.write(cont)
+    f.close()
 
 
 def arbol_ast():
@@ -135,7 +140,10 @@ def arbol_ast():
 
 
 def verSimbolos():
-    tablaSym.node("TS", contenidoSym)
+    f = open('tsAux','r')
+    c = f.read()
+    f.close()
+    tablaSym.node("TS", c)
     tablaSym.render('ts', view=True)  # doctest: +SKIP
     'ts.pdf'
 

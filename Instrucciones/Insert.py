@@ -203,9 +203,9 @@ class Insert(Instruccion):
 
         for i in range(0, len(self.valores), 1):
             if (i == 0):
-                self.codigo3d += self.valores[i].stringsql
+                self.codigo3d += self.valores[i].traducir(ent).stringsql
             else:
-                self.codigo3d += ', ' + self.valores[i].stringsql
+                self.codigo3d += ', ' + self.valores[i].traducir(ent).stringsql
 
         self.codigo3d += ')'
 
@@ -455,9 +455,9 @@ class InsertWhitColum(Instruccion):
         i = 0
         for i in range(0, len(self.valores), 1):
             if (i == 0):
-                self.codigo3d += self.valores[i].stringsql
+                self.codigo3d += self.valores[i].traducir(ent).stringsql
             else:
-                self.codigo3d += ', ' + self.valores[i].stringsql
+                self.codigo3d += ', ' + self.valores[i].traducir(ent).stringsql
 
         self.codigo3d += ");\")\n"
         return self

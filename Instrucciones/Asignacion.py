@@ -44,4 +44,10 @@ class Asignacion(Instruccion):
         cad = expval.codigo3d
         cad += self.nombre + '=' + str(expval.temp) + '\n'
         self.codigo3d=cad
+
+        sql=self.nombre
+        if self.valor != None:
+            sql += ' = ' + self.valor.stringsql
+        sql += ';'
+        self.stringsql=sql
         return self

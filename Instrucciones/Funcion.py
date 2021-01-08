@@ -12,6 +12,7 @@ class Funcion(Instruccion):
         self.instrucciones=instrucciones
         self.tipo=tipo
 
+
     def ejecutar(self, ent):
         'ejecucion de la definicion de la funcion'
         simbolo = Simbolo(self.tipo, '_f'+self.nombre, [self.params,self.instrucciones], -1)
@@ -20,7 +21,6 @@ class Funcion(Instruccion):
             variables.consola.insert(INSERT,'La funcion '+self.nombre+' no se pudo crear porque ya existe\n')
 
     def traducir(self,ent):
-        'traduccion proc'
         nl = ent.newlabel()
         cad = 'goto ' + nl + '\n'
         cad += 'label ' + ent.newlabel('f_' + self.nombre) + '\n'
@@ -48,22 +48,26 @@ class Funcion(Instruccion):
         cad += 'label ' + nl + '\n'
         self.codigo3d = cad
 
-        # string quemado 
-        self.stringsql = 'ci.ejecutarsql("create function ' + self.nombre + '('
+         # string quemado
+        sql= 'ci.ejecutarsql("create function ' + self.nombre + '('
         if self.params != None:
-            for param in self.params:
-                if param.modo != None:
-                    self.stringsql += 'inout '
-                self.stringsql += param.nombre + ' ' + param.tipo.tipo
-        self.stringsql += ') returns ' + self.tipo.tipo
-        
-        print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-        print(self.codigo3d)
-        print(self.tipo.valor)
-        print(self.instrucciones)
-        print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+            for i in range(0,len(self.params)):
+                if i > 0:
+                    sql += ','
+                if self.params[i].modo != None:
+                    sql += 'inout '
 
+                sql += self.params[i].nombre + ' ' + self.params[i].tipo.tipo
+
+        sql += ') returns ' + self.tipo.tipo+' as $$ '
+
+        if self.instrucciones!=None:
+            for ins in self.instrucciones:
+                sql+=ins.traducir(ent).stringsql
+        sql+=' $$ language plpgsql;\")\n'
+        self.codigo3d=self.codigo3d+sql
         return self
+
 
 
 
@@ -76,6 +80,10 @@ class DropFunction(Instruccion):
         res= ent.eliminarSimbolo('_f'+self.nombre)
         if res=='ok':
             variables.consola.insert(INSERT,'Se elimino la funcion '+self.nombre +'\n')
+    def traducir(self,entorno):
+        cad='ci.ejecutarsql(\"DROP function '+self.nombre+';\")\n'
+        self.codigo3d=cad
+        return self
 
 class Parametro():
     def __init__(self,nombre,modo,tipo):

@@ -26,5 +26,6 @@ class Identificador(Expresion) :
     def traducir(self,Entorno):
         ''
         self.temp=self.nombre
+
         return self
 

@@ -10,14 +10,9 @@ class Relacional(Binaria):
         Binaria.__init__(self, exp1, exp2, operador)
         self.exp1 = exp1
         self.exp2 = exp2
-        if (self.operador == 'not like'):
-            self.stringsql += exp1.stringsql + ' not like ' + exp2.stringsql
-            self.operador = 'like'
-            operador = 'like'
-        else:
-            self.stringsql += exp1.stringsql + ' '
-            self.stringsql += operador + ' '
-            self.stringsql += exp2.stringsql
+
+
+
 
     def getval(self, entorno):
 
@@ -69,17 +64,36 @@ class Relacional(Binaria):
         return self.like(valizq, valder)
 
     def traducir(self, entorno):
+        exp1 = self.exp1.traducir(entorno)
+        exp2 = self.exp2.traducir(entorno)
+        if (self.operador == 'not like'):
+            stringsql = exp1.stringsql + ' '
+            stringsql +=' not like '
+            stringsql += exp2.stringsql
+            if self.stringsql == '()':
+                self.stringsql = '(' + stringsql + ')'
+            else:
+                self.stringsql = stringsql
+        else:
+            stringsql = exp1.stringsql + ' '
+            stringsql += ' '+self.operador+' '
+            stringsql += exp2.stringsql
+            if self.stringsql == '()':
+                self.stringsql = '(' + stringsql + ')'
+            else:
+                self.stringsql = stringsql
+
         if self.operador == '<>':
             self.operador = '!='
         if self.operador == '=':
             self.operador = '=='
         self.temp = entorno.newtemp()
         nt = self.temp
-        exp1 = self.exp1.traducir(entorno)
-        exp2 = self.exp2.traducir(entorno)
+
         cad = exp1.codigo3d
         cad += exp2.codigo3d
         cad += nt + '=' + str(exp1.temp) + ' ' + self.operador + ' ' + str(exp2.temp) + '\n'
         self.codigo3d = cad
+
 
         return self

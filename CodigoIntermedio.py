@@ -17,6 +17,11 @@ class CodigoIntermedio():
         for inst in instr:
             return inst.ejecutar(self.entorno)
 
+    def getSym(self):
+        f = open('tsAux', 'w')
+        f.write(self.entorno.mostrarSimbolos())
+        f.close()
+
 
 
 

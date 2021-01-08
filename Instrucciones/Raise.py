@@ -23,5 +23,6 @@ class Raise(Instruccion):
             cad = exp.codigo3d
             cad += 'print (' + exp.temp + ') \n'
             self.codigo3d = cad
+            self.stringsql=' raise notice '+self.exp.traducir(entorno).stringsql+';'
         return self
 

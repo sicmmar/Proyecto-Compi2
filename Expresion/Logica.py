@@ -14,9 +14,7 @@ class Logica(Binaria):
         self.exp2=exp2
         self.exp1=exp1
 
-        self.stringsql +=exp1.stringsql+ ' '
-        self.stringsql+= operador +' '
-        self.stringsql += exp2.stringsql
+
 
 
     def getval(self, entorno):
@@ -54,6 +52,14 @@ class Logica(Binaria):
         cad += exp2.codigo3d
         cad += nt + '=' + str(exp1.temp) + ' ' + self.operador + ' ' + str(exp2.temp) + '\n'
         self.codigo3d=cad
+
+        stringsql = str(self.exp1.stringsql) +' '
+        stringsql += self.operador + ' '
+        stringsql += str(self.exp2.stringsql)+' '
+        if self.stringsql == '()':
+            self.stringsql = '(' + stringsql + ')'
+        else:
+            self.stringsql = stringsql
 
         return self
 

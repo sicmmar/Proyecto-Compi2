@@ -9,7 +9,7 @@ class Extract(Expresion):
     def __init__(self,field=None,timestamp=None):
         self.field=field
         self.timestamp=timestamp
-
+        self.stringsql = 'EXTRACT( ' + field + ' from timestamp \'' + timestamp + '\') '
 
     def getval(self,entorno):
         'spliteo el timestamp'

@@ -273,7 +273,7 @@ class Select(Instruccion):
             print(inst)
             return
 
-    def traducir(self, Entorno):
+    def traducir(self, entorno):
         self.codigo3d = 'ci.ejecutarsql("select '
         self.stringsql = ' Select '
         if self.distinct != None:
@@ -286,32 +286,32 @@ class Select(Instruccion):
 
                     exp = self.exps[i]
                     if isinstance(self.exps[i], FuncionesNativas):
-                        self.codigo3d += self.exps[i].stringsql
-                        self.stringsql += self.exps[i].stringsql
+                        self.codigo3d += self.exps[i].traducir(entorno).stringsql
+                        self.stringsql += self.exps[i].traducir(entorno).stringsql
                     elif isinstance(self.exps[i], Alias):
                         self.codigo3d += self.exps[i].stringsql
                         self.stringsql += self.exps[i].stringsql
                     elif isinstance(self.exps[i], Identificador):
                         self.codigo3d += (self.exps[i].nombre)
-                        self.stringsql += self.exps[i].stringsql
+                        self.stringsql += self.exps[i].traducir(entorno).stringsql
                     else:
-                        self.codigo3d += (self.exps[i].stringsql)
-                        self.stringsql += self.exps[i].stringsql
+                        self.codigo3d += (self.exps[i].traducir(entorno).stringsql)
+                        self.stringsql += self.exps[i].traducir(entorno).stringsql
                 else:
                     exp = self.exps[i]
                     if isinstance(self.exps[i], FuncionesNativas):
-                        self.codigo3d += ', ' + self.exps[i].stringsql
-                        self.stringsql += ', ' + self.exps[i].stringsql
+                        self.codigo3d += ', ' + self.exps[i].traducir(entorno).stringsql
+                        self.stringsql += ', ' + self.exps[i].traducir(entorno).stringsql
                     elif isinstance(self.exps[i], Alias):
                         self.codigo3d += ', ' + self.exps[i].stringsql
                         self.stringsql += ', ' + self.exps[i].stringsql
                         exp = self.exps[i].expresion
                     elif isinstance(self.exps[i], Identificador):
-                        self.codigo3d += ', ' + self.exps[i].nombre
-                        self.stringsql += ', ' + self.exps[i].stringsql
+                        self.codigo3d += ', ' + self.exps[i].traducir(entorno).nombre
+                        self.stringsql += ', ' + self.exps[i].traducir(entorno).stringsql
                     else:
-                        self.codigo3d += ', ' + self.exps[i].stringsql
-                        self.stringsql += ', ' + self.exps[i].stringsql
+                        self.codigo3d += ', ' + self.exps[i].traducir(entorno).stringsql
+                        self.stringsql += ', ' + self.exps[i].traducir(entorno).stringsql
 
         if self.froms != None:
             self.codigo3d += ' from '
@@ -321,26 +321,26 @@ class Select(Instruccion):
                 if i == 0:
 
                     if isinstance(exp, Identificador) or isinstance(exp, Terminal):
-                        self.codigo3d += exp.stringsql
-                        self.stringsql += exp.stringsql
+                        self.codigo3d += exp.traducir(entorno).stringsql
+                        self.stringsql += exp.traducir(entorno).stringsql
                     elif isinstance(exp, Alias):
-                        self.codigo3d += exp.stringsql
-                        self.stringsql += exp.stringsql
+                        self.codigo3d += exp.traducir(entorno).stringsql
+                        self.stringsql += exp.traducir(entorno).stringsql
                 else:
                     if isinstance(exp, Identificador) or isinstance(exp, Terminal):
-                        self.codigo3d += ', ' + exp.stringsql
-                        self.stringsql += ', ' + exp.stringsql
+                        self.codigo3d += ', ' + exp.traducir(entorno).stringsql
+                        self.stringsql += ', ' + exp.traducir(entorno).stringsql
                     elif isinstance(exp, Alias):
-                        self.codigo3d += ', ' + exp.stringsql
-                        self.stringsql += ', ' + exp.stringsql
+                        self.codigo3d += ', ' + exp.traducir(entorno).stringsql
+                        self.stringsql += ', ' + exp.traducir(entorno).stringsql
                 i = i + 1
 
         if self.where != None:
             self.codigo3d += ' Where '
             self.stringsql += ' Where '
             # v=self.where.getval(ent)
-            self.codigo3d += self.where.stringsql
-            self.stringsql += self.where.stringsql
+            self.stringsql += self.where.traducir(entorno).stringsql
+            self.codigo3d += self.where.traducir(entorno).stringsql
 
         if self.group != None:
             self.codigo3d += ' Group by '
@@ -348,11 +348,11 @@ class Select(Instruccion):
             i = 0
             for exp in self.group:
                 if i == 0:
-                    self.codigo3d += exp.stringsql
-                    self.stringsql += exp.stringsql
+                    self.codigo3d += exp.traducir(entorno).stringsql
+                    self.stringsql += exp.traducir(entorno).stringsql
                 else:
-                    self.codigo3d += ', ' + exp.stringsql
-                    self.stringsql += ', ' + exp.stringsql
+                    self.codigo3d += ', ' + exp.traducir(entorno).stringsql
+                    self.stringsql += ', ' + exp.traducir(entorno).stringsql
                 i = i + 1
 
         if self.having != None:
@@ -679,7 +679,7 @@ class Alias():
         self.expresion = expresion
         self.nombre = nombre
         self.ali = ali
-        self.stringsql = self.expresion.stringsql + ' ' + self.ali
+        self.stringsql = self.expresion.traducir(Entorno).stringsql + ' ' + self.ali
 
 
 class Combi():

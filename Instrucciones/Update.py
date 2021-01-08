@@ -239,7 +239,7 @@ class Update(Instruccion):
 
         return None
 
-    def traducir(self, Entorno):
+    def traducir(self, entorno):
         if ((self.tabla != None or self.tabla != "") and self.listaCampos != None and self.where != None):
             self.codigo3d = 'ci.ejecutarsql(' + '"' + 'update ' + self.tabla + ' set '
 
@@ -261,7 +261,7 @@ class Update(Instruccion):
                         self.codigo3d += nombrecol + "='" + str(contenido) + "',"
 
             self.codigo3d += ' Where '
-            self.codigo3d += self.where.stringsql
+            self.codigo3d += self.where.traducir(entorno).stringsql
 
             self.codigo3d += ';' + '"' + ')\n'
             return self

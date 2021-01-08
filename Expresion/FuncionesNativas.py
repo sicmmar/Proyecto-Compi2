@@ -17,20 +17,8 @@ class FuncionesNativas(Expresion):
         Expresion.__init__(self)
         self.identificador = identificador
         self.expresiones = expresiones
-        self.stringsql = self.identificador + '('
-        i = 0
-        if self.expresiones != None:
 
-            for i in range(0, len(self.expresiones), 1):
-                if str(self.identificador).lower() == 'convert':
-                    self.stringsql += '\'' + self.expresiones[i].stringsql + '\' as ' + self.expresiones[i].tipo.tipo
-                else:
-                    if (i == 0):
-                        self.stringsql += self.expresiones[i].stringsql
-                    else:
-                        self.stringsql += ', ' + self.expresiones[i].stringsql
-                i = i + 1
-            self.stringsql += ')'
+
 
         # print("en funci==========",self.identificador,self.expresiones[0])
 
@@ -40,7 +28,7 @@ class FuncionesNativas(Expresion):
             sizeparametro = len(self.expresiones)
             funcion = self.identificador.lower()
             i = 0
-            for param in self.expresiones:
+            ''' for param in self.expresiones:
                 if str(self.identificador).lower() == 'convert':
                     self.stringsql += self.expresiones[i].stringsql + ' as ' + self.expresiones[i].getTipo(entorno)
                 else:
@@ -49,7 +37,7 @@ class FuncionesNativas(Expresion):
                     else:
                         self.stringsql += ', ' + str(param.getval(entorno).valor)
                 i = i + 1
-            self.stringsql += ')'
+            self.stringsql += ')' '''
 
         # print("aqqqqqqqqqqqqq")
         try:
@@ -416,11 +404,25 @@ class FuncionesNativas(Expresion):
             return len(str(valor))
 
     def traducir(self, entorno):
+        if self.expresiones != None:
+            self.stringsql = self.identificador + '('
+            i = 0
+            for i in range(0, len(self.expresiones), 1):
+                if str(self.identificador).lower() == 'convert':
+                    self.stringsql += '\'' + self.expresiones[i].traducir(entorno).stringsql + '\' as ' + self.expresiones[i].tipo.tipo
+                else:
+                    if (i == 0):
+                        self.stringsql += self.expresiones[i].traducir(entorno).stringsql
+                    else:
+                        self.stringsql += ', ' + self.expresiones[i].traducir(entorno).stringsql
+                i = i + 1
+            self.stringsql += ')'
         try:
             self.temp = self.getval(entorno).valor
             return self
         except:
-            'pos nose pero por si truena'
+            self.temp=None
+            return self
 
 
 class Date_Part(FuncionesNativas):

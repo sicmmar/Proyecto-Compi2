@@ -41,6 +41,23 @@ class Ifclass(Instruccion):
 
 
     def traducir(self,entorno):
+        sql='if '+self.exp.traducir(entorno).stringsql +' then '
+        for inst in self.cif:
+            sql+=inst.traducir(entorno).stringsql
+        if self.elsif != None:
+            for elsif in self.elsif:
+                sql += 'elsif ' + elsif.exp.traducir(entorno).stringsql + ' then '
+                for inst in elsif.cif:
+                    sql += inst.traducir(entorno).stringsql
+        if self.celse!=None:
+            sql+=' else '
+            for inst in self.celse:
+                sql += inst.traducir(entorno).stringsql
+
+        sql+='end if;'
+        self.stringsql=sql
+
+
         if self.elsif==None and self.celse==None:
             lv = entorno.newlabel()
             lf = entorno.newlabel()

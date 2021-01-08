@@ -12,8 +12,8 @@ class Unaria(Expresion) :
         Expresion.__init__(self)
         self.exp1 = exp1
         self.operador = operador
-        self.stringsql+= self.operador +' '
-        self.stringsql+= str(exp1.stringsql) +' '
+
+
 
     def getval(self,entorno):
 
@@ -46,5 +46,11 @@ class Unaria(Expresion) :
         cad = exp1.codigo3d
         cad += nt + '='  + self.operador + ' ' + str(exp1.temp) + '\n'
         self.codigo3d=cad
+
+        stringsql = self.operador+' ' +str(exp1.stringsql) +' '
+        if self.stringsql == '()':
+            self.stringsql = '(' + stringsql + ')'
+        else:
+            self.stringsql = stringsql
 
         return self

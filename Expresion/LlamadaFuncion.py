@@ -11,6 +11,16 @@ class LLamadaFuncion(Expresion):
     def __init__(self,nombre,parametros):
         self.nombre=nombre
         self.parametros=parametros
+        sql=self.nombre +'('
+        if self.parametros!=None:
+            for i in range(0,len(self.parametros)):
+                if i>1:
+                    sql+=','
+                sql+=self.parametros[i].stringsql
+
+        sql+=')'
+        self.stringsql=sql
+
 
     def getval(self, ent:Entorno):
         'ejecucion llamada funcinon'
@@ -20,7 +30,7 @@ class LLamadaFuncion(Expresion):
             defparams=sim.valor[0]
             instrucciones=sim.valor[1]
             newent=Entorno(ent)
-            if self.parametros!=None:
+            if self.parametros!=None and defparams!=None:
                 if len(defparams)==len(self.parametros):
                     for i in range(0,len(defparams)):
                         param=defparams[i]
@@ -55,23 +65,34 @@ class LLamadaFuncion(Expresion):
 
 
     def traducir(self,ent):
-        'traduzco funcion'
+        '''
         lenp = 0
         cad = ''
-        if self.params != None:
-            lenp = len(self.params)
+        if self.parametros != None:
+            lenp = len(self.parametros)
 
         for i in range(0, lenp):
             cad += 'stack.append(' + str(self.params[i].traducir(ent).temp) + ')\n'
 
+        for i in range(0, lenp):
+            if not isinstance(self.params[i], Instrucciones.Select):
+                cad += 'stack.append(' + str(self.params[i].traducir(ent).temp) + ')\n'
         nl = ent.newlabel()
         cad += 'stack.append(\'' + nl + '\')\n'
-        variables.stack.append(nl)
-        cad += 'goto .L_' + self.nombre + '\n'
+        variables.stack.append('\'' + nl + '\'')
+        cad += 'goto .Lp_' + self.nombre + '\n'
         cad += 'label ' + nl + '\n'
-        nt=ent.newtemp()
-        cad+=nt+' = stack[0]\n'
-        self.temp=nt
         self.codigo3d = cad
+        '''
+        #quemado
+        strsql=self.nombre+'('
+        if self.parametros!=None:
+            for i in range(0,len(self.parametros)):
+                if i>1:
+                    strsql+=','
+                strsql+=self.parametros[i].traducir(ent).stringsql
+        strsql+=') '
+        self.stringsql=strsql
+
         return self
 

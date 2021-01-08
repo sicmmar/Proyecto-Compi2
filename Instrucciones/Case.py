@@ -41,6 +41,24 @@ class Case(Instruccion):
 
 
     def traducir(self,entorno):
+        sql = 'case '
+        if self.exp!=None:
+            sql+=self.exp.traducir(entorno).stringsql+' '
+
+        for case in self.cases:
+            sql+='when '+case.exp.traducir(entorno).stringsql+' then '
+            for inst in case.instr:
+                sql+=inst.traducir(entorno).stringsql
+
+        if self.celse != None:
+            sql += ' else '
+            for inst in self.celse:
+                sql += inst.traducir(entorno).stringsql
+
+        sql += 'end case;'
+        self.stringsql = sql
+
+
         if self.exp != None:
             lelifs = []
             for case in self.cases:

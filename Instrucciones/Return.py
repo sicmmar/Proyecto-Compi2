@@ -12,5 +12,5 @@ class Return(Instruccion):
     def traducir(self, ent):
         'ejecutar return'
         self.codigo3d='stack[0]= '+self.exp.traducir(ent).temp +'\n'
-        self.stringsql = 'return ' + self.exp.stringsql
+        self.stringsql = 'return ' + self.exp.stringsql+';'
         return self

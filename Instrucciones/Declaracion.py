@@ -33,13 +33,28 @@ class Declaracion(Instruccion):
 
     def traducir(self,entorno):
         if self.valor==None and self.nullable==True:
-            cad=self.id+'=' 'None\n'
+            cad=self.id+'=' '\'\'\n'
         elif self.valor!=None:
             exp=self.valor.traducir(entorno)
             cad=exp.codigo3d
             cad+=self.id+'='+str(exp.temp)+'\n'
 
         self.codigo3d=cad
+
+        sql='DECLARE '
+        sql+=self.id
+        if self.constant==True:
+            sql+=' constant '
+        else:
+            sql+=' '
+        sql+=self.tipo.tipo
+        if self.valor !=None:
+            sql+=' = '+self.valor.traducir(entorno).stringsql
+        if self.nullable==False:
+            sql+=' not null'
+        sql += ';'
+        self.stringsql=sql
+
         return self
 
 

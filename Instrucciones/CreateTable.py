@@ -315,9 +315,9 @@ class CreateType(Instruccion):
         reporteerrores.append(Lerrores("Error Semántico", "El tipo '" + self.id + "' ya existe declarado", "", ""))
 
     def traducir(self, ent: Entorno):
-        self.codigo3d = 'ci.ejecutarsql(" create type ' + self.id + ' as enum (' + str(self.contenido[0].stringsql)
+        self.codigo3d = 'ci.ejecutarsql(" create type ' + self.id + ' as enum (' + str(self.contenido[0].traducir(ent).stringsql)
         for i in range(1, len(self.contenido), 1):
-            self.codigo3d += ',' + str(self.contenido[i].stringsql)
+            self.codigo3d += ',' + str(self.contenido[i].traducir(ent).stringsql)
         self.codigo3d += ');")\n'
 
         return self
@@ -382,7 +382,7 @@ class Atributo(CreateTable):
         elif tipo == AtributosColumna.NO_NULO:
             self.stringsql = 'not null'
         elif tipo == AtributosColumna.DEFAULT:
-            self.stringsql = 'default ' + str(valor.valor)
+            self.stringsql = 'default ' + str(valor.traducir(None).stringsql)
         elif tipo == AtributosColumna.CHECK:
             self.stringsql = ''
             if valor != None:
@@ -419,7 +419,7 @@ class CondicionCheck(CreateTable):
         self.exp1 = exp1
         self.exp2 = exp2
         self.simbolo = simbolo
-        self.stringsql = str(exp1.stringsql) + " " + simbolo + " " + str(exp2.stringsql)
+        self.stringsql = str(exp1.traducir(None).stringsql) + " " + simbolo + " " + str(exp2.traducir(None).stringsql)
 
 
 class ShowTables(Instruccion):
