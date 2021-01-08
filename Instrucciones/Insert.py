@@ -203,9 +203,16 @@ class Insert(Instruccion):
 
         for i in range(0, len(self.valores), 1):
             if (i == 0):
-                self.codigo3d += self.valores[i].traducir(ent).stringsql
+                if isinstance(self.valores[i],Identificador):
+                    self.codigo3d += '\"+str('+self.valores[i].traducir(ent).stringsql+')+\"'
+                else:
+                    self.codigo3d += self.valores[i].traducir(ent).stringsql
             else:
-                self.codigo3d += ', ' + self.valores[i].traducir(ent).stringsql
+                if isinstance(self.valores[i],Identificador):
+                    self.codigo3d += ',\"+str('+self.valores[i].traducir(ent).stringsql+')+\"'
+                else:
+                    self.codigo3d += ', ' +self.valores[i].traducir(ent).stringsql
+
 
         self.codigo3d += ')'
 

@@ -73,7 +73,7 @@ class Terminal(Expresion):
     def traducir(self, entorno):
 
         self.temp = self.getval(entorno).valor
-        if self.tipo.tipo == 'varchar':
+        if self.tipo.tipo == 'varchar' or self.tipo.tipo in('date','timestamp without time zone','time without time zone'):
             self.temp = '\'' + self.temp + '\''
 
         if str(self.temp).lower() == 'true':

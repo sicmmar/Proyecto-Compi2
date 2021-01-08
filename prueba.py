@@ -7,19 +7,35 @@ def prueba():
 	ci = CodigoIntermedio(Entorno())
 	ci.ejecutarsql("create database DBFase2 ;") 
 	ci.ejecutarsql(" use DBFase2;" )
+	ci.ejecutarsql("create function myFuncion(texto text) returns text as $$ begin return texto; end; $$ language plpgsql;")
 	goto .L1
 	label .Lf_myFuncion
 	texto=stack[0]
 	stack[0]= texto
 	temp=stack[1]
 	stack=[]
-	if temp =='.L59':
-		goto .L59
-	if temp =='.L61':
-		goto .L61
+	if temp =='.L60':
+		goto .L60
+	if temp =='.L62':
+		goto .L62
+	if temp =='.L64':
+		goto .L64
+	if temp =='.L65':
+		goto .L65
+	if temp =='.L66':
+		goto .L66
+	if temp =='.L67':
+		goto .L67
+	if temp =='.L69':
+		goto .L69
+	if temp =='.L70':
+		goto .L70
+	if temp =='.L71':
+		goto .L71
+	if temp =='.L72':
+		goto .L72
 	
 	label .L1
-	ci.ejecutarsql("create function myFuncion(texto text) returns text as $$ begin return texto; end; $$ language plpgsql;")
 	ci.ejecutarsql("select myFuncion('INICIO CALIFICACION FASE 2') ;")
 	ci.ejecutarsql("create table tbProducto ( idproducto integer not null primary key, producto varchar(150) not null, fechacreacion date not null, estado integer);")
 	ci.ejecutarsql("create unique index idx_producto on tbProducto (idproducto);")
@@ -34,6 +50,7 @@ def prueba():
 	ci.ejecutarsql(" insert into tbProducto values(7, 'Teclado Flexible USB', now(), 1);")
 	ci.ejecutarsql(" insert into tbProducto values(8, 'Laptop Samsung', '2021-01-02', 1);")
 	ci.ejecutarsql("select myFuncion('Crea Funcion') ;")
+	ci.ejecutarsql("create function ValidaRegistros(tabla varchar,cantidad integer) returns integer as $$ DECLARE resultado INTEGER;DECLARE retorna INTEGER;begin if tabla  = 'tbProducto' then resultado =  Select COUNT(*) from tbProducto;if cantidad  = resultado then retorna = 1; else retorna = 0;end if;end if;if tabla  = 'tbProductoUp' then resultado =  Select COUNT(*) from tbProducto Where estado  = 2;if cantidad  = resultado then retorna = 1; else retorna = 0;end if;end if;if tabla  = 'tbbodega' then resultado =  Select COUNT(*) from tbbodega;if cantidad  = resultado then retorna = 1; else retorna = 0;end if;end if;return retorna; end; $$ language plpgsql;")
 	goto .L2
 	label .Lf_ValidaRegistros
 	tabla=stack[0]
@@ -100,16 +117,32 @@ def prueba():
 	stack[0]= retorna
 	temp=stack[2]
 	stack=[]
-	if temp =='.L59':
-		goto .L59
-	if temp =='.L61':
-		goto .L61
+	if temp =='.L60':
+		goto .L60
+	if temp =='.L62':
+		goto .L62
+	if temp =='.L64':
+		goto .L64
+	if temp =='.L65':
+		goto .L65
+	if temp =='.L66':
+		goto .L66
+	if temp =='.L67':
+		goto .L67
+	if temp =='.L69':
+		goto .L69
+	if temp =='.L70':
+		goto .L70
+	if temp =='.L71':
+		goto .L71
+	if temp =='.L72':
+		goto .L72
 	
 	label .L2
-	ci.ejecutarsql("create function ValidaRegistros(tabla varchar,cantidad integer) returns integer as $$ DECLARE resultado INTEGER;DECLARE retorna INTEGER;begin if tabla  = 'tbProducto' then resultado =  Select COUNT(*) from tbProducto;if cantidad  = resultado then retorna = 1; else retorna = 0;end if;end if;if tabla  = 'tbProductoUp' then resultado =  Select COUNT(*) from tbProducto Where estado  = 2;if cantidad  = resultado then retorna = 1; else retorna = 0;end if;end if;if tabla  = 'tbbodega' then resultado =  Select COUNT(*) from tbbodega;if cantidad  = resultado then retorna = 1; else retorna = 0;end if;end if;return retorna; end; $$ language plpgsql;")
 	ci.ejecutarsql(" insert into tbCalificacion values(1, 'Create Table and Insert', ValidaRegistros('tbProducto', 8));")
 	ci.ejecutarsql("update tbProducto set estado=2 Where estado  = 1;")
 	ci.ejecutarsql(" insert into tbCalificacion values(2, 'Update', ValidaRegistros('tbProductoUp', 8));")
+	ci.ejecutarsql("create function CALCULOS() returns integer as $$ DECLARE hora integer;DECLARE SENO decimal;DECLARE VALOR INTEGER;DECLARE ABSOLUTO decimal;begin hora =  Select EXTRACT( hour from timestamp '2001-02-16 20:38:40') ;SENO =  Select SIN(1);VALOR = TRUNC(SENO * hora );VALOR = VALOR + LENGTH(SUBSTRING('FASE2', 1, 4)) ;ABSOLUTO = ABS(SINH(- 1 ));ABSOLUTO = (ABSOLUTO * SQRT(225) );VALOR = (VALOR + ABSOLUTO ) / acosd(0.5) ;if VALOR  > 1 then VALOR = 20; else VALOR = 10;end if;return VALOR; end; $$ language plpgsql;")
 	goto .L51
 	label .Lf_CALCULOS
 	hora=''
@@ -144,17 +177,32 @@ def prueba():
 	stack[0]= VALOR
 	temp=stack[0]
 	stack=[]
-	if temp =='.L59':
-		goto .L59
-	if temp =='.L61':
-		goto .L61
+	if temp =='.L60':
+		goto .L60
+	if temp =='.L62':
+		goto .L62
+	if temp =='.L64':
+		goto .L64
+	if temp =='.L65':
+		goto .L65
+	if temp =='.L66':
+		goto .L66
+	if temp =='.L67':
+		goto .L67
+	if temp =='.L69':
+		goto .L69
+	if temp =='.L70':
+		goto .L70
+	if temp =='.L71':
+		goto .L71
+	if temp =='.L72':
+		goto .L72
 	
 	label .L51
-	ci.ejecutarsql("create function CALCULOS() returns integer as $$ DECLARE hora integer;DECLARE SENO decimal;DECLARE VALOR INTEGER;DECLARE ABSOLUTO decimal;begin hora =  Select EXTRACT( hour from timestamp '2001-02-16 20:38:40') ;SENO =  Select SIN(1);VALOR = TRUNC(SENO * hora );VALOR = VALOR + LENGTH(SUBSTRING('FASE2', 1, 4)) ;ABSOLUTO = ABS(SINH(- 1 ));ABSOLUTO = (ABSOLUTO * SQRT(225) );VALOR = (VALOR + ABSOLUTO ) / acosd(0.5) ;if VALOR  > 1 then VALOR = 20; else VALOR = 10;end if;return VALOR; end; $$ language plpgsql;")
 	ci.ejecutarsql(" insert into tbCalificacion values(3, ' Valida Funciones', CALCULOS() );")
 	ci.ejecutarsql("create table tbbodega ( idbodega integer not null primary key, bodega varchar(100) not null, estado integer);")
 	ci.ejecutarsql("create index nombreIndex on tbbodega (bodega);")
-	goto .L58
+	goto .L59
 	label .Lp_sp_validainsert
 	ci.ejecutarsql(" insert into tbbodega values(1, 'BODEGA CENTRAL', 1);")
 	ci.ejecutarsql(" insert into tbbodega (idbodega, bodega) values (2, 'BODEGA ZONA 12');")
@@ -163,69 +211,182 @@ def prueba():
 	ci.ejecutarsql(" insert into tbbodega (idbodega, bodega, estado) values (5, 'BODEGA ZONA 10', 1);")
 	temp=stack[0]
 	stack=[]
-	if temp =='.L59':
-		goto .L59
-	if temp =='.L61':
-		goto .L61
+	if temp =='.L60':
+		goto .L60
+	if temp =='.L62':
+		goto .L62
+	if temp =='.L64':
+		goto .L64
+	if temp =='.L65':
+		goto .L65
+	if temp =='.L66':
+		goto .L66
+	if temp =='.L67':
+		goto .L67
+	if temp =='.L69':
+		goto .L69
+	if temp =='.L70':
+		goto .L70
+	if temp =='.L71':
+		goto .L71
+	if temp =='.L72':
+		goto .L72
 	
-	label .L58
-	stack.append('.L59')
-	goto .Lp_sp_validainsert
 	label .L59
+	stack.append('.L60')
+	goto .Lp_sp_validainsert
+	label .L60
 	ci.ejecutarsql(" insert into tbCalificacion values(4, 'Valida Store Procedure', ValidaRegistros('tbbodega', 5));")
 	ci.ejecutarsql("create index idx_bodega on tbbodega (bodega,estado);")
 	ci.ejecutarsql("drop index idx_bodega;")
 	ci.ejecutarsql("create index idx_bodega on tbbodega (bodega,estado);")
-	goto .L60
+	goto .L61
 	label .Lp_sp_validaupdate
 	ci.ejecutarsql("update tbbodega set bodega='bodega zona 9' Where idbodega  = 4;")
 	temp=stack[0]
 	stack=[]
-	if temp =='.L59':
-		goto .L59
-	if temp =='.L61':
-		goto .L61
+	if temp =='.L60':
+		goto .L60
+	if temp =='.L62':
+		goto .L62
+	if temp =='.L64':
+		goto .L64
+	if temp =='.L65':
+		goto .L65
+	if temp =='.L66':
+		goto .L66
+	if temp =='.L67':
+		goto .L67
+	if temp =='.L69':
+		goto .L69
+	if temp =='.L70':
+		goto .L70
+	if temp =='.L71':
+		goto .L71
+	if temp =='.L72':
+		goto .L72
 	
-	label .L60
-	stack.append('.L61')
-	goto .Lp_sp_validaupdate
 	label .L61
+	stack.append('.L62')
+	goto .Lp_sp_validaupdate
+	label .L62
 	ci.ejecutarsql("delete from tbbodega Where idbodega  = 4 ;")
 	ci.ejecutarsql(" insert into tbCalificacion values(5, 'Valida Delete', ValidaRegistros('tbbodega', 4));")
 	ci.ejecutarsql("select * from tbbodega ;")
 	ci.ejecutarsql("create index idx_bodega on tbbodega (estado);")
-	goto .L62
+	goto .L63
 	label .Lp_sp_insertaproducto
 	llave=stack[0]
 	producto=stack[1]
 	fecha=stack[2]
-	ci.ejecutarsql(" insert into tbProducto values(llave, producto, fecha, 1);")
+	ci.ejecutarsql(" insert into tbProducto values("+str(llave)+","+str(producto)+","+str(fecha)+", 1);")
 	temp=stack[3]
 	stack=[]
-	if temp =='.L59':
-		goto .L59
-	if temp =='.L61':
-		goto .L61
+	if temp =='.L60':
+		goto .L60
+	if temp =='.L62':
+		goto .L62
+	if temp =='.L64':
+		goto .L64
+	if temp =='.L65':
+		goto .L65
+	if temp =='.L66':
+		goto .L66
+	if temp =='.L67':
+		goto .L67
+	if temp =='.L69':
+		goto .L69
+	if temp =='.L70':
+		goto .L70
+	if temp =='.L71':
+		goto .L71
+	if temp =='.L72':
+		goto .L72
 	
-	label .L62
+	label .L63
+	stack.append("9")
+	stack.append("'Bocina Inalambrica'")
+	stack.append("'2021-01-06'")
+	stack.append('.L64')
+	goto .Lp_sp_insertaproducto
+	label .L64
+	stack.append("10")
+	stack.append("'Audifonos con Microfono USB'")
+	stack.append("'2021-01-06'")
+	stack.append('.L65')
+	goto .Lp_sp_insertaproducto
+	label .L65
+	stack.append("11")
+	stack.append("'Bocina Inalambrica'")
+	stack.append("'2021-01-06'")
+	stack.append('.L66')
+	goto .Lp_sp_insertaproducto
+	label .L66
+	stack.append("12")
+	stack.append("'Monitor de 17'")
+	stack.append("'2021-01-06'")
+	stack.append('.L67')
+	goto .Lp_sp_insertaproducto
+	label .L67
 	ci.ejecutarsql("DROP function myFuncion;")
 	ci.ejecutarsql("select myFuncion('Valida drop function') ;")
-	goto .L63
+	ci.ejecutarsql("create function fn_Mensaje(texto text) returns text as $$ begin return texto; end; $$ language plpgsql;")
+	goto .L68
 	label .Lf_fn_Mensaje
 	texto=stack[0]
 	stack[0]= texto
 	temp=stack[1]
 	stack=[]
-	if temp =='.L59':
-		goto .L59
-	if temp =='.L61':
-		goto .L61
+	if temp =='.L60':
+		goto .L60
+	if temp =='.L62':
+		goto .L62
+	if temp =='.L64':
+		goto .L64
+	if temp =='.L65':
+		goto .L65
+	if temp =='.L66':
+		goto .L66
+	if temp =='.L67':
+		goto .L67
+	if temp =='.L69':
+		goto .L69
+	if temp =='.L70':
+		goto .L70
+	if temp =='.L71':
+		goto .L71
+	if temp =='.L72':
+		goto .L72
 	
-	label .L63
-	ci.ejecutarsql("create function fn_Mensaje(texto text) returns text as $$ begin return texto; end; $$ language plpgsql;")
+	label .L68
 	ci.ejecutarsql("select myFuncion('Crea funcion Nueva de Mensaje') ;")
+	stack.append("13")
+	stack.append("'Bocina Inalambrica Sony'")
+	stack.append("'2021-01-06'")
+	stack.append('.L69')
+	goto .Lp_sp_insertaproducto
+	label .L69
+	stack.append("14")
+	stack.append("'Audifonos con Microfono USB Lenovo'")
+	stack.append("'2021-01-06'")
+	stack.append('.L70')
+	goto .Lp_sp_insertaproducto
+	label .L70
+	stack.append("15")
+	stack.append("'Monitor de 21'")
+	stack.append("'2021-01-06'")
+	stack.append('.L71')
+	goto .Lp_sp_insertaproducto
+	label .L71
+	stack.append("16")
+	stack.append("'Monitor de 17' Lenovo'")
+	stack.append("'2021-01-06'")
+	stack.append('.L72')
+	goto .Lp_sp_insertaproducto
+	label .L72
 	ci.ejecutarsql("create table tbinventario ( idinventario integer not null primary key, idproducto integer not null, idbodega integer not null, cantidad integer not null, fechacarga date not null, descripcion text);")
-	goto .L64
+	ci.ejecutarsql("create function fn_retornaproducto(Vproducto varchar) returns integer as $$ DECLARE idp integer;begin idp =  Select idproducto from tbProducto Where producto  = Vproducto;return idp; end; $$ language plpgsql;")
+	goto .L73
 	label .Lf_fn_retornaproducto
 	Vproducto=stack[0]
 	idp=''
@@ -235,14 +396,30 @@ def prueba():
 	stack[0]= idp
 	temp=stack[1]
 	stack=[]
-	if temp =='.L59':
-		goto .L59
-	if temp =='.L61':
-		goto .L61
+	if temp =='.L60':
+		goto .L60
+	if temp =='.L62':
+		goto .L62
+	if temp =='.L64':
+		goto .L64
+	if temp =='.L65':
+		goto .L65
+	if temp =='.L66':
+		goto .L66
+	if temp =='.L67':
+		goto .L67
+	if temp =='.L69':
+		goto .L69
+	if temp =='.L70':
+		goto .L70
+	if temp =='.L71':
+		goto .L71
+	if temp =='.L72':
+		goto .L72
 	
-	label .L64
-	ci.ejecutarsql("create function fn_retornaproducto(Vproducto varchar) returns integer as $$ DECLARE idp integer;begin idp =  Select idproducto from tbProducto Where producto  = Vproducto;return idp; end; $$ language plpgsql;")
-	goto .L65
+	label .L73
+	ci.ejecutarsql("create function fn_retornabodega(Vbodega varchar) returns integer as $$ DECLARE idb integer;begin idb =  Select idbodega from tbbodega Where bodega  = Vbodega;return idb; end; $$ language plpgsql;")
+	goto .L74
 	label .Lf_fn_retornabodega
 	Vbodega=stack[0]
 	idb=''
@@ -252,14 +429,30 @@ def prueba():
 	stack[0]= idb
 	temp=stack[1]
 	stack=[]
-	if temp =='.L59':
-		goto .L59
-	if temp =='.L61':
-		goto .L61
+	if temp =='.L60':
+		goto .L60
+	if temp =='.L62':
+		goto .L62
+	if temp =='.L64':
+		goto .L64
+	if temp =='.L65':
+		goto .L65
+	if temp =='.L66':
+		goto .L66
+	if temp =='.L67':
+		goto .L67
+	if temp =='.L69':
+		goto .L69
+	if temp =='.L70':
+		goto .L70
+	if temp =='.L71':
+		goto .L71
+	if temp =='.L72':
+		goto .L72
 	
-	label .L65
-	ci.ejecutarsql("create function fn_retornabodega(Vbodega varchar) returns integer as $$ DECLARE idb integer;begin idb =  Select idbodega from tbbodega Where bodega  = Vbodega;return idb; end; $$ language plpgsql;")
-	goto .L66
+	label .L74
+	ci.ejecutarsql("create function sp_insertainventario(ide integer,Vproducto varchar,Vbodega varchar,cantidad integer,descripcion varchar) returns integer as $$ DECLARE idproducto integer;DECLARE idbodega integer;DECLARE idev integer;begin idev =  Select count(*) from tbinventario Where idinventario  = ide;if idev  = 0 then idproducto =  Select fn_retornaproducto(Vproducto);idbodega =  Select fn_retornabodega(Vbodega);end if;return ide; end; $$ language plpgsql;")
+	goto .L75
 	label .Lf_sp_insertainventario
 	ide=stack[0]
 	Vproducto=stack[1]
@@ -274,27 +467,42 @@ def prueba():
 	
 	t75=idev == 0
 	if t75: 
-	 	 goto .L67
-	goto .L68
-	label .L67
+	 	 goto .L76
+	goto .L77
+	label .L76
 	ci.ejecutarsql("select fn_retornaproducto(Vproducto) ;")
 	idproducto=ci.ejecutarsql("select fn_retornaproducto(Vproducto) ;")
 	
 	ci.ejecutarsql("select fn_retornabodega(Vbodega) ;")
 	idbodega=ci.ejecutarsql("select fn_retornabodega(Vbodega) ;")
 	
-	ci.ejecutarsql(" insert into tbinventario values(ide, idproducto, idbodega, cantidad, now, descripcion);")
-	label .L68
+	ci.ejecutarsql(" insert into tbinventario values("+str(ide)+","+str(idproducto)+","+str(idbodega)+","+str(cantidad)+","+str(now)+","+str(descripcion)+");")
+	label .L77
 	stack[0]= ide
 	temp=stack[5]
 	stack=[]
-	if temp =='.L59':
-		goto .L59
-	if temp =='.L61':
-		goto .L61
+	if temp =='.L60':
+		goto .L60
+	if temp =='.L62':
+		goto .L62
+	if temp =='.L64':
+		goto .L64
+	if temp =='.L65':
+		goto .L65
+	if temp =='.L66':
+		goto .L66
+	if temp =='.L67':
+		goto .L67
+	if temp =='.L69':
+		goto .L69
+	if temp =='.L70':
+		goto .L70
+	if temp =='.L71':
+		goto .L71
+	if temp =='.L72':
+		goto .L72
 	
-	label .L66
-	ci.ejecutarsql("create function sp_insertainventario(ide integer,Vproducto varchar,Vbodega varchar,cantidad integer,descripcion varchar) returns integer as $$ DECLARE idproducto integer;DECLARE idbodega integer;DECLARE idev integer;begin idev =  Select count(*) from tbinventario Where idinventario  = ide;if idev  = 0 then idproducto =  Select fn_retornaproducto(Vproducto);idbodega =  Select fn_retornabodega(Vbodega);end if;return ide; end; $$ language plpgsql;")
+	label .L75
 	ci.ejecutarsql("select sp_insertainventario(1, 'Laptop Lenovo', 'BODEGA CENTRAL', 200, 'Laptop Lenovo T420 i7 8GB') ;")
 	ci.ejecutarsql("select sp_insertainventario(2, 'Teclado Inalambrico', 'BODEGA CENTRAL', 100, 'Teclado Inalambrico Lenovo') ;")
 	ci.ejecutarsql("select sp_insertainventario(3, 'Mouse Inalambrico', 'BODEGA ZONA 12', 50, '') ;")

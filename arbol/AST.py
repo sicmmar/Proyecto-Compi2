@@ -425,7 +425,7 @@ def p_DROPPROC(t):
     t[0] = id
 
 def p_DROPPROC1(t):
-    'DROPPROCEDURE : drop procedure if exists id'
+    'DROPPROCEDURE : drop procedure if exist id'
     id = inc()
     arbol.node(id,"drop function if exists ")
     iden = inc()

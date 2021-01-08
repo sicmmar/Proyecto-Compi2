@@ -2,9 +2,9 @@ from Entorno.Simbolo import Simbolo
 from Instrucciones.Instruccion import Instruccion
 from Expresion.variablesestaticas import variables
 from tkinter import  *
-from Expresion.Terminal import  Terminal
+from Expresion.Terminal import Terminal
 from Instrucciones.Declaracion import Declaracion
-from Tipo import  Tipo
+from Tipo import Tipo
 class Funcion(Instruccion):
     def __init__(self,nombre,params,instrucciones,tipo=None):
         self.nombre=nombre
@@ -21,6 +21,7 @@ class Funcion(Instruccion):
             variables.consola.insert(INSERT,'La funcion '+self.nombre+' no se pudo crear porque ya existe\n')
 
     def traducir(self,ent):
+        'traduccion func'
         nl = ent.newlabel()
         cad = 'goto ' + nl + '\n'
         cad += 'label ' + ent.newlabel('f_' + self.nombre) + '\n'
@@ -48,7 +49,7 @@ class Funcion(Instruccion):
         cad += 'label ' + nl + '\n'
         self.codigo3d = cad
 
-         # string quemado
+        # string quemado
         sql= 'ci.ejecutarsql("create function ' + self.nombre + '('
         if self.params != None:
             for i in range(0,len(self.params)):
@@ -65,7 +66,7 @@ class Funcion(Instruccion):
             for ins in self.instrucciones:
                 sql+=ins.traducir(ent).stringsql
         sql+=' $$ language plpgsql;\")\n'
-        self.codigo3d=self.codigo3d+sql
+        self.codigo3d=sql+self.codigo3d
         return self
 
 

@@ -65,25 +65,21 @@ class LLamadaFuncion(Expresion):
 
 
     def traducir(self,ent):
-        '''
         lenp = 0
         cad = ''
         if self.parametros != None:
             lenp = len(self.parametros)
 
         for i in range(0, lenp):
-            cad += 'stack.append(' + str(self.params[i].traducir(ent).temp) + ')\n'
-
-        for i in range(0, lenp):
-            if not isinstance(self.params[i], Instrucciones.Select):
-                cad += 'stack.append(' + str(self.params[i].traducir(ent).temp) + ')\n'
+                ''
+                #cad += 'stack.append(' + str(self.params[i].traducir(ent).temp) + ')\n'#
         nl = ent.newlabel()
-        cad += 'stack.append(\'' + nl + '\')\n'
-        variables.stack.append('\'' + nl + '\'')
-        cad += 'goto .Lp_' + self.nombre + '\n'
+        #cad += 'stack.append(\'' + nl + '\')\n'
+        #variables.stack.append('\'' + nl + '\'')
+        #cad += 'goto .Lp_' + self.nombre + '\n'
         cad += 'label ' + nl + '\n'
         self.codigo3d = cad
-        '''
+
         #quemado
         strsql=self.nombre+'('
         if self.parametros!=None:

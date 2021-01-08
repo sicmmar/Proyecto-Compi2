@@ -468,9 +468,7 @@ class Select(Instruccion):
 
     def resolver(self, expresion, entorno, result, tablas, fila):
         # para expresion binaria
-        if not isinstance(expresion, Terminal) and not isinstance(expresion, Unaria) and not isinstance(expresion,
-                                                                                                        FuncionesNativas) and not isinstance(
-                expresion, Identificador):
+        if not isinstance(expresion, Terminal) and not isinstance(expresion, Unaria) and not isinstance(expresion,FuncionesNativas) and not isinstance(expresion, Identificador):
             'resuelvo logicas,aritmeticas y relacionales'
             exp1 = expresion.exp1
             exp2 = expresion.exp2
@@ -496,8 +494,10 @@ class Select(Instruccion):
             'aqui resuelvo los terminales y funciones'
             if isinstance(expresion, Identificador):
                 ''
-                term = expresion.getval(entorno)
-                if term != None:
+                sim = expresion.getval(entorno)
+
+                if sim != None:
+                    term = Terminal(Tipo(sim.tipo.tipo, None, -1, -1), sim.valor)
                     return term
                 else:
                     for i in range(0, len(self.encabezado)):
@@ -679,7 +679,7 @@ class Alias():
         self.expresion = expresion
         self.nombre = nombre
         self.ali = ali
-        self.stringsql = self.expresion.traducir(Entorno).stringsql + ' ' + self.ali
+
 
 
 class Combi():
