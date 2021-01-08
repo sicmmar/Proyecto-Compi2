@@ -38,7 +38,7 @@ class Select(Instruccion):
 
     def ejecutar(self, ent: Entorno, imp=1):
 
-        try:
+        #try:
             tablas = []
             result = []
             self.encabezado = []
@@ -269,9 +269,9 @@ class Select(Instruccion):
 
             return [self.encabezado, result]
 
-        except  Exception as inst:
-            print(inst)
-            return
+        #except  Exception as inst:
+            #print(inst)
+            #return
 
     def traducir(self, entorno):
         self.codigo3d = 'ci.ejecutarsql("select '
@@ -452,6 +452,10 @@ class Select(Instruccion):
 
     def optwhere(self, entorno, result, tablas):
         newres = []
+        if result==[]:
+            self.encabezado=['']
+            result=[[0]]
+            return result
         for i in range(0, len(result)):
             resexp = self.resolver(self.where, entorno, result, tablas, i)
             try:

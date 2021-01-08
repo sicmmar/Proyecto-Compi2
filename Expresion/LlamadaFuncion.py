@@ -62,6 +62,11 @@ class LLamadaFuncion(Expresion):
                                 Lerrores("Error Semantico", "Error el tipo devuelto no coincide con el de la funcion",
                                          0, 0))
                             variables.consola.insert(INSERT, "Error el tipo devuelto no coincide con el de la funcion")
+        else:
+            reporteerrores.append(
+                Lerrores("Error Semantico", "Error la funcion no existe",
+                         0, 0))
+            variables.consola.insert(INSERT, "Error la funcion no existe")
 
 
     def traducir(self,ent):

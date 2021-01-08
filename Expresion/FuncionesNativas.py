@@ -421,7 +421,7 @@ class FuncionesNativas(Expresion):
             self.temp = self.getval(entorno).valor
             return self
         except:
-            self.temp=None
+            self.temp=self.stringsql
             return self
 
 

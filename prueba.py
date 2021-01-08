@@ -155,7 +155,7 @@ def prueba():
 	ci.ejecutarsql("select SIN(1) ;")
 	SENO=ci.ejecutarsql("select SIN(1) ;")
 	
-	VALOR=None
+	VALOR=TRUNC(SENO * hora )
 	t47=VALOR + 4
 	VALOR=t47
 	ABSOLUTO=1.1752011936438014
@@ -329,7 +329,6 @@ def prueba():
 	goto .Lp_sp_insertaproducto
 	label .L67
 	ci.ejecutarsql("DROP function myFuncion;")
-	ci.ejecutarsql("select myFuncion('Valida drop function') ;")
 	ci.ejecutarsql("create function fn_Mensaje(texto text) returns text as $$ begin return texto; end; $$ language plpgsql;")
 	goto .L68
 	label .Lf_fn_Mensaje
@@ -379,7 +378,7 @@ def prueba():
 	goto .Lp_sp_insertaproducto
 	label .L71
 	stack.append("16")
-	stack.append("'Monitor de 17 Lenovo'")
+	stack.append("'Monitor de 17' Lenovo'")
 	stack.append("'2021-01-06'")
 	stack.append('.L72')
 	goto .Lp_sp_insertaproducto

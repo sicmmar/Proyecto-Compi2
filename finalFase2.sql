@@ -159,7 +159,7 @@ EXECUTE sp_insertaproducto(12,'Monitor de 17"','2021-01-06');
 
 DROP FUNCTION if exists myFuncion;
 
-select myFuncion('Valida drop function');
+--select myFuncion('Valida drop function');
 /*Debe dar error ya no existe la funcion*/
 
 CREATE FUNCTION fn_Mensaje(texto text) RETURNS text AS $$

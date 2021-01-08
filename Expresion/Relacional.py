@@ -1,8 +1,8 @@
 from Expresion.Binaria import Binaria
 
 from Expresion.variablesestaticas import *
+from Tipo import Tipo
 from reportes import *
-
 
 class Relacional(Binaria):
     def __init__(self, exp1, exp2, operador):
@@ -82,11 +82,13 @@ class Relacional(Binaria):
                 self.stringsql = '(' + stringsql + ')'
             else:
                 self.stringsql = stringsql
-
+        #------------------------------------------------------------------------------------------------------------
         if self.operador == '<>':
             self.operador = '!='
         if self.operador == '=':
             self.operador = '=='
+
+
         self.temp = entorno.newtemp()
         nt = self.temp
 
