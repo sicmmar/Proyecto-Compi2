@@ -379,7 +379,7 @@ def prueba():
 	goto .Lp_sp_insertaproducto
 	label .L71
 	stack.append("16")
-	stack.append("'Monitor de 17' Lenovo'")
+	stack.append("'Monitor de 17 Lenovo'")
 	stack.append("'2021-01-06'")
 	stack.append('.L72')
 	goto .Lp_sp_insertaproducto
