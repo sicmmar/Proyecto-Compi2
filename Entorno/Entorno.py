@@ -53,7 +53,7 @@ class Entorno:
         ent = self
 
         # nombre,tipoSym,baseDatos,tabla,valor
-        salida = "<<TABLE BORDER=\"0\" CELLBORDER=\"1\" CELLSPACING=\"0\"><TR><TD>NOMBRE</TD><TD>TIPO</TD><TD>BASE DE DATOS</TD><TD>TABLA</TD><TD>VALOR</TD></TR>"
+        salida = ""
         while ent != None:
             for x in ent.tablaSimbolo.values():
                 if x != None:
@@ -61,7 +61,19 @@ class Entorno:
 
             ent = ent.anterior
 
-        salida += "</TABLE>>"
+        return salida
+    
+    def mostrarProc(self):
+        ent = self
+
+        # nombre,tipoSym,baseDatos,tabla,valor
+        salida = ""
+        while ent != None:
+            for x in ent.tablaSimbolo.values():
+                if x != None:
+                    salida += x.proc()
+
+            ent = ent.anterior
 
         return salida
 

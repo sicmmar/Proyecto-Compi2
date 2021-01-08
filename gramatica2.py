@@ -522,6 +522,11 @@ def p_DROPPROC(t):
     listaBNF.append('DROPPROCEDURE ::= drop procedure '+t[3])
     t[0] = DropProcedure(t[3])
 
+def p_DROPPROC1(t):
+    'DROPPROCEDURE : drop procedure if exist id'
+    listaBNF.append('DROPPROCEDURE ::= drop procedure if exist id ' + t[5])
+    t[0] = DropProcedure(t[3])
+
 
 
 def p_RETURNP(t):

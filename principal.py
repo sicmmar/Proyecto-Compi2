@@ -91,6 +91,9 @@ def traducir():
         salida2+='\t'+fila +'\n'
 
     salida=salida+salida2
+    f = open('tsAux','w')
+    f.write(Principal.mostrarProc())
+    f.close()
 
     print(salida)
     f = open('prueba.py', 'w')
@@ -140,9 +143,11 @@ def arbol_ast():
 
 
 def verSimbolos():
+    c = "<<TABLE BORDER=\"0\" CELLBORDER=\"1\" CELLSPACING=\"0\"><TR><TD>NOMBRE</TD><TD>TIPO</TD><TD>BASE DE DATOS</TD><TD>TABLA</TD><TD>VALOR</TD></TR>"
     f = open('tsAux','r')
-    c = f.read()
+    c += f.read()
     f.close()
+    c += "</TABLE>>"
     tablaSym.node("TS", c)
     tablaSym.render('ts', view=True)  # doctest: +SKIP
     'ts.pdf'

@@ -345,8 +345,7 @@ def p_instruccion(t):
                     | PROCEDIMIENTOS
                     | FUNCIONES
                     | CALLPROCEDURE ptcoma 
-                    | DROPFUNC ptcoma
-                    | DROPPROCEDURE ptcoma'''
+                    | DROPFUNC ptcoma'''
     t[0] = t[1]
 
 def p_instruccion1(t):
@@ -409,25 +408,7 @@ def p_DROPFUNC(t):
 def p_DROPFUNC2(t):
     'DROPFUNC : drop function if exist id'
     id = inc()
-    arbol.node(id,"drop function if exist")
-    iden = inc()
-    arbol.node(iden,str(t[5]))
-    arbol.edge(id,iden)
-    t[0] = id
-
-def p_DROPPROC(t):
-    'DROPPROCEDURE : drop procedure id'
-    id = inc()
-    arbol.node(id,"drop procedure")
-    iden = inc()
-    arbol.node(iden,str(t[3]))
-    arbol.edge(id,iden)
-    t[0] = id
-
-def p_DROPPROC1(t):
-    'DROPPROCEDURE : drop procedure if exists id'
-    id = inc()
-    arbol.node(id,"drop function if exists ")
+    arbol.node(id,"drop function")
     iden = inc()
     arbol.node(iden,str(t[5]))
     arbol.edge(id,iden)
@@ -475,8 +456,9 @@ def p_PROCEDIMIENTOS(t):
     iden = inc()
     arbol.node(iden,str(t[3]))
     arbol.edge(root,iden)
-    arbol.edge(root,t[6])
+    arbol.edge(root,t[5])
     arbol.edge(root,t[7])
+    arbol.edge(root,t[8])
 
 def p_LCONTENIDOP(t):
     'LCONTENIDOP : LCONTENIDOP CONTENIDOP'
@@ -540,13 +522,6 @@ def p_LENGUAJE(t):
     lang = inc()
     arbol.node(lang,"language plpgsql")
     t[0] = lang
-
-def p_BEGINEND(t):
-    'BEGINEND :  begin LISTACONTENIDO end'
-    beg = inc()
-    arbol.node(beg,"begin")
-    arbol.edge(beg,t[2])
-    t[0] = beg
 
 def p_CREATEINDEX(t):
     '''CREATEINDEX      : create index id on id para LEXP parc '''
